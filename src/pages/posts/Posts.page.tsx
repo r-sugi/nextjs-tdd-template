@@ -1,11 +1,29 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Seo } from "@/components/Seo";
 import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 
 type Props = {};
 
+type Post = {
+  id: number;
+  body: string;
+  title: string;
+};
+// TODO: getStaticProps
+// TODO: ErrorBoundary
 export const Posts: FC<Props> = () => {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    fetch("/posts").then(async (res) => {
+      const data = await res.json();
+      setPosts(data);
+    });
+  }, []);
+
+  if (posts.length === 0) return "Loading...";
+
   return (
     <>
       <Seo

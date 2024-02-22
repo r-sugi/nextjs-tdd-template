@@ -10,7 +10,7 @@ function setup(props: SeoPops) {
 }
 
 describe(Seo, () => {
-  beforeAll(() => {
+  beforeEach(() => {
     mockNextHead();
   });
 

@@ -4,7 +4,8 @@ import { publicPages } from "@/paths";
 import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
 
 type Props = {};
-
+// TODO: getStaticProps
+// TODO: ErrorBoundary
 export const PostId: FC<Props> = () => {
   return (
     <>

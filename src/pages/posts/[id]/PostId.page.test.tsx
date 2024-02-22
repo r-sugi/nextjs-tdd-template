@@ -14,7 +14,7 @@ describe(Page, () => {
     };
   }
 
-  beforeAll(() => {
+  beforeEach(() => {
     mockNextHead();
   });
 

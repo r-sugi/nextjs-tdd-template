@@ -4,7 +4,8 @@ import { Seo } from "@/components/Seo";
 import { FC } from "react";
 
 type Props = {};
-
+// TODO: getStaticProps
+// TODO: ErrorBoundary
 export const Index: FC<Props> = () => {
   return (
     <>
