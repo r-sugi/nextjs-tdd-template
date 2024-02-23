@@ -48,6 +48,7 @@ describe(Page, () => {
     setup();
 
     // Assert
+    // @note: toHaveBeenCalledでも良いかもしれない
     expect(IndexTemplateMock).toHaveBeenCalledWith(COMPONENT_PROPS, {});
   });
 });
