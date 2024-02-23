@@ -1,5 +1,6 @@
 import { HttpErrorObject } from "@/error/errors/http-error";
 
+// TODO: どこかから呼び出すべきか？ErrorBoundaryを使うべきか？
 export const Error = ({ name, message, http }: HttpErrorObject) => {
   return (
     <div>
