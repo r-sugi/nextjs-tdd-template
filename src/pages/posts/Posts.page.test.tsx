@@ -1,25 +1,20 @@
 import { render, waitFor } from "@testing-library/react";
-import Page from "./Posts.page";
+import Page, { PagePropsType } from "./Posts.page";
 import { AppProvider } from "../../pages/_app.page";
 import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import { mocast } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
-import { server } from "@/../mocks/server";
-import { rest } from "msw";
+import * as getPosts from "@/../__fixtures__/posts/getPosts";
 
 jest.mock("@/components/templates/Posts/Posts");
 
-beforeAll(() => server.listen({ onUnhandledRequest: "bypass" }));
-beforeEach(() => server.resetHandlers());
-afterAll(() => server.close());
-
 describe(Page, () => {
-  function setup() {
+  function setup({ props }: { props: PagePropsType }) {
     return {
       view: render(
         <AppProvider>
-          <Page />
+          <Page {...props} />
         </AppProvider>
       ),
     };
@@ -35,51 +30,44 @@ describe(Page, () => {
   });
 
   it("SEO tag rendered", async () => {
-    const mock = jest.fn();
-    server.use(
-      rest.get("/posts", (req, res, ctx) => {
-        mock(req.params);
-        return res(ctx.json({ data: [{ id: 1 }] }));
-      })
-    );
+    // Arrange
+    const COMPONENT_PROPS = {
+      posts: getPosts.success.data,
+    };
 
     // Act
-    setup();
+    setup({ props: COMPONENT_PROPS });
 
     // Assert
     await waitFor(() => {
-      expect(mock).toHaveBeenCalledWith({});
+      assertSeoTags({
+        titleText: publicPages.posts.title(),
+        descriptionText: publicPages.posts.description(),
+        ogUrlText: `${process.env.NEXT_HOST_URI}${publicPages.posts.path()}`,
+      });
+      const metaRobots = document.querySelector('meta[name="robots"]');
+      expect(metaRobots).toBeInTheDocument();
+      expect(metaRobots).toHaveAttribute("content", "all");
     });
-    assertSeoTags({
-      titleText: publicPages.posts.title(),
-      descriptionText: publicPages.posts.description(),
-      ogUrlText: `${process.env.NEXT_HOST_URI}${publicPages.posts.path()}`,
-    });
-    const metaRobots = document.querySelector('meta[name="robots"]');
-    expect(metaRobots).toBeInTheDocument();
-    expect(metaRobots).toHaveAttribute("content", "all");
   });
 
   it("template file called", async () => {
     // Arrange
-    const mock = jest.fn();
-    server.use(
-      rest.get("/posts", (req, res, ctx) => {
-        mock(req.params);
-        return res(ctx.json({ data: [{ id: 1 }] }));
-      })
-    );
-    const TemplateMock = mocast(PostsTemplate);
+    const COMPONENT_PROPS = {
+      posts: getPosts.success.data,
+    };
     mockNextHead();
-    const COMPONENT_PROPS = {};
+    const TemplateMock = mocast(PostsTemplate);
+    const CHILD_COMPONENT_PROPS = {
+      posts: getPosts.success.data,
+    };
 
     // Act
-    setup();
+    setup({ props: COMPONENT_PROPS });
 
     // Assert
     await waitFor(() => {
-      expect(mock).toHaveBeenCalledWith({});
-      expect(TemplateMock).toHaveBeenCalledWith(COMPONENT_PROPS, {});
+      expect(TemplateMock).toHaveBeenCalledWith(CHILD_COMPONENT_PROPS, {});
     });
   });
 });

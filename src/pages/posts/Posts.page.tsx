@@ -1,29 +1,18 @@
-import { FC, useEffect, useState } from "react";
 import { Seo } from "@/components/Seo";
 import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
+import type { NextPage } from "next";
+import type { Post } from "@/../__fixtures__/posts/post.type";
+export { getStaticProps } from "./Posts.page.api";
 
-type Props = {};
-
-type Post = {
-  id: number;
-  body: string;
-  title: string;
-};
-// TODO: getStaticProps
 // TODO: ErrorBoundary
-export const Posts: FC<Props> = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
+export type PagePropsType = {
+  posts: Post[];
+};
 
-  useEffect(() => {
-    fetch("/posts").then(async (res) => {
-      const data = await res.json();
-      setPosts(data);
-    });
-  }, []);
+export type PageType = NextPage<PagePropsType>;
 
-  if (posts.length === 0) return "Loading...";
-
+export const Posts: PageType = ({ posts }) => {
   return (
     <>
       <Seo
@@ -31,7 +20,7 @@ export const Posts: FC<Props> = () => {
         description={publicPages.posts.description()}
         path={publicPages.posts.path()}
       />
-      <PostsTemplate />
+      <PostsTemplate posts={posts} />
     </>
   );
 };
