@@ -13,6 +13,7 @@ export type PageType = NextPage<PagePropsType>;
 export const PostId: PageType = ({ post }) => {
   return (
     <>
+      {/* TODO: mswで値を返したらオプショナルチェーンを外す */}
       <Seo
         title={publicPages.postId.title(post?.title ?? "")}
         description={publicPages.postId.description()}

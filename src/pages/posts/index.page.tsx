@@ -22,6 +22,7 @@ export const Posts: PageType = ({ posts }) => {
         description={publicPages.posts.description()}
         path={publicPages.posts.path()}
       />
+      {/* TODO: mswで値を返したらnull判定を外す */}
       <PostsTemplate posts={posts ?? []} />
     </>
   );
