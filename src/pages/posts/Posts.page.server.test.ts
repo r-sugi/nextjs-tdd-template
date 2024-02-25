@@ -1,6 +1,6 @@
 import { server } from "@/../mocks/server";
 import { rest } from "msw";
-import { getStaticProps } from "./Posts.page.api";
+import { getStaticProps } from "./Posts.page.server";
 import * as getPosts from "@/../__fixtures__/posts/getPosts";
 jest.mock("@/components/templates/Posts/Posts");
 

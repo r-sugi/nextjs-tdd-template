@@ -4,7 +4,7 @@ import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
 import { HttpErrorObject } from "@/error/errors/http-error";
-export { getStaticProps } from "./Posts.page.api";
+export { getStaticProps } from "./Posts.page.server";
 
 export type PagePropsType = {
   posts: Post[];
