@@ -1,20 +1,24 @@
-import { FC } from "react";
 import { Seo } from "@/components/Seo";
 import { publicPages } from "@/paths";
 import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
+import { Post } from "__fixtures__/posts/post.type";
+import type { NextPage } from "next";
 
-type Props = {};
-// TODO: getStaticProps
-// TODO: ErrorBoundary
-export const PostId: FC<Props> = () => {
+export type PagePropsType = {
+  post: Post;
+};
+
+export type PageType = NextPage<PagePropsType>;
+
+export const PostId: PageType = ({ post }) => {
   return (
     <>
       <Seo
-        title={publicPages.postId.title()}
+        title={publicPages.postId.title(post.title)}
         description={publicPages.postId.description()}
-        path={publicPages.postId.path(`1`)} // TODO: ここにパスを指定する
+        path={publicPages.postId.path(post.id)}
       />
-      <PostIdTemplate />
+      <PostIdTemplate post={post} />
     </>
   );
 };

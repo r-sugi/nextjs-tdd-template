@@ -3,17 +3,15 @@ import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
-import { HttpErrorObject } from "@/error/errors/http-error";
 export { getStaticProps } from "./Posts.page.server";
 
 export type PagePropsType = {
   posts: Post[];
-  error?: HttpErrorObject;
 };
 
 export type PageType = NextPage<PagePropsType>;
 
-export const Posts: PageType = ({ posts, error }) => {
+export const Posts: PageType = ({ posts }) => {
   // TODO: カスタムErrorコンポーネントを呼ぶか(or ErrorBoundaryへ渡すか)で表示する(どっちがベストか？)
   // console.log({ error });
   // if (error) return <Error {...error} />;

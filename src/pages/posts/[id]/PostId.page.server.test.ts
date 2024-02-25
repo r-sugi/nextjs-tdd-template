@@ -1,7 +1,7 @@
 import { server } from "@/../mocks/server";
 import { rest } from "msw";
-import { getStaticProps } from "./Posts.page.server";
-import * as getPosts from "@/../__fixtures__/posts/getPosts";
+import { getStaticProps } from "./PostId.page.server";
+import * as getPost from "@/../__fixtures__/posts/getPost";
 jest.mock("@/components/templates/Posts/Posts");
 
 beforeAll(() => server.listen({ onUnhandledRequest: "bypass" }));
@@ -13,15 +13,15 @@ describe("#getStaticProps", () => {
     // Arrange
     const mock = jest.fn();
     server.use(
-      rest.get("/posts", (req, res, ctx) => {
+      rest.get("/post/1", (req, res, ctx) => {
         mock(req.params);
-        return res(ctx.json(getPosts.success.data));
+        return res(ctx.json(getPost.success.data));
       })
     );
-    const expected = { props: { posts: getPosts.success.data } };
+    const expected = { props: { post: getPost.success.data } };
 
     // Act
-    const result = await getStaticProps();
+    const result = await getStaticProps({ params: { id: "1" } });
 
     // Assert
     expect(result).toStrictEqual(expected);
@@ -31,7 +31,7 @@ describe("#getStaticProps", () => {
     it("HttpErrorがかえること", async () => {
       const mock = jest.fn();
       server.use(
-        rest.get("/posts", (_req, res, ctx) => {
+        rest.get("/post/1", (_req, res, ctx) => {
           mock();
           return res(
             ctx.status(400),
@@ -42,20 +42,24 @@ describe("#getStaticProps", () => {
         })
       );
 
-      await expect(getStaticProps).rejects.toThrow("HttpError");
+      await expect(() =>
+        getStaticProps({ params: { id: "1" } })
+      ).rejects.toThrow("HttpError");
       expect(mock).toHaveBeenCalled();
     });
 
-    it("errorがかえること", async () => {
+    it("Unhandled errorがかえること", async () => {
       const mock = jest.fn();
       server.use(
-        rest.get("/posts", (_req, res, _ctx) => {
+        rest.get("/post/1", (_req, res, _ctx) => {
           mock();
           return res.networkError("Failed to connect");
         })
       );
 
-      await expect(getStaticProps).rejects.toThrow("Unhandled Error");
+      await expect(() =>
+        getStaticProps({ params: { id: "1" } })
+      ).rejects.toThrow("Unhandled Error");
       expect(mock).toHaveBeenCalled();
     });
   });

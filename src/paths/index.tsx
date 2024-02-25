@@ -12,13 +12,12 @@ const publicPages = {
   posts: {
     path: () => "/posts",
     title: () => title("投稿一覧"),
-    description: () => "投稿一覧のページです。",
+    description: () => "投稿一覧",
   },
   postId: {
     path: (id: string | number) => `/posts/${id}`,
-    title: () =>
-      title(`投稿詳細`),
-    description: () => "投稿詳細のページです。",
+    title: (postTitle: string) => title(`${postTitle} | 投稿詳細`),
+    description: () => "投稿詳細",
   },
 };
 
