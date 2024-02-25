@@ -5,7 +5,6 @@ import { FC } from "react";
 
 type Props = {};
 // TODO: import useSWR from 'swr'を使う
-// TODO: getStaticProps
 // TODO: ErrorBoundary
 export const Index: FC<Props> = () => {
   return (
