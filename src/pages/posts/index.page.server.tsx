@@ -19,6 +19,7 @@ export const getStaticProps = async (): Promise<{
       },
     };
   } catch (error) {
+    // TODO: サーバーサイドの秘匿情報が含まれる場合のエラー処理
     if (error instanceof HttpError) {
       // TODO: page側でカスタムエラーErrorComponentを使って表示する？(errorBoundaryを使ってここで使えないのか、、？)
       throw new Error("HttpError");
