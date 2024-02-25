@@ -1,6 +1,6 @@
 import { render, waitFor } from "@testing-library/react";
-import Page, { PagePropsType } from "./Posts.page";
-import { AppProvider } from "../../pages/_app.page";
+import Page, { PagePropsType } from "./index.page";
+import { AppProvider } from "../_app.page";
 import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import { mocast } from "@/__testing__/helper";

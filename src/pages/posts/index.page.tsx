@@ -3,7 +3,7 @@ import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
-export { getStaticProps } from "./Posts.page.server";
+// export { getStaticProps } from "./Posts.page.server";
 
 export type PagePropsType = {
   posts: Post[];
