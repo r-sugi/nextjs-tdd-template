@@ -14,9 +14,9 @@ export const PostId: PageType = ({ post }) => {
   return (
     <>
       <Seo
-        title={publicPages.postId.title(post.title)}
+        title={publicPages.postId.title(post?.title ?? "")}
         description={publicPages.postId.description()}
-        path={publicPages.postId.path(post.id)}
+        path={publicPages.postId.path(post?.id ?? "")}
       />
       <PostIdTemplate post={post} />
     </>

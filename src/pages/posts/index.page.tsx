@@ -15,7 +15,6 @@ export const Posts: PageType = ({ posts }) => {
   // TODO: カスタムErrorコンポーネントを呼ぶか(or ErrorBoundaryへ渡すか)で表示する(どっちがベストか？)
   // console.log({ error });
   // if (error) return <Error {...error} />;
-
   return (
     <>
       <Seo
@@ -23,7 +22,7 @@ export const Posts: PageType = ({ posts }) => {
         description={publicPages.posts.description()}
         path={publicPages.posts.path()}
       />
-      <PostsTemplate posts={posts} />
+      <PostsTemplate posts={posts ?? []} />
     </>
   );
 };

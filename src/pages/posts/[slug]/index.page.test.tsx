@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import Page, { PagePropsType } from "./PostId.page";
+import Page, { PagePropsType } from "./index.page";
 import { publicPages } from "@/paths";
 import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
 import { mocast } from "@/__testing__/helper";

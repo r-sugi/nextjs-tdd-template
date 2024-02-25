@@ -1,6 +1,6 @@
 import { HttpError } from "@/error/errors/http-error";
 import { Post } from "__fixtures__/posts/post.type";
-import { PagePropsType } from "./PostId.page";
+import { PagePropsType } from "./index.page";
 import { GetStaticPropsContext } from "next/types";
 
 // TODO: 400.tsx, 500.tsxはいつ呼ばれるのか？(下記でthrowしたら呼ばれる？)
