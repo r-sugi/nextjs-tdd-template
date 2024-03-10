@@ -12,25 +12,30 @@ export const getStaticProps = async (
 }> => {
   // TODO: なかった時のエラー処理?
   const postId = context?.params?.id;
+  // controller層
+  // 400エラーの場合 パラメータの型が不正(例: Intに変換できない文字列)
+  //   client側でエラーを表示したい props -> return errorを返す
+  //     メリット: エラーの内容をカスタマイズできる
+  //     デメリット: エラーの内容のパターンを把握する必要がある(エラーコード XXX-100, メッセージ "")
+  //   redirect -> 404, 500などへリダイレクトさせる
+  //     メリット: 共通でエラーを表示しやすい
+  //     デメリット: 特定のページでこの処理だけは別UIを表示したい場合、エラーの内容をカスタマイズしづらい
 
   try {
     const res = await fetch(`/post/${postId}`);
     // TODO: 型定義
-    const post = (await res.json()) as Post;
-    if (!res.ok) throw new HttpError(res);
-
-    return {
-      props: {
-        post,
-      },
-    };
-  } catch (error) {
-    if (error instanceof HttpError) {
-      // TODO: page側でカスタムエラーErrorComponentを使って表示する？(errorBoundaryを使ってここで使えないのか、、？)
-      throw new Error("HttpError");
+    if (!res.ok) {
+      const payload = (await res.json()) as Post;
+      // redirect or client側でエラーを表示したい
     }
-    // TODO: HttpError 以外の Error が発生した場合、Unhandled Error として_error.tsxが捉えるか(試して確認する)
-    // TODO: 独自のErrorを作成する
-    throw new Error("Unhandled Error");
+  } catch (error) {
+    if (error instanceof ClientAppError) {
+      // // 検査例外
+      error;
+      // redirect or client側でエラーを表示したい
+
+      // TODO: ロギング + ログサービスaxiomに送る(critical, fatalのみ送る)
+      // Logger.error('hogehoge')
+    }
   }
 };

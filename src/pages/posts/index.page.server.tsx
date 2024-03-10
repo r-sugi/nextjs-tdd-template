@@ -4,7 +4,8 @@ import { PagePropsType } from "./index.page";
 
 // TODO: 400.tsx, 500.tsxはいつ呼ばれるのか？(下記でthrowしたら呼ばれる？)
 // TODO: エラーをキャッチしてreturnする(+ page側でErrorComponentを使って表示する)
-export const getStaticProps = async (): Promise<{
+// Server
+export const getServerSideProps = async (): Promise<{
   props: PagePropsType;
 }> => {
   try {
@@ -16,6 +17,7 @@ export const getStaticProps = async (): Promise<{
     return {
       props: {
         posts,
+        error,
       },
     };
   } catch (error) {
