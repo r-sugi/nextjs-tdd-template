@@ -1,36 +1,25 @@
-export type HttpErrorObject = {
-  name: string;
-  message: string;
-  stack?: string;
-  http: {
-    url: string;
-    status: number;
-    statusText: string;
+export type ErrorResponse = {
+  data: undefined;
+  error: {
+    message: string;
+    errors?: { code: string; message: string; name: string }[];
   };
+  status: number;
+  statusText: string;
+  headers?: Headers;
 };
 
 export class HttpError extends Error {
-  url: string;
-  status: number;
-  statusText: string;
-  constructor(response: Response) {
+  public data: undefined;
+  public error: ErrorResponse["error"];
+  public status: number;
+  public statusText: string;
+
+  constructor(response: ErrorResponse) {
     super(response.statusText);
-    this.name = "HttpError";
+    this.data = response.data;
+    this.error = response.error;
     this.status = response.status;
     this.statusText = response.statusText;
-    this.url = response.url;
-  }
-
-  serialize(): HttpErrorObject {
-    return {
-      name: this.name,
-      message: this.message,
-      stack: this.stack,
-      http: {
-        status: this.status,
-        statusText: this.statusText,
-        url: this.url,
-      },
-    };
   }
 }

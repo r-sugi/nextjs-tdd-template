@@ -1,41 +1,52 @@
-import { HttpError } from "@/error/errors/http-error";
+import { isServerAppError } from "@/error/errors/server-app-error";
+import { ClientAppError } from "@/error/errors/client-app-error";
 import { Post } from "__fixtures__/posts/post.type";
 import { PagePropsType } from "./index.page";
-import { GetStaticPropsContext } from "next/types";
+import { GetServerSidePropsContext } from "next/types";
+import { apiClient } from "@/lib/apiClient";
+import { HttpError } from "@/error/errors/http-error";
 
 // TODO: 400.tsx, 500.tsxはいつ呼ばれるのか？(下記でthrowしたら呼ばれる？)
-// TODO: エラーをキャッチしてreturnする(+ page側でErrorComponentを使って表示する)
 export const getStaticProps = async (
-  context: GetStaticPropsContext
+  context: GetServerSidePropsContext
 ): Promise<{
   props: PagePropsType;
 }> => {
-  // TODO: なかった時のエラー処理?
-  const postId = context?.params?.id;
   // controller層
-  // 400エラーの場合 パラメータの型が不正(例: Intに変換できない文字列)
-  //   client側でエラーを表示したい props -> return errorを返す
-  //     メリット: エラーの内容をカスタマイズできる
-  //     デメリット: エラーの内容のパターンを把握する必要がある(エラーコード XXX-100, メッセージ "")
-  //   redirect -> 404, 500などへリダイレクトさせる
-  //     メリット: 共通でエラーを表示しやすい
-  //     デメリット: 特定のページでこの処理だけは別UIを表示したい場合、エラーの内容をカスタマイズしづらい
+  // TODO: 400エラーの場合 パラメータの型が不正(例: Intに変換できない文字列)
+  const postId = context?.params?.id;
 
   try {
-    const res = await fetch(`/post/${postId}`);
-    // TODO: 型定義
-    if (!res.ok) {
-      const payload = (await res.json()) as Post;
-      // redirect or client側でエラーを表示したい
-    }
-  } catch (error) {
-    if (error instanceof ClientAppError) {
-      // // 検査例外
-      error;
-      // redirect or client側でエラーを表示したい
+    const res = await apiClient<Post>(`/post/${postId}`);
 
-      // TODO: ロギング + ログサービスaxiomに送る(critical, fatalのみ送る)
-      // Logger.error('hogehoge')
+    if (!res.data) {
+      // failure
+      // TODO: filterを呼ぶ(内部でcodeの判定、levelのセットをする)
+      if (isServerAppError(res) && res.code == "XXXX") {
+        throw new ClientAppError(res, { level: "error" });
+      }
+      if (isServerAppError(res) && res.code == "XXXX") {
+        throw new ClientAppError(res, { level: "critical" });
+      }
+      if (isServerAppError(res) && res.code == "XXXX") {
+        throw new ClientAppError(res, { level: "fatal" });
+      }
     }
+    // success
+    return {
+      props: {
+        post: res.data,
+      },
+    };
+  } catch (error) {
+    // TODO: filterを呼ぶ(内部でcodeの判定、levelのセットをする)
+    // TODO: エラーコードに応じてredirectする(400.tsx, 500.tsxなど)
+    if (error instanceof HttpError) {
+      throw new ClientAppError(error);
+    }
+    if (error instanceof ClientAppError) {
+      throw new ClientAppError(error);
+    }
+    throw new ClientAppError(error, { level: "fatal" });
   }
 };
