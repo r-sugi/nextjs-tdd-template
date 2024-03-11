@@ -10,6 +10,8 @@ export class ClientAppErrorErrorsFilter {
     // コンソールログ出力
     this.logger.error(error);
 
+    // TODO: axiomでエラーを送信する処理を追加する
+
     // TODO: エラーの種類によって処理を分ける
     if (error instanceof HttpError) {
     } else if (error instanceof Error) {
