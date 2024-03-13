@@ -1,6 +1,6 @@
 import { server } from "@/../mocks/server";
 import { rest } from "msw";
-import { getStaticProps } from "./index.page.server";
+import { getServerSideProps } from "./index.page.server";
 import * as getPosts from "@/../__fixtures__/posts/getPosts";
 jest.mock("@/components/templates/Posts/Posts");
 
@@ -21,7 +21,7 @@ describe("#getStaticProps", () => {
     const expected = { props: { posts: getPosts.success.data } };
 
     // Act
-    const result = await getStaticProps();
+    const result = await getServerSideProps();
 
     // Assert
     expect(result).toStrictEqual(expected);
@@ -42,7 +42,7 @@ describe("#getStaticProps", () => {
         })
       );
 
-      await expect(getStaticProps).rejects.toThrow("HttpError");
+      await expect(getServerSideProps).rejects.toThrow("HttpError");
       expect(mock).toHaveBeenCalled();
     });
 
@@ -55,7 +55,7 @@ describe("#getStaticProps", () => {
         })
       );
 
-      await expect(getStaticProps).rejects.toThrow("Unhandled Error");
+      await expect(getServerSideProps).rejects.toThrow("Unhandled Error");
       expect(mock).toHaveBeenCalled();
     });
   });

@@ -4,6 +4,9 @@ import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
 import { Post } from "__fixtures__/posts/post.type";
 import type { NextPage } from "next";
 import { apiClient } from "@/lib/apiClient";
+import { ServerAppErrorErrorsFilter } from "@/error/filter/serverAppError.filter";
+import { ServerLogger } from "@/lib/serverLogger";
+import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
 
 export type PagePropsType = {
   post: Post;
@@ -12,6 +15,17 @@ export type PagePropsType = {
 export type PageType = NextPage<PagePropsType>;
 
 export const PostId: PageType = ({ post }) => {
+  if (typeof window === "undefined") {
+    // TODO: vscodeのserver debugを試したい
+    new ServerLogger().info("serverInfoTest1");
+    const error: any = { cause: "serverErrorTest2" };
+    new ServerAppErrorErrorsFilter().catch(error);
+  } else {
+    console.log("clientLogTest1");
+    const error: any = { cause: "clientLogTest2" };
+    new ClientAppErrorErrorsFilter().catch(error);
+  }
+
   // 1 error受け取る
   // case 1 <CutomXXXErrorComponent />　推し clientでUI表示のみ
   // case 2 throwしたらErrorBoundary呼ばれる ErrorBoundaryは予期せぬエラー(非検査例外)のみを描画させる
@@ -22,8 +36,8 @@ export const PostId: PageType = ({ post }) => {
   // type: Critical はビジネスロジック。 全体 UI 表示。 HandleableErrorBoundary
   // type: Fatal は非ビジネスロジック（ネットワークエラーや Developer の実装ミス）。 全体 UI 表示。UnhandleabeErrorBoundary
   try {
-    const postId = "2"; // 一旦固定値
-    const res = await apiClient<Post>(`/post/${postId}`);
+    // const postId = "2"; // 一旦固定値
+    // const res = await apiClient<Post>(`/post/${postId}`);
   } catch (error) {
     // TODO: 下記の流れは妥当か？
     // filterを呼ぶ(内部でcodeの判定、levelのセットをする)

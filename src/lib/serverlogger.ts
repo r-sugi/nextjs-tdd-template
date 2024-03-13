@@ -5,10 +5,10 @@ export class ServerLogger {
   private context: Record<string, any> = {};
 
   constructor() {
-    if (typeof window !== "undefined") {
-      this.p = pino({});
-      // ログレベルの設定
-      this.p.level = this.logLevel();
+    if (typeof window === "undefined") {
+      this.p = pino({
+        level: this.logLevel(),
+      });
     } else {
       throw new Error("ServerLoggerはサーバーでのみ使用可能です");
     }

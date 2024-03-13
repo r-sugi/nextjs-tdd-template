@@ -5,8 +5,6 @@ import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
 import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
 
-// export { getServerSideProps } from "./index.page.server";
-
 export type PagePropsType = {
   posts: Post[];
 };
@@ -18,8 +16,12 @@ export const Posts: PageType = ({ posts }) => {
   // TODO: カスタムErrorコンポーネントを呼ぶか(or ErrorBoundaryへ渡すか)で表示する(どっちがベストか？)
   // console.log({ error });
   // if (error) return <Error {...error} />;
-  const error: any = { cause: "test" };
-  new ClientAppErrorErrorsFilter().catch(error);
+
+  // 試しにfilterを呼んだ
+  if (typeof window !== "undefined") {
+    const error: any = { cause: "test" };
+    new ClientAppErrorErrorsFilter().catch(error);
+  }
 
   return (
     <>

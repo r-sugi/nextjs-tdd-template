@@ -8,8 +8,8 @@ export class ClientLogger {
     if (typeof window !== "undefined") {
       this.p = pino({
         browser: { asObject: true },
+        level: this.logLevel(),
       });
-      this.p.level = this.logLevel();
     } else {
       throw new Error("ClientLoggerはブラウザでのみ使用可能です");
     }
