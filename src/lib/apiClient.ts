@@ -1,4 +1,4 @@
-import { ErrorResponse, HttpError } from "@/error/errors/http-error";
+import { ErrorResponse, HttpError } from "@/error/errors/httpError";
 
 export type DataResponse<T> = {
   data: T;

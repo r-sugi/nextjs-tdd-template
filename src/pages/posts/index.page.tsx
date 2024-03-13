@@ -3,7 +3,7 @@ import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
-import { ClientAppErrorErrorsFilter } from "@/error/filter/client-app-error.filter";
+import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
 
 // export { getServerSideProps } from "./index.page.server";
 

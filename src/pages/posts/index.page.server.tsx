@@ -1,4 +1,4 @@
-import { HttpError } from "@/error/errors/http-error";
+import { HttpError } from "@/error/errors/httpError";
 import { Post } from "__fixtures__/posts/post.type";
 import { PagePropsType } from "./index.page";
 

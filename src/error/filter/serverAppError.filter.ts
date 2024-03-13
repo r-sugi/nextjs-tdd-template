@@ -1,16 +1,14 @@
-import { ClientLogger } from "@/lib/clientLogger";
-import { HttpError } from "../errors/http-error";
+import { ServerLogger } from "@/lib/serverLogger";
+import { HttpError } from "../errors/httpError";
 
-export class ClientAppErrorErrorsFilter {
-  constructor(private readonly logger = new ClientLogger()) {
+export class ServerAppErrorErrorsFilter {
+  constructor(private readonly logger: ServerLogger) {
     this.logger.setContext(this.constructor.name);
   }
 
   catch(error: Error): void {
-    // コンソールログ出力
+    // サーバーログ出力
     this.logger.error(error);
-
-    // TODO: axiomでエラーを送信する処理を追加する
 
     // TODO: エラーの種類によって処理を分ける
     if (error instanceof HttpError) {

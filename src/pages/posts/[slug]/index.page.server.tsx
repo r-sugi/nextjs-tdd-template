@@ -1,10 +1,10 @@
-import { isServerAppError } from "@/error/errors/server-app-error";
+import { isServerAppError } from "@/error/errors/serverAppError";
 import { ClientAppError } from "@/error/errors/client-app-error";
 import { Post } from "__fixtures__/posts/post.type";
 import { PagePropsType } from "./index.page";
 import { GetServerSidePropsContext } from "next/types";
 import { apiClient } from "@/lib/apiClient";
-import { HttpError } from "@/error/errors/http-error";
+import { HttpError } from "@/error/errors/httpError";
 
 // TODO: 400.tsx, 500.tsxはいつ呼ばれるのか？(下記でthrowしたら呼ばれる？)
 export const getStaticProps = async (
