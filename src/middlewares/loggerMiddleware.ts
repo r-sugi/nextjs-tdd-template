@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { ServerLogger } from "@/lib/serverlogger";
+import { ServerLogger } from "@/lib/serverLogger";
 
 const loggerMiddleware =
   (handler: (req: NextApiRequest, res: NextApiResponse) => void) =>

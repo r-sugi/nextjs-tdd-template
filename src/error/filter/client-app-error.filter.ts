@@ -1,4 +1,4 @@
-import { ClientLogger } from "@/lib/clientlogger";
+import { ClientLogger } from "@/lib/clientLogger";
 import { HttpError } from "../errors/http-error";
 
 export class ClientAppErrorErrorsFilter {

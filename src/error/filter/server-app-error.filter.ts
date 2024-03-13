@@ -1,4 +1,4 @@
-import { ServerLogger } from "@/lib/serverlogger";
+import { ServerLogger } from "@/lib/serverLogger";
 import { HttpError } from "../errors/http-error";
 
 export class ServerAppErrorErrorsFilter {
