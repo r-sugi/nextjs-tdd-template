@@ -5,13 +5,14 @@ export class ClientLogger {
   private context: Record<string, any> = {};
 
   constructor() {
-    if (typeof window === "undefined") {
+    if (typeof window !== "undefined") {
       this.p = pino({
         browser: { asObject: true },
       });
       this.p.level = this.logLevel();
+    } else {
+      throw new Error("ClientLoggerはブラウザでのみ使用可能です");
     }
-    throw new Error("ClientLoggerはブラウザでのみ使用可能です");
   }
 
   setContext(context: string): void {
