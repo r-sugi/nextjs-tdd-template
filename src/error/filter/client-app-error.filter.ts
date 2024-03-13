@@ -1,8 +1,8 @@
-import { Logger } from "@/lib/logger";
+import { ClientLogger } from "@/lib/clientlogger";
 import { HttpError } from "../errors/http-error";
 
 export class ClientAppErrorErrorsFilter {
-  constructor(private readonly logger: Logger) {
+  constructor(private readonly logger = new ClientLogger()) {
     this.logger.setContext(this.constructor.name);
   }
 

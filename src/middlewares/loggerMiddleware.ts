@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Logger } from "@/lib/logger";
+import { ServerLogger } from "@/lib/serverlogger";
 
 const loggerMiddleware =
   (handler: (req: NextApiRequest, res: NextApiResponse) => void) =>
   (req: NextApiRequest, res: NextApiResponse) => {
-    new Logger().info(`API route called: ${req.url}`);
+    new ServerLogger().info(`API route called: ${req.url}`);
     return handler(req, res);
   };
 
