@@ -18,7 +18,7 @@ export type PagePropsType = {
 
 export type PageType = NextPage<PagePropsType>;
 
-export const Posts: PageType = ({ posts, error }) => {
+const Posts: PageType = ({ posts, error }) => {
   // 試しにfilterを呼んだ
   if (typeof window === "undefined") {
     // TODO: vscodeのserver debugを試したい

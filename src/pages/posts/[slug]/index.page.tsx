@@ -10,6 +10,7 @@ import {
 import { ServerLogger } from "@/lib/serverLogger";
 import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
 import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
+import { HogeErrorBoundary } from "@/components/error/custom/HogeErrorBoundary";
 
 export type PagePropsType = {
   post?: Post;
@@ -18,7 +19,7 @@ export type PagePropsType = {
 
 export type PageType = NextPage<PagePropsType>;
 
-export const PostId: PageType = ({ post, error }) => {
+const PostId: PageType = ({ post, error }) => {
   if (typeof window === "undefined") {
     // TODO: vscodeのserver debugを試したい
     new ServerLogger().info("serverInfoTest1");
@@ -30,43 +31,35 @@ export const PostId: PageType = ({ post, error }) => {
     new ClientAppErrorErrorsFilter().catch(error);
   }
 
-  // カスタムErrorコンポーネントを呼ぶ
-  if (error) return <ServerErrorBoundary error={error} />;
-
-  // 1 error受け取る
-  // case 1 <CutomXXXErrorComponent />　推し clientでUI表示のみ
-  // case 2 throwしたらErrorBoundary呼ばれる ErrorBoundaryは予期せぬエラー(非検査例外)のみを描画させる
-
   // client側処理
   // 検査例外(ビジネスロジックとしてエラーハンドリングできるもの)、非検査例外(ビジネスロジック外のエラー)でErrorBoundaryを使い分ける
   // type: Error はビジネスロジック。 NotificationBar などで通知
   // type: Critical はビジネスロジック。 全体 UI 表示。 HandleableErrorBoundary
   // type: Fatal は非ビジネスロジック（ネットワークエラーや Developer の実装ミス）。 全体 UI 表示。UnhandleabeErrorBoundary
+
+  // const [aPost, setAPost] = useState<Post | undefined>(undefined);
+  // useEffect(() => {
+  //   const postId = "2"; // 一旦固定値
+  //   // TODO: SWRを使う
+  //   apiClient<Post>(`/post/${2}`).then((res) => {
+  //     setAPost(res.data);
+  //   });
+  // }, []);
+
+  // カスタムErrorコンポーネントを呼ぶ
+  if (error) return <ServerErrorBoundary error={error} />;
+
   try {
     // const postId = "2"; // 一旦固定値
     // const res = await apiClient<Post>(`/post/${postId}`);
-  } catch (error) {
-    // TODO: 下記の流れは妥当か？
-    // filterを呼ぶ(内部でcodeの判定、levelのセットをする)
-    // ↓
-    // throw errorされる
-    // ↓
-    // ErrorBoundaryが呼ばれる
-    // ↓
-    // <XXXErrorBoundary /> を描画させる
-    /*
-      前回のメモ
-    */
-    // if (error instanceof ClientAppError) {
-    // }
+  } catch (error: unknown) {
     // TODO: 検査例外
-    // throw new HttpError(res);
-    // // エラー画面を表示する
-    // // 検査例外専用のErrorXXXXBoundaryを用意しておく。
-    // // throw してそのErrorBoundaryを呼び出す
+    const result = new ClientAppErrorErrorsFilter().catch(error);
+    return <HogeErrorBoundary error={result} />;
+
     // TODO: 非検査例外（例: DBのメモリが足りない、DBの容量を超えた、NetworkErrorとか）
     // AppRESTErrorHandlerをErrorBoundaryに実装して、'unhandledrejection'イベント時にErrorBoundaryが表示されるようにする
-    // throwするとErrorBoundaryが呼ばれると(思う)
+    // 明示的にcatchできず、ランタイムで発生(throw)した際に自動的にErrorBoundaryが呼ばれる(と思う)
   }
 
   return (

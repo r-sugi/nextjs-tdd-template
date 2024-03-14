@@ -1,7 +1,7 @@
 import { ClientLogger } from "@/lib/clientLogger";
 import { HttpError } from "../errors/httpError";
 
-type ErrorResult = {
+export type ClientErrorResult = {
   message: string;
   code: string;
   cause: string;
@@ -13,14 +13,14 @@ export class ClientAppErrorErrorsFilter {
     this.logger.setContext(this.constructor.name);
   }
 
-  catch(error: unknown): ErrorResult {
+  catch(error: unknown): ClientErrorResult {
     // コンソールログ出力
     this.logger.error(error);
 
     // TODO: axiomでエラーを送信する処理をよぶ?
 
     // デフォルトのエラーメッセージを生成
-    let errorJson: ErrorResult = {
+    let errorJson: ClientErrorResult = {
       message: "サーバーでエラーが発生しました",
       cause: "",
       code: "",
