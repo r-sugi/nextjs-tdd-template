@@ -1,11 +1,17 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactNode } from "react";
+import { ErrorBoundary } from "@components/ErrorBoundary/ErrorBoundary";
 
-// TODO:
-export const AppProvider = ({ children }: { children: ReactNode }): JSX.Element => {
+export const AppProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
   return (
+    <ErrorBoundary fallback={<p>エラーが発生しました</p>}>
       <div>{children}</div>
+    </ErrorBoundary>
   );
 };
 
