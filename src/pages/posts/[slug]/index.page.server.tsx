@@ -1,16 +1,20 @@
 import { Post } from "__fixtures__/posts/post.type";
-import { GetServerSidePropsContext } from "next/types";
+import { GetServerSideProps } from "next/types";
 import { apiClient } from "@/lib/apiClient";
 import { ServerAppErrorErrorsFilter } from "@/error/filter/serverAppError.filter";
+import { PagePropsType } from "./index.page";
 
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  params,
+}): Promise<{
+  props: PagePropsType;
+}> => {
   // TODO: vscodeのserver debugを試したい
 
   // controller層
   // TODO: 400エラーの場合 パラメータの型が不正(例: Intに変換できない文字列)
-  const postId = context?.params?.id;
+  const postId = params?.id;
 
   try {
     const { data } = await apiClient<Post>(`/post/${postId}`);
@@ -41,12 +45,12 @@ export const getServerSideProps = async (
   } catch (error: unknown) {
     // filterを呼ぶ
     const result = new ServerAppErrorErrorsFilter().catch(error);
+    // HTTP status codeを設定する
+    res.statusCode = result.redirectCode;
 
-    // redirectする(400.tsx, 500.tsxなど)
     return {
-      // TODO: 表示する値も渡す
-      redirect: {
-        statusCode: result.redirectCode, // ステータスコード指定
+      props: {
+        error: result,
       },
     };
   }

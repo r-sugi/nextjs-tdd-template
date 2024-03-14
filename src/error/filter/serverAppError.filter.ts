@@ -2,7 +2,7 @@ import { ServerLogger } from "@/lib/serverLogger";
 import { HttpError } from "../errors/httpError";
 import { MY_ERROR, ERROR_CODE } from "../errors/const";
 
-type ErrorResult = {
+export type ServerErrorResult = {
   message: string;
   code: string;
   myErrorMessage: {
@@ -19,12 +19,12 @@ export class ServerAppErrorErrorsFilter {
     this.logger.setContext(this.constructor.name);
   }
 
-  catch(error: unknown): ErrorResult {
+  catch(error: unknown): ServerErrorResult {
     // サーバーログ出力
     this.logger.error(error);
 
     // デフォルトのエラーメッセージを生成
-    let errorJson: ErrorResult = {
+    let errorJson: ServerErrorResult = {
       message: "サーバーでエラーが発生しました",
       code: ERROR_CODE.INTERNAL_SERVER_ERROR,
       myErrorMessage: MY_ERROR.EER99,

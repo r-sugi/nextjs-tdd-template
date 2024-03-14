@@ -4,24 +4,35 @@ import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
 import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
+import {
+  ServerAppErrorErrorsFilter,
+  ServerErrorResult,
+} from "@/error/filter/serverAppError.filter";
+import { ServerErrorBoundary } from "@/components/error/server/ServerErrorBoundary";
+import { ServerLogger } from "@/lib/serverLogger";
 
 export type PagePropsType = {
-  posts: Post[];
+  posts?: Post[];
+  error?: ServerErrorResult;
 };
 
 export type PageType = NextPage<PagePropsType>;
 
-// buildしてHTMLになる
-export const Posts: PageType = ({ posts }) => {
-  // TODO: カスタムErrorコンポーネントを呼ぶか(or ErrorBoundaryへ渡すか)で表示する(どっちがベストか？)
-  // console.log({ error });
-  // if (error) return <Error {...error} />;
-
+export const Posts: PageType = ({ posts, error }) => {
   // 試しにfilterを呼んだ
-  if (typeof window !== "undefined") {
-    const error: any = { cause: "test" };
+  if (typeof window === "undefined") {
+    // TODO: vscodeのserver debugを試したい
+    new ServerLogger().info("serverInfoTest1");
+    const error: any = { cause: "serverErrorTest2" };
+    new ServerAppErrorErrorsFilter().catch(error);
+  } else {
+    console.log("clientLogTest1");
+    const error: any = { cause: "clientLogTest2" };
     new ClientAppErrorErrorsFilter().catch(error);
   }
+
+  // カスタムErrorコンポーネントを呼ぶ
+  if (error) return <ServerErrorBoundary error={error} />;
 
   return (
     <>
@@ -31,8 +42,7 @@ export const Posts: PageType = ({ posts }) => {
         path={publicPages.posts.path()}
       />
       {/* TODO: mswで値を返したらnull判定を外す */}
-      {/* client: SSRで静的な要素が読み込まれる + 動的なclient */}
-      <PostsTemplate posts={posts ?? []} />
+      <PostsTemplate posts={posts} />
     </>
   );
 };

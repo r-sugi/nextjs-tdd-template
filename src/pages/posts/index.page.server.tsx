@@ -1,8 +1,14 @@
 import { Post } from "__fixtures__/posts/post.type";
 import { apiClient } from "@/lib/apiClient";
 import { ServerAppErrorErrorsFilter } from "@/error/filter/serverAppError.filter";
+import { PagePropsType } from "./index.page";
+import { GetServerSideProps } from "next/types";
 
-export const getServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+}): Promise<{
+  props: PagePropsType;
+}> => {
   try {
     const { data } = await apiClient<Post[]>(`/posts`);
 
@@ -18,12 +24,12 @@ export const getServerSideProps = async () => {
   } catch (error) {
     // filterを呼ぶ
     const result = new ServerAppErrorErrorsFilter().catch(error);
+    // HTTP status codeを設定する
+    res.statusCode = result.redirectCode;
 
-    // redirectする(400.tsx, 500.tsxなど)
     return {
-      // TODO: 表示する値も渡す
-      redirect: {
-        statusCode: result.redirectCode, // ステータスコード指定
+      props: {
+        error: result,
       },
     };
   }

@@ -3,18 +3,22 @@ import { publicPages } from "@/paths";
 import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
 import { Post } from "__fixtures__/posts/post.type";
 import type { NextPage } from "next";
-import { apiClient } from "@/lib/apiClient";
-import { ServerAppErrorErrorsFilter } from "@/error/filter/serverAppError.filter";
+import {
+  ServerAppErrorErrorsFilter,
+  ServerErrorResult,
+} from "@/error/filter/serverAppError.filter";
 import { ServerLogger } from "@/lib/serverLogger";
 import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
+import { ServerErrorBoundary } from "@/components/error/server/ServerErrorBoundary";
 
 export type PagePropsType = {
-  post: Post;
+  post?: Post;
+  error?: ServerErrorResult;
 };
 
 export type PageType = NextPage<PagePropsType>;
 
-export const PostId: PageType = ({ post }) => {
+export const PostId: PageType = ({ post, error }) => {
   if (typeof window === "undefined") {
     // TODO: vscodeのserver debugを試したい
     new ServerLogger().info("serverInfoTest1");
@@ -25,6 +29,9 @@ export const PostId: PageType = ({ post }) => {
     const error: any = { cause: "clientLogTest2" };
     new ClientAppErrorErrorsFilter().catch(error);
   }
+
+  // カスタムErrorコンポーネントを呼ぶ
+  if (error) return <ServerErrorBoundary error={error} />;
 
   // 1 error受け取る
   // case 1 <CutomXXXErrorComponent />　推し clientでUI表示のみ
