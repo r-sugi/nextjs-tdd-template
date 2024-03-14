@@ -48,6 +48,7 @@ const PostId: PageType = ({ post, error }) => {
 
   // カスタムErrorコンポーネントを呼ぶ
   if (error) return <ServerErrorBoundary error={error} />;
+  if (!post) return <ServerErrorBoundary error={error} />;
 
   try {
     // const postId = "2"; // 一旦固定値
