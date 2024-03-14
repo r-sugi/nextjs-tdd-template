@@ -9,7 +9,7 @@ import {
 } from "@/error/filter/serverAppError.filter";
 import { ServerLogger } from "@/lib/serverLogger";
 import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
-import { ServerErrorBoundary } from "@/components/error/server/ServerErrorBoundary";
+import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
 
 export type PagePropsType = {
   post?: Post;

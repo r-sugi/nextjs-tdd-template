@@ -8,7 +8,7 @@ import {
   ServerAppErrorErrorsFilter,
   ServerErrorResult,
 } from "@/error/filter/serverAppError.filter";
-import { ServerErrorBoundary } from "@/components/error/server/ServerErrorBoundary";
+import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
 import { ServerLogger } from "@/lib/serverLogger";
 
 export type PagePropsType = {
