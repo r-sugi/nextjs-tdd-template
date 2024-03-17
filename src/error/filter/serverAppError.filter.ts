@@ -11,36 +11,47 @@ export type ServerErrorResult = {
     myErrorCode: string;
   };
   validationMessages?: { param: string; messages: string[] }[];
-  redirectCode: number;
+  resultStatus: number;
 };
 
-export class ServerAppErrorErrorsFilter {
-  constructor(private readonly logger = new ServerLogger()) {
-    this.logger.setContext(this.constructor.name);
-  }
+type OptionType = {
+  logger?: ServerLogger
+}
 
-  catch(error: unknown): ServerErrorResult {
-    // サーバーログ出力
-    this.logger.error(error);
+// TODO: ServerAppErrorTransformerにリネームする
+export class ServerAppErrorErrorsFilter {
+  constructor() {}
+
+  // TODO: transformにリネームする
+  catch(
+    error: unknown,
+    options?: OptionType
+  ): ServerErrorResult {
+    const logger = options?.logger ?? new ServerLogger()
 
     // デフォルトのエラーメッセージを生成
-    let errorJson: ServerErrorResult = {
+    const errorJson: ServerErrorResult = {
       message: "サーバーでエラーが発生しました",
       code: ERROR_CODE.INTERNAL_SERVER_ERROR,
       myErrorMessage: MY_ERROR.EER99,
-      redirectCode: 500,
+      resultStatus: 500,
     };
 
     // エラーの種類によって処理を分ける
     if (error instanceof HttpError) {
-      errorJson = {
+      // TODO: severity次第でログレベルが変わる
+      logger.error(error);
+      return {
         ...errorJson,
         message: error.message,
-        redirectCode: error.status,
+        resultStatus: error.status,
       };
     }
+
     if (error instanceof Error) {
-      errorJson = {
+      // サーバーログ出力
+      logger.fatal(error);
+      return {
         ...errorJson,
         message: error.message,
       };

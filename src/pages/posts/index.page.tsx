@@ -33,7 +33,7 @@ const Posts: PageType = ({ posts, error }) => {
 
   // カスタムErrorコンポーネントを呼ぶ
   if (error) return <ServerErrorBoundary error={error} />;
-  if (!posts) return <ServerErrorBoundary error={error} />;
+  // if (!posts) return <ServerErrorBoundary error={error} />;
 
   return (
     <>

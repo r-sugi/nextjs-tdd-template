@@ -8,9 +8,9 @@ export type DataResponse<T> = {
   headers?: Headers;
 };
 
-export type HttpResponse<T> = DataResponse<T> | ErrorResponse;
+export type HttpResponse<T> = DataResponse<T>;
 
-function transformResponse<T>(throwError = true) {
+function transformResponse<T>() {
   return async (response: Response): Promise<HttpResponse<T>> => {
     const json = await response.json().catch(() => ({}));
     if (!response.ok) {
@@ -22,11 +22,9 @@ function transformResponse<T>(throwError = true) {
         },
         status: response.status,
         statusText: response.statusText,
+        // TODO: severity: "fatal" | "critical" | "error" | "warning" | "info" | "debug" | "trace"
       };
-      if (throwError) {
-        throw new HttpError(error);
-      }
-      return error;
+      throw new HttpError(error);
     }
 
     const data: T = { ...json };
@@ -43,12 +41,20 @@ function transformResponse<T>(throwError = true) {
 
 export async function apiClient<T>(
   input: RequestInfo | URL,
-  config?:
-    | (RequestInit & {
-        throwErrors?: boolean;
-      })
-    | undefined
+  config?: RequestInit | undefined
 ): Promise<HttpResponse<T>> {
-  const throwErrors = config?.throwErrors ?? true;
-  return fetch(input, config).then(transformResponse<T>(throwErrors));
+  return fetch(input, config).then(transformResponse<T>());
 }
+
+// TODO: FetchUserRepositoryみたいにラップして呼び出す
+// export const fetchUserRepository = () => {
+//   await res = apiClient
+//   // fetch系のエラーハンドリングをthrow or 値を返す
+//   return res
+// }
+
+// export const fetchPDFRepository = () => {
+//   await res = apiClient
+//   // PDFエラーハンドリングをthrow or 値を返す
+//   return res
+// }

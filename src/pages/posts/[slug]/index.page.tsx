@@ -12,14 +12,18 @@ import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter
 import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
 import { HogeErrorBoundary } from "@/components/error/custom/HogeErrorBoundary";
 
-export type PagePropsType = {
-  post?: Post;
-  error?: ServerErrorResult;
+type Success = {
+  post: Post;
 };
+
+type Failure = { error: ServerErrorResult };
+
+// パイプ + key in で型を絞り込む
+export type PagePropsType = Success | Failure;
 
 export type PageType = NextPage<PagePropsType>;
 
-const PostId: PageType = ({ post, error }) => {
+const PostId: PageType = (props) => {
   if (typeof window === "undefined") {
     // TODO: vscodeのserver debugを試したい
     new ServerLogger().info("serverInfoTest1");
@@ -46,9 +50,9 @@ const PostId: PageType = ({ post, error }) => {
   //   });
   // }, []);
 
-  // カスタムErrorコンポーネントを呼ぶ
-  if (error) return <ServerErrorBoundary error={error} />;
-  if (!post) return <ServerErrorBoundary error={error} />;
+  if ("error" in props) {
+    return <ServerErrorBoundary error={props.error} />;
+  }
 
   try {
     // const postId = "2"; // 一旦固定値
@@ -67,11 +71,11 @@ const PostId: PageType = ({ post, error }) => {
     <>
       {/* TODO: mswで値を返したらオプショナルチェーンを外す */}
       <Seo
-        title={publicPages.postId.title(post?.title ?? "")}
+        title={publicPages.postId.title(props.post.title ?? "")}
         description={publicPages.postId.description()}
-        path={publicPages.postId.path(post?.id ?? "")}
+        path={publicPages.postId.path(props.post.id ?? "")}
       />
-      <PostIdTemplate post={post} />
+      <PostIdTemplate post={props.post} />
     </>
   );
 };

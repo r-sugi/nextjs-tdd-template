@@ -17,24 +17,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const postId = params?.id;
 
   try {
+    // TODO: findPostByIdでラップしてコールする
     const { data } = await apiClient<Post>(`/post/${postId}`);
-
-    if (!data) {
-      throw new Error("?????");
-    }
-    // if (!res.data) {
-    //   // failure
-    //   // TODO: filterを呼ぶ(内部でcodeの判定、levelのセットをする)
-    //   if (isServerAppError(res) && res.code == "XXXX") {
-    //     throw new ClientAppError(res, { level: "error" });
-    //   }
-    //   if (isServerAppError(res) && res.code == "XXXX") {
-    //     throw new ClientAppError(res, { level: "critical" });
-    //   }
-    //   if (isServerAppError(res) && res.code == "XXXX") {
-    //     throw new ClientAppError(res, { level: "fatal" });
-    //   }
-    // }
 
     // success
     return {
@@ -46,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     // filterを呼ぶ
     const result = new ServerAppErrorErrorsFilter().catch(error);
     // HTTP status codeを設定する
-    res.statusCode = result.redirectCode;
+    res.statusCode = result.resultStatus;
 
     return {
       props: {
