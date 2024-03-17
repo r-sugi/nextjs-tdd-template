@@ -3,7 +3,7 @@ import { ServerErrorResult } from "@/error/filter/serverAppError.filter";
 
 type Props = {
   error: ServerErrorResult;
-  render?: (error: ServerErrorResult) => ReactNode;
+  render?: (error: ServerErrorResult) => ReactNode | undefined;
 };
 
 // TODO:
