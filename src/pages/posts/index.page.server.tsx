@@ -1,8 +1,7 @@
-import { Post } from "__fixtures__/posts/post.type";
-import { apiClient } from "@/lib/apiClient";
-import { ServerAppErrorErrorsFilter } from "@/error/filter/serverAppError.filter";
+import { ServerAppErrorTransformer } from "@/error/transformer/serverAppError.transformer";
 import { PagePropsType } from "./index.page";
 import { GetServerSideProps } from "next/types";
+import { fetchPosts } from "@/repositories/post/postRepository";
 
 export const getServerSideProps: GetServerSideProps = async ({
   res,
@@ -10,22 +9,16 @@ export const getServerSideProps: GetServerSideProps = async ({
   props: PagePropsType;
 }> => {
   try {
-    const { data } = await apiClient<Post[]>(`/posts`);
-
-    if (!data) {
-      throw new Error("?????");
-    }
+    const { data } = await fetchPosts();
 
     return {
       props: {
         posts: data,
       },
     };
-  } catch (error) {
-    // filterを呼ぶ
-    const result = new ServerAppErrorErrorsFilter().catch(error);
-    // HTTP status codeを設定する
-    res.statusCode = result.redirectCode;
+  } catch (error: unknown) {
+    const result = new ServerAppErrorTransformer().transform(error);
+    res.statusCode = result.resultStatus;
 
     return {
       props: {

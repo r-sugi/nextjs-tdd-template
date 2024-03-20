@@ -18,7 +18,7 @@ export class ServerLogger {
     this.context = Object.assign(this.context, { context });
   }
 
-  setLogLevel(logLevel: pino.LevelWithSilent) {
+  setLogLevel(logLevel: pino.LevelWithSilent): void {
     this.p.level = logLevel;
   }
 

@@ -4,13 +4,12 @@ import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
 import { Post } from "__fixtures__/posts/post.type";
 import type { NextPage } from "next";
 import {
-  ServerAppErrorErrorsFilter,
+  ServerAppErrorTransformer,
   ServerErrorResult,
-} from "@/error/filter/serverAppError.filter";
+} from "@/error/transformer/serverAppError.transformer";
 import { ServerLogger } from "@/lib/serverLogger";
-import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
+import { ClientAppErrorTransformer } from "@/error/transformer/clientAppError.transformer";
 import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
-import { HogeErrorBoundary } from "@/components/error/custom/PostIdErrorBoundary";
 
 type Success = {
   post: Post;
@@ -18,21 +17,21 @@ type Success = {
 
 type Failure = { error: ServerErrorResult };
 
-// パイプ + key in で型を絞り込む
+// パイプ + key in で型を絞り込む -> in で型を絞り込む
 export type PagePropsType = Success | Failure;
 
 export type PageType = NextPage<PagePropsType>;
 
 const PostId: PageType = (props) => {
+  // 下記は動作確認用のコード、削除予定。
   if (typeof window === "undefined") {
-    // TODO: vscodeのserver debugを試したい
     new ServerLogger().info("serverInfoTest1");
     const error: any = { cause: "serverErrorTest2" };
-    new ServerAppErrorErrorsFilter().catch(error);
+    new ServerAppErrorTransformer().transform(error);
   } else {
     console.log("clientLogTest1");
     const error: any = { cause: "clientLogTest2" };
-    new ClientAppErrorErrorsFilter().catch(error);
+    new ClientAppErrorTransformer().transform(error);
   }
 
   if ("error" in props) {
@@ -41,17 +40,12 @@ const PostId: PageType = (props) => {
 
   return (
     <>
-      {/* TODO: mswで値を返したらオプショナルチェーンを外す */}
       <Seo
-        title={publicPages.postId.title(props.post.title ?? "")}
+        title={publicPages.postId.title(props.post.title)}
         description={publicPages.postId.description()}
-        path={publicPages.postId.path(props.post.id ?? "")}
+        path={publicPages.postId.path(props.post.id)}
       />
-      {/* TODO: 個別Boundaryで囲む */}
-      {/* TODO: PostIdErrorScreen: エラーを受け取って描画するテンプレートを用意する */}
-      <PostIdErrorBoundary render={PostIdErrorScreen}>
-        <PostIdTemplate post={props.post} />
-      </PostIdErrorBoundary>
+      <PostIdTemplate post={props.post} />
     </>
   );
 };

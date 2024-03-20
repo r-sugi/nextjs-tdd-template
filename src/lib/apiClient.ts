@@ -45,16 +45,3 @@ export async function apiClient<T>(
 ): Promise<HttpResponse<T>> {
   return fetch(input, config).then(transformResponse<T>());
 }
-
-// TODO: FetchUserRepositoryみたいにラップして呼び出す
-// export const fetchUserRepository = () => {
-//   await res = apiClient
-//   // fetch系のエラーハンドリングをthrow or 値を返す
-//   return res
-// }
-
-// export const fetchPDFRepository = () => {
-//   await res = apiClient
-//   // PDFエラーハンドリングをthrow or 値を返す
-//   return res
-// }

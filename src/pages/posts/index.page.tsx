@@ -3,37 +3,39 @@ import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
-import { ClientAppErrorErrorsFilter } from "@/error/filter/clientAppError.filter";
+import { ClientAppErrorTransformer } from "@/error/transformer/clientAppError.transformer";
 import {
-  ServerAppErrorErrorsFilter,
+  ServerAppErrorTransformer,
   ServerErrorResult,
-} from "@/error/filter/serverAppError.filter";
+} from "@/error/transformer/serverAppError.transformer";
 import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
 import { ServerLogger } from "@/lib/serverLogger";
 
-export type PagePropsType = {
-  posts?: Post[];
-  error?: ServerErrorResult;
+type Success = {
+  posts: Post[];
 };
+
+type Failure = { error: ServerErrorResult };
+
+export type PagePropsType = Success | Failure;
 
 export type PageType = NextPage<PagePropsType>;
 
-const Posts: PageType = ({ posts, error }) => {
-  // 試しにfilterを呼んだ
+const Posts: PageType = (props) => {
+  // 下記は動作確認用のコード、削除予定。
   if (typeof window === "undefined") {
-    // TODO: vscodeのserver debugを試したい
     new ServerLogger().info("serverInfoTest1");
     const error: any = { cause: "serverErrorTest2" };
-    new ServerAppErrorErrorsFilter().catch(error);
+    new ServerAppErrorTransformer().transform(error);
   } else {
     console.log("clientLogTest1");
     const error: any = { cause: "clientLogTest2" };
-    new ClientAppErrorErrorsFilter().catch(error);
+    new ClientAppErrorTransformer().transform(error);
   }
 
-  // カスタムErrorコンポーネントを呼ぶ
-  if (error) return <ServerErrorBoundary error={error} />;
-  // if (!posts) return <ServerErrorBoundary error={error} />;
+  if ("error" in props) {
+    return <ServerErrorBoundary error={props.error} />;
+  }
 
   return (
     <>
@@ -42,8 +44,7 @@ const Posts: PageType = ({ posts, error }) => {
         description={publicPages.posts.description()}
         path={publicPages.posts.path()}
       />
-      {/* TODO: mswで値を返したらnull判定を外す */}
-      <PostsTemplate posts={posts} />
+      <PostsTemplate posts={props.posts} />
     </>
   );
 };

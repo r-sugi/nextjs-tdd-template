@@ -15,19 +15,14 @@ export type ServerErrorResult = {
 };
 
 type OptionType = {
-  logger?: ServerLogger
-}
+  logger?: ServerLogger;
+};
 
-// TODO: ServerAppErrorTransformerにリネームする
-export class ServerAppErrorErrorsFilter {
+export class ServerAppErrorTransformer {
   constructor() {}
 
-  // TODO: transformにリネームする
-  catch(
-    error: unknown,
-    options?: OptionType
-  ): ServerErrorResult {
-    const logger = options?.logger ?? new ServerLogger()
+  transform(error: unknown, options?: OptionType): ServerErrorResult {
+    const logger = options?.logger ?? new ServerLogger();
 
     // デフォルトのエラーメッセージを生成
     const errorJson: ServerErrorResult = {
