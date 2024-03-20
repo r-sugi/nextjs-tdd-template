@@ -1,6 +1,7 @@
 import { ClientError } from "@/error/transformer/clientAppError.transformer";
-import { Component, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
 import { ErrorScreen } from "../ErrorScreen";
+import { ClientLogger } from "@/lib/clientLogger";
 
 type Props = {
   children: ReactNode;
@@ -12,9 +13,6 @@ type ErrorBoundaryState = {
   error?: ClientError;
 };
 
-// TODO: 非検査例外（例: DBのメモリが足りない、DBの容量を超えた、NetworkErrorとか）
-// AppRESTErrorHandlerをErrorBoundaryに実装して、'unhandledrejection'イベント時にErrorBoundaryが表示されるようにする
-// 明示的にcatchできず、ランタイムで発生(throw)した際に自動的にErrorBoundaryが呼ばれる(と思う)
 export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
   constructor(props: Props) {
     super(props);
@@ -30,6 +28,34 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
       throw error;
     }
     return { error };
+  }
+
+  componentDidCatch(err: Error, errInfo: ErrorInfo) {
+    // You can use your own error logging service here
+    // TODO: loggerを使ってOK?
+    new ClientLogger().error({
+      error: err,
+      info: errInfo,
+    });
+  }
+
+  // TODO: ErrorBoundary.tsxにも追加する必要があるか
+  componentDidMount() {
+    window.addEventListener(
+      "unhandledrejection",
+      (e: PromiseRejectionEvent) => {
+        throw new Error(e.reason);
+      }
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "unhandledrejection",
+      (e: PromiseRejectionEvent) => {
+        throw new Error(e.reason);
+      }
+    );
   }
 
   render(): ReactNode {
