@@ -2,6 +2,10 @@ import { server } from "@/../mocks/server";
 import { rest } from "msw";
 import { getServerSideProps } from "./index.page.server";
 import * as getPost from "@/../__fixtures__/posts/getPost";
+import { GetServerSidePropsContext } from "next/types";
+import { ParsedUrlQuery } from "querystring";
+import { spyAndMock } from "@/__testing__/helper";
+import { ServerAppErrorTransformer } from "@/error/transformer/serverAppError.transformer";
 jest.mock("@/components/templates/Posts/Posts");
 
 beforeAll(() => server.listen({ onUnhandledRequest: "bypass" }));
@@ -13,25 +17,33 @@ describe("#getStaticProps", () => {
     // Arrange
     const mock = jest.fn();
     server.use(
-      rest.get("/post/1", (req, res, ctx) => {
+      rest.get("/api/posts/1", (req, res, ctx) => {
         mock(req.params);
         return res(ctx.json(getPost.success.data));
       })
     );
     const expected = { props: { post: getPost.success.data } };
 
+    const context = {
+      res: {
+        statusCode: 0,
+      },
+      params: { id: "1" } as ParsedUrlQuery,
+    } as GetServerSidePropsContext;
+
     // Act
-    const result = await getServerSideProps({ params: { id: "1" } });
+    const result = await getServerSideProps(context);
 
     // Assert
-    expect(result).toStrictEqual(expected);
+    expect(mock).toHaveBeenCalled();
+    expect(result).toEqual(expected);
   });
 
   describe("error", () => {
     it("HttpErrorがかえること", async () => {
       const mock = jest.fn();
       server.use(
-        rest.get("/post/1", (_req, res, ctx) => {
+        rest.get("/api/posts/1", (_req, res, ctx) => {
           mock();
           return res(
             ctx.status(400),
@@ -41,26 +53,33 @@ describe("#getStaticProps", () => {
           );
         })
       );
+      const context = {
+        res: {
+          statusCode: 0,
+        },
+        params: { id: "1" } as ParsedUrlQuery,
+      } as GetServerSidePropsContext;
 
-      await expect(() =>
-        getServerSideProps({ params: { id: "1" } })
-      ).rejects.toThrow("HttpError");
-      expect(mock).toHaveBeenCalled();
-    });
+      const errorResult = {
+        resultStatus: 400,
+        errorMessage: "error",
+      };
 
-    it("Unhandled errorがかえること", async () => {
-      const mock = jest.fn();
-      server.use(
-        rest.get("/post/1", (_req, res, _ctx) => {
-          mock();
-          return res.networkError("Failed to connect");
-        })
+      spyAndMock(
+        ServerAppErrorTransformer.prototype,
+        "transform",
+        () => errorResult
       );
 
-      await expect(() =>
-        getServerSideProps({ params: { id: "1" } })
-      ).rejects.toThrow("Unhandled Error");
+      const expected = { props: { error: errorResult } };
+
+      // Act
+      const result = await getServerSideProps(context);
+
+      // Assert
       expect(mock).toHaveBeenCalled();
+      expect(result).toEqual(expected);
+      expect(context.res.statusCode).toBe(400);
     });
   });
 });

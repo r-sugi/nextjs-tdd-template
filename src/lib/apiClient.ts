@@ -26,8 +26,7 @@ function transformResponse<T>() {
       };
       throw new HttpError(error);
     }
-
-    const data: T = { ...json };
+    const data: T = json;
 
     return {
       data,
