@@ -4,7 +4,7 @@ import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
 import { Post } from "__fixtures__/posts/post.type";
 import type { NextPage } from "next";
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
-import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
+import { ServerErrorBoundary } from "@/components/error/baundary/ServerErrorBoundary";
 
 type Success = {
   post: Post;

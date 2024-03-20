@@ -4,7 +4,7 @@ import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
-import { ServerErrorBoundary } from "@/components/error/custom/ServerErrorBoundary";
+import { ServerErrorBoundary } from "@/components/error/baundary/ServerErrorBoundary";
 
 type Success = {
   posts: Post[];
