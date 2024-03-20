@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next/types";
-import { apiClient } from "@/lib/apiClient";
 import { ServerAppErrorTransformer } from "@/error/transformer/serverAppError.transformer";
 import { PagePropsType } from "./index.page";
 import { fetchPostById } from "@/repositories/post/postRepository";

@@ -4,8 +4,7 @@ import { Seo } from "@/components/Seo";
 import { FC } from "react";
 
 type Props = {};
-// TODO: import useSWR from 'swr'を使う
-// TODO: ErrorBoundary
+
 export const Index: FC<Props> = () => {
   return (
     <>

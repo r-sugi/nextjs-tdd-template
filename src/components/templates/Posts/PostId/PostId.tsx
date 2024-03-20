@@ -15,12 +15,12 @@ type Props = {
 };
 
 export const PostId: FC<Props> = ({ post }) => {
-  try {
-    // const postId = "2"; // 一旦固定値
-    // const res = await apiClient<Post>(`/post/${postId}`);
-  } catch (error: unknown) {
-    throw new ClientAppErrorTransformer().transform(error);
-  }
+  // try {
+  //   // const postId = "2"; // 一旦固定値
+  //   // const res = await apiClient<Post>(`/post/${postId}`);
+  // } catch (error: unknown) {
+  //   throw new ClientAppErrorTransformer().transform(error);
+  // }
 
   return (
     <div>
