@@ -17,6 +17,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 
   componentDidCatch(err: Error, errInfo: ErrorInfo) {
     // You can use your own error logging service here
+    // TODO: loggerを使ってOK?
     new ClientLogger().error({
       error: err,
       info: errInfo,

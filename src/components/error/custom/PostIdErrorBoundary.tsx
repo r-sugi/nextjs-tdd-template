@@ -15,7 +15,6 @@ type ErrorBoundaryState = {
 // TODO: 非検査例外（例: DBのメモリが足りない、DBの容量を超えた、NetworkErrorとか）
 // AppRESTErrorHandlerをErrorBoundaryに実装して、'unhandledrejection'イベント時にErrorBoundaryが表示されるようにする
 // 明示的にcatchできず、ランタイムで発生(throw)した際に自動的にErrorBoundaryが呼ばれる(と思う)
-
 export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
   constructor(props: Props) {
     super(props);
