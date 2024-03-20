@@ -1,7 +1,7 @@
 import { ClientAppErrorTransformer } from "@/error/transformer/clientAppError.transformer";
 import { Post } from "__fixtures__/posts/post.type";
 import { FC } from "react";
-import { PostIdErrorBoundary } from "@/components/error/custom/PostIdErrorBoundary";
+import { PostIdErrorBoundary } from "@/components/error/baundary/PostIdErrorBoundary";
 import { PostIdErrorScreen } from "@/components/error/screen/PostIdErrorScreen";
 import { fetchPostById } from "@/repositories/post/postRepository";
 
