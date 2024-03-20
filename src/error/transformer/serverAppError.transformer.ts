@@ -1,6 +1,6 @@
 import { HttpError } from "../errors/httpError";
 import { MY_ERROR, ERROR_CODE } from "../errors/const";
-import { ServerLogger } from "@/lib/serverlogger";
+import { ServerLogger } from "@/lib/serverLogger";
 
 export type ServerErrorResult = {
   message: string;
