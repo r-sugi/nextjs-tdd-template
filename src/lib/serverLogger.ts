@@ -5,7 +5,12 @@ export class ServerLogger {
   private context: Record<string, any> = {};
 
   constructor() {
-    if (typeof window === "undefined") {
+    if (process.env.NODE_ENV === "test") {
+      // テスト時はwindowがないため。
+      this.p = pino({
+        level: this.logLevel(),
+      });
+    } else if (typeof window === "undefined") {
       this.p = pino({
         level: this.logLevel(),
       });
