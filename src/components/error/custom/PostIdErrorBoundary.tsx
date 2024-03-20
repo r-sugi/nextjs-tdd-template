@@ -4,11 +4,11 @@ import { ErrorScreen } from "../ErrorScreen";
 
 type Props = {
   children: ReactNode;
-  render: ({ error }: { error: ClientError }) => ReactNode;
+  render?: ({ error }: { error: ClientError }) => ReactNode | undefined;
 };
 
 type ErrorBoundaryState = {
-  render: ({ error }: { error: ClientError }) => ReactNode;
+  render?: ({ error }: { error: ClientError }) => ReactNode | undefined;
   error?: ClientError;
 };
 
