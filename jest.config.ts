@@ -15,6 +15,9 @@ const config: Config = {
   moduleNameMapper: {
     "^@/(.*)": "<rootDir>/src/$1",
   },
+  transform: {
+    "^.+\\.(t|j)sx?$": "@swc/jest",
+  },
   testMatch: ["**/*.test.ts", "**/*.test.tsx"],
   verbose: true,
   testEnvironment: "jest-environment-jsdom",
