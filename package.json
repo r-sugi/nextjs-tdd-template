@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,12 +12,15 @@
   },
   "dependencies": {
     "next": "13.5.4",
+    "pino": "^8.19.0",
     "react": "^18",
     "react-dom": "^18",
     "swiper": "^11.0.5",
+    "swr": "^2.2.5",
     "whatwg-fetch": "^3.6.20"
   },
   "devDependencies": {
+    "@swc/jest": "^0.2.36",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "@types/jest": "^29.5.12",

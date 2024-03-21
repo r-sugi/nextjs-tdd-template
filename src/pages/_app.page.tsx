@@ -1,12 +1,18 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactNode } from "react";
+import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 
-// TODO:
-export const AppProvider = ({ children }: { children: ReactNode }): JSX.Element => {
-  return (
-      <div>{children}</div>
-  );
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  require("../../mocks/index");
+}
+
+export const AppProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
+  return <ErrorBoundary>{children}</ErrorBoundary>;
 };
 
 export default function MyApp({ Component, pageProps }: AppProps) {

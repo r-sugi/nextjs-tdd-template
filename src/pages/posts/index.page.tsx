@@ -3,18 +3,24 @@ import { publicPages } from "@/paths";
 import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
-// export { getStaticProps } from "./Posts.page.server";
+import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
+import { ServerErrorBoundary } from "@/components/error/baundary/ServerErrorBoundary";
 
-export type PagePropsType = {
+type Success = {
   posts: Post[];
 };
 
+type Failure = { error: ServerErrorResult };
+
+export type PagePropsType = Success | Failure;
+
 export type PageType = NextPage<PagePropsType>;
 
-export const Posts: PageType = ({ posts }) => {
-  // TODO: カスタムErrorコンポーネントを呼ぶか(or ErrorBoundaryへ渡すか)で表示する(どっちがベストか？)
-  // console.log({ error });
-  // if (error) return <Error {...error} />;
+const Posts: PageType = (props) => {
+  if ("error" in props) {
+    return <ServerErrorBoundary error={props.error} />;
+  }
+
   return (
     <>
       <Seo
@@ -22,8 +28,7 @@ export const Posts: PageType = ({ posts }) => {
         description={publicPages.posts.description()}
         path={publicPages.posts.path()}
       />
-      {/* TODO: mswで値を返したらnull判定を外す */}
-      <PostsTemplate posts={posts ?? []} />
+      <PostsTemplate posts={props.posts} />
     </>
   );
 };
