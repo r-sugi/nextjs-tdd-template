@@ -3,6 +3,10 @@ import Head from "next/head";
 import { ReactNode } from "react";
 import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  require("../../mocks/index");
+}
+
 export const AppProvider = ({
   children,
 }: {
