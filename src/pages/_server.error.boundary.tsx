@@ -17,6 +17,10 @@ export const ServerErrorBoundary: FC<Props> = (props: Props) => {
       <h1>ServerErrorScreen</h1>
       <p>code: {props.error.code}</p>
       <p>message: {props.error.message}</p>
+      <p>
+        myErrorMessage: {JSON.stringify(props.error.myErrorMessage, null, 2)}
+      </p>
+      <p>resultStatus: {props.error.resultStatus}</p>
     </div>
   );
 };

@@ -1,7 +1,7 @@
+import { ErrorBoundary } from "@/components/error/boundary/ErrorBoundary";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactNode } from "react";
-import { ErrorBoundary } from "@/components/error/ErrorBoundary";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../../mocks/index");
