@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "@/components/error/boundary/ErrorBoundary";
+import { ErrorBoundary } from "@/pages/_error.boundary";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { ReactNode } from "react";
