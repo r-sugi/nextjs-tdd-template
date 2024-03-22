@@ -1,6 +1,6 @@
 import { ERROR_CODE, MY_ERROR } from "../errors/const";
 import { HttpError } from "../errors/httpError";
-import { ClientAppErrorTransformer } from "./clientAppError.transformer";
+import { ErrorTransformer } from "./error.transformer";
 
 describe.skip("#transform", () => {
   describe("errorがHttpErrorの場合", () => {
@@ -20,7 +20,7 @@ describe.skip("#transform", () => {
         severity: "error",
       };
 
-      const result = new ClientAppErrorTransformer().transform(httpError);
+      const result = new ErrorTransformer().transform(httpError);
       expect(result).toEqual(expected);
     });
   });
@@ -37,9 +37,7 @@ describe.skip("#transform", () => {
         resultStatus: 500,
       };
 
-      const result = new ClientAppErrorTransformer().transform(
-        new Error(error.message)
-      );
+      const result = new ErrorTransformer().transform(new Error(error.message));
       expect(result).toEqual(expected);
     });
   });

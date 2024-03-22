@@ -1,4 +1,4 @@
-import { ClientAppErrorTransformer } from "@/error/transformer/clientAppError.transformer";
+import { ErrorTransformer } from "@/error/transformer/error.transformer";
 import { useFetchPosts } from "@/repositories/post/postRepository";
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./Posts/PostId/PostIdErrorBoundary";
@@ -9,7 +9,7 @@ export const IndexTemplate: FC<Props> = () => {
   const { posts: data, error, isLoading } = useFetchPosts();
 
   if (error) {
-    throw new ClientAppErrorTransformer().transform(error);
+    throw new ErrorTransformer().transform(error);
   }
   if (isLoading) {
     return <div>loading...</div>;

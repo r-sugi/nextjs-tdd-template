@@ -1,4 +1,4 @@
-import { ClientAppErrorTransformer } from "@/error/transformer/clientAppError.transformer";
+import { ErrorTransformer } from "@/error/transformer/error.transformer";
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./PostIdErrorBoundary";
 import { PostIdErrorScreen } from "./PostIdErrorScreen";
@@ -12,7 +12,7 @@ export const PostId: FC<{}> = () => {
   );
 
   if (error) {
-    throw new ClientAppErrorTransformer().transform(error);
+    throw new ErrorTransformer().transform(error);
   }
   if (isLoading) {
     return <div>loading...</div>;

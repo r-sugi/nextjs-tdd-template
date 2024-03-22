@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { useFetchPosts } from "../../../repositories/post/postRepository";
-import { ClientAppErrorTransformer } from "../../../error/transformer/clientAppError.transformer";
+import { ErrorTransformer } from "../../../error/transformer/error.transformer";
 
 const PostsTemplate: FC<{}> = () => {
   const { posts, error, isLoading } = useFetchPosts();
 
   if (error) {
-    throw new ClientAppErrorTransformer().transform(error);
+    throw new ErrorTransformer().transform(error);
   }
   if (isLoading) {
     return <div>loading...</div>;
