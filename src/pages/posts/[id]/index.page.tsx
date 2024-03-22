@@ -4,8 +4,10 @@ import { PostIdTemplate } from "@/components/templates/Posts/PostId/PostId";
 import { Post } from "__fixtures__/posts/post.type";
 import type { NextPage } from "next";
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
-import { ServerErrorBoundary } from "@/components/error/baundary/ServerErrorBoundary";
-
+import { getServerSideProps } from "./index.page.server";
+export { getServerSideProps };
+import { PostIdErrorScreen } from "./index.page.error";
+import { ServerErrorBoundary } from "@/pages/_server.error.boundary";
 type Success = {
   post: Post;
 };
@@ -18,7 +20,9 @@ export type PageType = NextPage<PagePropsType>;
 
 const PostId: PageType = (props) => {
   if ("error" in props) {
-    return <ServerErrorBoundary error={props.error} />;
+    return (
+      <ServerErrorBoundary error={props.error} render={PostIdErrorScreen} />
+    );
   }
 
   return (

@@ -23,3 +23,17 @@ export const useFetchPostById = (id: string | number) => {
     isLoading,
   };
 };
+
+export const useFetchPosts = () => {
+  const {
+    data: posts,
+    error,
+    isLoading,
+  } = useSWR(`/api/posts`, apiClient<Post>);
+
+  return {
+    posts,
+    error,
+    isLoading,
+  };
+};

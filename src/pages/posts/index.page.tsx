@@ -4,7 +4,10 @@ import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
-import { ServerErrorBoundary } from "@/components/error/baundary/ServerErrorBoundary";
+import { getServerSideProps } from "./index.page.server";
+import { PostsErrorScreen } from "./index.page.error";
+import { ServerErrorBoundary } from "../_server.error.boundary";
+export { getServerSideProps };
 
 type Success = {
   posts: Post[];
@@ -18,7 +21,9 @@ export type PageType = NextPage<PagePropsType>;
 
 const Posts: PageType = (props) => {
   if ("error" in props) {
-    return <ServerErrorBoundary error={props.error} />;
+    return (
+      <ServerErrorBoundary render={PostsErrorScreen} error={props.error} />
+    );
   }
 
   return (
