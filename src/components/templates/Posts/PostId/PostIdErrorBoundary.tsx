@@ -23,8 +23,14 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
   }
 
   static getDerivedStateFromError(error: ClientError) {
-    if (error?.severity != null && error?.severity !== "error") {
-      // fatal, criticalの場合は再throwして全体のErrorBoundaryで処理する
+    if (
+      error?.severity != null &&
+      ["error", "fatal"].includes(error.severity)
+    ) {
+      // 明示的にfatal, criticalにしたものは全体のErrorBoundaryで補足する
+      throw error;
+    } else if (error?.severity == null) {
+      // 補足できなかったものは全体のErrorBoundaryで補足する
       throw error;
     }
     return { error };
@@ -42,6 +48,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
     window.addEventListener(
       "unhandledrejection",
       (e: PromiseRejectionEvent) => {
+        // 全体のErrorBoundaryで補足する
         throw new Error(e.reason, { cause: e.reason });
       }
     );
@@ -51,6 +58,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
     window.removeEventListener(
       "unhandledrejection",
       (e: PromiseRejectionEvent) => {
+        // 全体のErrorBoundaryで補足する
         throw new Error(e.reason, { cause: e.reason });
       }
     );
@@ -61,13 +69,9 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
     if (this.state.render && this.state.error) {
       return this.state.render({ error: this.state.error });
     }
-
-    if (this.state.error && process.env.NODE_ENV === "production") {
-      return <ErrorScreen error={this.state.error} />;
-    }
-
+    // デフォルトで描画する場合
     if (this.state.error) {
-      return <div>{JSON.stringify(this.state.error, null, 2)}</div>;
+      return <ErrorScreen error={this.state.error} />;
     }
 
     return this.props.children;
