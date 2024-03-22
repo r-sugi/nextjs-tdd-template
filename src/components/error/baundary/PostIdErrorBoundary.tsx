@@ -1,6 +1,6 @@
 import { ClientError } from "@/error/transformer/clientAppError.transformer";
 import { Component, ErrorInfo, ReactNode } from "react";
-import { ErrorScreen } from "../ErrorScreen";
+import { ErrorScreen } from "../screen/ErrorScreen";
 import { ClientLogger } from "@/lib/clientLogger";
 
 type Props = {

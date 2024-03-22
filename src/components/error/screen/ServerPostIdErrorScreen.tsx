@@ -1,7 +1,7 @@
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
 import { ReactNode } from "react";
 
-export const PostIdServerErrorScreen = (
+export const ServerPostIdErrorScreen = (
   error: ServerErrorResult
 ): ReactNode => {
   return (

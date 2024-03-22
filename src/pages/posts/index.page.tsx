@@ -6,7 +6,7 @@ import type { Post } from "@/../__fixtures__/posts/post.type";
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
 import { ServerErrorBoundary } from "@/components/error/baundary/ServerErrorBoundary";
 import { getServerSideProps } from "./index.page.server";
-import { PostIdServerErrorScreen } from "@/components/error/screen/PostIdServerErrorScreen";
+import { ServerPostIdErrorScreen } from "@/components/error/screen/ServerPostIdErrorScreen";
 export { getServerSideProps };
 
 type Success = {
@@ -23,7 +23,7 @@ const Posts: PageType = (props) => {
   if ("error" in props) {
     return (
       <ServerErrorBoundary
-        render={PostIdServerErrorScreen}
+        render={ServerPostIdErrorScreen}
         error={props.error}
       />
     );

@@ -12,5 +12,11 @@ export const ServerErrorBoundary: FC<Props> = (props: Props) => {
     return props.render(props.error);
   }
   // デフォルトテンプレートを表示する場合
-  return <>{props.error}</>;
+  return (
+    <div>
+      <h1>ServerErrorScreen</h1>
+      <p>code: {props.error.code}</p>
+      <p>message: {props.error.message}</p>
+    </div>
+  );
 };
