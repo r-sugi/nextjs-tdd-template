@@ -1,15 +1,15 @@
 import { ClientAppErrorTransformer } from "@/error/transformer/clientAppError.transformer";
-import { Post } from "__fixtures__/posts/post.type";
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./PostIdErrorBoundary";
 import { PostIdErrorScreen } from "./PostIdErrorScreen";
 import { useFetchPostById } from "@/repositories/post/postRepository";
-type Props = {
-  post: Post;
-};
+import { useRouter } from "next/router";
 
-export const PostId: FC<Props> = ({ post }) => {
-  const { post: data, error, isLoading } = useFetchPostById(post.id);
+export const PostId: FC<{}> = () => {
+  const router = useRouter();
+  const { post, error, isLoading } = useFetchPostById(
+    router?.query?.id as string
+  );
 
   if (error) {
     throw new ClientAppErrorTransformer().transform(error);
@@ -17,7 +17,7 @@ export const PostId: FC<Props> = ({ post }) => {
   if (isLoading) {
     return <div>loading...</div>;
   }
-  if (!data) {
+  if (!post) {
     return <div>no data</div>;
   }
 
@@ -28,10 +28,12 @@ export const PostId: FC<Props> = ({ post }) => {
   );
 };
 
-export const PostIdTemplate: FC<Props> = ({ post }) => {
+const PostIdTemplate = () => {
   return (
     <PostIdErrorBoundary render={PostIdErrorScreen}>
-      <PostId post={post} />
+      <PostId />
     </PostIdErrorBoundary>
   );
 };
+
+export default PostIdTemplate;

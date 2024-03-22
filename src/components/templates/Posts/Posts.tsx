@@ -1,11 +1,20 @@
-import { Post } from "__fixtures__/posts/post.type";
 import { FC } from "react";
+import { useFetchPosts } from "../../../repositories/post/postRepository";
+import { ClientAppErrorTransformer } from "../../../error/transformer/clientAppError.transformer";
 
-type Props = {
-  posts: Post[];
-};
+const PostsTemplate: FC<{}> = () => {
+  const { posts, error, isLoading } = useFetchPosts();
 
-export const PostsTemplate: FC<Props> = ({ posts }) => {
+  if (error) {
+    throw new ClientAppErrorTransformer().transform(error);
+  }
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+  if (posts == null) {
+    return <div>no data</div>;
+  }
+
   return (
     <>
       <div>PostsTemplate</div>
@@ -17,3 +26,5 @@ export const PostsTemplate: FC<Props> = ({ posts }) => {
     </>
   );
 };
+
+export default PostsTemplate;

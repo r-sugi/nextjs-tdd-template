@@ -12,13 +12,13 @@ export const fetchPosts = async () => {
 
 export const useFetchPostById = (id: string | number) => {
   const {
-    data: post,
+    data: res,
     error,
     isLoading,
   } = useSWR(`/api/posts/${id}`, apiClient<Post>);
 
   return {
-    post,
+    post: res?.data,
     error,
     isLoading,
   };
@@ -26,13 +26,13 @@ export const useFetchPostById = (id: string | number) => {
 
 export const useFetchPosts = () => {
   const {
-    data: posts,
+    data: res,
     error,
     isLoading,
-  } = useSWR(`/api/posts`, apiClient<Post>);
+  } = useSWR(`/api/posts`, apiClient<Post[]>);
 
   return {
-    posts,
+    posts: res?.data,
     error,
     isLoading,
   };
