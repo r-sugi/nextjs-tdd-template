@@ -6,7 +6,7 @@ import type { NextPage } from "next";
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
 import { getServerSideProps } from "./index.page.server";
 export { getServerSideProps };
-import { PostIdErrorScreen } from "./_index.page.error";
+import { PostIdErrorScreen } from "./index.page.error";
 import { ServerErrorBoundary } from "@/pages/_server.error.boundary";
 type Success = {
   post: Post;

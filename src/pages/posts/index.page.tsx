@@ -5,7 +5,7 @@ import type { NextPage } from "next";
 import type { Post } from "@/../__fixtures__/posts/post.type";
 import { ServerErrorResult } from "@/error/transformer/serverAppError.transformer";
 import { getServerSideProps } from "./index.page.server";
-import { PostsErrorScreen } from "./_index.page.error";
+import { PostsErrorScreen } from "./index.page.error";
 import { ServerErrorBoundary } from "../_server.error.boundary";
 export { getServerSideProps };
 
