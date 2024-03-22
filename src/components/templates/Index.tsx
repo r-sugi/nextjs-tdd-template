@@ -1,7 +1,30 @@
+import { ClientAppErrorTransformer } from "@/error/transformer/clientAppError.transformer";
+import { useFetchPosts } from "@/repositories/post/postRepository";
 import { FC } from "react";
+import { PostIdErrorBoundary } from "./Posts/PostId/PostIdErrorBoundary";
 
 type Props = {};
 
 export const IndexTemplate: FC<Props> = () => {
-  return <div>IndexTemplate</div>;
+  const { posts: data, error, isLoading } = useFetchPosts();
+
+  if (error) {
+    throw new ClientAppErrorTransformer().transform(error);
+  }
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+  if (!data) {
+    return <div>no data</div>;
+  }
+
+  return <div>{JSON.stringify(data, null, 2)}</div>;
+};
+
+export const PostIdTemplate: FC<Props> = () => {
+  return (
+    <PostIdErrorBoundary>
+      <IndexTemplate />
+    </PostIdErrorBoundary>
+  );
 };

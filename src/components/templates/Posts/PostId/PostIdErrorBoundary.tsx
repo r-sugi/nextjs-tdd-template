@@ -32,19 +32,17 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
 
   componentDidCatch(err: Error, errInfo: ErrorInfo) {
     // You can use your own error logging service here
-    // TODO: loggerを使ってOK?
     new ClientLogger().error({
       error: err,
       info: errInfo,
     });
   }
 
-  // TODO: ErrorBoundary.tsxにも追加する必要があるか
   componentDidMount() {
     window.addEventListener(
       "unhandledrejection",
       (e: PromiseRejectionEvent) => {
-        throw new Error(e.reason);
+        throw new Error(e.reason, { cause: e.reason });
       }
     );
   }
@@ -53,7 +51,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
     window.removeEventListener(
       "unhandledrejection",
       (e: PromiseRejectionEvent) => {
-        throw new Error(e.reason);
+        throw new Error(e.reason, { cause: e.reason });
       }
     );
   }

@@ -1,34 +1,42 @@
+import { ClientErrorObject } from "@/error/transformer/clientAppError.transformer";
 import { ClientLogger } from "@/lib/clientLogger";
 import { Component, ErrorInfo, ReactNode } from "react";
+import { ErrorScreen } from "./_error.screen";
 
-type ErrorBoundaryState = { error?: { code?: string; message?: string } };
+type ErrorBoundaryState = { error?: Error };
 type ErrorBoundaryProps = { children: ReactNode };
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps> {
-  state: ErrorBoundaryState = {};
+  state: ErrorBoundaryState = {
+    error: undefined,
+  };
 
   constructor(props: ErrorBoundaryProps) {
     super(props);
   }
-  static getDerivedStateFromError(error?: Error): ErrorBoundaryState {
-    // Update state so the next render will show the fallback UI
-    return { error: { code: error?.name, message: error?.message } };
+  // TODO: 型の指定がErrorになってしまう。ClientErrorObjectにしたい
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { error };
   }
 
-  componentDidCatch(err: Error, errInfo: ErrorInfo) {
-    // You can use your own error logging service here
-    // TODO: loggerを使ってOK?
+  // TODO: 型の指定がErrorになってしまう。ClientErrorObjectにしたい
+  componentDidCatch(error: Error, errInfo: ErrorInfo) {
+    this.setState({
+      error,
+    });
+
     new ClientLogger().error({
-      error: err,
-      info: errInfo,
+      error,
+      errInfo,
     });
   }
 
   render() {
+    // npm run startの場合はこちらが表示される
     if (this.state.error) {
-      return <div>{JSON.stringify(this.state.error, null, 2)}</div>;
+      return <ErrorScreen error={this.state.error} />;
     }
-
+    // 開発環境の場合はこちらが表示される
     return this.props.children;
   }
 }

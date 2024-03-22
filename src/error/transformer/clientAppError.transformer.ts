@@ -1,7 +1,7 @@
 import { ClientLogger } from "@/lib/clientLogger";
 import { HttpError } from "../errors/httpError";
 
-type ClientErrorObject = {
+export type ClientErrorObject = {
   message: string;
   code: string;
   cause: string;
