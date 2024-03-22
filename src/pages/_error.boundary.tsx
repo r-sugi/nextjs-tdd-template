@@ -1,4 +1,3 @@
-import { ClientErrorObject } from "@/error/transformer/clientAppError.transformer";
 import { ClientLogger } from "@/lib/clientLogger";
 import { Component, ErrorInfo, ReactNode } from "react";
 import { ErrorScreen } from "./_error.screen";

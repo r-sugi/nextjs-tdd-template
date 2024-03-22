@@ -24,7 +24,7 @@ export class ClientError extends Error {
   }
 }
 
-export class ClientAppErrorTransformer {
+export class ErrorTransformer {
   constructor(private readonly logger = new ClientLogger()) {
     this.logger.setContext(this.constructor.name);
   }
