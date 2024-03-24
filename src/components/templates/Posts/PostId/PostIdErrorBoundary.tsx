@@ -1,15 +1,30 @@
-import { ClientError } from "@/error/transformer/error.transformer";
+import {
+  ClientError,
+  ErrorTransformer,
+} from "@/error/transformer/error.transformer";
 import { Component, ErrorInfo, ReactNode } from "react";
 import { ErrorScreen } from "../../../../pages/_error.screen";
 import { ClientLogger } from "@/lib/clientLogger";
 
 type Props = {
   children: ReactNode;
-  render?: ({ error }: { error: ClientError }) => ReactNode | undefined;
+  render?: ({
+    error,
+    onReset,
+  }: {
+    error: ClientError;
+    onReset: () => void;
+  }) => ReactNode | undefined;
 };
 
 type ErrorBoundaryState = {
-  render?: ({ error }: { error: ClientError }) => ReactNode | undefined;
+  render?: ({
+    error,
+    onReset,
+  }: {
+    error: ClientError;
+    onReset: () => void;
+  }) => ReactNode | undefined;
   error?: ClientError;
 };
 
@@ -25,7 +40,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
   static getDerivedStateFromError(error: ClientError) {
     if (
       error?.severity != null &&
-      ["error", "fatal"].includes(error.severity)
+      ["critial", "fatal"].includes(error.severity)
     ) {
       // 明示的にfatal, criticalにしたものは全体のErrorBoundaryで補足する
       throw error;
@@ -38,6 +53,22 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
 
   componentDidCatch(err: Error, errInfo: ErrorInfo) {
     // You can use your own error logging service here
+    if (err instanceof ClientError) {
+      this.setState((state) => {
+        return {
+          render: state.render,
+          error: err,
+        };
+      });
+    } else {
+      this.setState((state) => {
+        return {
+          render: state.render,
+          error: new ErrorTransformer().transform(err),
+        };
+      });
+    }
+
     new ClientLogger().error({
       error: err,
       info: errInfo,
@@ -49,6 +80,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
       "unhandledrejection",
       (e: PromiseRejectionEvent) => {
         // 全体のErrorBoundaryで補足する
+        // TODO: エラーの型 unhandledrejectionの場合の値を入れる
         throw new Error(e.reason, { cause: e.reason });
       }
     );
@@ -67,13 +99,34 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
   render(): ReactNode {
     // 個別にエラーを描画したい場合はrenderを渡す
     if (this.state.render && this.state.error) {
-      return this.state.render({ error: this.state.error });
+      return this.state.render({
+        error: this.state.error,
+        onReset: () => {
+          this.setState((prev) => {
+            return {
+              error: undefined,
+              render: prev.render,
+            };
+          });
+        },
+      });
     }
     // デフォルトで描画する場合
     if (this.state.error) {
-      return <ErrorScreen error={this.state.error} />;
+      return (
+        <ErrorScreen
+          error={this.state.error}
+          onReset={() => {
+            this.setState((prev) => {
+              return {
+                error: undefined,
+                render: prev.render,
+              };
+            });
+          }}
+        />
+      );
     }
-
     return this.props.children;
   }
 }
