@@ -4,7 +4,7 @@ import Head from "next/head";
 import { ReactNode } from "react";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-  require("../../mocks/index");
+  require("../../mocks");
 }
 
 export const AppProvider = ({
