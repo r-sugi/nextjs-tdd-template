@@ -1,10 +1,9 @@
-import {
-  ClientError,
-  ErrorTransformer,
-} from "@/error/transformer/error.transformer";
+import { ErrorTransformer } from "@/error/transformer/error.transformer";
 import { Component, ErrorInfo, ReactNode } from "react";
 import { ErrorScreen } from "../../../../pages/_error.screen";
 import { ClientLogger } from "@/lib/clientLogger";
+import { ClientError } from "@/error/errors/clientError";
+import { UnhandledRejectionError } from "@/error/errors/unhandledRejectionError";
 
 type Props = {
   children: ReactNode;
@@ -45,7 +44,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
       // 明示的にfatal, criticalにしたものは全体のErrorBoundaryで補足する
       throw error;
     } else if (error?.severity == null) {
-      // 補足できなかったものは全体のErrorBoundaryで補足する
+      // 指定しなかったものは全体のErrorBoundaryで補足する
       throw error;
     }
     return { error };
@@ -79,9 +78,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
     window.addEventListener(
       "unhandledrejection",
       (e: PromiseRejectionEvent) => {
-        // 全体のErrorBoundaryで補足する
-        // TODO: エラーの型 unhandledrejectionの場合の値を入れる
-        throw new Error(e.reason, { cause: e.reason });
+        throw new UnhandledRejectionError(e.reason);
       }
     );
   }
@@ -90,8 +87,7 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
     window.removeEventListener(
       "unhandledrejection",
       (e: PromiseRejectionEvent) => {
-        // 全体のErrorBoundaryで補足する
-        throw new Error(e.reason, { cause: e.reason });
+        throw new UnhandledRejectionError(e.reason);
       }
     );
   }
