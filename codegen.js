@@ -1,11 +1,13 @@
-// TODO: 環境変数の整理
-// TODO: ymlにしたい
+require("dotenv").config();
+
 module.exports = {
   schema: [
     {
-      "http://localhost:8080/v1/graphql": {
+      [process.env.NEXT_PUBLIC_GRAPHQL_URI ??
+      "http://localhost:8080/v1/graphql"]: {
         headers: {
-          Authorization: "Bearer " + process.env.AUTH_TOKEN,
+          Authorization:
+            "Bearer " + process.env.HASURA_GRAPHQL_ADMIN_SECRET ?? "xxxxxx",
         },
       },
     },
@@ -24,6 +26,7 @@ module.exports = {
         withHooks: true,
         withHOC: false,
         withComponent: false,
+        preResolveTypes: false,
       },
     },
     "./graphql.schema.json": {

@@ -408,7 +408,13 @@ export type Table_Tennis_Tables_Variance_Fields = {
 export type GetTableTennisTablesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetTableTennisTablesQuery = { __typename?: 'query_root', table_tennis_tables: Array<{ __typename?: 'table_tennis_tables', id: number, name: any }> };
+export type GetTableTennisTablesQuery = (
+  { __typename?: 'query_root' }
+  & { table_tennis_tables: Array<(
+    { __typename?: 'table_tennis_tables' }
+    & Pick<Table_Tennis_Tables, 'id' | 'name'>
+  )> }
+);
 
 
 export const GetTableTennisTablesDocument = gql`
