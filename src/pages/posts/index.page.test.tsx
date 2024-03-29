@@ -1,20 +1,20 @@
 import { render, waitFor } from "@testing-library/react";
-import Page, { PagePropsType } from "./index.page";
-import { AppProvider } from "../_app.page";
-import { publicPages } from "@/paths";
-import { PostsTemplate } from "@/components/templates/Posts/Posts";
 import { mocast } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 import * as getPosts from "@/../__fixtures__/posts/getPosts";
+import PostsTemplate from "@/components/templates/Posts/Posts";
+import { publicPages } from "@/paths";
+import { AppProvider } from "../_app.provider";
+import Page from "./index.page";
 
 jest.mock("@/components/templates/Posts/Posts");
 
 describe(Page, () => {
-  function setup({ props }: { props: PagePropsType }) {
+  function setup() {
     return {
       view: render(
         <AppProvider>
-          <Page {...props} />
+          <Page />
         </AppProvider>
       ),
     };
@@ -36,7 +36,7 @@ describe(Page, () => {
     };
 
     // Act
-    setup({ props: COMPONENT_PROPS });
+    setup();
 
     // Assert
     await waitFor(() => {
@@ -63,7 +63,7 @@ describe(Page, () => {
     };
 
     // Act
-    setup({ props: COMPONENT_PROPS });
+    setup();
 
     // Assert
     await waitFor(() => {

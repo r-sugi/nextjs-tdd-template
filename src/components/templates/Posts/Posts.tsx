@@ -1,17 +1,17 @@
 import { FC } from "react";
-import { useFetchPosts } from "../../../repositories/post/postRepository";
 import { ErrorTransformer } from "../../../error/transformer/error.transformer";
+import { useGetTableTennisTablesQuery } from "@/generated/graphql";
 
 const PostsTemplate: FC<{}> = () => {
-  const { posts, error, isLoading } = useFetchPosts();
+  const { data, loading, error } = useGetTableTennisTablesQuery();
 
   if (error) {
     throw new ErrorTransformer().transform(error);
   }
-  if (isLoading) {
+  if (loading) {
     return <div>loading...</div>;
   }
-  if (posts == null) {
+  if (data?.table_tennis_tables == null) {
     return <div>no data</div>;
   }
 
@@ -19,8 +19,8 @@ const PostsTemplate: FC<{}> = () => {
     <>
       <div>PostsTemplate</div>
       <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
+        {data?.table_tennis_tables.map((table) => (
+          <li key={table.id}>{table.name}</li>
         ))}
       </ul>
     </>
