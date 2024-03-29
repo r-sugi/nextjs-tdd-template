@@ -3,11 +3,11 @@ import { apiClient } from "@/lib/apiClient";
 import useSWR from "swr";
 
 // export const fetchPostById = async (id: string) => {
-//   return await apiClient<Post>(`/api/posts/${id}`);
+//   return await apiClient<Post>(`/posts/${id}`);
 // };
 
 // export const fetchPosts = async () => {
-//   return await apiClient<Post[]>(`/api/posts`);
+//   return await apiClient<Post[]>(`/posts`);
 // };
 
 export const useFetchPostById = (id: string | number) => {
@@ -15,7 +15,7 @@ export const useFetchPostById = (id: string | number) => {
     data: res,
     error,
     isLoading,
-  } = useSWR(`/api/posts/${id}`, apiClient<Post>);
+  } = useSWR(`/posts/${id}`, apiClient<Post>);
 
   return {
     post: res?.data,
@@ -25,11 +25,7 @@ export const useFetchPostById = (id: string | number) => {
 };
 
 export const useFetchPosts = () => {
-  const {
-    data: res,
-    error,
-    isLoading,
-  } = useSWR(`/api/posts`, apiClient<Post[]>);
+  const { data: res, error, isLoading } = useSWR(`/posts`, apiClient<Post[]>);
 
   return {
     posts: res?.data,
