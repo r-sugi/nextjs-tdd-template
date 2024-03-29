@@ -1,3 +1,5 @@
+// TODO: 環境変数の整理
+// TODO: ymlにしたい
 module.exports = {
   schema: [
     {
@@ -8,7 +10,7 @@ module.exports = {
       },
     },
   ],
-  documents: ["src/**/*.graphql", "./src/**/*.tsx", "./src/**/*.ts"],
+  documents: ["src/**/*.graphql"],
   overwrite: true,
   generates: {
     "./src/generated/graphql.tsx": {
