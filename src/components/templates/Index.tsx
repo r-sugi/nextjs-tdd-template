@@ -1,8 +1,8 @@
 import { ErrorTransformer } from "@/error/transformer/error.transformer";
-import { useFetchPosts } from "@/repositories/post/postRepository";
+import { useFetchPosts } from "@/core/repositories/post/postRepository";
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./Posts/PostId/PostIdErrorBoundary";
-import { findMembersOne } from "@/repositories/members/members.repository";
+import { findMembersOne } from "@/core/repositories/members/members.repository";
 
 type Props = {};
 
