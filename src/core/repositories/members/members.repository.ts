@@ -15,7 +15,7 @@ type FindMemberOneSuccess = {
 };
 
 // TODO: where: { eq: $member_id}したいがhasura consoleでエラーになるため、調査中。(一旦statusで実装した)
-export const findMembersOne = async (
+export const findMemberOne = async (
   variables: GetMemberStatusActivitiesTestLatestQueryVariables
 ) => {
   const res = await apiClient<FindMemberOneSuccess>(NEXT_PUBLIC_GRAPHQL_URI, {
