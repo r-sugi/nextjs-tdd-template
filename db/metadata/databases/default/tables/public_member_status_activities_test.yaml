@@ -1,0 +1,3 @@
+table:
+  name: member_status_activities_test
+  schema: public

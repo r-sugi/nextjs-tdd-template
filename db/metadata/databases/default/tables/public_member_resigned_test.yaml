@@ -1,0 +1,3 @@
+table:
+  name: member_resigned_test
+  schema: public
