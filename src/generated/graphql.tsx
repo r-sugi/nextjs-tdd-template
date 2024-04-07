@@ -90,8 +90,11 @@ export enum Cursor_Ordering {
 /** columns and relationships of "member_active_test" */
 export type Member_Active_Test = {
   __typename?: 'member_active_test';
+  address: Scalars['String']['output'];
+  birthday: Scalars['timestamptz']['output'];
   created_at: Scalars['timestamptz']['output'];
   member_id: Scalars['bigint']['output'];
+  postal_code: Scalars['String']['output'];
   status_activity_id: Scalars['bigint']['output'];
 };
 
@@ -137,8 +140,11 @@ export type Member_Active_Test_Bool_Exp = {
   _and?: InputMaybe<Array<Member_Active_Test_Bool_Exp>>;
   _not?: InputMaybe<Member_Active_Test_Bool_Exp>;
   _or?: InputMaybe<Array<Member_Active_Test_Bool_Exp>>;
+  address?: InputMaybe<String_Comparison_Exp>;
+  birthday?: InputMaybe<Timestamptz_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   member_id?: InputMaybe<Bigint_Comparison_Exp>;
+  postal_code?: InputMaybe<String_Comparison_Exp>;
   status_activity_id?: InputMaybe<Bigint_Comparison_Exp>;
 };
 
@@ -156,24 +162,33 @@ export type Member_Active_Test_Inc_Input = {
 
 /** input type for inserting data into table "member_active_test" */
 export type Member_Active_Test_Insert_Input = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  birthday?: InputMaybe<Scalars['timestamptz']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
+  postal_code?: InputMaybe<Scalars['String']['input']>;
   status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
 /** aggregate max on columns */
 export type Member_Active_Test_Max_Fields = {
   __typename?: 'member_active_test_max_fields';
+  address?: Maybe<Scalars['String']['output']>;
+  birthday?: Maybe<Scalars['timestamptz']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
+  postal_code?: Maybe<Scalars['String']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
 
 /** aggregate min on columns */
 export type Member_Active_Test_Min_Fields = {
   __typename?: 'member_active_test_min_fields';
+  address?: Maybe<Scalars['String']['output']>;
+  birthday?: Maybe<Scalars['timestamptz']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
+  postal_code?: Maybe<Scalars['String']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
 
@@ -195,8 +210,11 @@ export type Member_Active_Test_On_Conflict = {
 
 /** Ordering options when selecting data from "member_active_test". */
 export type Member_Active_Test_Order_By = {
+  address?: InputMaybe<Order_By>;
+  birthday?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   member_id?: InputMaybe<Order_By>;
+  postal_code?: InputMaybe<Order_By>;
   status_activity_id?: InputMaybe<Order_By>;
 };
 
@@ -208,17 +226,26 @@ export type Member_Active_Test_Pk_Columns_Input = {
 /** select columns of table "member_active_test" */
 export enum Member_Active_Test_Select_Column {
   /** column name */
+  Address = 'address',
+  /** column name */
+  Birthday = 'birthday',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   MemberId = 'member_id',
+  /** column name */
+  PostalCode = 'postal_code',
   /** column name */
   StatusActivityId = 'status_activity_id'
 }
 
 /** input type for updating data in table "member_active_test" */
 export type Member_Active_Test_Set_Input = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  birthday?: InputMaybe<Scalars['timestamptz']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
+  postal_code?: InputMaybe<Scalars['String']['input']>;
   status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
@@ -253,8 +280,11 @@ export type Member_Active_Test_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Member_Active_Test_Stream_Cursor_Value_Input = {
+  address?: InputMaybe<Scalars['String']['input']>;
+  birthday?: InputMaybe<Scalars['timestamptz']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
+  postal_code?: InputMaybe<Scalars['String']['input']>;
   status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
@@ -268,9 +298,15 @@ export type Member_Active_Test_Sum_Fields = {
 /** update columns of table "member_active_test" */
 export enum Member_Active_Test_Update_Column {
   /** column name */
+  Address = 'address',
+  /** column name */
+  Birthday = 'birthday',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   MemberId = 'member_id',
+  /** column name */
+  PostalCode = 'postal_code',
   /** column name */
   StatusActivityId = 'status_activity_id'
 }
