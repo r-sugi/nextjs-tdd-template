@@ -1,3 +1,4 @@
+// TODO: activityから外部キーでmemberを取得したい
 query GetMemberStatusActivitiesTestLatest($status: String!) {
   member_status_activities_test(
     order_by: { created_at: desc }
