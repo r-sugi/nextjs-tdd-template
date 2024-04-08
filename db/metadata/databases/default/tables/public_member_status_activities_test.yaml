@@ -1,3 +1,13 @@
 table:
   name: member_status_activities_test
   schema: public
+array_relationships:
+  - name: member_actives
+    using:
+      manual_configuration:
+        column_mapping:
+          id: status_activity_id
+        insertion_order: null
+        remote_table:
+          name: member_active_test
+          schema: public
