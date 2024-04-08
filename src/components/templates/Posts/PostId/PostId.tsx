@@ -2,7 +2,7 @@ import { ErrorTransformer } from "@/error/transformer/error.transformer";
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./PostIdErrorBoundary";
 import { PostIdErrorScreen } from "./PostIdErrorScreen";
-import { useFetchPostById } from "@/repositories/post/postRepository";
+import { useFetchPostById } from "@/core/repository/post/postRepository";
 import { useRouter } from "next/router";
 
 export const PostId: FC<{}> = () => {

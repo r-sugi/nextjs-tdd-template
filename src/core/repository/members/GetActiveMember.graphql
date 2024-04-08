@@ -1,0 +1,16 @@
+query GetActiveMember($member_id: bigint!) {
+  member_status_activities_test(
+    order_by: { created_at: desc }
+    limit: 1
+    where: { member_id: { _eq: $member_id } }
+  ) {
+    member_actives {
+      address
+      birthday
+      created_at
+      member_id
+      postal_code
+      status_activity_id
+    }
+  }
+}

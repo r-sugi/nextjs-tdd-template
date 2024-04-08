@@ -1,0 +1,3 @@
+table:
+  name: operators_test
+  schema: public

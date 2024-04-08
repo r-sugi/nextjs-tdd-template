@@ -5,15 +5,19 @@
   "scripts": {
     "debug": "NODE_OPTIONS='--inspect' next src",
     "dev": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
+    "dev:all": "npm-run-all -p dev db:start",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "generate": "graphql-codegen --config codegen.js"
+    "generate": "graphql-codegen --config codegen.js",
+    "db:start": "docker-compose up -d && npm run db:console --prefix ./db",
+    "db:export": "npm run db:export --prefix ./db"
   },
   "dependencies": {
     "@apollo/client": "^3.9.9",
+    "class-transformer": "^0.5.1",
     "next": "13.5.4",
     "pino": "^8.19.0",
     "react": "^18",

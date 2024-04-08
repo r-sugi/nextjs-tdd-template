@@ -1,0 +1,3 @@
+table:
+  name: member_pending_activations_test
+  schema: public

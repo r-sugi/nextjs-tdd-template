@@ -1,0 +1,3 @@
+table:
+  name: member_banned
+  schema: public
