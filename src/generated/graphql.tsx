@@ -105,6 +105,17 @@ export type Member_Active_Test_Aggregate = {
   nodes: Array<Member_Active_Test>;
 };
 
+export type Member_Active_Test_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Member_Active_Test_Aggregate_Bool_Exp_Count>;
+};
+
+export type Member_Active_Test_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Member_Active_Test_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "member_active_test" */
 export type Member_Active_Test_Aggregate_Fields = {
   __typename?: 'member_active_test_aggregate_fields';
@@ -128,11 +139,39 @@ export type Member_Active_Test_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** order by aggregate values of table "member_active_test" */
+export type Member_Active_Test_Aggregate_Order_By = {
+  avg?: InputMaybe<Member_Active_Test_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Member_Active_Test_Max_Order_By>;
+  min?: InputMaybe<Member_Active_Test_Min_Order_By>;
+  stddev?: InputMaybe<Member_Active_Test_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Member_Active_Test_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Member_Active_Test_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Member_Active_Test_Sum_Order_By>;
+  var_pop?: InputMaybe<Member_Active_Test_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Member_Active_Test_Var_Samp_Order_By>;
+  variance?: InputMaybe<Member_Active_Test_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "member_active_test" */
+export type Member_Active_Test_Arr_Rel_Insert_Input = {
+  data: Array<Member_Active_Test_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Member_Active_Test_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Member_Active_Test_Avg_Fields = {
   __typename?: 'member_active_test_avg_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "member_active_test" */
+export type Member_Active_Test_Avg_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "member_active_test". All fields are combined with a logical 'AND'. */
@@ -181,6 +220,16 @@ export type Member_Active_Test_Max_Fields = {
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
 
+/** order by max() on columns of table "member_active_test" */
+export type Member_Active_Test_Max_Order_By = {
+  address?: InputMaybe<Order_By>;
+  birthday?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  member_id?: InputMaybe<Order_By>;
+  postal_code?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Member_Active_Test_Min_Fields = {
   __typename?: 'member_active_test_min_fields';
@@ -190,6 +239,16 @@ export type Member_Active_Test_Min_Fields = {
   member_id?: Maybe<Scalars['bigint']['output']>;
   postal_code?: Maybe<Scalars['String']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** order by min() on columns of table "member_active_test" */
+export type Member_Active_Test_Min_Order_By = {
+  address?: InputMaybe<Order_By>;
+  birthday?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  member_id?: InputMaybe<Order_By>;
+  postal_code?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "member_active_test" */
@@ -256,6 +315,12 @@ export type Member_Active_Test_Stddev_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by stddev() on columns of table "member_active_test" */
+export type Member_Active_Test_Stddev_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_pop on columns */
 export type Member_Active_Test_Stddev_Pop_Fields = {
   __typename?: 'member_active_test_stddev_pop_fields';
@@ -263,11 +328,23 @@ export type Member_Active_Test_Stddev_Pop_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by stddev_pop() on columns of table "member_active_test" */
+export type Member_Active_Test_Stddev_Pop_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_samp on columns */
 export type Member_Active_Test_Stddev_Samp_Fields = {
   __typename?: 'member_active_test_stddev_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "member_active_test" */
+export type Member_Active_Test_Stddev_Samp_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "member_active_test" */
@@ -293,6 +370,12 @@ export type Member_Active_Test_Sum_Fields = {
   __typename?: 'member_active_test_sum_fields';
   member_id?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** order by sum() on columns of table "member_active_test" */
+export type Member_Active_Test_Sum_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "member_active_test" */
@@ -327,6 +410,12 @@ export type Member_Active_Test_Var_Pop_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by var_pop() on columns of table "member_active_test" */
+export type Member_Active_Test_Var_Pop_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate var_samp on columns */
 export type Member_Active_Test_Var_Samp_Fields = {
   __typename?: 'member_active_test_var_samp_fields';
@@ -334,11 +423,23 @@ export type Member_Active_Test_Var_Samp_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by var_samp() on columns of table "member_active_test" */
+export type Member_Active_Test_Var_Samp_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate variance on columns */
 export type Member_Active_Test_Variance_Fields = {
   __typename?: 'member_active_test_variance_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by variance() on columns of table "member_active_test" */
+export type Member_Active_Test_Variance_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "member_banned" */
@@ -1298,8 +1399,32 @@ export type Member_Status_Activities_Test = {
   __typename?: 'member_status_activities_test';
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
+  /** An array relationship */
+  member_actives: Array<Member_Active_Test>;
+  /** An aggregate relationship */
+  member_actives_aggregate: Member_Active_Test_Aggregate;
   member_id: Scalars['bigint']['output'];
   status: Scalars['String']['output'];
+};
+
+
+/** columns and relationships of "member_status_activities_test" */
+export type Member_Status_Activities_TestMember_ActivesArgs = {
+  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
+  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member_status_activities_test" */
+export type Member_Status_Activities_TestMember_Actives_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
+  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
 };
 
 /** aggregated selection of "member_status_activities_test" */
@@ -1346,6 +1471,8 @@ export type Member_Status_Activities_Test_Bool_Exp = {
   _or?: InputMaybe<Array<Member_Status_Activities_Test_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
+  member_actives?: InputMaybe<Member_Active_Test_Bool_Exp>;
+  member_actives_aggregate?: InputMaybe<Member_Active_Test_Aggregate_Bool_Exp>;
   member_id?: InputMaybe<Bigint_Comparison_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
 };
@@ -1366,6 +1493,7 @@ export type Member_Status_Activities_Test_Inc_Input = {
 export type Member_Status_Activities_Test_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
+  member_actives?: InputMaybe<Member_Active_Test_Arr_Rel_Insert_Input>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1408,6 +1536,7 @@ export type Member_Status_Activities_Test_On_Conflict = {
 export type Member_Status_Activities_Test_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  member_actives_aggregate?: InputMaybe<Member_Active_Test_Aggregate_Order_By>;
   member_id?: InputMaybe<Order_By>;
   status?: InputMaybe<Order_By>;
 };
@@ -3709,16 +3838,19 @@ export type GetTableTennisTablesQuery = (
   )> }
 );
 
-export type GetMemberStatusActivitiesTestLatestQueryVariables = Exact<{
-  status: Scalars['String']['input'];
+export type GetActiveMemberQueryVariables = Exact<{
+  member_id: Scalars['bigint']['input'];
 }>;
 
 
-export type GetMemberStatusActivitiesTestLatestQuery = (
+export type GetActiveMemberQuery = (
   { __typename?: 'query_root' }
   & { member_status_activities_test: Array<(
     { __typename?: 'member_status_activities_test' }
-    & Pick<Member_Status_Activities_Test, 'created_at' | 'member_id' | 'status' | 'id'>
+    & { member_actives: Array<(
+      { __typename?: 'member_active_test' }
+      & Pick<Member_Active_Test, 'address' | 'birthday' | 'created_at' | 'member_id' | 'postal_code' | 'status_activity_id'>
+    )> }
   )> }
 );
 
@@ -3763,50 +3895,54 @@ export type GetTableTennisTablesQueryHookResult = ReturnType<typeof useGetTableT
 export type GetTableTennisTablesLazyQueryHookResult = ReturnType<typeof useGetTableTennisTablesLazyQuery>;
 export type GetTableTennisTablesSuspenseQueryHookResult = ReturnType<typeof useGetTableTennisTablesSuspenseQuery>;
 export type GetTableTennisTablesQueryResult = Apollo.QueryResult<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>;
-export const GetMemberStatusActivitiesTestLatestDocument = gql`
-    query GetMemberStatusActivitiesTestLatest($status: String!) {
+export const GetActiveMemberDocument = gql`
+    query GetActiveMember($member_id: bigint!) {
   member_status_activities_test(
     order_by: {created_at: desc}
     limit: 1
-    where: {status: {_eq: $status}}
+    where: {member_id: {_eq: $member_id}}
   ) {
-    created_at
-    member_id
-    status
-    id
+    member_actives {
+      address
+      birthday
+      created_at
+      member_id
+      postal_code
+      status_activity_id
+    }
   }
 }
     `;
 
 /**
- * __useGetMemberStatusActivitiesTestLatestQuery__
+ * __useGetActiveMemberQuery__
  *
- * To run a query within a React component, call `useGetMemberStatusActivitiesTestLatestQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMemberStatusActivitiesTestLatestQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetActiveMemberQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetActiveMemberQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetMemberStatusActivitiesTestLatestQuery({
+ * const { data, loading, error } = useGetActiveMemberQuery({
  *   variables: {
- *      status: // value for 'status'
+ *      member_id: // value for 'member_id'
  *   },
  * });
  */
-export function useGetMemberStatusActivitiesTestLatestQuery(baseOptions: Apollo.QueryHookOptions<GetMemberStatusActivitiesTestLatestQuery, GetMemberStatusActivitiesTestLatestQueryVariables> & ({ variables: GetMemberStatusActivitiesTestLatestQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+export function useGetActiveMemberQuery(baseOptions: Apollo.QueryHookOptions<GetActiveMemberQuery, GetActiveMemberQueryVariables> & ({ variables: GetActiveMemberQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetMemberStatusActivitiesTestLatestQuery, GetMemberStatusActivitiesTestLatestQueryVariables>(GetMemberStatusActivitiesTestLatestDocument, options);
+        return Apollo.useQuery<GetActiveMemberQuery, GetActiveMemberQueryVariables>(GetActiveMemberDocument, options);
       }
-export function useGetMemberStatusActivitiesTestLatestLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMemberStatusActivitiesTestLatestQuery, GetMemberStatusActivitiesTestLatestQueryVariables>) {
+export function useGetActiveMemberLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetActiveMemberQuery, GetActiveMemberQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetMemberStatusActivitiesTestLatestQuery, GetMemberStatusActivitiesTestLatestQueryVariables>(GetMemberStatusActivitiesTestLatestDocument, options);
+          return Apollo.useLazyQuery<GetActiveMemberQuery, GetActiveMemberQueryVariables>(GetActiveMemberDocument, options);
         }
-export function useGetMemberStatusActivitiesTestLatestSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetMemberStatusActivitiesTestLatestQuery, GetMemberStatusActivitiesTestLatestQueryVariables>) {
+export function useGetActiveMemberSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetActiveMemberQuery, GetActiveMemberQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetMemberStatusActivitiesTestLatestQuery, GetMemberStatusActivitiesTestLatestQueryVariables>(GetMemberStatusActivitiesTestLatestDocument, options);
+          return Apollo.useSuspenseQuery<GetActiveMemberQuery, GetActiveMemberQueryVariables>(GetActiveMemberDocument, options);
         }
-export type GetMemberStatusActivitiesTestLatestQueryHookResult = ReturnType<typeof useGetMemberStatusActivitiesTestLatestQuery>;
-export type GetMemberStatusActivitiesTestLatestLazyQueryHookResult = ReturnType<typeof useGetMemberStatusActivitiesTestLatestLazyQuery>;
-export type GetMemberStatusActivitiesTestLatestSuspenseQueryHookResult = ReturnType<typeof useGetMemberStatusActivitiesTestLatestSuspenseQuery>;
-export type GetMemberStatusActivitiesTestLatestQueryResult = Apollo.QueryResult<GetMemberStatusActivitiesTestLatestQuery, GetMemberStatusActivitiesTestLatestQueryVariables>;
+export type GetActiveMemberQueryHookResult = ReturnType<typeof useGetActiveMemberQuery>;
+export type GetActiveMemberLazyQueryHookResult = ReturnType<typeof useGetActiveMemberLazyQuery>;
+export type GetActiveMemberSuspenseQueryHookResult = ReturnType<typeof useGetActiveMemberSuspenseQuery>;
+export type GetActiveMemberQueryResult = Apollo.QueryResult<GetActiveMemberQuery, GetActiveMemberQueryVariables>;

@@ -1,5 +1,3 @@
-import { Expose } from "class-transformer";
-
 export default class ActiveMember {
   private readonly statusActivityId!: number;
   private readonly memberId!: number;
@@ -7,4 +5,6 @@ export default class ActiveMember {
   private readonly postalCode!: string;
   private readonly birthday!: Date;
   private readonly createdAt!: Date;
+
+  // インスタンスメソッドを追加していく
 }

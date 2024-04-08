@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./Posts/PostId/PostIdErrorBoundary";
-import { fetchMemberOne } from "@/core/usecases/members/fetchMemberOne.usecase";
+import { fetchMemberOne } from "@/core/usecase/members/fetchMemberOne.usecase";
 
 type Props = {};
 
