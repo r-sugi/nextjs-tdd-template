@@ -3827,17 +3827,6 @@ export type Users_Test_Variance_Fields = {
   id?: Maybe<Scalars['Float']['output']>;
 };
 
-export type GetTableTennisTablesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTableTennisTablesQuery = (
-  { __typename?: 'query_root' }
-  & { table_tennis_tables: Array<(
-    { __typename?: 'table_tennis_tables' }
-    & Pick<Table_Tennis_Tables, 'id' | 'name'>
-  )> }
-);
-
 export type GetActiveMemberQueryVariables = Exact<{
   member_id: Scalars['bigint']['input'];
 }>;
@@ -3855,46 +3844,6 @@ export type GetActiveMemberQuery = (
 );
 
 
-export const GetTableTennisTablesDocument = gql`
-    query GetTableTennisTables {
-  table_tennis_tables {
-    id
-    name
-  }
-}
-    `;
-
-/**
- * __useGetTableTennisTablesQuery__
- *
- * To run a query within a React component, call `useGetTableTennisTablesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTableTennisTablesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetTableTennisTablesQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetTableTennisTablesQuery(baseOptions?: Apollo.QueryHookOptions<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>(GetTableTennisTablesDocument, options);
-      }
-export function useGetTableTennisTablesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>(GetTableTennisTablesDocument, options);
-        }
-export function useGetTableTennisTablesSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>(GetTableTennisTablesDocument, options);
-        }
-export type GetTableTennisTablesQueryHookResult = ReturnType<typeof useGetTableTennisTablesQuery>;
-export type GetTableTennisTablesLazyQueryHookResult = ReturnType<typeof useGetTableTennisTablesLazyQuery>;
-export type GetTableTennisTablesSuspenseQueryHookResult = ReturnType<typeof useGetTableTennisTablesSuspenseQuery>;
-export type GetTableTennisTablesQueryResult = Apollo.QueryResult<GetTableTennisTablesQuery, GetTableTennisTablesQueryVariables>;
 export const GetActiveMemberDocument = gql`
     query GetActiveMember($member_id: bigint!) {
   member_status_activities_test(
