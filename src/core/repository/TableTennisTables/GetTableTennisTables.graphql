@@ -1,6 +1,0 @@
-query GetTableTennisTables {
-  table_tennis_tables {
-    id
-    name
-  }
-}
