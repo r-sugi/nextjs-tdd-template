@@ -1,5 +1,6 @@
 import MemberRepository from "@/core/repository/members/members.repository";
 
+// TODO: useXXXにしたらuseStateとか使えるようになる。hooksにした方が良い？
 export const fetchActiveMember = async () => {
   const res = await new MemberRepository().findActiveMemberOne({
     member_id: 1,

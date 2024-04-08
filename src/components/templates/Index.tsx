@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./Posts/PostId/PostIdErrorBoundary";
-import { fetchMemberOne } from "@/core/usecase/members/fetchMemberOne.usecase";
+import { fetchActiveMember } from "@/core/usecase/members/fetchActiveMember.usecase";
 
 type Props = {};
 
 export const IndexTemplate: FC<Props> = () => {
   // const { posts: data, error, isLoading } = useFetchPosts();
-  const res = fetchMemberOne();
+  const res = fetchActiveMember();
 
   // if (error) {
   //   throw new ErrorTransformer().transform(error);
