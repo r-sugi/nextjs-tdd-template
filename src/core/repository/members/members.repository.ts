@@ -33,6 +33,7 @@ export default class MemberRepository
   implements IMemberRepository
 {
   async findActiveMemberOne(variables: GetActiveMemberQueryVariables) {
+    // TODO: queryをlimit 1で取得している。パフォーマンスが悪いかもしれない
     const res = await apiClient<FindMemberOneSuccess>(NEXT_PUBLIC_GRAPHQL_URI, {
       method: "POST",
       body: JSON.stringify({
