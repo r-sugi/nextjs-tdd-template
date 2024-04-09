@@ -3,6 +3,8 @@ import {
   GetActiveMemberDocument,
   GetActiveMemberQueryVariables,
   Member_Status_Activities_Test,
+  ResignMemberMutationVariables,
+  ResignMemberDocument,
 } from "@/generated/graphql";
 import { apiClient } from "@/lib/apiClient";
 import { print } from "graphql/language/printer";
@@ -11,15 +13,9 @@ import MemberFactory from "./member.factory";
 import { IMemberRepository } from "@/core/domain/repositoyInterface/members.repository.interface";
 
 // TODO: よりよい型の指定方法があるか検討したい
-type Member_Status_Activities_Test_Object = Omit<
-  Member_Status_Activities_Test,
-  "__typename"
->;
-
-// TODO: よりよい型の指定方法があるか検討したい
 type FindMemberOneSuccess = {
   data: {
-    member_status_activities_test: Array<Member_Status_Activities_Test_Object>;
+    member_status_activities_test: Array<Member_Status_Activities_Test>;
   };
 };
 
@@ -33,7 +29,6 @@ export default class MemberRepository
   implements IMemberRepository
 {
   async findActiveMemberOne(variables: GetActiveMemberQueryVariables) {
-    // TODO: queryをlimit 1で取得している。パフォーマンスが悪いかもしれない
     const res = await apiClient<FindMemberOneSuccess>(NEXT_PUBLIC_GRAPHQL_URI, {
       method: "POST",
       body: JSON.stringify({
@@ -69,5 +64,17 @@ export default class MemberRepository
 
     // 存在する場合はインスタンスを生成して返す
     return memberFactory.createActiveMember(params);
+  }
+
+  async resignMember(variables: ResignMemberMutationVariables) {
+    await apiClient<any>(NEXT_PUBLIC_GRAPHQL_URI, {
+      method: "POST",
+      body: JSON.stringify({
+        variables,
+        query: print(ResignMemberDocument),
+      }),
+    });
+
+    return true;
   }
 }

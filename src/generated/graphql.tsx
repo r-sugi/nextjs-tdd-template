@@ -89,7 +89,6 @@ export enum Cursor_Ordering {
 
 /** columns and relationships of "member_active_test" */
 export type Member_Active_Test = {
-  __typename?: 'member_active_test';
   address: Scalars['String']['output'];
   birthday: Scalars['timestamptz']['output'];
   created_at: Scalars['timestamptz']['output'];
@@ -100,7 +99,6 @@ export type Member_Active_Test = {
 
 /** aggregated selection of "member_active_test" */
 export type Member_Active_Test_Aggregate = {
-  __typename?: 'member_active_test_aggregate';
   aggregate?: Maybe<Member_Active_Test_Aggregate_Fields>;
   nodes: Array<Member_Active_Test>;
 };
@@ -118,7 +116,6 @@ export type Member_Active_Test_Aggregate_Bool_Exp_Count = {
 
 /** aggregate fields of "member_active_test" */
 export type Member_Active_Test_Aggregate_Fields = {
-  __typename?: 'member_active_test_aggregate_fields';
   avg?: Maybe<Member_Active_Test_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Member_Active_Test_Max_Fields>;
@@ -163,7 +160,6 @@ export type Member_Active_Test_Arr_Rel_Insert_Input = {
 
 /** aggregate avg on columns */
 export type Member_Active_Test_Avg_Fields = {
-  __typename?: 'member_active_test_avg_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -211,7 +207,6 @@ export type Member_Active_Test_Insert_Input = {
 
 /** aggregate max on columns */
 export type Member_Active_Test_Max_Fields = {
-  __typename?: 'member_active_test_max_fields';
   address?: Maybe<Scalars['String']['output']>;
   birthday?: Maybe<Scalars['timestamptz']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
@@ -232,7 +227,6 @@ export type Member_Active_Test_Max_Order_By = {
 
 /** aggregate min on columns */
 export type Member_Active_Test_Min_Fields = {
-  __typename?: 'member_active_test_min_fields';
   address?: Maybe<Scalars['String']['output']>;
   birthday?: Maybe<Scalars['timestamptz']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
@@ -253,7 +247,6 @@ export type Member_Active_Test_Min_Order_By = {
 
 /** response of any mutation on the table "member_active_test" */
 export type Member_Active_Test_Mutation_Response = {
-  __typename?: 'member_active_test_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -310,7 +303,6 @@ export type Member_Active_Test_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Member_Active_Test_Stddev_Fields = {
-  __typename?: 'member_active_test_stddev_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -323,7 +315,6 @@ export type Member_Active_Test_Stddev_Order_By = {
 
 /** aggregate stddev_pop on columns */
 export type Member_Active_Test_Stddev_Pop_Fields = {
-  __typename?: 'member_active_test_stddev_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -336,7 +327,6 @@ export type Member_Active_Test_Stddev_Pop_Order_By = {
 
 /** aggregate stddev_samp on columns */
 export type Member_Active_Test_Stddev_Samp_Fields = {
-  __typename?: 'member_active_test_stddev_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -367,7 +357,6 @@ export type Member_Active_Test_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Member_Active_Test_Sum_Fields = {
-  __typename?: 'member_active_test_sum_fields';
   member_id?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
@@ -405,7 +394,6 @@ export type Member_Active_Test_Updates = {
 
 /** aggregate var_pop on columns */
 export type Member_Active_Test_Var_Pop_Fields = {
-  __typename?: 'member_active_test_var_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -418,7 +406,6 @@ export type Member_Active_Test_Var_Pop_Order_By = {
 
 /** aggregate var_samp on columns */
 export type Member_Active_Test_Var_Samp_Fields = {
-  __typename?: 'member_active_test_var_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -431,7 +418,6 @@ export type Member_Active_Test_Var_Samp_Order_By = {
 
 /** aggregate variance on columns */
 export type Member_Active_Test_Variance_Fields = {
-  __typename?: 'member_active_test_variance_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -444,7 +430,6 @@ export type Member_Active_Test_Variance_Order_By = {
 
 /** columns and relationships of "member_banned" */
 export type Member_Banned = {
-  __typename?: 'member_banned';
   created_at: Scalars['timestamptz']['output'];
   member_id: Scalars['bigint']['output'];
   operated_by: Scalars['bigint']['output'];
@@ -454,14 +439,12 @@ export type Member_Banned = {
 
 /** aggregated selection of "member_banned" */
 export type Member_Banned_Aggregate = {
-  __typename?: 'member_banned_aggregate';
   aggregate?: Maybe<Member_Banned_Aggregate_Fields>;
   nodes: Array<Member_Banned>;
 };
 
 /** aggregate fields of "member_banned" */
 export type Member_Banned_Aggregate_Fields = {
-  __typename?: 'member_banned_aggregate_fields';
   avg?: Maybe<Member_Banned_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Member_Banned_Max_Fields>;
@@ -484,7 +467,6 @@ export type Member_Banned_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Member_Banned_Avg_Fields = {
-  __typename?: 'member_banned_avg_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -526,7 +508,6 @@ export type Member_Banned_Insert_Input = {
 
 /** aggregate max on columns */
 export type Member_Banned_Max_Fields = {
-  __typename?: 'member_banned_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   operated_by?: Maybe<Scalars['bigint']['output']>;
@@ -536,7 +517,6 @@ export type Member_Banned_Max_Fields = {
 
 /** aggregate min on columns */
 export type Member_Banned_Min_Fields = {
-  __typename?: 'member_banned_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   operated_by?: Maybe<Scalars['bigint']['output']>;
@@ -546,7 +526,6 @@ export type Member_Banned_Min_Fields = {
 
 /** response of any mutation on the table "member_banned" */
 export type Member_Banned_Mutation_Response = {
-  __typename?: 'member_banned_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -599,7 +578,6 @@ export type Member_Banned_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Member_Banned_Stddev_Fields = {
-  __typename?: 'member_banned_stddev_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -607,7 +585,6 @@ export type Member_Banned_Stddev_Fields = {
 
 /** aggregate stddev_pop on columns */
 export type Member_Banned_Stddev_Pop_Fields = {
-  __typename?: 'member_banned_stddev_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -615,7 +592,6 @@ export type Member_Banned_Stddev_Pop_Fields = {
 
 /** aggregate stddev_samp on columns */
 export type Member_Banned_Stddev_Samp_Fields = {
-  __typename?: 'member_banned_stddev_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -640,7 +616,6 @@ export type Member_Banned_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Member_Banned_Sum_Fields = {
-  __typename?: 'member_banned_sum_fields';
   member_id?: Maybe<Scalars['bigint']['output']>;
   operated_by?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
@@ -671,7 +646,6 @@ export type Member_Banned_Updates = {
 
 /** aggregate var_pop on columns */
 export type Member_Banned_Var_Pop_Fields = {
-  __typename?: 'member_banned_var_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -679,7 +653,6 @@ export type Member_Banned_Var_Pop_Fields = {
 
 /** aggregate var_samp on columns */
 export type Member_Banned_Var_Samp_Fields = {
-  __typename?: 'member_banned_var_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -687,7 +660,6 @@ export type Member_Banned_Var_Samp_Fields = {
 
 /** aggregate variance on columns */
 export type Member_Banned_Variance_Fields = {
-  __typename?: 'member_banned_variance_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -695,7 +667,6 @@ export type Member_Banned_Variance_Fields = {
 
 /** columns and relationships of "member_pending_activations_test" */
 export type Member_Pending_Activations_Test = {
-  __typename?: 'member_pending_activations_test';
   created_at: Scalars['timestamptz']['output'];
   member_id: Scalars['bigint']['output'];
   status_activity_id: Scalars['bigint']['output'];
@@ -703,14 +674,12 @@ export type Member_Pending_Activations_Test = {
 
 /** aggregated selection of "member_pending_activations_test" */
 export type Member_Pending_Activations_Test_Aggregate = {
-  __typename?: 'member_pending_activations_test_aggregate';
   aggregate?: Maybe<Member_Pending_Activations_Test_Aggregate_Fields>;
   nodes: Array<Member_Pending_Activations_Test>;
 };
 
 /** aggregate fields of "member_pending_activations_test" */
 export type Member_Pending_Activations_Test_Aggregate_Fields = {
-  __typename?: 'member_pending_activations_test_aggregate_fields';
   avg?: Maybe<Member_Pending_Activations_Test_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Member_Pending_Activations_Test_Max_Fields>;
@@ -733,7 +702,6 @@ export type Member_Pending_Activations_Test_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Member_Pending_Activations_Test_Avg_Fields = {
-  __typename?: 'member_pending_activations_test_avg_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -771,7 +739,6 @@ export type Member_Pending_Activations_Test_Insert_Input = {
 
 /** aggregate max on columns */
 export type Member_Pending_Activations_Test_Max_Fields = {
-  __typename?: 'member_pending_activations_test_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
@@ -779,7 +746,6 @@ export type Member_Pending_Activations_Test_Max_Fields = {
 
 /** aggregate min on columns */
 export type Member_Pending_Activations_Test_Min_Fields = {
-  __typename?: 'member_pending_activations_test_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
@@ -787,7 +753,6 @@ export type Member_Pending_Activations_Test_Min_Fields = {
 
 /** response of any mutation on the table "member_pending_activations_test" */
 export type Member_Pending_Activations_Test_Mutation_Response = {
-  __typename?: 'member_pending_activations_test_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -832,21 +797,18 @@ export type Member_Pending_Activations_Test_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Member_Pending_Activations_Test_Stddev_Fields = {
-  __typename?: 'member_pending_activations_test_stddev_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Member_Pending_Activations_Test_Stddev_Pop_Fields = {
-  __typename?: 'member_pending_activations_test_stddev_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Member_Pending_Activations_Test_Stddev_Samp_Fields = {
-  __typename?: 'member_pending_activations_test_stddev_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -868,7 +830,6 @@ export type Member_Pending_Activations_Test_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Member_Pending_Activations_Test_Sum_Fields = {
-  __typename?: 'member_pending_activations_test_sum_fields';
   member_id?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
@@ -894,28 +855,24 @@ export type Member_Pending_Activations_Test_Updates = {
 
 /** aggregate var_pop on columns */
 export type Member_Pending_Activations_Test_Var_Pop_Fields = {
-  __typename?: 'member_pending_activations_test_var_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Member_Pending_Activations_Test_Var_Samp_Fields = {
-  __typename?: 'member_pending_activations_test_var_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Member_Pending_Activations_Test_Variance_Fields = {
-  __typename?: 'member_pending_activations_test_variance_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "member_resigned_test" */
 export type Member_Resigned_Test = {
-  __typename?: 'member_resigned_test';
   created_at: Scalars['timestamptz']['output'];
   member_id: Scalars['bigint']['output'];
   reason: Scalars['String']['output'];
@@ -924,14 +881,23 @@ export type Member_Resigned_Test = {
 
 /** aggregated selection of "member_resigned_test" */
 export type Member_Resigned_Test_Aggregate = {
-  __typename?: 'member_resigned_test_aggregate';
   aggregate?: Maybe<Member_Resigned_Test_Aggregate_Fields>;
   nodes: Array<Member_Resigned_Test>;
 };
 
+export type Member_Resigned_Test_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Member_Resigned_Test_Aggregate_Bool_Exp_Count>;
+};
+
+export type Member_Resigned_Test_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "member_resigned_test" */
 export type Member_Resigned_Test_Aggregate_Fields = {
-  __typename?: 'member_resigned_test_aggregate_fields';
   avg?: Maybe<Member_Resigned_Test_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Member_Resigned_Test_Max_Fields>;
@@ -952,11 +918,38 @@ export type Member_Resigned_Test_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** order by aggregate values of table "member_resigned_test" */
+export type Member_Resigned_Test_Aggregate_Order_By = {
+  avg?: InputMaybe<Member_Resigned_Test_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Member_Resigned_Test_Max_Order_By>;
+  min?: InputMaybe<Member_Resigned_Test_Min_Order_By>;
+  stddev?: InputMaybe<Member_Resigned_Test_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Member_Resigned_Test_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Member_Resigned_Test_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Member_Resigned_Test_Sum_Order_By>;
+  var_pop?: InputMaybe<Member_Resigned_Test_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Member_Resigned_Test_Var_Samp_Order_By>;
+  variance?: InputMaybe<Member_Resigned_Test_Variance_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "member_resigned_test" */
+export type Member_Resigned_Test_Arr_Rel_Insert_Input = {
+  data: Array<Member_Resigned_Test_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Member_Resigned_Test_On_Conflict>;
+};
+
 /** aggregate avg on columns */
 export type Member_Resigned_Test_Avg_Fields = {
-  __typename?: 'member_resigned_test_avg_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by avg() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Avg_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "member_resigned_test". All fields are combined with a logical 'AND'. */
@@ -992,25 +985,38 @@ export type Member_Resigned_Test_Insert_Input = {
 
 /** aggregate max on columns */
 export type Member_Resigned_Test_Max_Fields = {
-  __typename?: 'member_resigned_test_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** order by max() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  member_id?: InputMaybe<Order_By>;
+  reason?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Member_Resigned_Test_Min_Fields = {
-  __typename?: 'member_resigned_test_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
 
+/** order by min() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  member_id?: InputMaybe<Order_By>;
+  reason?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** response of any mutation on the table "member_resigned_test" */
 export type Member_Resigned_Test_Mutation_Response = {
-  __typename?: 'member_resigned_test_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -1059,23 +1065,38 @@ export type Member_Resigned_Test_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Member_Resigned_Test_Stddev_Fields = {
-  __typename?: 'member_resigned_test_stddev_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Stddev_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Member_Resigned_Test_Stddev_Pop_Fields = {
-  __typename?: 'member_resigned_test_stddev_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by stddev_pop() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Stddev_Pop_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate stddev_samp on columns */
 export type Member_Resigned_Test_Stddev_Samp_Fields = {
-  __typename?: 'member_resigned_test_stddev_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by stddev_samp() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Stddev_Samp_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "member_resigned_test" */
@@ -1096,9 +1117,14 @@ export type Member_Resigned_Test_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Member_Resigned_Test_Sum_Fields = {
-  __typename?: 'member_resigned_test_sum_fields';
   member_id?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
+};
+
+/** order by sum() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Sum_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "member_resigned_test" */
@@ -1124,28 +1150,42 @@ export type Member_Resigned_Test_Updates = {
 
 /** aggregate var_pop on columns */
 export type Member_Resigned_Test_Var_Pop_Fields = {
-  __typename?: 'member_resigned_test_var_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_pop() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Var_Pop_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate var_samp on columns */
 export type Member_Resigned_Test_Var_Samp_Fields = {
-  __typename?: 'member_resigned_test_var_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
+};
+
+/** order by var_samp() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Var_Samp_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate variance on columns */
 export type Member_Resigned_Test_Variance_Fields = {
-  __typename?: 'member_resigned_test_variance_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
+/** order by variance() on columns of table "member_resigned_test" */
+export type Member_Resigned_Test_Variance_Order_By = {
+  member_id?: InputMaybe<Order_By>;
+  status_activity_id?: InputMaybe<Order_By>;
+};
+
 /** columns and relationships of "member_restored" */
 export type Member_Restored = {
-  __typename?: 'member_restored';
   created_at: Scalars['timestamptz']['output'];
   member_id: Scalars['bigint']['output'];
   operated_by: Scalars['bigint']['output'];
@@ -1155,14 +1195,12 @@ export type Member_Restored = {
 
 /** aggregated selection of "member_restored" */
 export type Member_Restored_Aggregate = {
-  __typename?: 'member_restored_aggregate';
   aggregate?: Maybe<Member_Restored_Aggregate_Fields>;
   nodes: Array<Member_Restored>;
 };
 
 /** aggregate fields of "member_restored" */
 export type Member_Restored_Aggregate_Fields = {
-  __typename?: 'member_restored_aggregate_fields';
   avg?: Maybe<Member_Restored_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Member_Restored_Max_Fields>;
@@ -1185,7 +1223,6 @@ export type Member_Restored_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Member_Restored_Avg_Fields = {
-  __typename?: 'member_restored_avg_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -1227,7 +1264,6 @@ export type Member_Restored_Insert_Input = {
 
 /** aggregate max on columns */
 export type Member_Restored_Max_Fields = {
-  __typename?: 'member_restored_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   operated_by?: Maybe<Scalars['bigint']['output']>;
@@ -1237,7 +1273,6 @@ export type Member_Restored_Max_Fields = {
 
 /** aggregate min on columns */
 export type Member_Restored_Min_Fields = {
-  __typename?: 'member_restored_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   operated_by?: Maybe<Scalars['bigint']['output']>;
@@ -1247,7 +1282,6 @@ export type Member_Restored_Min_Fields = {
 
 /** response of any mutation on the table "member_restored" */
 export type Member_Restored_Mutation_Response = {
-  __typename?: 'member_restored_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -1300,7 +1334,6 @@ export type Member_Restored_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Member_Restored_Stddev_Fields = {
-  __typename?: 'member_restored_stddev_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -1308,7 +1341,6 @@ export type Member_Restored_Stddev_Fields = {
 
 /** aggregate stddev_pop on columns */
 export type Member_Restored_Stddev_Pop_Fields = {
-  __typename?: 'member_restored_stddev_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -1316,7 +1348,6 @@ export type Member_Restored_Stddev_Pop_Fields = {
 
 /** aggregate stddev_samp on columns */
 export type Member_Restored_Stddev_Samp_Fields = {
-  __typename?: 'member_restored_stddev_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -1341,7 +1372,6 @@ export type Member_Restored_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Member_Restored_Sum_Fields = {
-  __typename?: 'member_restored_sum_fields';
   member_id?: Maybe<Scalars['bigint']['output']>;
   operated_by?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
@@ -1372,7 +1402,6 @@ export type Member_Restored_Updates = {
 
 /** aggregate var_pop on columns */
 export type Member_Restored_Var_Pop_Fields = {
-  __typename?: 'member_restored_var_pop_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -1380,7 +1409,6 @@ export type Member_Restored_Var_Pop_Fields = {
 
 /** aggregate var_samp on columns */
 export type Member_Restored_Var_Samp_Fields = {
-  __typename?: 'member_restored_var_samp_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -1388,7 +1416,6 @@ export type Member_Restored_Var_Samp_Fields = {
 
 /** aggregate variance on columns */
 export type Member_Restored_Variance_Fields = {
-  __typename?: 'member_restored_variance_fields';
   member_id?: Maybe<Scalars['Float']['output']>;
   operated_by?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
@@ -1396,7 +1423,6 @@ export type Member_Restored_Variance_Fields = {
 
 /** columns and relationships of "member_status_activities_test" */
 export type Member_Status_Activities_Test = {
-  __typename?: 'member_status_activities_test';
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
   /** An array relationship */
@@ -1404,6 +1430,10 @@ export type Member_Status_Activities_Test = {
   /** An aggregate relationship */
   member_actives_aggregate: Member_Active_Test_Aggregate;
   member_id: Scalars['bigint']['output'];
+  /** An array relationship */
+  member_resigns: Array<Member_Resigned_Test>;
+  /** An aggregate relationship */
+  member_resigns_aggregate: Member_Resigned_Test_Aggregate;
   status: Scalars['String']['output'];
 };
 
@@ -1427,16 +1457,34 @@ export type Member_Status_Activities_TestMember_Actives_AggregateArgs = {
   where?: InputMaybe<Member_Active_Test_Bool_Exp>;
 };
 
+
+/** columns and relationships of "member_status_activities_test" */
+export type Member_Status_Activities_TestMember_ResignsArgs = {
+  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
+  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member_status_activities_test" */
+export type Member_Status_Activities_TestMember_Resigns_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
+  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+};
+
 /** aggregated selection of "member_status_activities_test" */
 export type Member_Status_Activities_Test_Aggregate = {
-  __typename?: 'member_status_activities_test_aggregate';
   aggregate?: Maybe<Member_Status_Activities_Test_Aggregate_Fields>;
   nodes: Array<Member_Status_Activities_Test>;
 };
 
 /** aggregate fields of "member_status_activities_test" */
 export type Member_Status_Activities_Test_Aggregate_Fields = {
-  __typename?: 'member_status_activities_test_aggregate_fields';
   avg?: Maybe<Member_Status_Activities_Test_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Member_Status_Activities_Test_Max_Fields>;
@@ -1459,7 +1507,6 @@ export type Member_Status_Activities_Test_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Member_Status_Activities_Test_Avg_Fields = {
-  __typename?: 'member_status_activities_test_avg_fields';
   id?: Maybe<Scalars['Float']['output']>;
   member_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -1474,6 +1521,8 @@ export type Member_Status_Activities_Test_Bool_Exp = {
   member_actives?: InputMaybe<Member_Active_Test_Bool_Exp>;
   member_actives_aggregate?: InputMaybe<Member_Active_Test_Aggregate_Bool_Exp>;
   member_id?: InputMaybe<Bigint_Comparison_Exp>;
+  member_resigns?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+  member_resigns_aggregate?: InputMaybe<Member_Resigned_Test_Aggregate_Bool_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -1495,12 +1544,12 @@ export type Member_Status_Activities_Test_Insert_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   member_actives?: InputMaybe<Member_Active_Test_Arr_Rel_Insert_Input>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
+  member_resigns?: InputMaybe<Member_Resigned_Test_Arr_Rel_Insert_Input>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate max on columns */
 export type Member_Status_Activities_Test_Max_Fields = {
-  __typename?: 'member_status_activities_test_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
@@ -1509,7 +1558,6 @@ export type Member_Status_Activities_Test_Max_Fields = {
 
 /** aggregate min on columns */
 export type Member_Status_Activities_Test_Min_Fields = {
-  __typename?: 'member_status_activities_test_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   id?: Maybe<Scalars['bigint']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
@@ -1518,7 +1566,6 @@ export type Member_Status_Activities_Test_Min_Fields = {
 
 /** response of any mutation on the table "member_status_activities_test" */
 export type Member_Status_Activities_Test_Mutation_Response = {
-  __typename?: 'member_status_activities_test_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -1538,6 +1585,7 @@ export type Member_Status_Activities_Test_Order_By = {
   id?: InputMaybe<Order_By>;
   member_actives_aggregate?: InputMaybe<Member_Active_Test_Aggregate_Order_By>;
   member_id?: InputMaybe<Order_By>;
+  member_resigns_aggregate?: InputMaybe<Member_Resigned_Test_Aggregate_Order_By>;
   status?: InputMaybe<Order_By>;
 };
 
@@ -1568,21 +1616,18 @@ export type Member_Status_Activities_Test_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Member_Status_Activities_Test_Stddev_Fields = {
-  __typename?: 'member_status_activities_test_stddev_fields';
   id?: Maybe<Scalars['Float']['output']>;
   member_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Member_Status_Activities_Test_Stddev_Pop_Fields = {
-  __typename?: 'member_status_activities_test_stddev_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
   member_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Member_Status_Activities_Test_Stddev_Samp_Fields = {
-  __typename?: 'member_status_activities_test_stddev_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
   member_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -1605,7 +1650,6 @@ export type Member_Status_Activities_Test_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Member_Status_Activities_Test_Sum_Fields = {
-  __typename?: 'member_status_activities_test_sum_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
 };
@@ -1633,28 +1677,24 @@ export type Member_Status_Activities_Test_Updates = {
 
 /** aggregate var_pop on columns */
 export type Member_Status_Activities_Test_Var_Pop_Fields = {
-  __typename?: 'member_status_activities_test_var_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
   member_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Member_Status_Activities_Test_Var_Samp_Fields = {
-  __typename?: 'member_status_activities_test_var_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
   member_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Member_Status_Activities_Test_Variance_Fields = {
-  __typename?: 'member_status_activities_test_variance_fields';
   id?: Maybe<Scalars['Float']['output']>;
   member_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** columns and relationships of "members_test" */
 export type Members_Test = {
-  __typename?: 'members_test';
   id: Scalars['bigint']['output'];
   name: Scalars['String']['output'];
   user_id: Scalars['bigint']['output'];
@@ -1662,14 +1702,12 @@ export type Members_Test = {
 
 /** aggregated selection of "members_test" */
 export type Members_Test_Aggregate = {
-  __typename?: 'members_test_aggregate';
   aggregate?: Maybe<Members_Test_Aggregate_Fields>;
   nodes: Array<Members_Test>;
 };
 
 /** aggregate fields of "members_test" */
 export type Members_Test_Aggregate_Fields = {
-  __typename?: 'members_test_aggregate_fields';
   avg?: Maybe<Members_Test_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Members_Test_Max_Fields>;
@@ -1692,7 +1730,6 @@ export type Members_Test_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Members_Test_Avg_Fields = {
-  __typename?: 'members_test_avg_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -1730,7 +1767,6 @@ export type Members_Test_Insert_Input = {
 
 /** aggregate max on columns */
 export type Members_Test_Max_Fields = {
-  __typename?: 'members_test_max_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['bigint']['output']>;
@@ -1738,7 +1774,6 @@ export type Members_Test_Max_Fields = {
 
 /** aggregate min on columns */
 export type Members_Test_Min_Fields = {
-  __typename?: 'members_test_min_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['bigint']['output']>;
@@ -1746,7 +1781,6 @@ export type Members_Test_Min_Fields = {
 
 /** response of any mutation on the table "members_test" */
 export type Members_Test_Mutation_Response = {
-  __typename?: 'members_test_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -1791,21 +1825,18 @@ export type Members_Test_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Members_Test_Stddev_Fields = {
-  __typename?: 'members_test_stddev_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Members_Test_Stddev_Pop_Fields = {
-  __typename?: 'members_test_stddev_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Members_Test_Stddev_Samp_Fields = {
-  __typename?: 'members_test_stddev_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -1827,7 +1858,6 @@ export type Members_Test_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Members_Test_Sum_Fields = {
-  __typename?: 'members_test_sum_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   user_id?: Maybe<Scalars['bigint']['output']>;
 };
@@ -1853,28 +1883,24 @@ export type Members_Test_Updates = {
 
 /** aggregate var_pop on columns */
 export type Members_Test_Var_Pop_Fields = {
-  __typename?: 'members_test_var_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Members_Test_Var_Samp_Fields = {
-  __typename?: 'members_test_var_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Members_Test_Variance_Fields = {
-  __typename?: 'members_test_variance_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** mutation root */
 export type Mutation_Root = {
-  __typename?: 'mutation_root';
   /** delete data from the table: "member_active_test" */
   delete_member_active_test?: Maybe<Member_Active_Test_Mutation_Response>;
   /** delete single row from the table: "member_active_test" */
@@ -2512,7 +2538,6 @@ export type Name_Comparison_Exp = {
 
 /** columns and relationships of "operators_test" */
 export type Operators_Test = {
-  __typename?: 'operators_test';
   id: Scalars['bigint']['output'];
   name: Scalars['String']['output'];
   user_id: Scalars['bigint']['output'];
@@ -2520,14 +2545,12 @@ export type Operators_Test = {
 
 /** aggregated selection of "operators_test" */
 export type Operators_Test_Aggregate = {
-  __typename?: 'operators_test_aggregate';
   aggregate?: Maybe<Operators_Test_Aggregate_Fields>;
   nodes: Array<Operators_Test>;
 };
 
 /** aggregate fields of "operators_test" */
 export type Operators_Test_Aggregate_Fields = {
-  __typename?: 'operators_test_aggregate_fields';
   avg?: Maybe<Operators_Test_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Operators_Test_Max_Fields>;
@@ -2550,7 +2573,6 @@ export type Operators_Test_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Operators_Test_Avg_Fields = {
-  __typename?: 'operators_test_avg_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -2586,7 +2608,6 @@ export type Operators_Test_Insert_Input = {
 
 /** aggregate max on columns */
 export type Operators_Test_Max_Fields = {
-  __typename?: 'operators_test_max_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['bigint']['output']>;
@@ -2594,7 +2615,6 @@ export type Operators_Test_Max_Fields = {
 
 /** aggregate min on columns */
 export type Operators_Test_Min_Fields = {
-  __typename?: 'operators_test_min_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   user_id?: Maybe<Scalars['bigint']['output']>;
@@ -2602,7 +2622,6 @@ export type Operators_Test_Min_Fields = {
 
 /** response of any mutation on the table "operators_test" */
 export type Operators_Test_Mutation_Response = {
-  __typename?: 'operators_test_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -2647,21 +2666,18 @@ export type Operators_Test_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Operators_Test_Stddev_Fields = {
-  __typename?: 'operators_test_stddev_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Operators_Test_Stddev_Pop_Fields = {
-  __typename?: 'operators_test_stddev_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Operators_Test_Stddev_Samp_Fields = {
-  __typename?: 'operators_test_stddev_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -2683,7 +2699,6 @@ export type Operators_Test_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Operators_Test_Sum_Fields = {
-  __typename?: 'operators_test_sum_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   user_id?: Maybe<Scalars['bigint']['output']>;
 };
@@ -2709,21 +2724,18 @@ export type Operators_Test_Updates = {
 
 /** aggregate var_pop on columns */
 export type Operators_Test_Var_Pop_Fields = {
-  __typename?: 'operators_test_var_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Operators_Test_Var_Samp_Fields = {
-  __typename?: 'operators_test_var_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Operators_Test_Variance_Fields = {
-  __typename?: 'operators_test_variance_fields';
   id?: Maybe<Scalars['Float']['output']>;
   user_id?: Maybe<Scalars['Float']['output']>;
 };
@@ -2745,7 +2757,6 @@ export enum Order_By {
 }
 
 export type Query_Root = {
-  __typename?: 'query_root';
   /** fetch data from the table: "member_active_test" */
   member_active_test: Array<Member_Active_Test>;
   /** fetch aggregated fields from the table: "member_active_test" */
@@ -3039,7 +3050,6 @@ export type Query_RootUsers_Test_By_PkArgs = {
 };
 
 export type Subscription_Root = {
-  __typename?: 'subscription_root';
   /** fetch data from the table: "member_active_test" */
   member_active_test: Array<Member_Active_Test>;
   /** fetch aggregated fields from the table: "member_active_test" */
@@ -3424,21 +3434,18 @@ export type Subscription_RootUsers_Test_StreamArgs = {
 
 /** columns and relationships of "table_tennis_tables" */
 export type Table_Tennis_Tables = {
-  __typename?: 'table_tennis_tables';
   id: Scalars['Int']['output'];
   name: Scalars['name']['output'];
 };
 
 /** aggregated selection of "table_tennis_tables" */
 export type Table_Tennis_Tables_Aggregate = {
-  __typename?: 'table_tennis_tables_aggregate';
   aggregate?: Maybe<Table_Tennis_Tables_Aggregate_Fields>;
   nodes: Array<Table_Tennis_Tables>;
 };
 
 /** aggregate fields of "table_tennis_tables" */
 export type Table_Tennis_Tables_Aggregate_Fields = {
-  __typename?: 'table_tennis_tables_aggregate_fields';
   avg?: Maybe<Table_Tennis_Tables_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Table_Tennis_Tables_Max_Fields>;
@@ -3461,7 +3468,6 @@ export type Table_Tennis_Tables_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Table_Tennis_Tables_Avg_Fields = {
-  __typename?: 'table_tennis_tables_avg_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -3493,19 +3499,16 @@ export type Table_Tennis_Tables_Insert_Input = {
 
 /** aggregate max on columns */
 export type Table_Tennis_Tables_Max_Fields = {
-  __typename?: 'table_tennis_tables_max_fields';
   id?: Maybe<Scalars['Int']['output']>;
 };
 
 /** aggregate min on columns */
 export type Table_Tennis_Tables_Min_Fields = {
-  __typename?: 'table_tennis_tables_min_fields';
   id?: Maybe<Scalars['Int']['output']>;
 };
 
 /** response of any mutation on the table "table_tennis_tables" */
 export type Table_Tennis_Tables_Mutation_Response = {
-  __typename?: 'table_tennis_tables_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -3546,19 +3549,16 @@ export type Table_Tennis_Tables_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Table_Tennis_Tables_Stddev_Fields = {
-  __typename?: 'table_tennis_tables_stddev_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Table_Tennis_Tables_Stddev_Pop_Fields = {
-  __typename?: 'table_tennis_tables_stddev_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Table_Tennis_Tables_Stddev_Samp_Fields = {
-  __typename?: 'table_tennis_tables_stddev_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -3578,7 +3578,6 @@ export type Table_Tennis_Tables_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Table_Tennis_Tables_Sum_Fields = {
-  __typename?: 'table_tennis_tables_sum_fields';
   id?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -3601,19 +3600,16 @@ export type Table_Tennis_Tables_Updates = {
 
 /** aggregate var_pop on columns */
 export type Table_Tennis_Tables_Var_Pop_Fields = {
-  __typename?: 'table_tennis_tables_var_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Table_Tennis_Tables_Var_Samp_Fields = {
-  __typename?: 'table_tennis_tables_var_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Table_Tennis_Tables_Variance_Fields = {
-  __typename?: 'table_tennis_tables_variance_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -3632,21 +3628,18 @@ export type Timestamptz_Comparison_Exp = {
 
 /** columns and relationships of "users_test" */
 export type Users_Test = {
-  __typename?: 'users_test';
   id: Scalars['bigint']['output'];
   name: Scalars['String']['output'];
 };
 
 /** aggregated selection of "users_test" */
 export type Users_Test_Aggregate = {
-  __typename?: 'users_test_aggregate';
   aggregate?: Maybe<Users_Test_Aggregate_Fields>;
   nodes: Array<Users_Test>;
 };
 
 /** aggregate fields of "users_test" */
 export type Users_Test_Aggregate_Fields = {
-  __typename?: 'users_test_aggregate_fields';
   avg?: Maybe<Users_Test_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Users_Test_Max_Fields>;
@@ -3669,7 +3662,6 @@ export type Users_Test_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Users_Test_Avg_Fields = {
-  __typename?: 'users_test_avg_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -3701,21 +3693,18 @@ export type Users_Test_Insert_Input = {
 
 /** aggregate max on columns */
 export type Users_Test_Max_Fields = {
-  __typename?: 'users_test_max_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregate min on columns */
 export type Users_Test_Min_Fields = {
-  __typename?: 'users_test_min_fields';
   id?: Maybe<Scalars['bigint']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 
 /** response of any mutation on the table "users_test" */
 export type Users_Test_Mutation_Response = {
-  __typename?: 'users_test_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -3756,19 +3745,16 @@ export type Users_Test_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Users_Test_Stddev_Fields = {
-  __typename?: 'users_test_stddev_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Users_Test_Stddev_Pop_Fields = {
-  __typename?: 'users_test_stddev_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Users_Test_Stddev_Samp_Fields = {
-  __typename?: 'users_test_stddev_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -3788,7 +3774,6 @@ export type Users_Test_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Users_Test_Sum_Fields = {
-  __typename?: 'users_test_sum_fields';
   id?: Maybe<Scalars['bigint']['output']>;
 };
 
@@ -3811,39 +3796,81 @@ export type Users_Test_Updates = {
 
 /** aggregate var_pop on columns */
 export type Users_Test_Var_Pop_Fields = {
-  __typename?: 'users_test_var_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Users_Test_Var_Samp_Fields = {
-  __typename?: 'users_test_var_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Users_Test_Variance_Fields = {
-  __typename?: 'users_test_variance_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
+
+export type ResignMemberMutationVariables = Exact<{
+  activity_input: Member_Status_Activities_Test_Insert_Input;
+}>;
+
+
+export type ResignMemberMutation = { insert_member_status_activities_test?: Maybe<{ returning: Array<(
+      Pick<Member_Status_Activities_Test, 'member_id' | 'status' | 'id' | 'created_at'>
+      & { member_resigns: Array<Pick<Member_Resigned_Test, 'status_activity_id' | 'reason' | 'member_id' | 'created_at'>> }
+    )> }> };
 
 export type GetActiveMemberQueryVariables = Exact<{
   member_id: Scalars['bigint']['input'];
 }>;
 
 
-export type GetActiveMemberQuery = (
-  { __typename?: 'query_root' }
-  & { member_status_activities_test: Array<(
-    { __typename?: 'member_status_activities_test' }
-    & { member_actives: Array<(
-      { __typename?: 'member_active_test' }
-      & Pick<Member_Active_Test, 'address' | 'birthday' | 'created_at' | 'member_id' | 'postal_code' | 'status_activity_id'>
-    )> }
-  )> }
-);
+export type GetActiveMemberQuery = { member_status_activities_test: Array<{ member_actives: Array<Pick<Member_Active_Test, 'address' | 'birthday' | 'created_at' | 'member_id' | 'postal_code' | 'status_activity_id'>> }> };
 
 
+export const ResignMemberDocument = gql`
+    mutation ResignMember($activity_input: member_status_activities_test_insert_input!) {
+  insert_member_status_activities_test(objects: [$activity_input]) {
+    returning {
+      member_id
+      status
+      id
+      created_at
+      member_resigns {
+        status_activity_id
+        reason
+        member_id
+        created_at
+      }
+    }
+  }
+}
+    `;
+export type ResignMemberMutationFn = Apollo.MutationFunction<ResignMemberMutation, ResignMemberMutationVariables>;
+
+/**
+ * __useResignMemberMutation__
+ *
+ * To run a mutation, you first call `useResignMemberMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResignMemberMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resignMemberMutation, { data, loading, error }] = useResignMemberMutation({
+ *   variables: {
+ *      activity_input: // value for 'activity_input'
+ *   },
+ * });
+ */
+export function useResignMemberMutation(baseOptions?: Apollo.MutationHookOptions<ResignMemberMutation, ResignMemberMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResignMemberMutation, ResignMemberMutationVariables>(ResignMemberDocument, options);
+      }
+export type ResignMemberMutationHookResult = ReturnType<typeof useResignMemberMutation>;
+export type ResignMemberMutationResult = Apollo.MutationResult<ResignMemberMutation>;
+export type ResignMemberMutationOptions = Apollo.BaseMutationOptions<ResignMemberMutation, ResignMemberMutationVariables>;
 export const GetActiveMemberDocument = gql`
     query GetActiveMember($member_id: bigint!) {
   member_status_activities_test(

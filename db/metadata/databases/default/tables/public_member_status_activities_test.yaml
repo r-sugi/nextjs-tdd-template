@@ -11,3 +11,12 @@ array_relationships:
         remote_table:
           name: member_active_test
           schema: public
+  - name: member_resigns
+    using:
+      manual_configuration:
+        column_mapping:
+          id: status_activity_id
+        insertion_order: null
+        remote_table:
+          name: member_resigned_test
+          schema: public
