@@ -22,7 +22,7 @@ module.exports = {
         "typescript-react-apollo",
       ],
       config: {
-        skipTypename: false,
+        skipTypename: true,
         withHooks: true,
         withHOC: false,
         withComponent: false,
