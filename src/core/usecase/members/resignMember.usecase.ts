@@ -13,6 +13,7 @@ export const resignMember = async ({ reason }: { reason: string }) => {
           {
             member_id: 1, // TODO: ログインメンバーのID
             reason,
+            // TODO: テーブルに退会理由詳細、同意フラグのカラムを追加する
           },
         ],
       },

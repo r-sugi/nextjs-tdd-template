@@ -29,6 +29,7 @@ export const IndexTemplate: FC<Props> = () => {
     event && event.preventDefault();
 
     try {
+      // TODO: 値を渡す
       await resignMember({ reason: "" });
     } catch (error) {
       // TODO: エラー処理(例: 入力値のバリデーションエラーなど)
