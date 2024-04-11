@@ -1,13 +1,25 @@
 import MemberRepository from "@/core/repository/members/members.repository";
+import { ActiveMemberDTO } from "./ActiveMemberDTO";
+import { useEffect, useState } from "react";
 
-// TODO: useXXXにしたらuseStateとか使えるようになる。hooksにした方が良い？
-export const fetchActiveMember = async () => {
-  const res = await new MemberRepository().findActiveMemberOne({
-    member_id: 1,
-  });
-  if (res == null) {
-    // TODO: error処理
-    throw new Error("data not found");
-  }
-  return res;
+export const useFetchActiveMember = () => {
+  const [activeMember, setActiveMember] = useState<ActiveMemberDTO>();
+
+  useEffect(() => {
+    (async () => {
+      const res = await new MemberRepository().findActiveMemberOne({
+        member_id: 1,
+      });
+      if (res == null) {
+        // TODO: error処理
+        throw new Error("activeMember not found");
+      }
+      setActiveMember(new ActiveMemberDTO(res));
+    })();
+  }, []);
+
+  return {
+    activeMember,
+    setActiveMember,
+  };
 };
