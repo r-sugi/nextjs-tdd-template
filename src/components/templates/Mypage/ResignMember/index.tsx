@@ -30,7 +30,7 @@ export const IndexTemplate: FC<Props> = () => {
 
     try {
       // TODO: 値を渡す
-      await resignMember({ reason: "" });
+      await resignMember({ reason: "", reason_detail: "", reason_type: "" });
     } catch (error) {
       // TODO: エラー処理(例: 入力値のバリデーションエラーなど)
     }

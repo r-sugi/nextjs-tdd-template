@@ -11,8 +11,7 @@ object_relationships:
         remote_table:
           name: member_active_test
           schema: public
-array_relationships:
-  - name: member_resigns
+  - name: member_resign
     using:
       manual_configuration:
         column_mapping:

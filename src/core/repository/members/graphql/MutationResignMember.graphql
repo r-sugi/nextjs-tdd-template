@@ -1,18 +1,14 @@
 mutation ResignMember(
   $activity_input: member_status_activities_test_insert_input!
 ) {
-  insert_member_status_activities_test(objects: [$activity_input]) {
-    returning {
+  insert_member_status_activities_test_one(object: $activity_input) {
+    member_id
+    status
+    member_resign {
+      reason
+      reason_detail
+      agreement
       member_id
-      status
-      id
-      created_at
-      member_resigns {
-        status_activity_id
-        reason
-        member_id
-        created_at
-      }
     }
   }
 }

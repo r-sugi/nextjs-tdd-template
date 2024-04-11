@@ -1,5 +1,6 @@
 import ActiveMemberEntity from "../entity/activeMember.entity";
 
+// TODO: I/F GraphQLのvariablesを書いているだけなので不毛
 export abstract class IMemberRepository {
   findActiveMemberOne:
     | (({
@@ -10,18 +11,19 @@ export abstract class IMemberRepository {
     | undefined;
   resignMember:
     | (({
-        activity_input: { status, member_id, member_resigns },
+        activity_input: { status, member_id, member_resign },
       }: {
         activity_input: {
           status: string;
           member_id: number;
-          member_resigns: {
-            data: [
-              {
-                member_id: number;
-                reason: string;
-              }
-            ];
+          member_resign: {
+            data: {
+              member_id: number;
+              reason: string;
+              reason_type: string;
+              reason_detail: string;
+              agreement: boolean;
+            };
           };
         };
       }) => Promise<boolean>)

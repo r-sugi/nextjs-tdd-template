@@ -20,6 +20,19 @@ export type Scalars = {
   timestamptz: { input: any; output: any; }
 };
 
+/** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
+export type Boolean_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Boolean']['input']>;
+  _gt?: InputMaybe<Scalars['Boolean']['input']>;
+  _gte?: InputMaybe<Scalars['Boolean']['input']>;
+  _in?: InputMaybe<Array<Scalars['Boolean']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['Boolean']['input']>;
+  _lte?: InputMaybe<Scalars['Boolean']['input']>;
+  _neq?: InputMaybe<Scalars['Boolean']['input']>;
+  _nin?: InputMaybe<Array<Scalars['Boolean']['input']>>;
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']['input']>;
@@ -779,9 +792,12 @@ export type Member_Pending_Activations_Test_Variance_Fields = {
 
 /** columns and relationships of "member_resigned_test" */
 export type Member_Resigned_Test = {
+  agreement: Scalars['Boolean']['output'];
   created_at: Scalars['timestamptz']['output'];
   member_id: Scalars['bigint']['output'];
   reason: Scalars['String']['output'];
+  reason_detail: Scalars['String']['output'];
+  reason_type: Scalars['String']['output'];
   status_activity_id: Scalars['bigint']['output'];
 };
 
@@ -789,17 +805,6 @@ export type Member_Resigned_Test = {
 export type Member_Resigned_Test_Aggregate = {
   aggregate?: Maybe<Member_Resigned_Test_Aggregate_Fields>;
   nodes: Array<Member_Resigned_Test>;
-};
-
-export type Member_Resigned_Test_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Member_Resigned_Test_Aggregate_Bool_Exp_Count>;
-};
-
-export type Member_Resigned_Test_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "member_resigned_test" */
@@ -824,38 +829,10 @@ export type Member_Resigned_Test_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** order by aggregate values of table "member_resigned_test" */
-export type Member_Resigned_Test_Aggregate_Order_By = {
-  avg?: InputMaybe<Member_Resigned_Test_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Member_Resigned_Test_Max_Order_By>;
-  min?: InputMaybe<Member_Resigned_Test_Min_Order_By>;
-  stddev?: InputMaybe<Member_Resigned_Test_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Member_Resigned_Test_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Member_Resigned_Test_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Member_Resigned_Test_Sum_Order_By>;
-  var_pop?: InputMaybe<Member_Resigned_Test_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Member_Resigned_Test_Var_Samp_Order_By>;
-  variance?: InputMaybe<Member_Resigned_Test_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "member_resigned_test" */
-export type Member_Resigned_Test_Arr_Rel_Insert_Input = {
-  data: Array<Member_Resigned_Test_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Member_Resigned_Test_On_Conflict>;
-};
-
 /** aggregate avg on columns */
 export type Member_Resigned_Test_Avg_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by avg() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Avg_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "member_resigned_test". All fields are combined with a logical 'AND'. */
@@ -863,9 +840,12 @@ export type Member_Resigned_Test_Bool_Exp = {
   _and?: InputMaybe<Array<Member_Resigned_Test_Bool_Exp>>;
   _not?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
   _or?: InputMaybe<Array<Member_Resigned_Test_Bool_Exp>>;
+  agreement?: InputMaybe<Boolean_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   member_id?: InputMaybe<Bigint_Comparison_Exp>;
   reason?: InputMaybe<String_Comparison_Exp>;
+  reason_detail?: InputMaybe<String_Comparison_Exp>;
+  reason_type?: InputMaybe<String_Comparison_Exp>;
   status_activity_id?: InputMaybe<Bigint_Comparison_Exp>;
 };
 
@@ -883,9 +863,12 @@ export type Member_Resigned_Test_Inc_Input = {
 
 /** input type for inserting data into table "member_resigned_test" */
 export type Member_Resigned_Test_Insert_Input = {
+  agreement?: InputMaybe<Scalars['Boolean']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
+  reason_detail?: InputMaybe<Scalars['String']['input']>;
+  reason_type?: InputMaybe<Scalars['String']['input']>;
   status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
@@ -894,15 +877,9 @@ export type Member_Resigned_Test_Max_Fields = {
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
+  reason_detail?: Maybe<Scalars['String']['output']>;
+  reason_type?: Maybe<Scalars['String']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** order by max() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Max_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  reason?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
@@ -910,15 +887,9 @@ export type Member_Resigned_Test_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   member_id?: Maybe<Scalars['bigint']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
+  reason_detail?: Maybe<Scalars['String']['output']>;
+  reason_type?: Maybe<Scalars['String']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** order by min() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Min_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  reason?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "member_resigned_test" */
@@ -927,6 +898,13 @@ export type Member_Resigned_Test_Mutation_Response = {
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
   returning: Array<Member_Resigned_Test>;
+};
+
+/** input type for inserting object relation for remote table "member_resigned_test" */
+export type Member_Resigned_Test_Obj_Rel_Insert_Input = {
+  data: Member_Resigned_Test_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Member_Resigned_Test_On_Conflict>;
 };
 
 /** on_conflict condition type for table "member_resigned_test" */
@@ -938,9 +916,12 @@ export type Member_Resigned_Test_On_Conflict = {
 
 /** Ordering options when selecting data from "member_resigned_test". */
 export type Member_Resigned_Test_Order_By = {
+  agreement?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   member_id?: InputMaybe<Order_By>;
   reason?: InputMaybe<Order_By>;
+  reason_detail?: InputMaybe<Order_By>;
+  reason_type?: InputMaybe<Order_By>;
   status_activity_id?: InputMaybe<Order_By>;
 };
 
@@ -952,20 +933,29 @@ export type Member_Resigned_Test_Pk_Columns_Input = {
 /** select columns of table "member_resigned_test" */
 export enum Member_Resigned_Test_Select_Column {
   /** column name */
+  Agreement = 'agreement',
+  /** column name */
   CreatedAt = 'created_at',
   /** column name */
   MemberId = 'member_id',
   /** column name */
   Reason = 'reason',
   /** column name */
+  ReasonDetail = 'reason_detail',
+  /** column name */
+  ReasonType = 'reason_type',
+  /** column name */
   StatusActivityId = 'status_activity_id'
 }
 
 /** input type for updating data in table "member_resigned_test" */
 export type Member_Resigned_Test_Set_Input = {
+  agreement?: InputMaybe<Scalars['Boolean']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
+  reason_detail?: InputMaybe<Scalars['String']['input']>;
+  reason_type?: InputMaybe<Scalars['String']['input']>;
   status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
@@ -975,34 +965,16 @@ export type Member_Resigned_Test_Stddev_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by stddev() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Stddev_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_pop on columns */
 export type Member_Resigned_Test_Stddev_Pop_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by stddev_pop() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Stddev_Pop_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_samp on columns */
 export type Member_Resigned_Test_Stddev_Samp_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_samp() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Stddev_Samp_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "member_resigned_test" */
@@ -1015,9 +987,12 @@ export type Member_Resigned_Test_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Member_Resigned_Test_Stream_Cursor_Value_Input = {
+  agreement?: InputMaybe<Scalars['Boolean']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
+  reason_detail?: InputMaybe<Scalars['String']['input']>;
+  reason_type?: InputMaybe<Scalars['String']['input']>;
   status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
 };
 
@@ -1027,20 +1002,20 @@ export type Member_Resigned_Test_Sum_Fields = {
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
 
-/** order by sum() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Sum_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** update columns of table "member_resigned_test" */
 export enum Member_Resigned_Test_Update_Column {
+  /** column name */
+  Agreement = 'agreement',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
   MemberId = 'member_id',
   /** column name */
   Reason = 'reason',
+  /** column name */
+  ReasonDetail = 'reason_detail',
+  /** column name */
+  ReasonType = 'reason_type',
   /** column name */
   StatusActivityId = 'status_activity_id'
 }
@@ -1060,34 +1035,16 @@ export type Member_Resigned_Test_Var_Pop_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by var_pop() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Var_Pop_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate var_samp on columns */
 export type Member_Resigned_Test_Var_Samp_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by var_samp() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Var_Samp_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate variance on columns */
 export type Member_Resigned_Test_Variance_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by variance() on columns of table "member_resigned_test" */
-export type Member_Resigned_Test_Variance_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "member_restored" */
@@ -1334,31 +1291,9 @@ export type Member_Status_Activities_Test = {
   /** An object relationship */
   member_active?: Maybe<Member_Active_Test>;
   member_id: Scalars['bigint']['output'];
-  /** An array relationship */
-  member_resigns: Array<Member_Resigned_Test>;
-  /** An aggregate relationship */
-  member_resigns_aggregate: Member_Resigned_Test_Aggregate;
+  /** An object relationship */
+  member_resign?: Maybe<Member_Resigned_Test>;
   status: Scalars['String']['output'];
-};
-
-
-/** columns and relationships of "member_status_activities_test" */
-export type Member_Status_Activities_TestMember_ResignsArgs = {
-  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
-};
-
-
-/** columns and relationships of "member_status_activities_test" */
-export type Member_Status_Activities_TestMember_Resigns_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
 };
 
 /** aggregated selection of "member_status_activities_test" */
@@ -1404,8 +1339,7 @@ export type Member_Status_Activities_Test_Bool_Exp = {
   id?: InputMaybe<Bigint_Comparison_Exp>;
   member_active?: InputMaybe<Member_Active_Test_Bool_Exp>;
   member_id?: InputMaybe<Bigint_Comparison_Exp>;
-  member_resigns?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
-  member_resigns_aggregate?: InputMaybe<Member_Resigned_Test_Aggregate_Bool_Exp>;
+  member_resign?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -1427,7 +1361,7 @@ export type Member_Status_Activities_Test_Insert_Input = {
   id?: InputMaybe<Scalars['bigint']['input']>;
   member_active?: InputMaybe<Member_Active_Test_Obj_Rel_Insert_Input>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
-  member_resigns?: InputMaybe<Member_Resigned_Test_Arr_Rel_Insert_Input>;
+  member_resign?: InputMaybe<Member_Resigned_Test_Obj_Rel_Insert_Input>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1468,7 +1402,7 @@ export type Member_Status_Activities_Test_Order_By = {
   id?: InputMaybe<Order_By>;
   member_active?: InputMaybe<Member_Active_Test_Order_By>;
   member_id?: InputMaybe<Order_By>;
-  member_resigns_aggregate?: InputMaybe<Member_Resigned_Test_Aggregate_Order_By>;
+  member_resign?: InputMaybe<Member_Resigned_Test_Order_By>;
   status?: InputMaybe<Order_By>;
 };
 
@@ -3697,10 +3631,10 @@ export type ResignMemberMutationVariables = Exact<{
 }>;
 
 
-export type ResignMemberMutation = { insert_member_status_activities_test?: Maybe<{ returning: Array<(
-      Pick<Member_Status_Activities_Test, 'member_id' | 'status' | 'id' | 'created_at'>
-      & { member_resigns: Array<Pick<Member_Resigned_Test, 'status_activity_id' | 'reason' | 'member_id' | 'created_at'>> }
-    )> }> };
+export type ResignMemberMutation = { insert_member_status_activities_test_one?: Maybe<(
+    Pick<Member_Status_Activities_Test, 'member_id' | 'status'>
+    & { member_resign?: Maybe<Pick<Member_Resigned_Test, 'reason' | 'reason_detail' | 'agreement' | 'member_id'>> }
+  )> };
 
 export type GetActiveMemberQueryVariables = Exact<{
   member_id: Scalars['bigint']['input'];
@@ -3715,18 +3649,14 @@ export type GetActiveMemberQuery = { member_status_activities_test: Array<(
 
 export const ResignMemberDocument = gql`
     mutation ResignMember($activity_input: member_status_activities_test_insert_input!) {
-  insert_member_status_activities_test(objects: [$activity_input]) {
-    returning {
+  insert_member_status_activities_test_one(object: $activity_input) {
+    member_id
+    status
+    member_resign {
+      reason
+      reason_detail
+      agreement
       member_id
-      status
-      id
-      created_at
-      member_resigns {
-        status_activity_id
-        reason
-        member_id
-        created_at
-      }
     }
   }
 }
