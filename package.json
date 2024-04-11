@@ -25,7 +25,6 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.2",
-    "swr": "^2.2.5",
     "whatwg-fetch": "^3.6.20",
     "yup": "^1.4.0"
   },
