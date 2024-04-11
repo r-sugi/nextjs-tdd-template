@@ -1,17 +1,18 @@
+import { MemberStatus } from "@/core/domain/value/memberStatus.value";
 import MemberRepository from "@/core/repository/members/members.repository";
 
 // TODO: useXXXにしたらuseStateとか使えるようになる。hooksにした方が良い？
-// TODO: 引数で渡す
-export const resignMember = async () => {
+// TODO: 退会理由: ユーザーが選択した選択肢(例: "利用しないため")
+export const resignMember = async ({ reason }: { reason: string }) => {
   const res = await new MemberRepository().resignMember({
     activity_input: {
-      status: "Resigned",
-      member_id: 1,
+      status: MemberStatus.Resigned,
+      member_id: 1, // TODO: ログインメンバーのID
       member_resigns: {
         data: [
           {
-            member_id: 1,
-            reason: "利用しないため",
+            member_id: 1, // TODO: ログインメンバーのID
+            reason,
           },
         ],
       },
