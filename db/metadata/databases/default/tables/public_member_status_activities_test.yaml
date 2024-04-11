@@ -1,8 +1,8 @@
 table:
   name: member_status_activities_test
   schema: public
-array_relationships:
-  - name: member_actives
+object_relationships:
+  - name: member_active
     using:
       manual_configuration:
         column_mapping:
@@ -11,6 +11,7 @@ array_relationships:
         remote_table:
           name: member_active_test
           schema: public
+array_relationships:
   - name: member_resigns
     using:
       manual_configuration:

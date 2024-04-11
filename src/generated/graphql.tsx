@@ -103,17 +103,6 @@ export type Member_Active_Test_Aggregate = {
   nodes: Array<Member_Active_Test>;
 };
 
-export type Member_Active_Test_Aggregate_Bool_Exp = {
-  count?: InputMaybe<Member_Active_Test_Aggregate_Bool_Exp_Count>;
-};
-
-export type Member_Active_Test_Aggregate_Bool_Exp_Count = {
-  arguments?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-  filter?: InputMaybe<Member_Active_Test_Bool_Exp>;
-  predicate: Int_Comparison_Exp;
-};
-
 /** aggregate fields of "member_active_test" */
 export type Member_Active_Test_Aggregate_Fields = {
   avg?: Maybe<Member_Active_Test_Avg_Fields>;
@@ -136,38 +125,10 @@ export type Member_Active_Test_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** order by aggregate values of table "member_active_test" */
-export type Member_Active_Test_Aggregate_Order_By = {
-  avg?: InputMaybe<Member_Active_Test_Avg_Order_By>;
-  count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Member_Active_Test_Max_Order_By>;
-  min?: InputMaybe<Member_Active_Test_Min_Order_By>;
-  stddev?: InputMaybe<Member_Active_Test_Stddev_Order_By>;
-  stddev_pop?: InputMaybe<Member_Active_Test_Stddev_Pop_Order_By>;
-  stddev_samp?: InputMaybe<Member_Active_Test_Stddev_Samp_Order_By>;
-  sum?: InputMaybe<Member_Active_Test_Sum_Order_By>;
-  var_pop?: InputMaybe<Member_Active_Test_Var_Pop_Order_By>;
-  var_samp?: InputMaybe<Member_Active_Test_Var_Samp_Order_By>;
-  variance?: InputMaybe<Member_Active_Test_Variance_Order_By>;
-};
-
-/** input type for inserting array relation for remote table "member_active_test" */
-export type Member_Active_Test_Arr_Rel_Insert_Input = {
-  data: Array<Member_Active_Test_Insert_Input>;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Member_Active_Test_On_Conflict>;
-};
-
 /** aggregate avg on columns */
 export type Member_Active_Test_Avg_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by avg() on columns of table "member_active_test" */
-export type Member_Active_Test_Avg_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Boolean expression to filter rows from the table "member_active_test". All fields are combined with a logical 'AND'. */
@@ -215,16 +176,6 @@ export type Member_Active_Test_Max_Fields = {
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
 
-/** order by max() on columns of table "member_active_test" */
-export type Member_Active_Test_Max_Order_By = {
-  address?: InputMaybe<Order_By>;
-  birthday?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  postal_code?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate min on columns */
 export type Member_Active_Test_Min_Fields = {
   address?: Maybe<Scalars['String']['output']>;
@@ -235,22 +186,19 @@ export type Member_Active_Test_Min_Fields = {
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
 };
 
-/** order by min() on columns of table "member_active_test" */
-export type Member_Active_Test_Min_Order_By = {
-  address?: InputMaybe<Order_By>;
-  birthday?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  postal_code?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** response of any mutation on the table "member_active_test" */
 export type Member_Active_Test_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
   returning: Array<Member_Active_Test>;
+};
+
+/** input type for inserting object relation for remote table "member_active_test" */
+export type Member_Active_Test_Obj_Rel_Insert_Input = {
+  data: Member_Active_Test_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Member_Active_Test_On_Conflict>;
 };
 
 /** on_conflict condition type for table "member_active_test" */
@@ -307,34 +255,16 @@ export type Member_Active_Test_Stddev_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by stddev() on columns of table "member_active_test" */
-export type Member_Active_Test_Stddev_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_pop on columns */
 export type Member_Active_Test_Stddev_Pop_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by stddev_pop() on columns of table "member_active_test" */
-export type Member_Active_Test_Stddev_Pop_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate stddev_samp on columns */
 export type Member_Active_Test_Stddev_Samp_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by stddev_samp() on columns of table "member_active_test" */
-export type Member_Active_Test_Stddev_Samp_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** Streaming cursor of the table "member_active_test" */
@@ -359,12 +289,6 @@ export type Member_Active_Test_Stream_Cursor_Value_Input = {
 export type Member_Active_Test_Sum_Fields = {
   member_id?: Maybe<Scalars['bigint']['output']>;
   status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** order by sum() on columns of table "member_active_test" */
-export type Member_Active_Test_Sum_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** update columns of table "member_active_test" */
@@ -398,34 +322,16 @@ export type Member_Active_Test_Var_Pop_Fields = {
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by var_pop() on columns of table "member_active_test" */
-export type Member_Active_Test_Var_Pop_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate var_samp on columns */
 export type Member_Active_Test_Var_Samp_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
 };
 
-/** order by var_samp() on columns of table "member_active_test" */
-export type Member_Active_Test_Var_Samp_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
 /** aggregate variance on columns */
 export type Member_Active_Test_Variance_Fields = {
   member_id?: Maybe<Scalars['Float']['output']>;
   status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** order by variance() on columns of table "member_active_test" */
-export type Member_Active_Test_Variance_Order_By = {
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
 };
 
 /** columns and relationships of "member_banned" */
@@ -1425,36 +1331,14 @@ export type Member_Restored_Variance_Fields = {
 export type Member_Status_Activities_Test = {
   created_at: Scalars['timestamptz']['output'];
   id: Scalars['bigint']['output'];
-  /** An array relationship */
-  member_actives: Array<Member_Active_Test>;
-  /** An aggregate relationship */
-  member_actives_aggregate: Member_Active_Test_Aggregate;
+  /** An object relationship */
+  member_active?: Maybe<Member_Active_Test>;
   member_id: Scalars['bigint']['output'];
   /** An array relationship */
   member_resigns: Array<Member_Resigned_Test>;
   /** An aggregate relationship */
   member_resigns_aggregate: Member_Resigned_Test_Aggregate;
   status: Scalars['String']['output'];
-};
-
-
-/** columns and relationships of "member_status_activities_test" */
-export type Member_Status_Activities_TestMember_ActivesArgs = {
-  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
-};
-
-
-/** columns and relationships of "member_status_activities_test" */
-export type Member_Status_Activities_TestMember_Actives_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
 };
 
 
@@ -1518,8 +1402,7 @@ export type Member_Status_Activities_Test_Bool_Exp = {
   _or?: InputMaybe<Array<Member_Status_Activities_Test_Bool_Exp>>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Bigint_Comparison_Exp>;
-  member_actives?: InputMaybe<Member_Active_Test_Bool_Exp>;
-  member_actives_aggregate?: InputMaybe<Member_Active_Test_Aggregate_Bool_Exp>;
+  member_active?: InputMaybe<Member_Active_Test_Bool_Exp>;
   member_id?: InputMaybe<Bigint_Comparison_Exp>;
   member_resigns?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
   member_resigns_aggregate?: InputMaybe<Member_Resigned_Test_Aggregate_Bool_Exp>;
@@ -1542,7 +1425,7 @@ export type Member_Status_Activities_Test_Inc_Input = {
 export type Member_Status_Activities_Test_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
   id?: InputMaybe<Scalars['bigint']['input']>;
-  member_actives?: InputMaybe<Member_Active_Test_Arr_Rel_Insert_Input>;
+  member_active?: InputMaybe<Member_Active_Test_Obj_Rel_Insert_Input>;
   member_id?: InputMaybe<Scalars['bigint']['input']>;
   member_resigns?: InputMaybe<Member_Resigned_Test_Arr_Rel_Insert_Input>;
   status?: InputMaybe<Scalars['String']['input']>;
@@ -1583,7 +1466,7 @@ export type Member_Status_Activities_Test_On_Conflict = {
 export type Member_Status_Activities_Test_Order_By = {
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  member_actives_aggregate?: InputMaybe<Member_Active_Test_Aggregate_Order_By>;
+  member_active?: InputMaybe<Member_Active_Test_Order_By>;
   member_id?: InputMaybe<Order_By>;
   member_resigns_aggregate?: InputMaybe<Member_Resigned_Test_Aggregate_Order_By>;
   status?: InputMaybe<Order_By>;
@@ -3824,7 +3707,10 @@ export type GetActiveMemberQueryVariables = Exact<{
 }>;
 
 
-export type GetActiveMemberQuery = { member_status_activities_test: Array<{ member_actives: Array<Pick<Member_Active_Test, 'address' | 'birthday' | 'created_at' | 'member_id' | 'postal_code' | 'status_activity_id'>> }> };
+export type GetActiveMemberQuery = { member_status_activities_test: Array<(
+    Pick<Member_Status_Activities_Test, 'id' | 'member_id' | 'status' | 'created_at'>
+    & { member_active?: Maybe<Pick<Member_Active_Test, 'address' | 'birthday' | 'created_at' | 'member_id' | 'postal_code' | 'status_activity_id'>> }
+  )> };
 
 
 export const ResignMemberDocument = gql`
@@ -3878,7 +3764,11 @@ export const GetActiveMemberDocument = gql`
     limit: 1
     where: {member_id: {_eq: $member_id}}
   ) {
-    member_actives {
+    id
+    member_id
+    status
+    created_at
+    member_active {
       address
       birthday
       created_at

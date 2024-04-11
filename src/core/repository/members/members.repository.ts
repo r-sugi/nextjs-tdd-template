@@ -43,14 +43,13 @@ export default class MemberRepository
     if (res.data.data.member_status_activities_test.length === 0) {
       return null;
     } else if (
-      res.data.data.member_status_activities_test[0].member_actives.length === 0
+      res.data.data.member_status_activities_test[0].member_active == null
     ) {
       return null;
     }
 
     const activeMember =
-      res.data.data.member_status_activities_test[0].member_actives[0];
-    const memberFactory = new MemberFactory();
+      res.data.data.member_status_activities_test[0].member_active;
 
     // TODO: カラム名はキャピタルケースの方がよかった。
     const params = {
@@ -63,7 +62,7 @@ export default class MemberRepository
     };
 
     // 存在する場合はインスタンスを生成して返す
-    return memberFactory.createActiveMember(params);
+    return new MemberFactory().createActiveMember(params);
   }
 
   async resignMember(variables: ResignMemberMutationVariables) {

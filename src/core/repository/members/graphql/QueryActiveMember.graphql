@@ -4,7 +4,11 @@ query GetActiveMember($member_id: bigint!) {
     limit: 1
     where: { member_id: { _eq: $member_id } }
   ) {
-    member_actives {
+    id
+    member_id
+    status
+    created_at
+    member_active {
       address
       birthday
       created_at
