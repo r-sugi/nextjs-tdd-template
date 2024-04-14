@@ -1,5 +1,5 @@
 import { render } from "@testing-library/react";
-import { mocast } from "@/__testing__/helper";
+import { toMock } from "@/__testing__/helper";
 import { mockNextHead } from "@/__testing__/seo-helper";
 import PageId from "./index.page";
 import * as getPost from "@/../__fixtures__/posts/getPost";
@@ -41,7 +41,7 @@ describe(PageId, () => {
 
   // it("template file called", async () => {
   //   // Arrange
-  //   const TemplateMock = mocast(PostIdTemplate);
+  //   const TemplateMock = toMock(PostIdTemplate);
   //   mockNextHead();
   //   const postMock = getPost.success.data;
   //   const COMPONENT_PROPS = {

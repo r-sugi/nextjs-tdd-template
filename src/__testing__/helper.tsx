@@ -1,11 +1,13 @@
-export function mocast<T extends jest.Func>(fn: T): jest.Mock<ReturnType<T>, Parameters<T>> {
+export function toMock<T extends jest.Func>(
+  fn: T
+): jest.Mock<ReturnType<T>, Parameters<T>> {
   return fn as unknown as jest.Mock<ReturnType<T>, Parameters<T>>;
 }
 
-export function spyAndMock<T extends (...args: any[]) => any>(
+export function toSpyWithMock<T extends (...args: any[]) => any>(
   obj: any,
   method: string,
-  mockImpl: T,
+  mockImpl: T
 ): jest.SpyInstance {
   const spy = jest.spyOn(obj, method);
   spy.mockImplementation(mockImpl);

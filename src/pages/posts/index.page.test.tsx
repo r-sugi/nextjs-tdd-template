@@ -1,5 +1,5 @@
 import { render, waitFor } from "@testing-library/react";
-import { mocast } from "@/__testing__/helper";
+import { toMock } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 import * as getPosts from "@/../__fixtures__/posts/getPosts";
 import PostsTemplate from "@/components/templates/Posts/Posts";
@@ -57,7 +57,7 @@ describe(Page, () => {
       posts: getPosts.success.data,
     };
     mockNextHead();
-    const TemplateMock = mocast(PostsTemplate);
+    const TemplateMock = toMock(PostsTemplate);
     const CHILD_COMPONENT_PROPS = {
       posts: getPosts.success.data,
     };

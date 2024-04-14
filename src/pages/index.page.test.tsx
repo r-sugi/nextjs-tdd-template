@@ -2,7 +2,7 @@ import { render } from "@testing-library/react";
 import Page from "./index.page";
 import { publicPages } from "@/paths";
 import { IndexTemplate } from "@/components/templates/Index";
-import { mocast } from "@/__testing__/helper";
+import { toMock } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 
 jest.mock("@/components/templates/Index");
@@ -41,7 +41,7 @@ describe(Page, () => {
 
   it("template file called", async () => {
     // Arrange
-    const IndexTemplateMock = mocast(IndexTemplate);
+    const IndexTemplateMock = toMock(IndexTemplate);
     const COMPONENT_PROPS = {};
 
     // Act
