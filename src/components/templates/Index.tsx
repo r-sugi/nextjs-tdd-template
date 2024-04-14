@@ -1,12 +1,17 @@
 import { FC } from "react";
 import { PostIdErrorBoundary } from "./Posts/PostId/PostIdErrorBoundary";
-import { useFetchActiveMember } from "@/core/usecase/members/fetchActiveMember.usecase";
+import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
+import { useRouter } from "next/router";
 
 type Props = {};
 
 export const IndexTemplate: FC<Props> = () => {
-  // const { posts: data, error, isLoading } = useFetchPosts();
-  const { activeMember } = useFetchActiveMember();
+  const router = useRouter();
+  const { activeMember } = useFetchActiveMember({
+    onError: async () => {
+      await router.push("/login");
+    },
+  });
   console.log(activeMember);
 
   // if (error) {

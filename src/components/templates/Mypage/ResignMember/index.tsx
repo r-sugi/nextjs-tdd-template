@@ -1,5 +1,5 @@
 import { BaseSyntheticEvent, FC } from "react";
-import { resignMember } from "@/core/usecase/members/resignMember.usecase";
+import { resignMember } from "@/core/usecases/member/resignMember.command";
 import { ResignMemberErrorBoundary } from "./resignMemberErrorBoundary";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,7 @@ import {
 
 type Props = {};
 
+// TODO: featureパターンにする
 export const IndexTemplate: FC<Props> = () => {
   const {
     handleSubmit,
@@ -17,7 +18,7 @@ export const IndexTemplate: FC<Props> = () => {
     formState: { isSubmitting, isValid, errors },
     setError,
   } = useForm({
-    resolver: yupResolver(resignMemberSchema),
+    resolver: yupResolver(resignMemberSchema), // TODO: zodにする
     shouldFocusError: true,
     mode: "onChange",
   });
@@ -30,7 +31,14 @@ export const IndexTemplate: FC<Props> = () => {
 
     try {
       // TODO: 値を渡す
-      await resignMember({ reason: "", reason_detail: "", reason_type: "" });
+      await resignMember(
+        { reason: "", reason_detail: "", reason_type: "" },
+        {
+          onError: async () => {
+            // TODO: エラー処理(例: 退会に失敗しました)
+          },
+        }
+      );
     } catch (error) {
       // TODO: エラー処理(例: 入力値のバリデーションエラーなど)
     }

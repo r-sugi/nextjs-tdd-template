@@ -1,6 +1,7 @@
 import { string } from "yup";
 import { InferType, object } from "yup";
 
+// TODO:スキーマをテストする(不正な値からガードする) + DBのカラムに制約をつける(長さとか)
 export const resignMemberSchema = object({
   reasonType: string()
     .required("選択してください")
