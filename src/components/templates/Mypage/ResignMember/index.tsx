@@ -1,11 +1,10 @@
 import { BaseSyntheticEvent, FC } from "react";
 import { resignMember } from "@/core/usecases/member/resignMember.command";
 import { ResignMemberErrorBoundary } from "./resignMemberErrorBoundary";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+
 import {
   ResignMemberSchema,
-  resignMemberSchema,
+  useResignMemberForm,
 } from "@/components/molecules/form/Mypage/ResignMember";
 
 type Props = {};
@@ -17,18 +16,13 @@ export const IndexTemplate: FC<Props> = () => {
     register,
     formState: { isSubmitting, isValid, errors },
     setError,
-  } = useForm({
-    resolver: yupResolver(resignMemberSchema), // TODO: zodにする
-    shouldFocusError: true,
-    mode: "onChange",
-  });
+  } = useResignMemberForm();
 
   const submitHandler = async (
     data: ResignMemberSchema,
     event?: BaseSyntheticEvent
   ) => {
     event && event.preventDefault();
-
     try {
       // TODO: 値を渡す
       await resignMember(
