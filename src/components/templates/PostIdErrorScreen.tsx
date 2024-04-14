@@ -5,7 +5,7 @@ type Props = {
   error: ClientError;
   onReset: () => void;
 };
-
+// TODO: 名前を変える
 export const PostIdErrorScreen = ({ error, onReset }: Props): ReactNode => {
   return (
     <div>

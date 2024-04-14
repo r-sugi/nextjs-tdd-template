@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { PostIdErrorBoundary } from "./Posts/PostId/PostIdErrorBoundary";
+import { PostIdErrorBoundary } from "./PostIdErrorBoundary";
 import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
 import { useRouter } from "next/router";
 
