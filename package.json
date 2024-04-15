@@ -14,7 +14,8 @@
     "codegen": "graphql-codegen --config codegen.js",
     "db:start": "docker-compose up -d",
     "db:stop": "docker-compose stop",
-    "db:export": "npm run db:export --prefix ./db"
+    "db:export": "npm run db:export --prefix ./db",
+    "db:dump": "npm run db:dump --prefix ./db"
   },
   "dependencies": {
     "@apollo/client": "^3.9.11",
