@@ -26,4 +26,3 @@ cd /db
 エクスポートする
 hasura metadata export
 ```
-
