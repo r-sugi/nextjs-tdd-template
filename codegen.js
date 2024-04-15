@@ -14,6 +14,9 @@ module.exports = {
   ],
   documents: ["src/**/*.graphql"],
   overwrite: true,
+  customization: {
+    naming_convention: 'graphql-default'
+  },
   generates: {
     "./src/generated/graphql.tsx": {
       plugins: [
