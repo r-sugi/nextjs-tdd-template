@@ -24,9 +24,8 @@ export const IndexTemplate: FC<Props> = () => {
   ) => {
     event && event.preventDefault();
     try {
-      // TODO: 値を渡す
       await resignMember(
-        { reason: "", reason_detail: "", reason_type: "" },
+        { reasonDetail: "test", reasonType: "NO_USE", email: "hoge@example.com" },
         {
           onError: async () => {
             // TODO: エラー処理(例: 退会に失敗しました)

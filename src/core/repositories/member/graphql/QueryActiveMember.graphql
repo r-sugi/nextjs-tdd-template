@@ -1,21 +1,17 @@
-# パフォーマンス的にはgroup byの方が良いが、group byが使えないため、limit 1で対応している。
-query GetActiveMember($member_id: bigint!) {
-  member_status_activities_test(
-    order_by: { created_at: desc }
-    limit: 1
-    where: { member_id: { _eq: $member_id } }
-  ) {
+query GetActiveMember($memberId: uuid!) {
+  memberStatusActivities(where: {memberId: {_eq: $memberId }}, order_by: {createdAt: desc}, limit: 1) {
     id
-    member_id
+    memberId
     status
-    created_at
-    member_active {
+    createdAt
+    memberActive {
       address
       birthday
-      created_at
-      member_id
-      postal_code
-      status_activity_id
+      createdAt
+      email
+      memberId
+      postalCode
+      statusActivityId
     }
   }
 }

@@ -18,7 +18,8 @@ export const useFetchActiveMember = (opt?: Option) => {
   useEffect(() => {
     (async () => {
       const res = await findActiveMemberOne({
-        member_id: 1, // TODO: 動的な値(JWTから取得したもの)
+        // TODO: variablesがanyになっているのを修正する
+        memberId: 'ff4b01ee-15e9-4e2e-acb3-25a0347af7c1', // TODO: 動的な値(JWTから取得したもの)
       });
       if (res == null) {
         await ref.current?.();

@@ -15,9 +15,8 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  bigint: { input: any; output: any; }
-  name: { input: any; output: any; }
   timestamptz: { input: any; output: any; }
+  uuid: { input: any; output: any; }
 };
 
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
@@ -31,19 +30,6 @@ export type Boolean_Comparison_Exp = {
   _lte?: InputMaybe<Scalars['Boolean']['input']>;
   _neq?: InputMaybe<Scalars['Boolean']['input']>;
   _nin?: InputMaybe<Array<Scalars['Boolean']['input']>>;
-};
-
-/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
-export type Int_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['Int']['input']>;
-  _gt?: InputMaybe<Scalars['Int']['input']>;
-  _gte?: InputMaybe<Scalars['Int']['input']>;
-  _in?: InputMaybe<Array<Scalars['Int']['input']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
-  _lt?: InputMaybe<Scalars['Int']['input']>;
-  _lte?: InputMaybe<Scalars['Int']['input']>;
-  _neq?: InputMaybe<Scalars['Int']['input']>;
-  _nin?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -79,19 +65,6 @@ export type String_Comparison_Exp = {
   _similar?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
-export type Bigint_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['bigint']['input']>;
-  _gt?: InputMaybe<Scalars['bigint']['input']>;
-  _gte?: InputMaybe<Scalars['bigint']['input']>;
-  _in?: InputMaybe<Array<Scalars['bigint']['input']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
-  _lt?: InputMaybe<Scalars['bigint']['input']>;
-  _lte?: InputMaybe<Scalars['bigint']['input']>;
-  _neq?: InputMaybe<Scalars['bigint']['input']>;
-  _nin?: InputMaybe<Array<Scalars['bigint']['input']>>;
-};
-
 /** ordering argument of a cursor */
 export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
@@ -100,2461 +73,1920 @@ export enum Cursor_Ordering {
   Desc = 'DESC'
 }
 
-/** columns and relationships of "member_active_test" */
-export type Member_Active_Test = {
+/** columns and relationships of "membarRestored" */
+export type MembarRestored = {
+  createdAt: Scalars['timestamptz']['output'];
+  email: Scalars['String']['output'];
+  memberId: Scalars['uuid']['output'];
+  operatedBy: Scalars['uuid']['output'];
+  reason: Scalars['String']['output'];
+  statusActivityId: Scalars['uuid']['output'];
+};
+
+/** aggregated selection of "membarRestored" */
+export type MembarRestored_Aggregate = {
+  aggregate?: Maybe<MembarRestored_Aggregate_Fields>;
+  nodes: Array<MembarRestored>;
+};
+
+/** aggregate fields of "membarRestored" */
+export type MembarRestored_Aggregate_Fields = {
+  count: Scalars['Int']['output'];
+  max?: Maybe<MembarRestored_Max_Fields>;
+  min?: Maybe<MembarRestored_Min_Fields>;
+};
+
+
+/** aggregate fields of "membarRestored" */
+export type MembarRestored_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MembarRestored_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "membarRestored". All fields are combined with a logical 'AND'. */
+export type MembarRestored_Bool_Exp = {
+  _and?: InputMaybe<Array<MembarRestored_Bool_Exp>>;
+  _not?: InputMaybe<MembarRestored_Bool_Exp>;
+  _or?: InputMaybe<Array<MembarRestored_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  operatedBy?: InputMaybe<Uuid_Comparison_Exp>;
+  reason?: InputMaybe<String_Comparison_Exp>;
+  statusActivityId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "membarRestored" */
+export enum MembarRestored_Constraint {
+  /** unique or primary key constraint on columns "statusActivityId" */
+  MembarRestoredPkey = 'membarRestored_pkey'
+}
+
+/** input type for inserting data into table "membarRestored" */
+export type MembarRestored_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** aggregate max on columns */
+export type MembarRestored_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  operatedBy?: Maybe<Scalars['uuid']['output']>;
+  reason?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** aggregate min on columns */
+export type MembarRestored_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  operatedBy?: Maybe<Scalars['uuid']['output']>;
+  reason?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** response of any mutation on the table "membarRestored" */
+export type MembarRestored_Mutation_Response = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<MembarRestored>;
+};
+
+/** input type for inserting object relation for remote table "membarRestored" */
+export type MembarRestored_Obj_Rel_Insert_Input = {
+  data: MembarRestored_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<MembarRestored_On_Conflict>;
+};
+
+/** on_conflict condition type for table "membarRestored" */
+export type MembarRestored_On_Conflict = {
+  constraint: MembarRestored_Constraint;
+  update_columns?: Array<MembarRestored_Update_Column>;
+  where?: InputMaybe<MembarRestored_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "membarRestored". */
+export type MembarRestored_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  operatedBy?: InputMaybe<Order_By>;
+  reason?: InputMaybe<Order_By>;
+  statusActivityId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: membarRestored */
+export type MembarRestored_Pk_Columns_Input = {
+  statusActivityId: Scalars['uuid']['input'];
+};
+
+/** select columns of table "membarRestored" */
+export enum MembarRestored_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  OperatedBy = 'operatedBy',
+  /** column name */
+  Reason = 'reason',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
+}
+
+/** input type for updating data in table "membarRestored" */
+export type MembarRestored_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** Streaming cursor of the table "membarRestored" */
+export type MembarRestored_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: MembarRestored_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type MembarRestored_Stream_Cursor_Value_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** update columns of table "membarRestored" */
+export enum MembarRestored_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  OperatedBy = 'operatedBy',
+  /** column name */
+  Reason = 'reason',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
+}
+
+export type MembarRestored_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<MembarRestored_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: MembarRestored_Bool_Exp;
+};
+
+/** columns and relationships of "memberActive" */
+export type MemberActive = {
   address: Scalars['String']['output'];
   birthday: Scalars['timestamptz']['output'];
-  created_at: Scalars['timestamptz']['output'];
-  member_id: Scalars['bigint']['output'];
-  postal_code: Scalars['String']['output'];
-  status_activity_id: Scalars['bigint']['output'];
+  createdAt: Scalars['timestamptz']['output'];
+  email: Scalars['String']['output'];
+  memberId: Scalars['uuid']['output'];
+  postalCode: Scalars['String']['output'];
+  statusActivityId: Scalars['uuid']['output'];
 };
 
-/** aggregated selection of "member_active_test" */
-export type Member_Active_Test_Aggregate = {
-  aggregate?: Maybe<Member_Active_Test_Aggregate_Fields>;
-  nodes: Array<Member_Active_Test>;
+/** aggregated selection of "memberActive" */
+export type MemberActive_Aggregate = {
+  aggregate?: Maybe<MemberActive_Aggregate_Fields>;
+  nodes: Array<MemberActive>;
 };
 
-/** aggregate fields of "member_active_test" */
-export type Member_Active_Test_Aggregate_Fields = {
-  avg?: Maybe<Member_Active_Test_Avg_Fields>;
+/** aggregate fields of "memberActive" */
+export type MemberActive_Aggregate_Fields = {
   count: Scalars['Int']['output'];
-  max?: Maybe<Member_Active_Test_Max_Fields>;
-  min?: Maybe<Member_Active_Test_Min_Fields>;
-  stddev?: Maybe<Member_Active_Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Member_Active_Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Member_Active_Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Member_Active_Test_Sum_Fields>;
-  var_pop?: Maybe<Member_Active_Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Member_Active_Test_Var_Samp_Fields>;
-  variance?: Maybe<Member_Active_Test_Variance_Fields>;
+  max?: Maybe<MemberActive_Max_Fields>;
+  min?: Maybe<MemberActive_Min_Fields>;
 };
 
 
-/** aggregate fields of "member_active_test" */
-export type Member_Active_Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+/** aggregate fields of "memberActive" */
+export type MemberActive_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberActive_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** aggregate avg on columns */
-export type Member_Active_Test_Avg_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "member_active_test". All fields are combined with a logical 'AND'. */
-export type Member_Active_Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Member_Active_Test_Bool_Exp>>;
-  _not?: InputMaybe<Member_Active_Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Member_Active_Test_Bool_Exp>>;
+/** Boolean expression to filter rows from the table "memberActive". All fields are combined with a logical 'AND'. */
+export type MemberActive_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberActive_Bool_Exp>>;
+  _not?: InputMaybe<MemberActive_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberActive_Bool_Exp>>;
   address?: InputMaybe<String_Comparison_Exp>;
   birthday?: InputMaybe<Timestamptz_Comparison_Exp>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  member_id?: InputMaybe<Bigint_Comparison_Exp>;
-  postal_code?: InputMaybe<String_Comparison_Exp>;
-  status_activity_id?: InputMaybe<Bigint_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  postalCode?: InputMaybe<String_Comparison_Exp>;
+  statusActivityId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "member_active_test" */
-export enum Member_Active_Test_Constraint {
-  /** unique or primary key constraint on columns "created_at" */
-  MemberActiveTestPkey = 'member_active_test_pkey'
+/** unique or primary key constraints on table "memberActive" */
+export enum MemberActive_Constraint {
+  /** unique or primary key constraint on columns "statusActivityId" */
+  MemberActivePkey = 'memberActive_pkey'
 }
 
-/** input type for incrementing numeric columns in table "member_active_test" */
-export type Member_Active_Test_Inc_Input = {
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "member_active_test" */
-export type Member_Active_Test_Insert_Input = {
+/** input type for inserting data into table "memberActive" */
+export type MemberActive_Insert_Input = {
   address?: InputMaybe<Scalars['String']['input']>;
   birthday?: InputMaybe<Scalars['timestamptz']['input']>;
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  postal_code?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  postalCode?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** aggregate max on columns */
-export type Member_Active_Test_Max_Fields = {
+export type MemberActive_Max_Fields = {
   address?: Maybe<Scalars['String']['output']>;
   birthday?: Maybe<Scalars['timestamptz']['output']>;
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  postal_code?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  postalCode?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** aggregate min on columns */
-export type Member_Active_Test_Min_Fields = {
+export type MemberActive_Min_Fields = {
   address?: Maybe<Scalars['String']['output']>;
   birthday?: Maybe<Scalars['timestamptz']['output']>;
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  postal_code?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  postalCode?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
 };
 
-/** response of any mutation on the table "member_active_test" */
-export type Member_Active_Test_Mutation_Response = {
+/** response of any mutation on the table "memberActive" */
+export type MemberActive_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
-  returning: Array<Member_Active_Test>;
+  returning: Array<MemberActive>;
 };
 
-/** input type for inserting object relation for remote table "member_active_test" */
-export type Member_Active_Test_Obj_Rel_Insert_Input = {
-  data: Member_Active_Test_Insert_Input;
+/** input type for inserting object relation for remote table "memberActive" */
+export type MemberActive_Obj_Rel_Insert_Input = {
+  data: MemberActive_Insert_Input;
   /** upsert condition */
-  on_conflict?: InputMaybe<Member_Active_Test_On_Conflict>;
+  on_conflict?: InputMaybe<MemberActive_On_Conflict>;
 };
 
-/** on_conflict condition type for table "member_active_test" */
-export type Member_Active_Test_On_Conflict = {
-  constraint: Member_Active_Test_Constraint;
-  update_columns?: Array<Member_Active_Test_Update_Column>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
+/** on_conflict condition type for table "memberActive" */
+export type MemberActive_On_Conflict = {
+  constraint: MemberActive_Constraint;
+  update_columns?: Array<MemberActive_Update_Column>;
+  where?: InputMaybe<MemberActive_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "member_active_test". */
-export type Member_Active_Test_Order_By = {
+/** Ordering options when selecting data from "memberActive". */
+export type MemberActive_Order_By = {
   address?: InputMaybe<Order_By>;
   birthday?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  postal_code?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  postalCode?: InputMaybe<Order_By>;
+  statusActivityId?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: member_active_test */
-export type Member_Active_Test_Pk_Columns_Input = {
-  created_at: Scalars['timestamptz']['input'];
+/** primary key columns input for table: memberActive */
+export type MemberActive_Pk_Columns_Input = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
-/** select columns of table "member_active_test" */
-export enum Member_Active_Test_Select_Column {
+/** select columns of table "memberActive" */
+export enum MemberActive_Select_Column {
   /** column name */
   Address = 'address',
   /** column name */
   Birthday = 'birthday',
   /** column name */
-  CreatedAt = 'created_at',
+  CreatedAt = 'createdAt',
   /** column name */
-  MemberId = 'member_id',
+  Email = 'email',
   /** column name */
-  PostalCode = 'postal_code',
+  MemberId = 'memberId',
   /** column name */
-  StatusActivityId = 'status_activity_id'
+  PostalCode = 'postalCode',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
 }
 
-/** input type for updating data in table "member_active_test" */
-export type Member_Active_Test_Set_Input = {
+/** input type for updating data in table "memberActive" */
+export type MemberActive_Set_Input = {
   address?: InputMaybe<Scalars['String']['input']>;
   birthday?: InputMaybe<Scalars['timestamptz']['input']>;
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  postal_code?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  postalCode?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate stddev on columns */
-export type Member_Active_Test_Stddev_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Member_Active_Test_Stddev_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Member_Active_Test_Stddev_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "member_active_test" */
-export type Member_Active_Test_Stream_Cursor_Input = {
+/** Streaming cursor of the table "memberActive" */
+export type MemberActive_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Member_Active_Test_Stream_Cursor_Value_Input;
+  initial_value: MemberActive_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Member_Active_Test_Stream_Cursor_Value_Input = {
+export type MemberActive_Stream_Cursor_Value_Input = {
   address?: InputMaybe<Scalars['String']['input']>;
   birthday?: InputMaybe<Scalars['timestamptz']['input']>;
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  postal_code?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  postalCode?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate sum on columns */
-export type Member_Active_Test_Sum_Fields = {
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "member_active_test" */
-export enum Member_Active_Test_Update_Column {
+/** update columns of table "memberActive" */
+export enum MemberActive_Update_Column {
   /** column name */
   Address = 'address',
   /** column name */
   Birthday = 'birthday',
   /** column name */
-  CreatedAt = 'created_at',
+  CreatedAt = 'createdAt',
   /** column name */
-  MemberId = 'member_id',
+  Email = 'email',
   /** column name */
-  PostalCode = 'postal_code',
+  MemberId = 'memberId',
   /** column name */
-  StatusActivityId = 'status_activity_id'
+  PostalCode = 'postalCode',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
 }
 
-export type Member_Active_Test_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Member_Active_Test_Inc_Input>;
+export type MemberActive_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Member_Active_Test_Set_Input>;
+  _set?: InputMaybe<MemberActive_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Member_Active_Test_Bool_Exp;
+  where: MemberActive_Bool_Exp;
 };
 
-/** aggregate var_pop on columns */
-export type Member_Active_Test_Var_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Member_Active_Test_Var_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Member_Active_Test_Variance_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** columns and relationships of "member_banned" */
-export type Member_Banned = {
-  created_at: Scalars['timestamptz']['output'];
-  member_id: Scalars['bigint']['output'];
-  operated_by: Scalars['bigint']['output'];
+/** columns and relationships of "memberBanned" */
+export type MemberBanned = {
+  createdAt: Scalars['timestamptz']['output'];
+  email: Scalars['String']['output'];
+  memberId: Scalars['uuid']['output'];
+  operatedBy: Scalars['uuid']['output'];
   reason: Scalars['String']['output'];
-  status_activity_id: Scalars['bigint']['output'];
+  statusActivityId: Scalars['uuid']['output'];
 };
 
-/** aggregated selection of "member_banned" */
-export type Member_Banned_Aggregate = {
-  aggregate?: Maybe<Member_Banned_Aggregate_Fields>;
-  nodes: Array<Member_Banned>;
+/** aggregated selection of "memberBanned" */
+export type MemberBanned_Aggregate = {
+  aggregate?: Maybe<MemberBanned_Aggregate_Fields>;
+  nodes: Array<MemberBanned>;
 };
 
-/** aggregate fields of "member_banned" */
-export type Member_Banned_Aggregate_Fields = {
-  avg?: Maybe<Member_Banned_Avg_Fields>;
+/** aggregate fields of "memberBanned" */
+export type MemberBanned_Aggregate_Fields = {
   count: Scalars['Int']['output'];
-  max?: Maybe<Member_Banned_Max_Fields>;
-  min?: Maybe<Member_Banned_Min_Fields>;
-  stddev?: Maybe<Member_Banned_Stddev_Fields>;
-  stddev_pop?: Maybe<Member_Banned_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Member_Banned_Stddev_Samp_Fields>;
-  sum?: Maybe<Member_Banned_Sum_Fields>;
-  var_pop?: Maybe<Member_Banned_Var_Pop_Fields>;
-  var_samp?: Maybe<Member_Banned_Var_Samp_Fields>;
-  variance?: Maybe<Member_Banned_Variance_Fields>;
+  max?: Maybe<MemberBanned_Max_Fields>;
+  min?: Maybe<MemberBanned_Min_Fields>;
 };
 
 
-/** aggregate fields of "member_banned" */
-export type Member_Banned_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Member_Banned_Select_Column>>;
+/** aggregate fields of "memberBanned" */
+export type MemberBanned_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberBanned_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** aggregate avg on columns */
-export type Member_Banned_Avg_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "member_banned". All fields are combined with a logical 'AND'. */
-export type Member_Banned_Bool_Exp = {
-  _and?: InputMaybe<Array<Member_Banned_Bool_Exp>>;
-  _not?: InputMaybe<Member_Banned_Bool_Exp>;
-  _or?: InputMaybe<Array<Member_Banned_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  member_id?: InputMaybe<Bigint_Comparison_Exp>;
-  operated_by?: InputMaybe<Bigint_Comparison_Exp>;
+/** Boolean expression to filter rows from the table "memberBanned". All fields are combined with a logical 'AND'. */
+export type MemberBanned_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberBanned_Bool_Exp>>;
+  _not?: InputMaybe<MemberBanned_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberBanned_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  operatedBy?: InputMaybe<Uuid_Comparison_Exp>;
   reason?: InputMaybe<String_Comparison_Exp>;
-  status_activity_id?: InputMaybe<Bigint_Comparison_Exp>;
+  statusActivityId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "member_banned" */
-export enum Member_Banned_Constraint {
-  /** unique or primary key constraint on columns "created_at" */
-  MemberBannedPkey = 'member_banned_pkey'
+/** unique or primary key constraints on table "memberBanned" */
+export enum MemberBanned_Constraint {
+  /** unique or primary key constraint on columns "statusActivityId" */
+  MemberBannedPkey = 'memberBanned_pkey'
 }
 
-/** input type for incrementing numeric columns in table "member_banned" */
-export type Member_Banned_Inc_Input = {
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "member_banned" */
-export type Member_Banned_Insert_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for inserting data into table "memberBanned" */
+export type MemberBanned_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** aggregate max on columns */
-export type Member_Banned_Max_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  operated_by?: Maybe<Scalars['bigint']['output']>;
+export type MemberBanned_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  operatedBy?: Maybe<Scalars['uuid']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** aggregate min on columns */
-export type Member_Banned_Min_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  operated_by?: Maybe<Scalars['bigint']['output']>;
+export type MemberBanned_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  operatedBy?: Maybe<Scalars['uuid']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
 };
 
-/** response of any mutation on the table "member_banned" */
-export type Member_Banned_Mutation_Response = {
+/** response of any mutation on the table "memberBanned" */
+export type MemberBanned_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
-  returning: Array<Member_Banned>;
+  returning: Array<MemberBanned>;
 };
 
-/** on_conflict condition type for table "member_banned" */
-export type Member_Banned_On_Conflict = {
-  constraint: Member_Banned_Constraint;
-  update_columns?: Array<Member_Banned_Update_Column>;
-  where?: InputMaybe<Member_Banned_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "member_banned". */
-export type Member_Banned_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  operated_by?: InputMaybe<Order_By>;
-  reason?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: member_banned */
-export type Member_Banned_Pk_Columns_Input = {
-  created_at: Scalars['timestamptz']['input'];
-};
-
-/** select columns of table "member_banned" */
-export enum Member_Banned_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  MemberId = 'member_id',
-  /** column name */
-  OperatedBy = 'operated_by',
-  /** column name */
-  Reason = 'reason',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
-}
-
-/** input type for updating data in table "member_banned" */
-export type Member_Banned_Set_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate stddev on columns */
-export type Member_Banned_Stddev_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Member_Banned_Stddev_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Member_Banned_Stddev_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "member_banned" */
-export type Member_Banned_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Member_Banned_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Member_Banned_Stream_Cursor_Value_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate sum on columns */
-export type Member_Banned_Sum_Fields = {
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  operated_by?: Maybe<Scalars['bigint']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "member_banned" */
-export enum Member_Banned_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  MemberId = 'member_id',
-  /** column name */
-  OperatedBy = 'operated_by',
-  /** column name */
-  Reason = 'reason',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
-}
-
-export type Member_Banned_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Member_Banned_Inc_Input>;
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Member_Banned_Set_Input>;
-  /** filter the rows which have to be updated */
-  where: Member_Banned_Bool_Exp;
-};
-
-/** aggregate var_pop on columns */
-export type Member_Banned_Var_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Member_Banned_Var_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Member_Banned_Variance_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** columns and relationships of "member_pending_activations_test" */
-export type Member_Pending_Activations_Test = {
-  created_at: Scalars['timestamptz']['output'];
-  member_id: Scalars['bigint']['output'];
-  status_activity_id: Scalars['bigint']['output'];
-};
-
-/** aggregated selection of "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Aggregate = {
-  aggregate?: Maybe<Member_Pending_Activations_Test_Aggregate_Fields>;
-  nodes: Array<Member_Pending_Activations_Test>;
-};
-
-/** aggregate fields of "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Aggregate_Fields = {
-  avg?: Maybe<Member_Pending_Activations_Test_Avg_Fields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<Member_Pending_Activations_Test_Max_Fields>;
-  min?: Maybe<Member_Pending_Activations_Test_Min_Fields>;
-  stddev?: Maybe<Member_Pending_Activations_Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Member_Pending_Activations_Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Member_Pending_Activations_Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Member_Pending_Activations_Test_Sum_Fields>;
-  var_pop?: Maybe<Member_Pending_Activations_Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Member_Pending_Activations_Test_Var_Samp_Fields>;
-  variance?: Maybe<Member_Pending_Activations_Test_Variance_Fields>;
-};
-
-
-/** aggregate fields of "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Member_Pending_Activations_Test_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** aggregate avg on columns */
-export type Member_Pending_Activations_Test_Avg_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "member_pending_activations_test". All fields are combined with a logical 'AND'. */
-export type Member_Pending_Activations_Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Member_Pending_Activations_Test_Bool_Exp>>;
-  _not?: InputMaybe<Member_Pending_Activations_Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Member_Pending_Activations_Test_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  member_id?: InputMaybe<Bigint_Comparison_Exp>;
-  status_activity_id?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "member_pending_activations_test" */
-export enum Member_Pending_Activations_Test_Constraint {
-  /** unique or primary key constraint on columns "created_at" */
-  MemberPendingActivationsTestCreatedAtKey = 'member_pending_activations_test_created_at_key',
-  /** unique or primary key constraint on columns "created_at" */
-  MemberPendingActivationsTestPkey = 'member_pending_activations_test_pkey'
-}
-
-/** input type for incrementing numeric columns in table "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Inc_Input = {
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Insert_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate max on columns */
-export type Member_Pending_Activations_Test_Max_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate min on columns */
-export type Member_Pending_Activations_Test_Min_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** response of any mutation on the table "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Mutation_Response = {
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int']['output'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Member_Pending_Activations_Test>;
-};
-
-/** on_conflict condition type for table "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_On_Conflict = {
-  constraint: Member_Pending_Activations_Test_Constraint;
-  update_columns?: Array<Member_Pending_Activations_Test_Update_Column>;
-  where?: InputMaybe<Member_Pending_Activations_Test_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "member_pending_activations_test". */
-export type Member_Pending_Activations_Test_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: member_pending_activations_test */
-export type Member_Pending_Activations_Test_Pk_Columns_Input = {
-  created_at: Scalars['timestamptz']['input'];
-};
-
-/** select columns of table "member_pending_activations_test" */
-export enum Member_Pending_Activations_Test_Select_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  MemberId = 'member_id',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
-}
-
-/** input type for updating data in table "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Set_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate stddev on columns */
-export type Member_Pending_Activations_Test_Stddev_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Member_Pending_Activations_Test_Stddev_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Member_Pending_Activations_Test_Stddev_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "member_pending_activations_test" */
-export type Member_Pending_Activations_Test_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Member_Pending_Activations_Test_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Member_Pending_Activations_Test_Stream_Cursor_Value_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate sum on columns */
-export type Member_Pending_Activations_Test_Sum_Fields = {
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "member_pending_activations_test" */
-export enum Member_Pending_Activations_Test_Update_Column {
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  MemberId = 'member_id',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
-}
-
-export type Member_Pending_Activations_Test_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Member_Pending_Activations_Test_Inc_Input>;
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Member_Pending_Activations_Test_Set_Input>;
-  /** filter the rows which have to be updated */
-  where: Member_Pending_Activations_Test_Bool_Exp;
-};
-
-/** aggregate var_pop on columns */
-export type Member_Pending_Activations_Test_Var_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Member_Pending_Activations_Test_Var_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Member_Pending_Activations_Test_Variance_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** columns and relationships of "member_resigned_test" */
-export type Member_Resigned_Test = {
-  agreement: Scalars['Boolean']['output'];
-  created_at: Scalars['timestamptz']['output'];
-  member_id: Scalars['bigint']['output'];
-  reason: Scalars['String']['output'];
-  reason_detail: Scalars['String']['output'];
-  reason_type: Scalars['String']['output'];
-  status_activity_id: Scalars['bigint']['output'];
-};
-
-/** aggregated selection of "member_resigned_test" */
-export type Member_Resigned_Test_Aggregate = {
-  aggregate?: Maybe<Member_Resigned_Test_Aggregate_Fields>;
-  nodes: Array<Member_Resigned_Test>;
-};
-
-/** aggregate fields of "member_resigned_test" */
-export type Member_Resigned_Test_Aggregate_Fields = {
-  avg?: Maybe<Member_Resigned_Test_Avg_Fields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<Member_Resigned_Test_Max_Fields>;
-  min?: Maybe<Member_Resigned_Test_Min_Fields>;
-  stddev?: Maybe<Member_Resigned_Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Member_Resigned_Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Member_Resigned_Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Member_Resigned_Test_Sum_Fields>;
-  var_pop?: Maybe<Member_Resigned_Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Member_Resigned_Test_Var_Samp_Fields>;
-  variance?: Maybe<Member_Resigned_Test_Variance_Fields>;
-};
-
-
-/** aggregate fields of "member_resigned_test" */
-export type Member_Resigned_Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** aggregate avg on columns */
-export type Member_Resigned_Test_Avg_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "member_resigned_test". All fields are combined with a logical 'AND'. */
-export type Member_Resigned_Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Member_Resigned_Test_Bool_Exp>>;
-  _not?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Member_Resigned_Test_Bool_Exp>>;
-  agreement?: InputMaybe<Boolean_Comparison_Exp>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  member_id?: InputMaybe<Bigint_Comparison_Exp>;
-  reason?: InputMaybe<String_Comparison_Exp>;
-  reason_detail?: InputMaybe<String_Comparison_Exp>;
-  reason_type?: InputMaybe<String_Comparison_Exp>;
-  status_activity_id?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "member_resigned_test" */
-export enum Member_Resigned_Test_Constraint {
-  /** unique or primary key constraint on columns "created_at" */
-  MemberResignedTestPkey = 'member_resigned_test_pkey'
-}
-
-/** input type for incrementing numeric columns in table "member_resigned_test" */
-export type Member_Resigned_Test_Inc_Input = {
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "member_resigned_test" */
-export type Member_Resigned_Test_Insert_Input = {
-  agreement?: InputMaybe<Scalars['Boolean']['input']>;
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  reason_detail?: InputMaybe<Scalars['String']['input']>;
-  reason_type?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** aggregate max on columns */
-export type Member_Resigned_Test_Max_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  reason?: Maybe<Scalars['String']['output']>;
-  reason_detail?: Maybe<Scalars['String']['output']>;
-  reason_type?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** aggregate min on columns */
-export type Member_Resigned_Test_Min_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  reason?: Maybe<Scalars['String']['output']>;
-  reason_detail?: Maybe<Scalars['String']['output']>;
-  reason_type?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** response of any mutation on the table "member_resigned_test" */
-export type Member_Resigned_Test_Mutation_Response = {
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int']['output'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Member_Resigned_Test>;
-};
-
-/** input type for inserting object relation for remote table "member_resigned_test" */
-export type Member_Resigned_Test_Obj_Rel_Insert_Input = {
-  data: Member_Resigned_Test_Insert_Input;
+/** input type for inserting object relation for remote table "memberBanned" */
+export type MemberBanned_Obj_Rel_Insert_Input = {
+  data: MemberBanned_Insert_Input;
   /** upsert condition */
-  on_conflict?: InputMaybe<Member_Resigned_Test_On_Conflict>;
+  on_conflict?: InputMaybe<MemberBanned_On_Conflict>;
 };
 
-/** on_conflict condition type for table "member_resigned_test" */
-export type Member_Resigned_Test_On_Conflict = {
-  constraint: Member_Resigned_Test_Constraint;
-  update_columns?: Array<Member_Resigned_Test_Update_Column>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+/** on_conflict condition type for table "memberBanned" */
+export type MemberBanned_On_Conflict = {
+  constraint: MemberBanned_Constraint;
+  update_columns?: Array<MemberBanned_Update_Column>;
+  where?: InputMaybe<MemberBanned_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "member_resigned_test". */
-export type Member_Resigned_Test_Order_By = {
-  agreement?: InputMaybe<Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
+/** Ordering options when selecting data from "memberBanned". */
+export type MemberBanned_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  operatedBy?: InputMaybe<Order_By>;
   reason?: InputMaybe<Order_By>;
-  reason_detail?: InputMaybe<Order_By>;
-  reason_type?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
+  statusActivityId?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: member_resigned_test */
-export type Member_Resigned_Test_Pk_Columns_Input = {
-  created_at: Scalars['timestamptz']['input'];
+/** primary key columns input for table: memberBanned */
+export type MemberBanned_Pk_Columns_Input = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
-/** select columns of table "member_resigned_test" */
-export enum Member_Resigned_Test_Select_Column {
+/** select columns of table "memberBanned" */
+export enum MemberBanned_Select_Column {
   /** column name */
-  Agreement = 'agreement',
+  CreatedAt = 'createdAt',
   /** column name */
-  CreatedAt = 'created_at',
+  Email = 'email',
   /** column name */
-  MemberId = 'member_id',
+  MemberId = 'memberId',
+  /** column name */
+  OperatedBy = 'operatedBy',
   /** column name */
   Reason = 'reason',
   /** column name */
-  ReasonDetail = 'reason_detail',
-  /** column name */
-  ReasonType = 'reason_type',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
+  StatusActivityId = 'statusActivityId'
 }
 
-/** input type for updating data in table "member_resigned_test" */
-export type Member_Resigned_Test_Set_Input = {
-  agreement?: InputMaybe<Scalars['Boolean']['input']>;
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for updating data in table "memberBanned" */
+export type MemberBanned_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
-  reason_detail?: InputMaybe<Scalars['String']['input']>;
-  reason_type?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate stddev on columns */
-export type Member_Resigned_Test_Stddev_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Member_Resigned_Test_Stddev_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Member_Resigned_Test_Stddev_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "member_resigned_test" */
-export type Member_Resigned_Test_Stream_Cursor_Input = {
+/** Streaming cursor of the table "memberBanned" */
+export type MemberBanned_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Member_Resigned_Test_Stream_Cursor_Value_Input;
+  initial_value: MemberBanned_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Member_Resigned_Test_Stream_Cursor_Value_Input = {
-  agreement?: InputMaybe<Scalars['Boolean']['input']>;
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
+export type MemberBanned_Stream_Cursor_Value_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
-  reason_detail?: InputMaybe<Scalars['String']['input']>;
-  reason_type?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate sum on columns */
-export type Member_Resigned_Test_Sum_Fields = {
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "member_resigned_test" */
-export enum Member_Resigned_Test_Update_Column {
+/** update columns of table "memberBanned" */
+export enum MemberBanned_Update_Column {
   /** column name */
-  Agreement = 'agreement',
+  CreatedAt = 'createdAt',
   /** column name */
-  CreatedAt = 'created_at',
+  Email = 'email',
   /** column name */
-  MemberId = 'member_id',
+  MemberId = 'memberId',
+  /** column name */
+  OperatedBy = 'operatedBy',
   /** column name */
   Reason = 'reason',
   /** column name */
-  ReasonDetail = 'reason_detail',
-  /** column name */
-  ReasonType = 'reason_type',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
+  StatusActivityId = 'statusActivityId'
 }
 
-export type Member_Resigned_Test_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Member_Resigned_Test_Inc_Input>;
+export type MemberBanned_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Member_Resigned_Test_Set_Input>;
+  _set?: InputMaybe<MemberBanned_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Member_Resigned_Test_Bool_Exp;
+  where: MemberBanned_Bool_Exp;
 };
 
-/** aggregate var_pop on columns */
-export type Member_Resigned_Test_Var_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
+/** columns and relationships of "memberPendingActivation" */
+export type MemberPendingActivation = {
+  createdAt: Scalars['timestamptz']['output'];
+  email: Scalars['String']['output'];
+  memberId: Scalars['uuid']['output'];
+  statusActivityId: Scalars['uuid']['output'];
 };
 
-/** aggregate var_samp on columns */
-export type Member_Resigned_Test_Var_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
+/** aggregated selection of "memberPendingActivation" */
+export type MemberPendingActivation_Aggregate = {
+  aggregate?: Maybe<MemberPendingActivation_Aggregate_Fields>;
+  nodes: Array<MemberPendingActivation>;
 };
 
-/** aggregate variance on columns */
-export type Member_Resigned_Test_Variance_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** columns and relationships of "member_restored" */
-export type Member_Restored = {
-  created_at: Scalars['timestamptz']['output'];
-  member_id: Scalars['bigint']['output'];
-  operated_by: Scalars['bigint']['output'];
-  reason: Scalars['String']['output'];
-  status_activity_id: Scalars['bigint']['output'];
-};
-
-/** aggregated selection of "member_restored" */
-export type Member_Restored_Aggregate = {
-  aggregate?: Maybe<Member_Restored_Aggregate_Fields>;
-  nodes: Array<Member_Restored>;
-};
-
-/** aggregate fields of "member_restored" */
-export type Member_Restored_Aggregate_Fields = {
-  avg?: Maybe<Member_Restored_Avg_Fields>;
+/** aggregate fields of "memberPendingActivation" */
+export type MemberPendingActivation_Aggregate_Fields = {
   count: Scalars['Int']['output'];
-  max?: Maybe<Member_Restored_Max_Fields>;
-  min?: Maybe<Member_Restored_Min_Fields>;
-  stddev?: Maybe<Member_Restored_Stddev_Fields>;
-  stddev_pop?: Maybe<Member_Restored_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Member_Restored_Stddev_Samp_Fields>;
-  sum?: Maybe<Member_Restored_Sum_Fields>;
-  var_pop?: Maybe<Member_Restored_Var_Pop_Fields>;
-  var_samp?: Maybe<Member_Restored_Var_Samp_Fields>;
-  variance?: Maybe<Member_Restored_Variance_Fields>;
+  max?: Maybe<MemberPendingActivation_Max_Fields>;
+  min?: Maybe<MemberPendingActivation_Min_Fields>;
 };
 
 
-/** aggregate fields of "member_restored" */
-export type Member_Restored_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Member_Restored_Select_Column>>;
+/** aggregate fields of "memberPendingActivation" */
+export type MemberPendingActivation_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberPendingActivation_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** aggregate avg on columns */
-export type Member_Restored_Avg_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
+/** Boolean expression to filter rows from the table "memberPendingActivation". All fields are combined with a logical 'AND'. */
+export type MemberPendingActivation_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberPendingActivation_Bool_Exp>>;
+  _not?: InputMaybe<MemberPendingActivation_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberPendingActivation_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  statusActivityId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
-/** Boolean expression to filter rows from the table "member_restored". All fields are combined with a logical 'AND'. */
-export type Member_Restored_Bool_Exp = {
-  _and?: InputMaybe<Array<Member_Restored_Bool_Exp>>;
-  _not?: InputMaybe<Member_Restored_Bool_Exp>;
-  _or?: InputMaybe<Array<Member_Restored_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  member_id?: InputMaybe<Bigint_Comparison_Exp>;
-  operated_by?: InputMaybe<Bigint_Comparison_Exp>;
-  reason?: InputMaybe<String_Comparison_Exp>;
-  status_activity_id?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "member_restored" */
-export enum Member_Restored_Constraint {
-  /** unique or primary key constraint on columns "created_at" */
-  MemberRestoredPkey = 'member_restored_pkey'
+/** unique or primary key constraints on table "memberPendingActivation" */
+export enum MemberPendingActivation_Constraint {
+  /** unique or primary key constraint on columns "statusActivityId" */
+  MemberPendingActivationPkey = 'memberPendingActivation_pkey'
 }
 
-/** input type for incrementing numeric columns in table "member_restored" */
-export type Member_Restored_Inc_Input = {
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "member_restored" */
-export type Member_Restored_Insert_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for inserting data into table "memberPendingActivation" */
+export type MemberPendingActivation_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** aggregate max on columns */
-export type Member_Restored_Max_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  operated_by?: Maybe<Scalars['bigint']['output']>;
-  reason?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
+export type MemberPendingActivation_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** aggregate min on columns */
-export type Member_Restored_Min_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  operated_by?: Maybe<Scalars['bigint']['output']>;
-  reason?: Maybe<Scalars['String']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
+export type MemberPendingActivation_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
 };
 
-/** response of any mutation on the table "member_restored" */
-export type Member_Restored_Mutation_Response = {
+/** response of any mutation on the table "memberPendingActivation" */
+export type MemberPendingActivation_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
-  returning: Array<Member_Restored>;
+  returning: Array<MemberPendingActivation>;
 };
 
-/** on_conflict condition type for table "member_restored" */
-export type Member_Restored_On_Conflict = {
-  constraint: Member_Restored_Constraint;
-  update_columns?: Array<Member_Restored_Update_Column>;
-  where?: InputMaybe<Member_Restored_Bool_Exp>;
+/** input type for inserting object relation for remote table "memberPendingActivation" */
+export type MemberPendingActivation_Obj_Rel_Insert_Input = {
+  data: MemberPendingActivation_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<MemberPendingActivation_On_Conflict>;
 };
 
-/** Ordering options when selecting data from "member_restored". */
-export type Member_Restored_Order_By = {
-  created_at?: InputMaybe<Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  operated_by?: InputMaybe<Order_By>;
-  reason?: InputMaybe<Order_By>;
-  status_activity_id?: InputMaybe<Order_By>;
+/** on_conflict condition type for table "memberPendingActivation" */
+export type MemberPendingActivation_On_Conflict = {
+  constraint: MemberPendingActivation_Constraint;
+  update_columns?: Array<MemberPendingActivation_Update_Column>;
+  where?: InputMaybe<MemberPendingActivation_Bool_Exp>;
 };
 
-/** primary key columns input for table: member_restored */
-export type Member_Restored_Pk_Columns_Input = {
-  created_at: Scalars['timestamptz']['input'];
+/** Ordering options when selecting data from "memberPendingActivation". */
+export type MemberPendingActivation_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  statusActivityId?: InputMaybe<Order_By>;
 };
 
-/** select columns of table "member_restored" */
-export enum Member_Restored_Select_Column {
+/** primary key columns input for table: memberPendingActivation */
+export type MemberPendingActivation_Pk_Columns_Input = {
+  statusActivityId: Scalars['uuid']['input'];
+};
+
+/** select columns of table "memberPendingActivation" */
+export enum MemberPendingActivation_Select_Column {
   /** column name */
-  CreatedAt = 'created_at',
+  CreatedAt = 'createdAt',
   /** column name */
-  MemberId = 'member_id',
+  Email = 'email',
   /** column name */
-  OperatedBy = 'operated_by',
+  MemberId = 'memberId',
   /** column name */
-  Reason = 'reason',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
+  StatusActivityId = 'statusActivityId'
 }
 
-/** input type for updating data in table "member_restored" */
-export type Member_Restored_Set_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for updating data in table "memberPendingActivation" */
+export type MemberPendingActivation_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate stddev on columns */
-export type Member_Restored_Stddev_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Member_Restored_Stddev_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Member_Restored_Stddev_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "member_restored" */
-export type Member_Restored_Stream_Cursor_Input = {
+/** Streaming cursor of the table "memberPendingActivation" */
+export type MemberPendingActivation_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Member_Restored_Stream_Cursor_Value_Input;
+  initial_value: MemberPendingActivation_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Member_Restored_Stream_Cursor_Value_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  operated_by?: InputMaybe<Scalars['bigint']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  status_activity_id?: InputMaybe<Scalars['bigint']['input']>;
+export type MemberPendingActivation_Stream_Cursor_Value_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate sum on columns */
-export type Member_Restored_Sum_Fields = {
-  member_id?: Maybe<Scalars['bigint']['output']>;
-  operated_by?: Maybe<Scalars['bigint']['output']>;
-  status_activity_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "member_restored" */
-export enum Member_Restored_Update_Column {
+/** update columns of table "memberPendingActivation" */
+export enum MemberPendingActivation_Update_Column {
   /** column name */
-  CreatedAt = 'created_at',
+  CreatedAt = 'createdAt',
   /** column name */
-  MemberId = 'member_id',
+  Email = 'email',
   /** column name */
-  OperatedBy = 'operated_by',
+  MemberId = 'memberId',
   /** column name */
-  Reason = 'reason',
-  /** column name */
-  StatusActivityId = 'status_activity_id'
+  StatusActivityId = 'statusActivityId'
 }
 
-export type Member_Restored_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Member_Restored_Inc_Input>;
+export type MemberPendingActivation_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Member_Restored_Set_Input>;
+  _set?: InputMaybe<MemberPendingActivation_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Member_Restored_Bool_Exp;
+  where: MemberPendingActivation_Bool_Exp;
 };
 
-/** aggregate var_pop on columns */
-export type Member_Restored_Var_Pop_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
+/** columns and relationships of "memberResigned" */
+export type MemberResigned = {
+  agreement: Scalars['Boolean']['output'];
+  createdAt: Scalars['timestamptz']['output'];
+  email: Scalars['String']['output'];
+  memberId: Scalars['uuid']['output'];
+  reasonDetail: Scalars['String']['output'];
+  reasonType: Scalars['String']['output'];
+  statusActivityId: Scalars['uuid']['output'];
 };
 
-/** aggregate var_samp on columns */
-export type Member_Restored_Var_Samp_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
+/** aggregated selection of "memberResigned" */
+export type MemberResigned_Aggregate = {
+  aggregate?: Maybe<MemberResigned_Aggregate_Fields>;
+  nodes: Array<MemberResigned>;
 };
 
-/** aggregate variance on columns */
-export type Member_Restored_Variance_Fields = {
-  member_id?: Maybe<Scalars['Float']['output']>;
-  operated_by?: Maybe<Scalars['Float']['output']>;
-  status_activity_id?: Maybe<Scalars['Float']['output']>;
+/** aggregate fields of "memberResigned" */
+export type MemberResigned_Aggregate_Fields = {
+  count: Scalars['Int']['output'];
+  max?: Maybe<MemberResigned_Max_Fields>;
+  min?: Maybe<MemberResigned_Min_Fields>;
 };
 
-/** columns and relationships of "member_status_activities_test" */
-export type Member_Status_Activities_Test = {
-  created_at: Scalars['timestamptz']['output'];
-  id: Scalars['bigint']['output'];
+
+/** aggregate fields of "memberResigned" */
+export type MemberResigned_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberResigned_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "memberResigned". All fields are combined with a logical 'AND'. */
+export type MemberResigned_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberResigned_Bool_Exp>>;
+  _not?: InputMaybe<MemberResigned_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberResigned_Bool_Exp>>;
+  agreement?: InputMaybe<Boolean_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  reasonDetail?: InputMaybe<String_Comparison_Exp>;
+  reasonType?: InputMaybe<String_Comparison_Exp>;
+  statusActivityId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "memberResigned" */
+export enum MemberResigned_Constraint {
+  /** unique or primary key constraint on columns "statusActivityId" */
+  MemberResignedPkey = 'memberResigned_pkey'
+}
+
+/** input type for inserting data into table "memberResigned" */
+export type MemberResigned_Insert_Input = {
+  agreement?: InputMaybe<Scalars['Boolean']['input']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  reasonDetail?: InputMaybe<Scalars['String']['input']>;
+  reasonType?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** aggregate max on columns */
+export type MemberResigned_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  reasonDetail?: Maybe<Scalars['String']['output']>;
+  reasonType?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** aggregate min on columns */
+export type MemberResigned_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  reasonDetail?: Maybe<Scalars['String']['output']>;
+  reasonType?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** response of any mutation on the table "memberResigned" */
+export type MemberResigned_Mutation_Response = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<MemberResigned>;
+};
+
+/** input type for inserting object relation for remote table "memberResigned" */
+export type MemberResigned_Obj_Rel_Insert_Input = {
+  data: MemberResigned_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<MemberResigned_On_Conflict>;
+};
+
+/** on_conflict condition type for table "memberResigned" */
+export type MemberResigned_On_Conflict = {
+  constraint: MemberResigned_Constraint;
+  update_columns?: Array<MemberResigned_Update_Column>;
+  where?: InputMaybe<MemberResigned_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "memberResigned". */
+export type MemberResigned_Order_By = {
+  agreement?: InputMaybe<Order_By>;
+  createdAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  reasonDetail?: InputMaybe<Order_By>;
+  reasonType?: InputMaybe<Order_By>;
+  statusActivityId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: memberResigned */
+export type MemberResigned_Pk_Columns_Input = {
+  statusActivityId: Scalars['uuid']['input'];
+};
+
+/** select columns of table "memberResigned" */
+export enum MemberResigned_Select_Column {
+  /** column name */
+  Agreement = 'agreement',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  ReasonDetail = 'reasonDetail',
+  /** column name */
+  ReasonType = 'reasonType',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
+}
+
+/** input type for updating data in table "memberResigned" */
+export type MemberResigned_Set_Input = {
+  agreement?: InputMaybe<Scalars['Boolean']['input']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  reasonDetail?: InputMaybe<Scalars['String']['input']>;
+  reasonType?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** Streaming cursor of the table "memberResigned" */
+export type MemberResigned_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: MemberResigned_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type MemberResigned_Stream_Cursor_Value_Input = {
+  agreement?: InputMaybe<Scalars['Boolean']['input']>;
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  reasonDetail?: InputMaybe<Scalars['String']['input']>;
+  reasonType?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** update columns of table "memberResigned" */
+export enum MemberResigned_Update_Column {
+  /** column name */
+  Agreement = 'agreement',
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  ReasonDetail = 'reasonDetail',
+  /** column name */
+  ReasonType = 'reasonType',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
+}
+
+export type MemberResigned_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<MemberResigned_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: MemberResigned_Bool_Exp;
+};
+
+/** columns and relationships of "memberStatusActivities" */
+export type MemberStatusActivities = {
+  createdAt: Scalars['timestamptz']['output'];
+  id: Scalars['uuid']['output'];
   /** An object relationship */
-  member_active?: Maybe<Member_Active_Test>;
-  member_id: Scalars['bigint']['output'];
+  memberActive?: Maybe<MemberActive>;
   /** An object relationship */
-  member_resign?: Maybe<Member_Resigned_Test>;
+  memberBanned?: Maybe<MemberBanned>;
+  memberId: Scalars['uuid']['output'];
+  /** An object relationship */
+  memberPendingActivation?: Maybe<MemberPendingActivation>;
+  /** An object relationship */
+  memberResigned?: Maybe<MemberResigned>;
+  /** An object relationship */
+  memberRestored?: Maybe<MembarRestored>;
   status: Scalars['String']['output'];
 };
 
-/** aggregated selection of "member_status_activities_test" */
-export type Member_Status_Activities_Test_Aggregate = {
-  aggregate?: Maybe<Member_Status_Activities_Test_Aggregate_Fields>;
-  nodes: Array<Member_Status_Activities_Test>;
+/** aggregated selection of "memberStatusActivities" */
+export type MemberStatusActivities_Aggregate = {
+  aggregate?: Maybe<MemberStatusActivities_Aggregate_Fields>;
+  nodes: Array<MemberStatusActivities>;
 };
 
-/** aggregate fields of "member_status_activities_test" */
-export type Member_Status_Activities_Test_Aggregate_Fields = {
-  avg?: Maybe<Member_Status_Activities_Test_Avg_Fields>;
+/** aggregate fields of "memberStatusActivities" */
+export type MemberStatusActivities_Aggregate_Fields = {
   count: Scalars['Int']['output'];
-  max?: Maybe<Member_Status_Activities_Test_Max_Fields>;
-  min?: Maybe<Member_Status_Activities_Test_Min_Fields>;
-  stddev?: Maybe<Member_Status_Activities_Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Member_Status_Activities_Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Member_Status_Activities_Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Member_Status_Activities_Test_Sum_Fields>;
-  var_pop?: Maybe<Member_Status_Activities_Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Member_Status_Activities_Test_Var_Samp_Fields>;
-  variance?: Maybe<Member_Status_Activities_Test_Variance_Fields>;
+  max?: Maybe<MemberStatusActivities_Max_Fields>;
+  min?: Maybe<MemberStatusActivities_Min_Fields>;
 };
 
 
-/** aggregate fields of "member_status_activities_test" */
-export type Member_Status_Activities_Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Member_Status_Activities_Test_Select_Column>>;
+/** aggregate fields of "memberStatusActivities" */
+export type MemberStatusActivities_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberStatusActivities_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** aggregate avg on columns */
-export type Member_Status_Activities_Test_Avg_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  member_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "member_status_activities_test". All fields are combined with a logical 'AND'. */
-export type Member_Status_Activities_Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Member_Status_Activities_Test_Bool_Exp>>;
-  _not?: InputMaybe<Member_Status_Activities_Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Member_Status_Activities_Test_Bool_Exp>>;
-  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  id?: InputMaybe<Bigint_Comparison_Exp>;
-  member_active?: InputMaybe<Member_Active_Test_Bool_Exp>;
-  member_id?: InputMaybe<Bigint_Comparison_Exp>;
-  member_resign?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+/** Boolean expression to filter rows from the table "memberStatusActivities". All fields are combined with a logical 'AND'. */
+export type MemberStatusActivities_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberStatusActivities_Bool_Exp>>;
+  _not?: InputMaybe<MemberStatusActivities_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberStatusActivities_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  memberActive?: InputMaybe<MemberActive_Bool_Exp>;
+  memberBanned?: InputMaybe<MemberBanned_Bool_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  memberPendingActivation?: InputMaybe<MemberPendingActivation_Bool_Exp>;
+  memberResigned?: InputMaybe<MemberResigned_Bool_Exp>;
+  memberRestored?: InputMaybe<MembarRestored_Bool_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "member_status_activities_test" */
-export enum Member_Status_Activities_Test_Constraint {
+/** unique or primary key constraints on table "memberStatusActivities" */
+export enum MemberStatusActivities_Constraint {
   /** unique or primary key constraint on columns "id" */
-  MemberStatusActivitiesTestPkey = 'member_status_activities_test_pkey'
+  MemberStatusActivitiesPkey = 'memberStatusActivities_pkey'
 }
 
-/** input type for incrementing numeric columns in table "member_status_activities_test" */
-export type Member_Status_Activities_Test_Inc_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "member_status_activities_test" */
-export type Member_Status_Activities_Test_Insert_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  member_active?: InputMaybe<Member_Active_Test_Obj_Rel_Insert_Input>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
-  member_resign?: InputMaybe<Member_Resigned_Test_Obj_Rel_Insert_Input>;
+/** input type for inserting data into table "memberStatusActivities" */
+export type MemberStatusActivities_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  memberActive?: InputMaybe<MemberActive_Obj_Rel_Insert_Input>;
+  memberBanned?: InputMaybe<MemberBanned_Obj_Rel_Insert_Input>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  memberPendingActivation?: InputMaybe<MemberPendingActivation_Obj_Rel_Insert_Input>;
+  memberResigned?: InputMaybe<MemberResigned_Obj_Rel_Insert_Input>;
+  memberRestored?: InputMaybe<MembarRestored_Obj_Rel_Insert_Input>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** aggregate max on columns */
-export type Member_Status_Activities_Test_Max_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  id?: Maybe<Scalars['bigint']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
+export type MemberStatusActivities_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
   status?: Maybe<Scalars['String']['output']>;
 };
 
 /** aggregate min on columns */
-export type Member_Status_Activities_Test_Min_Fields = {
-  created_at?: Maybe<Scalars['timestamptz']['output']>;
-  id?: Maybe<Scalars['bigint']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
+export type MemberStatusActivities_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
   status?: Maybe<Scalars['String']['output']>;
 };
 
-/** response of any mutation on the table "member_status_activities_test" */
-export type Member_Status_Activities_Test_Mutation_Response = {
+/** response of any mutation on the table "memberStatusActivities" */
+export type MemberStatusActivities_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
-  returning: Array<Member_Status_Activities_Test>;
+  returning: Array<MemberStatusActivities>;
 };
 
-/** on_conflict condition type for table "member_status_activities_test" */
-export type Member_Status_Activities_Test_On_Conflict = {
-  constraint: Member_Status_Activities_Test_Constraint;
-  update_columns?: Array<Member_Status_Activities_Test_Update_Column>;
-  where?: InputMaybe<Member_Status_Activities_Test_Bool_Exp>;
+/** on_conflict condition type for table "memberStatusActivities" */
+export type MemberStatusActivities_On_Conflict = {
+  constraint: MemberStatusActivities_Constraint;
+  update_columns?: Array<MemberStatusActivities_Update_Column>;
+  where?: InputMaybe<MemberStatusActivities_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "member_status_activities_test". */
-export type Member_Status_Activities_Test_Order_By = {
-  created_at?: InputMaybe<Order_By>;
+/** Ordering options when selecting data from "memberStatusActivities". */
+export type MemberStatusActivities_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  member_active?: InputMaybe<Member_Active_Test_Order_By>;
-  member_id?: InputMaybe<Order_By>;
-  member_resign?: InputMaybe<Member_Resigned_Test_Order_By>;
+  memberActive?: InputMaybe<MemberActive_Order_By>;
+  memberBanned?: InputMaybe<MemberBanned_Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  memberPendingActivation?: InputMaybe<MemberPendingActivation_Order_By>;
+  memberResigned?: InputMaybe<MemberResigned_Order_By>;
+  memberRestored?: InputMaybe<MembarRestored_Order_By>;
   status?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: member_status_activities_test */
-export type Member_Status_Activities_Test_Pk_Columns_Input = {
-  id: Scalars['bigint']['input'];
+/** primary key columns input for table: memberStatusActivities */
+export type MemberStatusActivities_Pk_Columns_Input = {
+  id: Scalars['uuid']['input'];
 };
 
-/** select columns of table "member_status_activities_test" */
-export enum Member_Status_Activities_Test_Select_Column {
+/** select columns of table "memberStatusActivities" */
+export enum MemberStatusActivities_Select_Column {
   /** column name */
-  CreatedAt = 'created_at',
+  CreatedAt = 'createdAt',
   /** column name */
   Id = 'id',
   /** column name */
-  MemberId = 'member_id',
+  MemberId = 'memberId',
   /** column name */
   Status = 'status'
 }
 
-/** input type for updating data in table "member_status_activities_test" */
-export type Member_Status_Activities_Test_Set_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for updating data in table "memberStatusActivities" */
+export type MemberStatusActivities_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** aggregate stddev on columns */
-export type Member_Status_Activities_Test_Stddev_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  member_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Member_Status_Activities_Test_Stddev_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  member_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Member_Status_Activities_Test_Stddev_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  member_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "member_status_activities_test" */
-export type Member_Status_Activities_Test_Stream_Cursor_Input = {
+/** Streaming cursor of the table "memberStatusActivities" */
+export type MemberStatusActivities_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Member_Status_Activities_Test_Stream_Cursor_Value_Input;
+  initial_value: MemberStatusActivities_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Member_Status_Activities_Test_Stream_Cursor_Value_Input = {
-  created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  member_id?: InputMaybe<Scalars['bigint']['input']>;
+export type MemberStatusActivities_Stream_Cursor_Value_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
-/** aggregate sum on columns */
-export type Member_Status_Activities_Test_Sum_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-  member_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "member_status_activities_test" */
-export enum Member_Status_Activities_Test_Update_Column {
+/** update columns of table "memberStatusActivities" */
+export enum MemberStatusActivities_Update_Column {
   /** column name */
-  CreatedAt = 'created_at',
+  CreatedAt = 'createdAt',
   /** column name */
   Id = 'id',
   /** column name */
-  MemberId = 'member_id',
+  MemberId = 'memberId',
   /** column name */
   Status = 'status'
 }
 
-export type Member_Status_Activities_Test_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Member_Status_Activities_Test_Inc_Input>;
+export type MemberStatusActivities_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Member_Status_Activities_Test_Set_Input>;
+  _set?: InputMaybe<MemberStatusActivities_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Member_Status_Activities_Test_Bool_Exp;
+  where: MemberStatusActivities_Bool_Exp;
 };
 
-/** aggregate var_pop on columns */
-export type Member_Status_Activities_Test_Var_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  member_id?: Maybe<Scalars['Float']['output']>;
+/** columns and relationships of "members" */
+export type Members = {
+  id: Scalars['uuid']['output'];
+  /** An object relationship */
+  user?: Maybe<Users>;
+  userId: Scalars['uuid']['output'];
 };
 
-/** aggregate var_samp on columns */
-export type Member_Status_Activities_Test_Var_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  member_id?: Maybe<Scalars['Float']['output']>;
+/** aggregated selection of "members" */
+export type Members_Aggregate = {
+  aggregate?: Maybe<Members_Aggregate_Fields>;
+  nodes: Array<Members>;
 };
 
-/** aggregate variance on columns */
-export type Member_Status_Activities_Test_Variance_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  member_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** columns and relationships of "members_test" */
-export type Members_Test = {
-  id: Scalars['bigint']['output'];
-  name: Scalars['String']['output'];
-  user_id: Scalars['bigint']['output'];
-};
-
-/** aggregated selection of "members_test" */
-export type Members_Test_Aggregate = {
-  aggregate?: Maybe<Members_Test_Aggregate_Fields>;
-  nodes: Array<Members_Test>;
-};
-
-/** aggregate fields of "members_test" */
-export type Members_Test_Aggregate_Fields = {
-  avg?: Maybe<Members_Test_Avg_Fields>;
+/** aggregate fields of "members" */
+export type Members_Aggregate_Fields = {
   count: Scalars['Int']['output'];
-  max?: Maybe<Members_Test_Max_Fields>;
-  min?: Maybe<Members_Test_Min_Fields>;
-  stddev?: Maybe<Members_Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Members_Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Members_Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Members_Test_Sum_Fields>;
-  var_pop?: Maybe<Members_Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Members_Test_Var_Samp_Fields>;
-  variance?: Maybe<Members_Test_Variance_Fields>;
+  max?: Maybe<Members_Max_Fields>;
+  min?: Maybe<Members_Min_Fields>;
 };
 
 
-/** aggregate fields of "members_test" */
-export type Members_Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Members_Test_Select_Column>>;
+/** aggregate fields of "members" */
+export type Members_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Members_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** aggregate avg on columns */
-export type Members_Test_Avg_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
+/** Boolean expression to filter rows from the table "members". All fields are combined with a logical 'AND'. */
+export type Members_Bool_Exp = {
+  _and?: InputMaybe<Array<Members_Bool_Exp>>;
+  _not?: InputMaybe<Members_Bool_Exp>;
+  _or?: InputMaybe<Array<Members_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
-/** Boolean expression to filter rows from the table "members_test". All fields are combined with a logical 'AND'. */
-export type Members_Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Members_Test_Bool_Exp>>;
-  _not?: InputMaybe<Members_Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Members_Test_Bool_Exp>>;
-  id?: InputMaybe<Bigint_Comparison_Exp>;
-  name?: InputMaybe<String_Comparison_Exp>;
-  user_id?: InputMaybe<Bigint_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "members_test" */
-export enum Members_Test_Constraint {
+/** unique or primary key constraints on table "members" */
+export enum Members_Constraint {
   /** unique or primary key constraint on columns "id" */
-  MembersTestIdKey = 'members_test_id_key',
+  MembersIdKey = 'members_id_key',
   /** unique or primary key constraint on columns "id" */
-  MembersTestPkey = 'members_test_pkey'
+  MembersPkey = 'members_pkey'
 }
 
-/** input type for incrementing numeric columns in table "members_test" */
-export type Members_Test_Inc_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "members_test" */
-export type Members_Test_Insert_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for inserting data into table "members" */
+export type Members_Insert_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** aggregate max on columns */
-export type Members_Test_Max_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  user_id?: Maybe<Scalars['bigint']['output']>;
+export type Members_Max_Fields = {
+  id?: Maybe<Scalars['uuid']['output']>;
+  userId?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** aggregate min on columns */
-export type Members_Test_Min_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  user_id?: Maybe<Scalars['bigint']['output']>;
+export type Members_Min_Fields = {
+  id?: Maybe<Scalars['uuid']['output']>;
+  userId?: Maybe<Scalars['uuid']['output']>;
 };
 
-/** response of any mutation on the table "members_test" */
-export type Members_Test_Mutation_Response = {
+/** response of any mutation on the table "members" */
+export type Members_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
-  returning: Array<Members_Test>;
+  returning: Array<Members>;
 };
 
-/** on_conflict condition type for table "members_test" */
-export type Members_Test_On_Conflict = {
-  constraint: Members_Test_Constraint;
-  update_columns?: Array<Members_Test_Update_Column>;
-  where?: InputMaybe<Members_Test_Bool_Exp>;
+/** on_conflict condition type for table "members" */
+export type Members_On_Conflict = {
+  constraint: Members_Constraint;
+  update_columns?: Array<Members_Update_Column>;
+  where?: InputMaybe<Members_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "members_test". */
-export type Members_Test_Order_By = {
+/** Ordering options when selecting data from "members". */
+export type Members_Order_By = {
   id?: InputMaybe<Order_By>;
-  name?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: members_test */
-export type Members_Test_Pk_Columns_Input = {
-  id: Scalars['bigint']['input'];
+/** primary key columns input for table: members */
+export type Members_Pk_Columns_Input = {
+  id: Scalars['uuid']['input'];
 };
 
-/** select columns of table "members_test" */
-export enum Members_Test_Select_Column {
+/** select columns of table "members" */
+export enum Members_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
-  /** column name */
-  UserId = 'user_id'
+  UserId = 'userId'
 }
 
-/** input type for updating data in table "members_test" */
-export type Members_Test_Set_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for updating data in table "members" */
+export type Members_Set_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate stddev on columns */
-export type Members_Test_Stddev_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Members_Test_Stddev_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Members_Test_Stddev_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "members_test" */
-export type Members_Test_Stream_Cursor_Input = {
+/** Streaming cursor of the table "members" */
+export type Members_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Members_Test_Stream_Cursor_Value_Input;
+  initial_value: Members_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Members_Test_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
+export type Members_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate sum on columns */
-export type Members_Test_Sum_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-  user_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "members_test" */
-export enum Members_Test_Update_Column {
+/** update columns of table "members" */
+export enum Members_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
-  /** column name */
-  UserId = 'user_id'
+  UserId = 'userId'
 }
 
-export type Members_Test_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Members_Test_Inc_Input>;
+export type Members_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Members_Test_Set_Input>;
+  _set?: InputMaybe<Members_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Members_Test_Bool_Exp;
-};
-
-/** aggregate var_pop on columns */
-export type Members_Test_Var_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Members_Test_Var_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Members_Test_Variance_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
+  where: Members_Bool_Exp;
 };
 
 /** mutation root */
 export type Mutation_Root = {
-  /** delete data from the table: "member_active_test" */
-  delete_member_active_test?: Maybe<Member_Active_Test_Mutation_Response>;
-  /** delete single row from the table: "member_active_test" */
-  delete_member_active_test_by_pk?: Maybe<Member_Active_Test>;
-  /** delete data from the table: "member_banned" */
-  delete_member_banned?: Maybe<Member_Banned_Mutation_Response>;
-  /** delete single row from the table: "member_banned" */
-  delete_member_banned_by_pk?: Maybe<Member_Banned>;
-  /** delete data from the table: "member_pending_activations_test" */
-  delete_member_pending_activations_test?: Maybe<Member_Pending_Activations_Test_Mutation_Response>;
-  /** delete single row from the table: "member_pending_activations_test" */
-  delete_member_pending_activations_test_by_pk?: Maybe<Member_Pending_Activations_Test>;
-  /** delete data from the table: "member_resigned_test" */
-  delete_member_resigned_test?: Maybe<Member_Resigned_Test_Mutation_Response>;
-  /** delete single row from the table: "member_resigned_test" */
-  delete_member_resigned_test_by_pk?: Maybe<Member_Resigned_Test>;
-  /** delete data from the table: "member_restored" */
-  delete_member_restored?: Maybe<Member_Restored_Mutation_Response>;
-  /** delete single row from the table: "member_restored" */
-  delete_member_restored_by_pk?: Maybe<Member_Restored>;
-  /** delete data from the table: "member_status_activities_test" */
-  delete_member_status_activities_test?: Maybe<Member_Status_Activities_Test_Mutation_Response>;
-  /** delete single row from the table: "member_status_activities_test" */
-  delete_member_status_activities_test_by_pk?: Maybe<Member_Status_Activities_Test>;
-  /** delete data from the table: "members_test" */
-  delete_members_test?: Maybe<Members_Test_Mutation_Response>;
-  /** delete single row from the table: "members_test" */
-  delete_members_test_by_pk?: Maybe<Members_Test>;
-  /** delete data from the table: "operators_test" */
-  delete_operators_test?: Maybe<Operators_Test_Mutation_Response>;
-  /** delete single row from the table: "operators_test" */
-  delete_operators_test_by_pk?: Maybe<Operators_Test>;
-  /** delete data from the table: "table_tennis_tables" */
-  delete_table_tennis_tables?: Maybe<Table_Tennis_Tables_Mutation_Response>;
-  /** delete single row from the table: "table_tennis_tables" */
-  delete_table_tennis_tables_by_pk?: Maybe<Table_Tennis_Tables>;
-  /** delete data from the table: "users_test" */
-  delete_users_test?: Maybe<Users_Test_Mutation_Response>;
-  /** delete single row from the table: "users_test" */
-  delete_users_test_by_pk?: Maybe<Users_Test>;
-  /** insert data into the table: "member_active_test" */
-  insert_member_active_test?: Maybe<Member_Active_Test_Mutation_Response>;
-  /** insert a single row into the table: "member_active_test" */
-  insert_member_active_test_one?: Maybe<Member_Active_Test>;
-  /** insert data into the table: "member_banned" */
-  insert_member_banned?: Maybe<Member_Banned_Mutation_Response>;
-  /** insert a single row into the table: "member_banned" */
-  insert_member_banned_one?: Maybe<Member_Banned>;
-  /** insert data into the table: "member_pending_activations_test" */
-  insert_member_pending_activations_test?: Maybe<Member_Pending_Activations_Test_Mutation_Response>;
-  /** insert a single row into the table: "member_pending_activations_test" */
-  insert_member_pending_activations_test_one?: Maybe<Member_Pending_Activations_Test>;
-  /** insert data into the table: "member_resigned_test" */
-  insert_member_resigned_test?: Maybe<Member_Resigned_Test_Mutation_Response>;
-  /** insert a single row into the table: "member_resigned_test" */
-  insert_member_resigned_test_one?: Maybe<Member_Resigned_Test>;
-  /** insert data into the table: "member_restored" */
-  insert_member_restored?: Maybe<Member_Restored_Mutation_Response>;
-  /** insert a single row into the table: "member_restored" */
-  insert_member_restored_one?: Maybe<Member_Restored>;
-  /** insert data into the table: "member_status_activities_test" */
-  insert_member_status_activities_test?: Maybe<Member_Status_Activities_Test_Mutation_Response>;
-  /** insert a single row into the table: "member_status_activities_test" */
-  insert_member_status_activities_test_one?: Maybe<Member_Status_Activities_Test>;
-  /** insert data into the table: "members_test" */
-  insert_members_test?: Maybe<Members_Test_Mutation_Response>;
-  /** insert a single row into the table: "members_test" */
-  insert_members_test_one?: Maybe<Members_Test>;
-  /** insert data into the table: "operators_test" */
-  insert_operators_test?: Maybe<Operators_Test_Mutation_Response>;
-  /** insert a single row into the table: "operators_test" */
-  insert_operators_test_one?: Maybe<Operators_Test>;
-  /** insert data into the table: "table_tennis_tables" */
-  insert_table_tennis_tables?: Maybe<Table_Tennis_Tables_Mutation_Response>;
-  /** insert a single row into the table: "table_tennis_tables" */
-  insert_table_tennis_tables_one?: Maybe<Table_Tennis_Tables>;
-  /** insert data into the table: "users_test" */
-  insert_users_test?: Maybe<Users_Test_Mutation_Response>;
-  /** insert a single row into the table: "users_test" */
-  insert_users_test_one?: Maybe<Users_Test>;
-  /** update data of the table: "member_active_test" */
-  update_member_active_test?: Maybe<Member_Active_Test_Mutation_Response>;
-  /** update single row of the table: "member_active_test" */
-  update_member_active_test_by_pk?: Maybe<Member_Active_Test>;
-  /** update multiples rows of table: "member_active_test" */
-  update_member_active_test_many?: Maybe<Array<Maybe<Member_Active_Test_Mutation_Response>>>;
-  /** update data of the table: "member_banned" */
-  update_member_banned?: Maybe<Member_Banned_Mutation_Response>;
-  /** update single row of the table: "member_banned" */
-  update_member_banned_by_pk?: Maybe<Member_Banned>;
-  /** update multiples rows of table: "member_banned" */
-  update_member_banned_many?: Maybe<Array<Maybe<Member_Banned_Mutation_Response>>>;
-  /** update data of the table: "member_pending_activations_test" */
-  update_member_pending_activations_test?: Maybe<Member_Pending_Activations_Test_Mutation_Response>;
-  /** update single row of the table: "member_pending_activations_test" */
-  update_member_pending_activations_test_by_pk?: Maybe<Member_Pending_Activations_Test>;
-  /** update multiples rows of table: "member_pending_activations_test" */
-  update_member_pending_activations_test_many?: Maybe<Array<Maybe<Member_Pending_Activations_Test_Mutation_Response>>>;
-  /** update data of the table: "member_resigned_test" */
-  update_member_resigned_test?: Maybe<Member_Resigned_Test_Mutation_Response>;
-  /** update single row of the table: "member_resigned_test" */
-  update_member_resigned_test_by_pk?: Maybe<Member_Resigned_Test>;
-  /** update multiples rows of table: "member_resigned_test" */
-  update_member_resigned_test_many?: Maybe<Array<Maybe<Member_Resigned_Test_Mutation_Response>>>;
-  /** update data of the table: "member_restored" */
-  update_member_restored?: Maybe<Member_Restored_Mutation_Response>;
-  /** update single row of the table: "member_restored" */
-  update_member_restored_by_pk?: Maybe<Member_Restored>;
-  /** update multiples rows of table: "member_restored" */
-  update_member_restored_many?: Maybe<Array<Maybe<Member_Restored_Mutation_Response>>>;
-  /** update data of the table: "member_status_activities_test" */
-  update_member_status_activities_test?: Maybe<Member_Status_Activities_Test_Mutation_Response>;
-  /** update single row of the table: "member_status_activities_test" */
-  update_member_status_activities_test_by_pk?: Maybe<Member_Status_Activities_Test>;
-  /** update multiples rows of table: "member_status_activities_test" */
-  update_member_status_activities_test_many?: Maybe<Array<Maybe<Member_Status_Activities_Test_Mutation_Response>>>;
-  /** update data of the table: "members_test" */
-  update_members_test?: Maybe<Members_Test_Mutation_Response>;
-  /** update single row of the table: "members_test" */
-  update_members_test_by_pk?: Maybe<Members_Test>;
-  /** update multiples rows of table: "members_test" */
-  update_members_test_many?: Maybe<Array<Maybe<Members_Test_Mutation_Response>>>;
-  /** update data of the table: "operators_test" */
-  update_operators_test?: Maybe<Operators_Test_Mutation_Response>;
-  /** update single row of the table: "operators_test" */
-  update_operators_test_by_pk?: Maybe<Operators_Test>;
-  /** update multiples rows of table: "operators_test" */
-  update_operators_test_many?: Maybe<Array<Maybe<Operators_Test_Mutation_Response>>>;
-  /** update data of the table: "table_tennis_tables" */
-  update_table_tennis_tables?: Maybe<Table_Tennis_Tables_Mutation_Response>;
-  /** update single row of the table: "table_tennis_tables" */
-  update_table_tennis_tables_by_pk?: Maybe<Table_Tennis_Tables>;
-  /** update multiples rows of table: "table_tennis_tables" */
-  update_table_tennis_tables_many?: Maybe<Array<Maybe<Table_Tennis_Tables_Mutation_Response>>>;
-  /** update data of the table: "users_test" */
-  update_users_test?: Maybe<Users_Test_Mutation_Response>;
-  /** update single row of the table: "users_test" */
-  update_users_test_by_pk?: Maybe<Users_Test>;
-  /** update multiples rows of table: "users_test" */
-  update_users_test_many?: Maybe<Array<Maybe<Users_Test_Mutation_Response>>>;
+  /** delete data from the table: "membarRestored" */
+  delete_membarRestored?: Maybe<MembarRestored_Mutation_Response>;
+  /** delete single row from the table: "membarRestored" */
+  delete_membarRestored_by_pk?: Maybe<MembarRestored>;
+  /** delete data from the table: "memberActive" */
+  delete_memberActive?: Maybe<MemberActive_Mutation_Response>;
+  /** delete single row from the table: "memberActive" */
+  delete_memberActive_by_pk?: Maybe<MemberActive>;
+  /** delete data from the table: "memberBanned" */
+  delete_memberBanned?: Maybe<MemberBanned_Mutation_Response>;
+  /** delete single row from the table: "memberBanned" */
+  delete_memberBanned_by_pk?: Maybe<MemberBanned>;
+  /** delete data from the table: "memberPendingActivation" */
+  delete_memberPendingActivation?: Maybe<MemberPendingActivation_Mutation_Response>;
+  /** delete single row from the table: "memberPendingActivation" */
+  delete_memberPendingActivation_by_pk?: Maybe<MemberPendingActivation>;
+  /** delete data from the table: "memberResigned" */
+  delete_memberResigned?: Maybe<MemberResigned_Mutation_Response>;
+  /** delete single row from the table: "memberResigned" */
+  delete_memberResigned_by_pk?: Maybe<MemberResigned>;
+  /** delete data from the table: "memberStatusActivities" */
+  delete_memberStatusActivities?: Maybe<MemberStatusActivities_Mutation_Response>;
+  /** delete single row from the table: "memberStatusActivities" */
+  delete_memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
+  /** delete data from the table: "members" */
+  delete_members?: Maybe<Members_Mutation_Response>;
+  /** delete single row from the table: "members" */
+  delete_members_by_pk?: Maybe<Members>;
+  /** delete data from the table: "operators" */
+  delete_operators?: Maybe<Operators_Mutation_Response>;
+  /** delete single row from the table: "operators" */
+  delete_operators_by_pk?: Maybe<Operators>;
+  /** delete data from the table: "users" */
+  delete_users?: Maybe<Users_Mutation_Response>;
+  /** delete single row from the table: "users" */
+  delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "membarRestored" */
+  insert_membarRestored?: Maybe<MembarRestored_Mutation_Response>;
+  /** insert a single row into the table: "membarRestored" */
+  insert_membarRestored_one?: Maybe<MembarRestored>;
+  /** insert data into the table: "memberActive" */
+  insert_memberActive?: Maybe<MemberActive_Mutation_Response>;
+  /** insert a single row into the table: "memberActive" */
+  insert_memberActive_one?: Maybe<MemberActive>;
+  /** insert data into the table: "memberBanned" */
+  insert_memberBanned?: Maybe<MemberBanned_Mutation_Response>;
+  /** insert a single row into the table: "memberBanned" */
+  insert_memberBanned_one?: Maybe<MemberBanned>;
+  /** insert data into the table: "memberPendingActivation" */
+  insert_memberPendingActivation?: Maybe<MemberPendingActivation_Mutation_Response>;
+  /** insert a single row into the table: "memberPendingActivation" */
+  insert_memberPendingActivation_one?: Maybe<MemberPendingActivation>;
+  /** insert data into the table: "memberResigned" */
+  insert_memberResigned?: Maybe<MemberResigned_Mutation_Response>;
+  /** insert a single row into the table: "memberResigned" */
+  insert_memberResigned_one?: Maybe<MemberResigned>;
+  /** insert data into the table: "memberStatusActivities" */
+  insert_memberStatusActivities?: Maybe<MemberStatusActivities_Mutation_Response>;
+  /** insert a single row into the table: "memberStatusActivities" */
+  insert_memberStatusActivities_one?: Maybe<MemberStatusActivities>;
+  /** insert data into the table: "members" */
+  insert_members?: Maybe<Members_Mutation_Response>;
+  /** insert a single row into the table: "members" */
+  insert_members_one?: Maybe<Members>;
+  /** insert data into the table: "operators" */
+  insert_operators?: Maybe<Operators_Mutation_Response>;
+  /** insert a single row into the table: "operators" */
+  insert_operators_one?: Maybe<Operators>;
+  /** insert data into the table: "users" */
+  insert_users?: Maybe<Users_Mutation_Response>;
+  /** insert a single row into the table: "users" */
+  insert_users_one?: Maybe<Users>;
+  /** update data of the table: "membarRestored" */
+  update_membarRestored?: Maybe<MembarRestored_Mutation_Response>;
+  /** update single row of the table: "membarRestored" */
+  update_membarRestored_by_pk?: Maybe<MembarRestored>;
+  /** update multiples rows of table: "membarRestored" */
+  update_membarRestored_many?: Maybe<Array<Maybe<MembarRestored_Mutation_Response>>>;
+  /** update data of the table: "memberActive" */
+  update_memberActive?: Maybe<MemberActive_Mutation_Response>;
+  /** update single row of the table: "memberActive" */
+  update_memberActive_by_pk?: Maybe<MemberActive>;
+  /** update multiples rows of table: "memberActive" */
+  update_memberActive_many?: Maybe<Array<Maybe<MemberActive_Mutation_Response>>>;
+  /** update data of the table: "memberBanned" */
+  update_memberBanned?: Maybe<MemberBanned_Mutation_Response>;
+  /** update single row of the table: "memberBanned" */
+  update_memberBanned_by_pk?: Maybe<MemberBanned>;
+  /** update multiples rows of table: "memberBanned" */
+  update_memberBanned_many?: Maybe<Array<Maybe<MemberBanned_Mutation_Response>>>;
+  /** update data of the table: "memberPendingActivation" */
+  update_memberPendingActivation?: Maybe<MemberPendingActivation_Mutation_Response>;
+  /** update single row of the table: "memberPendingActivation" */
+  update_memberPendingActivation_by_pk?: Maybe<MemberPendingActivation>;
+  /** update multiples rows of table: "memberPendingActivation" */
+  update_memberPendingActivation_many?: Maybe<Array<Maybe<MemberPendingActivation_Mutation_Response>>>;
+  /** update data of the table: "memberResigned" */
+  update_memberResigned?: Maybe<MemberResigned_Mutation_Response>;
+  /** update single row of the table: "memberResigned" */
+  update_memberResigned_by_pk?: Maybe<MemberResigned>;
+  /** update multiples rows of table: "memberResigned" */
+  update_memberResigned_many?: Maybe<Array<Maybe<MemberResigned_Mutation_Response>>>;
+  /** update data of the table: "memberStatusActivities" */
+  update_memberStatusActivities?: Maybe<MemberStatusActivities_Mutation_Response>;
+  /** update single row of the table: "memberStatusActivities" */
+  update_memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
+  /** update multiples rows of table: "memberStatusActivities" */
+  update_memberStatusActivities_many?: Maybe<Array<Maybe<MemberStatusActivities_Mutation_Response>>>;
+  /** update data of the table: "members" */
+  update_members?: Maybe<Members_Mutation_Response>;
+  /** update single row of the table: "members" */
+  update_members_by_pk?: Maybe<Members>;
+  /** update multiples rows of table: "members" */
+  update_members_many?: Maybe<Array<Maybe<Members_Mutation_Response>>>;
+  /** update data of the table: "operators" */
+  update_operators?: Maybe<Operators_Mutation_Response>;
+  /** update single row of the table: "operators" */
+  update_operators_by_pk?: Maybe<Operators>;
+  /** update multiples rows of table: "operators" */
+  update_operators_many?: Maybe<Array<Maybe<Operators_Mutation_Response>>>;
+  /** update data of the table: "users" */
+  update_users?: Maybe<Users_Mutation_Response>;
+  /** update single row of the table: "users" */
+  update_users_by_pk?: Maybe<Users>;
+  /** update multiples rows of table: "users" */
+  update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Active_TestArgs = {
-  where: Member_Active_Test_Bool_Exp;
+export type Mutation_RootDelete_MembarRestoredArgs = {
+  where: MembarRestored_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Active_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Mutation_RootDelete_MembarRestored_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_BannedArgs = {
-  where: Member_Banned_Bool_Exp;
+export type Mutation_RootDelete_MemberActiveArgs = {
+  where: MemberActive_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Banned_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Mutation_RootDelete_MemberActive_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Pending_Activations_TestArgs = {
-  where: Member_Pending_Activations_Test_Bool_Exp;
+export type Mutation_RootDelete_MemberBannedArgs = {
+  where: MemberBanned_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Pending_Activations_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Mutation_RootDelete_MemberBanned_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Resigned_TestArgs = {
-  where: Member_Resigned_Test_Bool_Exp;
+export type Mutation_RootDelete_MemberPendingActivationArgs = {
+  where: MemberPendingActivation_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Resigned_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Mutation_RootDelete_MemberPendingActivation_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_RestoredArgs = {
-  where: Member_Restored_Bool_Exp;
+export type Mutation_RootDelete_MemberResignedArgs = {
+  where: MemberResigned_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Restored_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Mutation_RootDelete_MemberResigned_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Status_Activities_TestArgs = {
-  where: Member_Status_Activities_Test_Bool_Exp;
+export type Mutation_RootDelete_MemberStatusActivitiesArgs = {
+  where: MemberStatusActivities_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Member_Status_Activities_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Mutation_RootDelete_MemberStatusActivities_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Members_TestArgs = {
-  where: Members_Test_Bool_Exp;
+export type Mutation_RootDelete_MembersArgs = {
+  where: Members_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Members_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Mutation_RootDelete_Members_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Operators_TestArgs = {
-  where: Operators_Test_Bool_Exp;
+export type Mutation_RootDelete_OperatorsArgs = {
+  where: Operators_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Operators_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Mutation_RootDelete_Operators_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Table_Tennis_TablesArgs = {
-  where: Table_Tennis_Tables_Bool_Exp;
+export type Mutation_RootDelete_UsersArgs = {
+  where: Users_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Table_Tennis_Tables_By_PkArgs = {
-  id: Scalars['Int']['input'];
+export type Mutation_RootDelete_Users_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Users_TestArgs = {
-  where: Users_Test_Bool_Exp;
+export type Mutation_RootInsert_MembarRestoredArgs = {
+  objects: Array<MembarRestored_Insert_Input>;
+  on_conflict?: InputMaybe<MembarRestored_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Users_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Mutation_RootInsert_MembarRestored_OneArgs = {
+  object: MembarRestored_Insert_Input;
+  on_conflict?: InputMaybe<MembarRestored_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Active_TestArgs = {
-  objects: Array<Member_Active_Test_Insert_Input>;
-  on_conflict?: InputMaybe<Member_Active_Test_On_Conflict>;
+export type Mutation_RootInsert_MemberActiveArgs = {
+  objects: Array<MemberActive_Insert_Input>;
+  on_conflict?: InputMaybe<MemberActive_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Active_Test_OneArgs = {
-  object: Member_Active_Test_Insert_Input;
-  on_conflict?: InputMaybe<Member_Active_Test_On_Conflict>;
+export type Mutation_RootInsert_MemberActive_OneArgs = {
+  object: MemberActive_Insert_Input;
+  on_conflict?: InputMaybe<MemberActive_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_BannedArgs = {
-  objects: Array<Member_Banned_Insert_Input>;
-  on_conflict?: InputMaybe<Member_Banned_On_Conflict>;
+export type Mutation_RootInsert_MemberBannedArgs = {
+  objects: Array<MemberBanned_Insert_Input>;
+  on_conflict?: InputMaybe<MemberBanned_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Banned_OneArgs = {
-  object: Member_Banned_Insert_Input;
-  on_conflict?: InputMaybe<Member_Banned_On_Conflict>;
+export type Mutation_RootInsert_MemberBanned_OneArgs = {
+  object: MemberBanned_Insert_Input;
+  on_conflict?: InputMaybe<MemberBanned_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Pending_Activations_TestArgs = {
-  objects: Array<Member_Pending_Activations_Test_Insert_Input>;
-  on_conflict?: InputMaybe<Member_Pending_Activations_Test_On_Conflict>;
+export type Mutation_RootInsert_MemberPendingActivationArgs = {
+  objects: Array<MemberPendingActivation_Insert_Input>;
+  on_conflict?: InputMaybe<MemberPendingActivation_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Pending_Activations_Test_OneArgs = {
-  object: Member_Pending_Activations_Test_Insert_Input;
-  on_conflict?: InputMaybe<Member_Pending_Activations_Test_On_Conflict>;
+export type Mutation_RootInsert_MemberPendingActivation_OneArgs = {
+  object: MemberPendingActivation_Insert_Input;
+  on_conflict?: InputMaybe<MemberPendingActivation_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Resigned_TestArgs = {
-  objects: Array<Member_Resigned_Test_Insert_Input>;
-  on_conflict?: InputMaybe<Member_Resigned_Test_On_Conflict>;
+export type Mutation_RootInsert_MemberResignedArgs = {
+  objects: Array<MemberResigned_Insert_Input>;
+  on_conflict?: InputMaybe<MemberResigned_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Resigned_Test_OneArgs = {
-  object: Member_Resigned_Test_Insert_Input;
-  on_conflict?: InputMaybe<Member_Resigned_Test_On_Conflict>;
+export type Mutation_RootInsert_MemberResigned_OneArgs = {
+  object: MemberResigned_Insert_Input;
+  on_conflict?: InputMaybe<MemberResigned_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_RestoredArgs = {
-  objects: Array<Member_Restored_Insert_Input>;
-  on_conflict?: InputMaybe<Member_Restored_On_Conflict>;
+export type Mutation_RootInsert_MemberStatusActivitiesArgs = {
+  objects: Array<MemberStatusActivities_Insert_Input>;
+  on_conflict?: InputMaybe<MemberStatusActivities_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Restored_OneArgs = {
-  object: Member_Restored_Insert_Input;
-  on_conflict?: InputMaybe<Member_Restored_On_Conflict>;
+export type Mutation_RootInsert_MemberStatusActivities_OneArgs = {
+  object: MemberStatusActivities_Insert_Input;
+  on_conflict?: InputMaybe<MemberStatusActivities_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Status_Activities_TestArgs = {
-  objects: Array<Member_Status_Activities_Test_Insert_Input>;
-  on_conflict?: InputMaybe<Member_Status_Activities_Test_On_Conflict>;
+export type Mutation_RootInsert_MembersArgs = {
+  objects: Array<Members_Insert_Input>;
+  on_conflict?: InputMaybe<Members_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Member_Status_Activities_Test_OneArgs = {
-  object: Member_Status_Activities_Test_Insert_Input;
-  on_conflict?: InputMaybe<Member_Status_Activities_Test_On_Conflict>;
+export type Mutation_RootInsert_Members_OneArgs = {
+  object: Members_Insert_Input;
+  on_conflict?: InputMaybe<Members_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Members_TestArgs = {
-  objects: Array<Members_Test_Insert_Input>;
-  on_conflict?: InputMaybe<Members_Test_On_Conflict>;
+export type Mutation_RootInsert_OperatorsArgs = {
+  objects: Array<Operators_Insert_Input>;
+  on_conflict?: InputMaybe<Operators_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Members_Test_OneArgs = {
-  object: Members_Test_Insert_Input;
-  on_conflict?: InputMaybe<Members_Test_On_Conflict>;
+export type Mutation_RootInsert_Operators_OneArgs = {
+  object: Operators_Insert_Input;
+  on_conflict?: InputMaybe<Operators_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Operators_TestArgs = {
-  objects: Array<Operators_Test_Insert_Input>;
-  on_conflict?: InputMaybe<Operators_Test_On_Conflict>;
+export type Mutation_RootInsert_UsersArgs = {
+  objects: Array<Users_Insert_Input>;
+  on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Operators_Test_OneArgs = {
-  object: Operators_Test_Insert_Input;
-  on_conflict?: InputMaybe<Operators_Test_On_Conflict>;
+export type Mutation_RootInsert_Users_OneArgs = {
+  object: Users_Insert_Input;
+  on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Table_Tennis_TablesArgs = {
-  objects: Array<Table_Tennis_Tables_Insert_Input>;
-  on_conflict?: InputMaybe<Table_Tennis_Tables_On_Conflict>;
+export type Mutation_RootUpdate_MembarRestoredArgs = {
+  _set?: InputMaybe<MembarRestored_Set_Input>;
+  where: MembarRestored_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Table_Tennis_Tables_OneArgs = {
-  object: Table_Tennis_Tables_Insert_Input;
-  on_conflict?: InputMaybe<Table_Tennis_Tables_On_Conflict>;
+export type Mutation_RootUpdate_MembarRestored_By_PkArgs = {
+  _set?: InputMaybe<MembarRestored_Set_Input>;
+  pk_columns: MembarRestored_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Users_TestArgs = {
-  objects: Array<Users_Test_Insert_Input>;
-  on_conflict?: InputMaybe<Users_Test_On_Conflict>;
+export type Mutation_RootUpdate_MembarRestored_ManyArgs = {
+  updates: Array<MembarRestored_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Users_Test_OneArgs = {
-  object: Users_Test_Insert_Input;
-  on_conflict?: InputMaybe<Users_Test_On_Conflict>;
+export type Mutation_RootUpdate_MemberActiveArgs = {
+  _set?: InputMaybe<MemberActive_Set_Input>;
+  where: MemberActive_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Active_TestArgs = {
-  _inc?: InputMaybe<Member_Active_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Active_Test_Set_Input>;
-  where: Member_Active_Test_Bool_Exp;
+export type Mutation_RootUpdate_MemberActive_By_PkArgs = {
+  _set?: InputMaybe<MemberActive_Set_Input>;
+  pk_columns: MemberActive_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Active_Test_By_PkArgs = {
-  _inc?: InputMaybe<Member_Active_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Active_Test_Set_Input>;
-  pk_columns: Member_Active_Test_Pk_Columns_Input;
+export type Mutation_RootUpdate_MemberActive_ManyArgs = {
+  updates: Array<MemberActive_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Active_Test_ManyArgs = {
-  updates: Array<Member_Active_Test_Updates>;
+export type Mutation_RootUpdate_MemberBannedArgs = {
+  _set?: InputMaybe<MemberBanned_Set_Input>;
+  where: MemberBanned_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_BannedArgs = {
-  _inc?: InputMaybe<Member_Banned_Inc_Input>;
-  _set?: InputMaybe<Member_Banned_Set_Input>;
-  where: Member_Banned_Bool_Exp;
+export type Mutation_RootUpdate_MemberBanned_By_PkArgs = {
+  _set?: InputMaybe<MemberBanned_Set_Input>;
+  pk_columns: MemberBanned_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Banned_By_PkArgs = {
-  _inc?: InputMaybe<Member_Banned_Inc_Input>;
-  _set?: InputMaybe<Member_Banned_Set_Input>;
-  pk_columns: Member_Banned_Pk_Columns_Input;
+export type Mutation_RootUpdate_MemberBanned_ManyArgs = {
+  updates: Array<MemberBanned_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Banned_ManyArgs = {
-  updates: Array<Member_Banned_Updates>;
+export type Mutation_RootUpdate_MemberPendingActivationArgs = {
+  _set?: InputMaybe<MemberPendingActivation_Set_Input>;
+  where: MemberPendingActivation_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Pending_Activations_TestArgs = {
-  _inc?: InputMaybe<Member_Pending_Activations_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Pending_Activations_Test_Set_Input>;
-  where: Member_Pending_Activations_Test_Bool_Exp;
+export type Mutation_RootUpdate_MemberPendingActivation_By_PkArgs = {
+  _set?: InputMaybe<MemberPendingActivation_Set_Input>;
+  pk_columns: MemberPendingActivation_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Pending_Activations_Test_By_PkArgs = {
-  _inc?: InputMaybe<Member_Pending_Activations_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Pending_Activations_Test_Set_Input>;
-  pk_columns: Member_Pending_Activations_Test_Pk_Columns_Input;
+export type Mutation_RootUpdate_MemberPendingActivation_ManyArgs = {
+  updates: Array<MemberPendingActivation_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Pending_Activations_Test_ManyArgs = {
-  updates: Array<Member_Pending_Activations_Test_Updates>;
+export type Mutation_RootUpdate_MemberResignedArgs = {
+  _set?: InputMaybe<MemberResigned_Set_Input>;
+  where: MemberResigned_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Resigned_TestArgs = {
-  _inc?: InputMaybe<Member_Resigned_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Resigned_Test_Set_Input>;
-  where: Member_Resigned_Test_Bool_Exp;
+export type Mutation_RootUpdate_MemberResigned_By_PkArgs = {
+  _set?: InputMaybe<MemberResigned_Set_Input>;
+  pk_columns: MemberResigned_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Resigned_Test_By_PkArgs = {
-  _inc?: InputMaybe<Member_Resigned_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Resigned_Test_Set_Input>;
-  pk_columns: Member_Resigned_Test_Pk_Columns_Input;
+export type Mutation_RootUpdate_MemberResigned_ManyArgs = {
+  updates: Array<MemberResigned_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Resigned_Test_ManyArgs = {
-  updates: Array<Member_Resigned_Test_Updates>;
+export type Mutation_RootUpdate_MemberStatusActivitiesArgs = {
+  _set?: InputMaybe<MemberStatusActivities_Set_Input>;
+  where: MemberStatusActivities_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_RestoredArgs = {
-  _inc?: InputMaybe<Member_Restored_Inc_Input>;
-  _set?: InputMaybe<Member_Restored_Set_Input>;
-  where: Member_Restored_Bool_Exp;
+export type Mutation_RootUpdate_MemberStatusActivities_By_PkArgs = {
+  _set?: InputMaybe<MemberStatusActivities_Set_Input>;
+  pk_columns: MemberStatusActivities_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Restored_By_PkArgs = {
-  _inc?: InputMaybe<Member_Restored_Inc_Input>;
-  _set?: InputMaybe<Member_Restored_Set_Input>;
-  pk_columns: Member_Restored_Pk_Columns_Input;
+export type Mutation_RootUpdate_MemberStatusActivities_ManyArgs = {
+  updates: Array<MemberStatusActivities_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Restored_ManyArgs = {
-  updates: Array<Member_Restored_Updates>;
+export type Mutation_RootUpdate_MembersArgs = {
+  _set?: InputMaybe<Members_Set_Input>;
+  where: Members_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Status_Activities_TestArgs = {
-  _inc?: InputMaybe<Member_Status_Activities_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Status_Activities_Test_Set_Input>;
-  where: Member_Status_Activities_Test_Bool_Exp;
+export type Mutation_RootUpdate_Members_By_PkArgs = {
+  _set?: InputMaybe<Members_Set_Input>;
+  pk_columns: Members_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Status_Activities_Test_By_PkArgs = {
-  _inc?: InputMaybe<Member_Status_Activities_Test_Inc_Input>;
-  _set?: InputMaybe<Member_Status_Activities_Test_Set_Input>;
-  pk_columns: Member_Status_Activities_Test_Pk_Columns_Input;
+export type Mutation_RootUpdate_Members_ManyArgs = {
+  updates: Array<Members_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Member_Status_Activities_Test_ManyArgs = {
-  updates: Array<Member_Status_Activities_Test_Updates>;
+export type Mutation_RootUpdate_OperatorsArgs = {
+  _set?: InputMaybe<Operators_Set_Input>;
+  where: Operators_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Members_TestArgs = {
-  _inc?: InputMaybe<Members_Test_Inc_Input>;
-  _set?: InputMaybe<Members_Test_Set_Input>;
-  where: Members_Test_Bool_Exp;
+export type Mutation_RootUpdate_Operators_By_PkArgs = {
+  _set?: InputMaybe<Operators_Set_Input>;
+  pk_columns: Operators_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Members_Test_By_PkArgs = {
-  _inc?: InputMaybe<Members_Test_Inc_Input>;
-  _set?: InputMaybe<Members_Test_Set_Input>;
-  pk_columns: Members_Test_Pk_Columns_Input;
+export type Mutation_RootUpdate_Operators_ManyArgs = {
+  updates: Array<Operators_Updates>;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Members_Test_ManyArgs = {
-  updates: Array<Members_Test_Updates>;
+export type Mutation_RootUpdate_UsersArgs = {
+  _set?: InputMaybe<Users_Set_Input>;
+  where: Users_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Operators_TestArgs = {
-  _inc?: InputMaybe<Operators_Test_Inc_Input>;
-  _set?: InputMaybe<Operators_Test_Set_Input>;
-  where: Operators_Test_Bool_Exp;
+export type Mutation_RootUpdate_Users_By_PkArgs = {
+  _set?: InputMaybe<Users_Set_Input>;
+  pk_columns: Users_Pk_Columns_Input;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Operators_Test_By_PkArgs = {
-  _inc?: InputMaybe<Operators_Test_Inc_Input>;
-  _set?: InputMaybe<Operators_Test_Set_Input>;
-  pk_columns: Operators_Test_Pk_Columns_Input;
+export type Mutation_RootUpdate_Users_ManyArgs = {
+  updates: Array<Users_Updates>;
 };
 
-
-/** mutation root */
-export type Mutation_RootUpdate_Operators_Test_ManyArgs = {
-  updates: Array<Operators_Test_Updates>;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Table_Tennis_TablesArgs = {
-  _inc?: InputMaybe<Table_Tennis_Tables_Inc_Input>;
-  _set?: InputMaybe<Table_Tennis_Tables_Set_Input>;
-  where: Table_Tennis_Tables_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Table_Tennis_Tables_By_PkArgs = {
-  _inc?: InputMaybe<Table_Tennis_Tables_Inc_Input>;
-  _set?: InputMaybe<Table_Tennis_Tables_Set_Input>;
-  pk_columns: Table_Tennis_Tables_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Table_Tennis_Tables_ManyArgs = {
-  updates: Array<Table_Tennis_Tables_Updates>;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Users_TestArgs = {
-  _inc?: InputMaybe<Users_Test_Inc_Input>;
-  _set?: InputMaybe<Users_Test_Set_Input>;
-  where: Users_Test_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Users_Test_By_PkArgs = {
-  _inc?: InputMaybe<Users_Test_Inc_Input>;
-  _set?: InputMaybe<Users_Test_Set_Input>;
-  pk_columns: Users_Test_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Users_Test_ManyArgs = {
-  updates: Array<Users_Test_Updates>;
-};
-
-/** Boolean expression to compare columns of type "name". All fields are combined with logical 'AND'. */
-export type Name_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['name']['input']>;
-  _gt?: InputMaybe<Scalars['name']['input']>;
-  _gte?: InputMaybe<Scalars['name']['input']>;
-  _in?: InputMaybe<Array<Scalars['name']['input']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
-  _lt?: InputMaybe<Scalars['name']['input']>;
-  _lte?: InputMaybe<Scalars['name']['input']>;
-  _neq?: InputMaybe<Scalars['name']['input']>;
-  _nin?: InputMaybe<Array<Scalars['name']['input']>>;
-};
-
-/** columns and relationships of "operators_test" */
-export type Operators_Test = {
-  id: Scalars['bigint']['output'];
+/** columns and relationships of "operators" */
+export type Operators = {
+  id: Scalars['uuid']['output'];
   name: Scalars['String']['output'];
-  user_id: Scalars['bigint']['output'];
+  /** An object relationship */
+  user?: Maybe<Users>;
+  userId: Scalars['uuid']['output'];
 };
 
-/** aggregated selection of "operators_test" */
-export type Operators_Test_Aggregate = {
-  aggregate?: Maybe<Operators_Test_Aggregate_Fields>;
-  nodes: Array<Operators_Test>;
+/** aggregated selection of "operators" */
+export type Operators_Aggregate = {
+  aggregate?: Maybe<Operators_Aggregate_Fields>;
+  nodes: Array<Operators>;
 };
 
-/** aggregate fields of "operators_test" */
-export type Operators_Test_Aggregate_Fields = {
-  avg?: Maybe<Operators_Test_Avg_Fields>;
+/** aggregate fields of "operators" */
+export type Operators_Aggregate_Fields = {
   count: Scalars['Int']['output'];
-  max?: Maybe<Operators_Test_Max_Fields>;
-  min?: Maybe<Operators_Test_Min_Fields>;
-  stddev?: Maybe<Operators_Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Operators_Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Operators_Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Operators_Test_Sum_Fields>;
-  var_pop?: Maybe<Operators_Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Operators_Test_Var_Samp_Fields>;
-  variance?: Maybe<Operators_Test_Variance_Fields>;
+  max?: Maybe<Operators_Max_Fields>;
+  min?: Maybe<Operators_Min_Fields>;
 };
 
 
-/** aggregate fields of "operators_test" */
-export type Operators_Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Operators_Test_Select_Column>>;
+/** aggregate fields of "operators" */
+export type Operators_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Operators_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** aggregate avg on columns */
-export type Operators_Test_Avg_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "operators_test". All fields are combined with a logical 'AND'. */
-export type Operators_Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Operators_Test_Bool_Exp>>;
-  _not?: InputMaybe<Operators_Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Operators_Test_Bool_Exp>>;
-  id?: InputMaybe<Bigint_Comparison_Exp>;
+/** Boolean expression to filter rows from the table "operators". All fields are combined with a logical 'AND'. */
+export type Operators_Bool_Exp = {
+  _and?: InputMaybe<Array<Operators_Bool_Exp>>;
+  _not?: InputMaybe<Operators_Bool_Exp>;
+  _or?: InputMaybe<Array<Operators_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
-  user_id?: InputMaybe<Bigint_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
+  userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
-/** unique or primary key constraints on table "operators_test" */
-export enum Operators_Test_Constraint {
+/** unique or primary key constraints on table "operators" */
+export enum Operators_Constraint {
   /** unique or primary key constraint on columns "id" */
-  OperatorsTestPkey = 'operators_test_pkey'
+  OperatorsIdKey = 'operators_id_key',
+  /** unique or primary key constraint on columns "id" */
+  OperatorsPkey = 'operators_pkey'
 }
 
-/** input type for incrementing numeric columns in table "operators_test" */
-export type Operators_Test_Inc_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "operators_test" */
-export type Operators_Test_Insert_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for inserting data into table "operators" */
+export type Operators_Insert_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
+  userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** aggregate max on columns */
-export type Operators_Test_Max_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
+export type Operators_Max_Fields = {
+  id?: Maybe<Scalars['uuid']['output']>;
   name?: Maybe<Scalars['String']['output']>;
-  user_id?: Maybe<Scalars['bigint']['output']>;
+  userId?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** aggregate min on columns */
-export type Operators_Test_Min_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
+export type Operators_Min_Fields = {
+  id?: Maybe<Scalars['uuid']['output']>;
   name?: Maybe<Scalars['String']['output']>;
-  user_id?: Maybe<Scalars['bigint']['output']>;
+  userId?: Maybe<Scalars['uuid']['output']>;
 };
 
-/** response of any mutation on the table "operators_test" */
-export type Operators_Test_Mutation_Response = {
+/** response of any mutation on the table "operators" */
+export type Operators_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
-  returning: Array<Operators_Test>;
+  returning: Array<Operators>;
 };
 
-/** on_conflict condition type for table "operators_test" */
-export type Operators_Test_On_Conflict = {
-  constraint: Operators_Test_Constraint;
-  update_columns?: Array<Operators_Test_Update_Column>;
-  where?: InputMaybe<Operators_Test_Bool_Exp>;
+/** on_conflict condition type for table "operators" */
+export type Operators_On_Conflict = {
+  constraint: Operators_Constraint;
+  update_columns?: Array<Operators_Update_Column>;
+  where?: InputMaybe<Operators_Bool_Exp>;
 };
 
-/** Ordering options when selecting data from "operators_test". */
-export type Operators_Test_Order_By = {
+/** Ordering options when selecting data from "operators". */
+export type Operators_Order_By = {
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
-  user_id?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: operators_test */
-export type Operators_Test_Pk_Columns_Input = {
-  id: Scalars['bigint']['input'];
+/** primary key columns input for table: operators */
+export type Operators_Pk_Columns_Input = {
+  id: Scalars['uuid']['input'];
 };
 
-/** select columns of table "operators_test" */
-export enum Operators_Test_Select_Column {
+/** select columns of table "operators" */
+export enum Operators_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
   Name = 'name',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'userId'
 }
 
-/** input type for updating data in table "operators_test" */
-export type Operators_Test_Set_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
+/** input type for updating data in table "operators" */
+export type Operators_Set_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
+  userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate stddev on columns */
-export type Operators_Test_Stddev_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Operators_Test_Stddev_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Operators_Test_Stddev_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "operators_test" */
-export type Operators_Test_Stream_Cursor_Input = {
+/** Streaming cursor of the table "operators" */
+export type Operators_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Operators_Test_Stream_Cursor_Value_Input;
+  initial_value: Operators_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Operators_Test_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
+export type Operators_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  user_id?: InputMaybe<Scalars['bigint']['input']>;
+  userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate sum on columns */
-export type Operators_Test_Sum_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-  user_id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "operators_test" */
-export enum Operators_Test_Update_Column {
+/** update columns of table "operators" */
+export enum Operators_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
   Name = 'name',
   /** column name */
-  UserId = 'user_id'
+  UserId = 'userId'
 }
 
-export type Operators_Test_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Operators_Test_Inc_Input>;
+export type Operators_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Operators_Test_Set_Input>;
+  _set?: InputMaybe<Operators_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Operators_Test_Bool_Exp;
-};
-
-/** aggregate var_pop on columns */
-export type Operators_Test_Var_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Operators_Test_Var_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Operators_Test_Variance_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-  user_id?: Maybe<Scalars['Float']['output']>;
+  where: Operators_Bool_Exp;
 };
 
 /** column ordering options */
@@ -2574,860 +2006,612 @@ export enum Order_By {
 }
 
 export type Query_Root = {
-  /** fetch data from the table: "member_active_test" */
-  member_active_test: Array<Member_Active_Test>;
-  /** fetch aggregated fields from the table: "member_active_test" */
-  member_active_test_aggregate: Member_Active_Test_Aggregate;
-  /** fetch data from the table: "member_active_test" using primary key columns */
-  member_active_test_by_pk?: Maybe<Member_Active_Test>;
-  /** fetch data from the table: "member_banned" */
-  member_banned: Array<Member_Banned>;
-  /** fetch aggregated fields from the table: "member_banned" */
-  member_banned_aggregate: Member_Banned_Aggregate;
-  /** fetch data from the table: "member_banned" using primary key columns */
-  member_banned_by_pk?: Maybe<Member_Banned>;
-  /** fetch data from the table: "member_pending_activations_test" */
-  member_pending_activations_test: Array<Member_Pending_Activations_Test>;
-  /** fetch aggregated fields from the table: "member_pending_activations_test" */
-  member_pending_activations_test_aggregate: Member_Pending_Activations_Test_Aggregate;
-  /** fetch data from the table: "member_pending_activations_test" using primary key columns */
-  member_pending_activations_test_by_pk?: Maybe<Member_Pending_Activations_Test>;
-  /** fetch data from the table: "member_resigned_test" */
-  member_resigned_test: Array<Member_Resigned_Test>;
-  /** fetch aggregated fields from the table: "member_resigned_test" */
-  member_resigned_test_aggregate: Member_Resigned_Test_Aggregate;
-  /** fetch data from the table: "member_resigned_test" using primary key columns */
-  member_resigned_test_by_pk?: Maybe<Member_Resigned_Test>;
-  /** fetch data from the table: "member_restored" */
-  member_restored: Array<Member_Restored>;
-  /** fetch aggregated fields from the table: "member_restored" */
-  member_restored_aggregate: Member_Restored_Aggregate;
-  /** fetch data from the table: "member_restored" using primary key columns */
-  member_restored_by_pk?: Maybe<Member_Restored>;
-  /** fetch data from the table: "member_status_activities_test" */
-  member_status_activities_test: Array<Member_Status_Activities_Test>;
-  /** fetch aggregated fields from the table: "member_status_activities_test" */
-  member_status_activities_test_aggregate: Member_Status_Activities_Test_Aggregate;
-  /** fetch data from the table: "member_status_activities_test" using primary key columns */
-  member_status_activities_test_by_pk?: Maybe<Member_Status_Activities_Test>;
-  /** fetch data from the table: "members_test" */
-  members_test: Array<Members_Test>;
-  /** fetch aggregated fields from the table: "members_test" */
-  members_test_aggregate: Members_Test_Aggregate;
-  /** fetch data from the table: "members_test" using primary key columns */
-  members_test_by_pk?: Maybe<Members_Test>;
-  /** fetch data from the table: "operators_test" */
-  operators_test: Array<Operators_Test>;
-  /** fetch aggregated fields from the table: "operators_test" */
-  operators_test_aggregate: Operators_Test_Aggregate;
-  /** fetch data from the table: "operators_test" using primary key columns */
-  operators_test_by_pk?: Maybe<Operators_Test>;
-  /** fetch data from the table: "table_tennis_tables" */
-  table_tennis_tables: Array<Table_Tennis_Tables>;
-  /** fetch aggregated fields from the table: "table_tennis_tables" */
-  table_tennis_tables_aggregate: Table_Tennis_Tables_Aggregate;
-  /** fetch data from the table: "table_tennis_tables" using primary key columns */
-  table_tennis_tables_by_pk?: Maybe<Table_Tennis_Tables>;
-  /** fetch data from the table: "users_test" */
-  users_test: Array<Users_Test>;
-  /** fetch aggregated fields from the table: "users_test" */
-  users_test_aggregate: Users_Test_Aggregate;
-  /** fetch data from the table: "users_test" using primary key columns */
-  users_test_by_pk?: Maybe<Users_Test>;
+  /** fetch data from the table: "membarRestored" */
+  membarRestored: Array<MembarRestored>;
+  /** fetch aggregated fields from the table: "membarRestored" */
+  membarRestored_aggregate: MembarRestored_Aggregate;
+  /** fetch data from the table: "membarRestored" using primary key columns */
+  membarRestored_by_pk?: Maybe<MembarRestored>;
+  /** fetch data from the table: "memberActive" */
+  memberActive: Array<MemberActive>;
+  /** fetch aggregated fields from the table: "memberActive" */
+  memberActive_aggregate: MemberActive_Aggregate;
+  /** fetch data from the table: "memberActive" using primary key columns */
+  memberActive_by_pk?: Maybe<MemberActive>;
+  /** fetch data from the table: "memberBanned" */
+  memberBanned: Array<MemberBanned>;
+  /** fetch aggregated fields from the table: "memberBanned" */
+  memberBanned_aggregate: MemberBanned_Aggregate;
+  /** fetch data from the table: "memberBanned" using primary key columns */
+  memberBanned_by_pk?: Maybe<MemberBanned>;
+  /** fetch data from the table: "memberPendingActivation" */
+  memberPendingActivation: Array<MemberPendingActivation>;
+  /** fetch aggregated fields from the table: "memberPendingActivation" */
+  memberPendingActivation_aggregate: MemberPendingActivation_Aggregate;
+  /** fetch data from the table: "memberPendingActivation" using primary key columns */
+  memberPendingActivation_by_pk?: Maybe<MemberPendingActivation>;
+  /** fetch data from the table: "memberResigned" */
+  memberResigned: Array<MemberResigned>;
+  /** fetch aggregated fields from the table: "memberResigned" */
+  memberResigned_aggregate: MemberResigned_Aggregate;
+  /** fetch data from the table: "memberResigned" using primary key columns */
+  memberResigned_by_pk?: Maybe<MemberResigned>;
+  /** fetch data from the table: "memberStatusActivities" */
+  memberStatusActivities: Array<MemberStatusActivities>;
+  /** fetch aggregated fields from the table: "memberStatusActivities" */
+  memberStatusActivities_aggregate: MemberStatusActivities_Aggregate;
+  /** fetch data from the table: "memberStatusActivities" using primary key columns */
+  memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
+  /** fetch data from the table: "members" */
+  members: Array<Members>;
+  /** fetch aggregated fields from the table: "members" */
+  members_aggregate: Members_Aggregate;
+  /** fetch data from the table: "members" using primary key columns */
+  members_by_pk?: Maybe<Members>;
+  /** fetch data from the table: "operators" */
+  operators: Array<Operators>;
+  /** fetch aggregated fields from the table: "operators" */
+  operators_aggregate: Operators_Aggregate;
+  /** fetch data from the table: "operators" using primary key columns */
+  operators_by_pk?: Maybe<Operators>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
 };
 
 
-export type Query_RootMember_Active_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+export type Query_RootMembarRestoredArgs = {
+  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
+  where?: InputMaybe<MembarRestored_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Active_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+export type Query_RootMembarRestored_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
+  where?: InputMaybe<MembarRestored_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Active_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Query_RootMembarRestored_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootMember_BannedArgs = {
-  distinct_on?: InputMaybe<Array<Member_Banned_Select_Column>>;
+export type Query_RootMemberActiveArgs = {
+  distinct_on?: InputMaybe<Array<MemberActive_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Banned_Order_By>>;
-  where?: InputMaybe<Member_Banned_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberActive_Order_By>>;
+  where?: InputMaybe<MemberActive_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Banned_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Banned_Select_Column>>;
+export type Query_RootMemberActive_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberActive_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Banned_Order_By>>;
-  where?: InputMaybe<Member_Banned_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberActive_Order_By>>;
+  where?: InputMaybe<MemberActive_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Banned_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Query_RootMemberActive_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootMember_Pending_Activations_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Pending_Activations_Test_Select_Column>>;
+export type Query_RootMemberBannedArgs = {
+  distinct_on?: InputMaybe<Array<MemberBanned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Pending_Activations_Test_Order_By>>;
-  where?: InputMaybe<Member_Pending_Activations_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberBanned_Order_By>>;
+  where?: InputMaybe<MemberBanned_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Pending_Activations_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Pending_Activations_Test_Select_Column>>;
+export type Query_RootMemberBanned_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberBanned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Pending_Activations_Test_Order_By>>;
-  where?: InputMaybe<Member_Pending_Activations_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberBanned_Order_By>>;
+  where?: InputMaybe<MemberBanned_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Pending_Activations_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Query_RootMemberBanned_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootMember_Resigned_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
+export type Query_RootMemberPendingActivationArgs = {
+  distinct_on?: InputMaybe<Array<MemberPendingActivation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberPendingActivation_Order_By>>;
+  where?: InputMaybe<MemberPendingActivation_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Resigned_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
+export type Query_RootMemberPendingActivation_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberPendingActivation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberPendingActivation_Order_By>>;
+  where?: InputMaybe<MemberPendingActivation_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Resigned_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Query_RootMemberPendingActivation_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootMember_RestoredArgs = {
-  distinct_on?: InputMaybe<Array<Member_Restored_Select_Column>>;
+export type Query_RootMemberResignedArgs = {
+  distinct_on?: InputMaybe<Array<MemberResigned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Restored_Order_By>>;
-  where?: InputMaybe<Member_Restored_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberResigned_Order_By>>;
+  where?: InputMaybe<MemberResigned_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Restored_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Restored_Select_Column>>;
+export type Query_RootMemberResigned_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberResigned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Restored_Order_By>>;
-  where?: InputMaybe<Member_Restored_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberResigned_Order_By>>;
+  where?: InputMaybe<MemberResigned_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Restored_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Query_RootMemberResigned_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootMember_Status_Activities_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Status_Activities_Test_Select_Column>>;
+export type Query_RootMemberStatusActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Status_Activities_Test_Order_By>>;
-  where?: InputMaybe<Member_Status_Activities_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberStatusActivities_Order_By>>;
+  where?: InputMaybe<MemberStatusActivities_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Status_Activities_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Status_Activities_Test_Select_Column>>;
+export type Query_RootMemberStatusActivities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Status_Activities_Test_Order_By>>;
-  where?: InputMaybe<Member_Status_Activities_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberStatusActivities_Order_By>>;
+  where?: InputMaybe<MemberStatusActivities_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Status_Activities_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Query_RootMemberStatusActivities_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootMembers_TestArgs = {
-  distinct_on?: InputMaybe<Array<Members_Test_Select_Column>>;
+export type Query_RootMembersArgs = {
+  distinct_on?: InputMaybe<Array<Members_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Members_Test_Order_By>>;
-  where?: InputMaybe<Members_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Members_Order_By>>;
+  where?: InputMaybe<Members_Bool_Exp>;
 };
 
 
-export type Query_RootMembers_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Members_Test_Select_Column>>;
+export type Query_RootMembers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Members_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Members_Test_Order_By>>;
-  where?: InputMaybe<Members_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Members_Order_By>>;
+  where?: InputMaybe<Members_Bool_Exp>;
 };
 
 
-export type Query_RootMembers_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Query_RootMembers_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootOperators_TestArgs = {
-  distinct_on?: InputMaybe<Array<Operators_Test_Select_Column>>;
+export type Query_RootOperatorsArgs = {
+  distinct_on?: InputMaybe<Array<Operators_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Operators_Test_Order_By>>;
-  where?: InputMaybe<Operators_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Operators_Order_By>>;
+  where?: InputMaybe<Operators_Bool_Exp>;
 };
 
 
-export type Query_RootOperators_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Operators_Test_Select_Column>>;
+export type Query_RootOperators_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Operators_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Operators_Test_Order_By>>;
-  where?: InputMaybe<Operators_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Operators_Order_By>>;
+  where?: InputMaybe<Operators_Bool_Exp>;
 };
 
 
-export type Query_RootOperators_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Query_RootOperators_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
-export type Query_RootTable_Tennis_TablesArgs = {
-  distinct_on?: InputMaybe<Array<Table_Tennis_Tables_Select_Column>>;
+export type Query_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Table_Tennis_Tables_Order_By>>;
-  where?: InputMaybe<Table_Tennis_Tables_Bool_Exp>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 
-export type Query_RootTable_Tennis_Tables_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Table_Tennis_Tables_Select_Column>>;
+export type Query_RootUsers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Table_Tennis_Tables_Order_By>>;
-  where?: InputMaybe<Table_Tennis_Tables_Bool_Exp>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 
-export type Query_RootTable_Tennis_Tables_By_PkArgs = {
-  id: Scalars['Int']['input'];
-};
-
-
-export type Query_RootUsers_TestArgs = {
-  distinct_on?: InputMaybe<Array<Users_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Users_Test_Order_By>>;
-  where?: InputMaybe<Users_Test_Bool_Exp>;
-};
-
-
-export type Query_RootUsers_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Users_Test_Order_By>>;
-  where?: InputMaybe<Users_Test_Bool_Exp>;
-};
-
-
-export type Query_RootUsers_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Query_RootUsers_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 export type Subscription_Root = {
-  /** fetch data from the table: "member_active_test" */
-  member_active_test: Array<Member_Active_Test>;
-  /** fetch aggregated fields from the table: "member_active_test" */
-  member_active_test_aggregate: Member_Active_Test_Aggregate;
-  /** fetch data from the table: "member_active_test" using primary key columns */
-  member_active_test_by_pk?: Maybe<Member_Active_Test>;
-  /** fetch data from the table in a streaming manner: "member_active_test" */
-  member_active_test_stream: Array<Member_Active_Test>;
-  /** fetch data from the table: "member_banned" */
-  member_banned: Array<Member_Banned>;
-  /** fetch aggregated fields from the table: "member_banned" */
-  member_banned_aggregate: Member_Banned_Aggregate;
-  /** fetch data from the table: "member_banned" using primary key columns */
-  member_banned_by_pk?: Maybe<Member_Banned>;
-  /** fetch data from the table in a streaming manner: "member_banned" */
-  member_banned_stream: Array<Member_Banned>;
-  /** fetch data from the table: "member_pending_activations_test" */
-  member_pending_activations_test: Array<Member_Pending_Activations_Test>;
-  /** fetch aggregated fields from the table: "member_pending_activations_test" */
-  member_pending_activations_test_aggregate: Member_Pending_Activations_Test_Aggregate;
-  /** fetch data from the table: "member_pending_activations_test" using primary key columns */
-  member_pending_activations_test_by_pk?: Maybe<Member_Pending_Activations_Test>;
-  /** fetch data from the table in a streaming manner: "member_pending_activations_test" */
-  member_pending_activations_test_stream: Array<Member_Pending_Activations_Test>;
-  /** fetch data from the table: "member_resigned_test" */
-  member_resigned_test: Array<Member_Resigned_Test>;
-  /** fetch aggregated fields from the table: "member_resigned_test" */
-  member_resigned_test_aggregate: Member_Resigned_Test_Aggregate;
-  /** fetch data from the table: "member_resigned_test" using primary key columns */
-  member_resigned_test_by_pk?: Maybe<Member_Resigned_Test>;
-  /** fetch data from the table in a streaming manner: "member_resigned_test" */
-  member_resigned_test_stream: Array<Member_Resigned_Test>;
-  /** fetch data from the table: "member_restored" */
-  member_restored: Array<Member_Restored>;
-  /** fetch aggregated fields from the table: "member_restored" */
-  member_restored_aggregate: Member_Restored_Aggregate;
-  /** fetch data from the table: "member_restored" using primary key columns */
-  member_restored_by_pk?: Maybe<Member_Restored>;
-  /** fetch data from the table in a streaming manner: "member_restored" */
-  member_restored_stream: Array<Member_Restored>;
-  /** fetch data from the table: "member_status_activities_test" */
-  member_status_activities_test: Array<Member_Status_Activities_Test>;
-  /** fetch aggregated fields from the table: "member_status_activities_test" */
-  member_status_activities_test_aggregate: Member_Status_Activities_Test_Aggregate;
-  /** fetch data from the table: "member_status_activities_test" using primary key columns */
-  member_status_activities_test_by_pk?: Maybe<Member_Status_Activities_Test>;
-  /** fetch data from the table in a streaming manner: "member_status_activities_test" */
-  member_status_activities_test_stream: Array<Member_Status_Activities_Test>;
-  /** fetch data from the table: "members_test" */
-  members_test: Array<Members_Test>;
-  /** fetch aggregated fields from the table: "members_test" */
-  members_test_aggregate: Members_Test_Aggregate;
-  /** fetch data from the table: "members_test" using primary key columns */
-  members_test_by_pk?: Maybe<Members_Test>;
-  /** fetch data from the table in a streaming manner: "members_test" */
-  members_test_stream: Array<Members_Test>;
-  /** fetch data from the table: "operators_test" */
-  operators_test: Array<Operators_Test>;
-  /** fetch aggregated fields from the table: "operators_test" */
-  operators_test_aggregate: Operators_Test_Aggregate;
-  /** fetch data from the table: "operators_test" using primary key columns */
-  operators_test_by_pk?: Maybe<Operators_Test>;
-  /** fetch data from the table in a streaming manner: "operators_test" */
-  operators_test_stream: Array<Operators_Test>;
-  /** fetch data from the table: "table_tennis_tables" */
-  table_tennis_tables: Array<Table_Tennis_Tables>;
-  /** fetch aggregated fields from the table: "table_tennis_tables" */
-  table_tennis_tables_aggregate: Table_Tennis_Tables_Aggregate;
-  /** fetch data from the table: "table_tennis_tables" using primary key columns */
-  table_tennis_tables_by_pk?: Maybe<Table_Tennis_Tables>;
-  /** fetch data from the table in a streaming manner: "table_tennis_tables" */
-  table_tennis_tables_stream: Array<Table_Tennis_Tables>;
-  /** fetch data from the table: "users_test" */
-  users_test: Array<Users_Test>;
-  /** fetch aggregated fields from the table: "users_test" */
-  users_test_aggregate: Users_Test_Aggregate;
-  /** fetch data from the table: "users_test" using primary key columns */
-  users_test_by_pk?: Maybe<Users_Test>;
-  /** fetch data from the table in a streaming manner: "users_test" */
-  users_test_stream: Array<Users_Test>;
+  /** fetch data from the table: "membarRestored" */
+  membarRestored: Array<MembarRestored>;
+  /** fetch aggregated fields from the table: "membarRestored" */
+  membarRestored_aggregate: MembarRestored_Aggregate;
+  /** fetch data from the table: "membarRestored" using primary key columns */
+  membarRestored_by_pk?: Maybe<MembarRestored>;
+  /** fetch data from the table in a streaming manner: "membarRestored" */
+  membarRestored_stream: Array<MembarRestored>;
+  /** fetch data from the table: "memberActive" */
+  memberActive: Array<MemberActive>;
+  /** fetch aggregated fields from the table: "memberActive" */
+  memberActive_aggregate: MemberActive_Aggregate;
+  /** fetch data from the table: "memberActive" using primary key columns */
+  memberActive_by_pk?: Maybe<MemberActive>;
+  /** fetch data from the table in a streaming manner: "memberActive" */
+  memberActive_stream: Array<MemberActive>;
+  /** fetch data from the table: "memberBanned" */
+  memberBanned: Array<MemberBanned>;
+  /** fetch aggregated fields from the table: "memberBanned" */
+  memberBanned_aggregate: MemberBanned_Aggregate;
+  /** fetch data from the table: "memberBanned" using primary key columns */
+  memberBanned_by_pk?: Maybe<MemberBanned>;
+  /** fetch data from the table in a streaming manner: "memberBanned" */
+  memberBanned_stream: Array<MemberBanned>;
+  /** fetch data from the table: "memberPendingActivation" */
+  memberPendingActivation: Array<MemberPendingActivation>;
+  /** fetch aggregated fields from the table: "memberPendingActivation" */
+  memberPendingActivation_aggregate: MemberPendingActivation_Aggregate;
+  /** fetch data from the table: "memberPendingActivation" using primary key columns */
+  memberPendingActivation_by_pk?: Maybe<MemberPendingActivation>;
+  /** fetch data from the table in a streaming manner: "memberPendingActivation" */
+  memberPendingActivation_stream: Array<MemberPendingActivation>;
+  /** fetch data from the table: "memberResigned" */
+  memberResigned: Array<MemberResigned>;
+  /** fetch aggregated fields from the table: "memberResigned" */
+  memberResigned_aggregate: MemberResigned_Aggregate;
+  /** fetch data from the table: "memberResigned" using primary key columns */
+  memberResigned_by_pk?: Maybe<MemberResigned>;
+  /** fetch data from the table in a streaming manner: "memberResigned" */
+  memberResigned_stream: Array<MemberResigned>;
+  /** fetch data from the table: "memberStatusActivities" */
+  memberStatusActivities: Array<MemberStatusActivities>;
+  /** fetch aggregated fields from the table: "memberStatusActivities" */
+  memberStatusActivities_aggregate: MemberStatusActivities_Aggregate;
+  /** fetch data from the table: "memberStatusActivities" using primary key columns */
+  memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
+  /** fetch data from the table in a streaming manner: "memberStatusActivities" */
+  memberStatusActivities_stream: Array<MemberStatusActivities>;
+  /** fetch data from the table: "members" */
+  members: Array<Members>;
+  /** fetch aggregated fields from the table: "members" */
+  members_aggregate: Members_Aggregate;
+  /** fetch data from the table: "members" using primary key columns */
+  members_by_pk?: Maybe<Members>;
+  /** fetch data from the table in a streaming manner: "members" */
+  members_stream: Array<Members>;
+  /** fetch data from the table: "operators" */
+  operators: Array<Operators>;
+  /** fetch aggregated fields from the table: "operators" */
+  operators_aggregate: Operators_Aggregate;
+  /** fetch data from the table: "operators" using primary key columns */
+  operators_by_pk?: Maybe<Operators>;
+  /** fetch data from the table in a streaming manner: "operators" */
+  operators_stream: Array<Operators>;
+  /** fetch data from the table: "users" */
+  users: Array<Users>;
+  /** fetch aggregated fields from the table: "users" */
+  users_aggregate: Users_Aggregate;
+  /** fetch data from the table: "users" using primary key columns */
+  users_by_pk?: Maybe<Users>;
+  /** fetch data from the table in a streaming manner: "users" */
+  users_stream: Array<Users>;
 };
 
 
-export type Subscription_RootMember_Active_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+export type Subscription_RootMembarRestoredArgs = {
+  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
+  where?: InputMaybe<MembarRestored_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Active_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Active_Test_Select_Column>>;
+export type Subscription_RootMembarRestored_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Active_Test_Order_By>>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
+  where?: InputMaybe<MembarRestored_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Active_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Subscription_RootMembarRestored_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootMember_Active_Test_StreamArgs = {
+export type Subscription_RootMembarRestored_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Member_Active_Test_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_Active_Test_Bool_Exp>;
+  cursor: Array<InputMaybe<MembarRestored_Stream_Cursor_Input>>;
+  where?: InputMaybe<MembarRestored_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_BannedArgs = {
-  distinct_on?: InputMaybe<Array<Member_Banned_Select_Column>>;
+export type Subscription_RootMemberActiveArgs = {
+  distinct_on?: InputMaybe<Array<MemberActive_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Banned_Order_By>>;
-  where?: InputMaybe<Member_Banned_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberActive_Order_By>>;
+  where?: InputMaybe<MemberActive_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Banned_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Banned_Select_Column>>;
+export type Subscription_RootMemberActive_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberActive_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Banned_Order_By>>;
-  where?: InputMaybe<Member_Banned_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberActive_Order_By>>;
+  where?: InputMaybe<MemberActive_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Banned_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Subscription_RootMemberActive_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootMember_Banned_StreamArgs = {
+export type Subscription_RootMemberActive_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Member_Banned_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_Banned_Bool_Exp>;
+  cursor: Array<InputMaybe<MemberActive_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberActive_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Pending_Activations_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Pending_Activations_Test_Select_Column>>;
+export type Subscription_RootMemberBannedArgs = {
+  distinct_on?: InputMaybe<Array<MemberBanned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Pending_Activations_Test_Order_By>>;
-  where?: InputMaybe<Member_Pending_Activations_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberBanned_Order_By>>;
+  where?: InputMaybe<MemberBanned_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Pending_Activations_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Pending_Activations_Test_Select_Column>>;
+export type Subscription_RootMemberBanned_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberBanned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Pending_Activations_Test_Order_By>>;
-  where?: InputMaybe<Member_Pending_Activations_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberBanned_Order_By>>;
+  where?: InputMaybe<MemberBanned_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Pending_Activations_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Subscription_RootMemberBanned_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootMember_Pending_Activations_Test_StreamArgs = {
+export type Subscription_RootMemberBanned_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Member_Pending_Activations_Test_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_Pending_Activations_Test_Bool_Exp>;
+  cursor: Array<InputMaybe<MemberBanned_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberBanned_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Resigned_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
+export type Subscription_RootMemberPendingActivationArgs = {
+  distinct_on?: InputMaybe<Array<MemberPendingActivation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberPendingActivation_Order_By>>;
+  where?: InputMaybe<MemberPendingActivation_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Resigned_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Resigned_Test_Select_Column>>;
+export type Subscription_RootMemberPendingActivation_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberPendingActivation_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Resigned_Test_Order_By>>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberPendingActivation_Order_By>>;
+  where?: InputMaybe<MemberPendingActivation_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Resigned_Test_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Subscription_RootMemberPendingActivation_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootMember_Resigned_Test_StreamArgs = {
+export type Subscription_RootMemberPendingActivation_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Member_Resigned_Test_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_Resigned_Test_Bool_Exp>;
+  cursor: Array<InputMaybe<MemberPendingActivation_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberPendingActivation_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_RestoredArgs = {
-  distinct_on?: InputMaybe<Array<Member_Restored_Select_Column>>;
+export type Subscription_RootMemberResignedArgs = {
+  distinct_on?: InputMaybe<Array<MemberResigned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Restored_Order_By>>;
-  where?: InputMaybe<Member_Restored_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberResigned_Order_By>>;
+  where?: InputMaybe<MemberResigned_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Restored_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Restored_Select_Column>>;
+export type Subscription_RootMemberResigned_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberResigned_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Restored_Order_By>>;
-  where?: InputMaybe<Member_Restored_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberResigned_Order_By>>;
+  where?: InputMaybe<MemberResigned_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Restored_By_PkArgs = {
-  created_at: Scalars['timestamptz']['input'];
+export type Subscription_RootMemberResigned_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootMember_Restored_StreamArgs = {
+export type Subscription_RootMemberResigned_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Member_Restored_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_Restored_Bool_Exp>;
+  cursor: Array<InputMaybe<MemberResigned_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberResigned_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Status_Activities_TestArgs = {
-  distinct_on?: InputMaybe<Array<Member_Status_Activities_Test_Select_Column>>;
+export type Subscription_RootMemberStatusActivitiesArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Status_Activities_Test_Order_By>>;
-  where?: InputMaybe<Member_Status_Activities_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberStatusActivities_Order_By>>;
+  where?: InputMaybe<MemberStatusActivities_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Status_Activities_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Status_Activities_Test_Select_Column>>;
+export type Subscription_RootMemberStatusActivities_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Member_Status_Activities_Test_Order_By>>;
-  where?: InputMaybe<Member_Status_Activities_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<MemberStatusActivities_Order_By>>;
+  where?: InputMaybe<MemberStatusActivities_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Status_Activities_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Subscription_RootMemberStatusActivities_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootMember_Status_Activities_Test_StreamArgs = {
+export type Subscription_RootMemberStatusActivities_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Member_Status_Activities_Test_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_Status_Activities_Test_Bool_Exp>;
+  cursor: Array<InputMaybe<MemberStatusActivities_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberStatusActivities_Bool_Exp>;
 };
 
 
-export type Subscription_RootMembers_TestArgs = {
-  distinct_on?: InputMaybe<Array<Members_Test_Select_Column>>;
+export type Subscription_RootMembersArgs = {
+  distinct_on?: InputMaybe<Array<Members_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Members_Test_Order_By>>;
-  where?: InputMaybe<Members_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Members_Order_By>>;
+  where?: InputMaybe<Members_Bool_Exp>;
 };
 
 
-export type Subscription_RootMembers_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Members_Test_Select_Column>>;
+export type Subscription_RootMembers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Members_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Members_Test_Order_By>>;
-  where?: InputMaybe<Members_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Members_Order_By>>;
+  where?: InputMaybe<Members_Bool_Exp>;
 };
 
 
-export type Subscription_RootMembers_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Subscription_RootMembers_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootMembers_Test_StreamArgs = {
+export type Subscription_RootMembers_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Members_Test_Stream_Cursor_Input>>;
-  where?: InputMaybe<Members_Test_Bool_Exp>;
+  cursor: Array<InputMaybe<Members_Stream_Cursor_Input>>;
+  where?: InputMaybe<Members_Bool_Exp>;
 };
 
 
-export type Subscription_RootOperators_TestArgs = {
-  distinct_on?: InputMaybe<Array<Operators_Test_Select_Column>>;
+export type Subscription_RootOperatorsArgs = {
+  distinct_on?: InputMaybe<Array<Operators_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Operators_Test_Order_By>>;
-  where?: InputMaybe<Operators_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Operators_Order_By>>;
+  where?: InputMaybe<Operators_Bool_Exp>;
 };
 
 
-export type Subscription_RootOperators_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Operators_Test_Select_Column>>;
+export type Subscription_RootOperators_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Operators_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Operators_Test_Order_By>>;
-  where?: InputMaybe<Operators_Test_Bool_Exp>;
+  order_by?: InputMaybe<Array<Operators_Order_By>>;
+  where?: InputMaybe<Operators_Bool_Exp>;
 };
 
 
-export type Subscription_RootOperators_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
+export type Subscription_RootOperators_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootOperators_Test_StreamArgs = {
+export type Subscription_RootOperators_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Operators_Test_Stream_Cursor_Input>>;
-  where?: InputMaybe<Operators_Test_Bool_Exp>;
+  cursor: Array<InputMaybe<Operators_Stream_Cursor_Input>>;
+  where?: InputMaybe<Operators_Bool_Exp>;
 };
 
 
-export type Subscription_RootTable_Tennis_TablesArgs = {
-  distinct_on?: InputMaybe<Array<Table_Tennis_Tables_Select_Column>>;
+export type Subscription_RootUsersArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Table_Tennis_Tables_Order_By>>;
-  where?: InputMaybe<Table_Tennis_Tables_Bool_Exp>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 
-export type Subscription_RootTable_Tennis_Tables_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Table_Tennis_Tables_Select_Column>>;
+export type Subscription_RootUsers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Users_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Table_Tennis_Tables_Order_By>>;
-  where?: InputMaybe<Table_Tennis_Tables_Bool_Exp>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 
-export type Subscription_RootTable_Tennis_Tables_By_PkArgs = {
-  id: Scalars['Int']['input'];
+export type Subscription_RootUsers_By_PkArgs = {
+  id: Scalars['uuid']['input'];
 };
 
 
-export type Subscription_RootTable_Tennis_Tables_StreamArgs = {
+export type Subscription_RootUsers_StreamArgs = {
   batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Table_Tennis_Tables_Stream_Cursor_Input>>;
-  where?: InputMaybe<Table_Tennis_Tables_Bool_Exp>;
-};
-
-
-export type Subscription_RootUsers_TestArgs = {
-  distinct_on?: InputMaybe<Array<Users_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Users_Test_Order_By>>;
-  where?: InputMaybe<Users_Test_Bool_Exp>;
-};
-
-
-export type Subscription_RootUsers_Test_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Users_Test_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<Users_Test_Order_By>>;
-  where?: InputMaybe<Users_Test_Bool_Exp>;
-};
-
-
-export type Subscription_RootUsers_Test_By_PkArgs = {
-  id: Scalars['bigint']['input'];
-};
-
-
-export type Subscription_RootUsers_Test_StreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<Users_Test_Stream_Cursor_Input>>;
-  where?: InputMaybe<Users_Test_Bool_Exp>;
-};
-
-/** columns and relationships of "table_tennis_tables" */
-export type Table_Tennis_Tables = {
-  id: Scalars['Int']['output'];
-  name: Scalars['name']['output'];
-};
-
-/** aggregated selection of "table_tennis_tables" */
-export type Table_Tennis_Tables_Aggregate = {
-  aggregate?: Maybe<Table_Tennis_Tables_Aggregate_Fields>;
-  nodes: Array<Table_Tennis_Tables>;
-};
-
-/** aggregate fields of "table_tennis_tables" */
-export type Table_Tennis_Tables_Aggregate_Fields = {
-  avg?: Maybe<Table_Tennis_Tables_Avg_Fields>;
-  count: Scalars['Int']['output'];
-  max?: Maybe<Table_Tennis_Tables_Max_Fields>;
-  min?: Maybe<Table_Tennis_Tables_Min_Fields>;
-  stddev?: Maybe<Table_Tennis_Tables_Stddev_Fields>;
-  stddev_pop?: Maybe<Table_Tennis_Tables_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Table_Tennis_Tables_Stddev_Samp_Fields>;
-  sum?: Maybe<Table_Tennis_Tables_Sum_Fields>;
-  var_pop?: Maybe<Table_Tennis_Tables_Var_Pop_Fields>;
-  var_samp?: Maybe<Table_Tennis_Tables_Var_Samp_Fields>;
-  variance?: Maybe<Table_Tennis_Tables_Variance_Fields>;
-};
-
-
-/** aggregate fields of "table_tennis_tables" */
-export type Table_Tennis_Tables_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Table_Tennis_Tables_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** aggregate avg on columns */
-export type Table_Tennis_Tables_Avg_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Boolean expression to filter rows from the table "table_tennis_tables". All fields are combined with a logical 'AND'. */
-export type Table_Tennis_Tables_Bool_Exp = {
-  _and?: InputMaybe<Array<Table_Tennis_Tables_Bool_Exp>>;
-  _not?: InputMaybe<Table_Tennis_Tables_Bool_Exp>;
-  _or?: InputMaybe<Array<Table_Tennis_Tables_Bool_Exp>>;
-  id?: InputMaybe<Int_Comparison_Exp>;
-  name?: InputMaybe<Name_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "table_tennis_tables" */
-export enum Table_Tennis_Tables_Constraint {
-  /** unique or primary key constraint on columns "id" */
-  TableTennisTablesPkey = 'table_tennis_tables_pkey'
-}
-
-/** input type for incrementing numeric columns in table "table_tennis_tables" */
-export type Table_Tennis_Tables_Inc_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-};
-
-/** input type for inserting data into table "table_tennis_tables" */
-export type Table_Tennis_Tables_Insert_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-  name?: InputMaybe<Scalars['name']['input']>;
-};
-
-/** aggregate max on columns */
-export type Table_Tennis_Tables_Max_Fields = {
-  id?: Maybe<Scalars['Int']['output']>;
-};
-
-/** aggregate min on columns */
-export type Table_Tennis_Tables_Min_Fields = {
-  id?: Maybe<Scalars['Int']['output']>;
-};
-
-/** response of any mutation on the table "table_tennis_tables" */
-export type Table_Tennis_Tables_Mutation_Response = {
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int']['output'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Table_Tennis_Tables>;
-};
-
-/** on_conflict condition type for table "table_tennis_tables" */
-export type Table_Tennis_Tables_On_Conflict = {
-  constraint: Table_Tennis_Tables_Constraint;
-  update_columns?: Array<Table_Tennis_Tables_Update_Column>;
-  where?: InputMaybe<Table_Tennis_Tables_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "table_tennis_tables". */
-export type Table_Tennis_Tables_Order_By = {
-  id?: InputMaybe<Order_By>;
-  name?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: table_tennis_tables */
-export type Table_Tennis_Tables_Pk_Columns_Input = {
-  id: Scalars['Int']['input'];
-};
-
-/** select columns of table "table_tennis_tables" */
-export enum Table_Tennis_Tables_Select_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name'
-}
-
-/** input type for updating data in table "table_tennis_tables" */
-export type Table_Tennis_Tables_Set_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-  name?: InputMaybe<Scalars['name']['input']>;
-};
-
-/** aggregate stddev on columns */
-export type Table_Tennis_Tables_Stddev_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Table_Tennis_Tables_Stddev_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Table_Tennis_Tables_Stddev_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "table_tennis_tables" */
-export type Table_Tennis_Tables_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Table_Tennis_Tables_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Table_Tennis_Tables_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-  name?: InputMaybe<Scalars['name']['input']>;
-};
-
-/** aggregate sum on columns */
-export type Table_Tennis_Tables_Sum_Fields = {
-  id?: Maybe<Scalars['Int']['output']>;
-};
-
-/** update columns of table "table_tennis_tables" */
-export enum Table_Tennis_Tables_Update_Column {
-  /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name'
-}
-
-export type Table_Tennis_Tables_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Table_Tennis_Tables_Inc_Input>;
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Table_Tennis_Tables_Set_Input>;
-  /** filter the rows which have to be updated */
-  where: Table_Tennis_Tables_Bool_Exp;
-};
-
-/** aggregate var_pop on columns */
-export type Table_Tennis_Tables_Var_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Table_Tennis_Tables_Var_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Table_Tennis_Tables_Variance_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
+  cursor: Array<InputMaybe<Users_Stream_Cursor_Input>>;
+  where?: InputMaybe<Users_Bool_Exp>;
 };
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
@@ -3443,220 +2627,174 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']['input']>>;
 };
 
-/** columns and relationships of "users_test" */
-export type Users_Test = {
-  id: Scalars['bigint']['output'];
-  name: Scalars['String']['output'];
+/** columns and relationships of "users" */
+export type Users = {
+  id: Scalars['uuid']['output'];
 };
 
-/** aggregated selection of "users_test" */
-export type Users_Test_Aggregate = {
-  aggregate?: Maybe<Users_Test_Aggregate_Fields>;
-  nodes: Array<Users_Test>;
+/** aggregated selection of "users" */
+export type Users_Aggregate = {
+  aggregate?: Maybe<Users_Aggregate_Fields>;
+  nodes: Array<Users>;
 };
 
-/** aggregate fields of "users_test" */
-export type Users_Test_Aggregate_Fields = {
-  avg?: Maybe<Users_Test_Avg_Fields>;
+/** aggregate fields of "users" */
+export type Users_Aggregate_Fields = {
   count: Scalars['Int']['output'];
-  max?: Maybe<Users_Test_Max_Fields>;
-  min?: Maybe<Users_Test_Min_Fields>;
-  stddev?: Maybe<Users_Test_Stddev_Fields>;
-  stddev_pop?: Maybe<Users_Test_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<Users_Test_Stddev_Samp_Fields>;
-  sum?: Maybe<Users_Test_Sum_Fields>;
-  var_pop?: Maybe<Users_Test_Var_Pop_Fields>;
-  var_samp?: Maybe<Users_Test_Var_Samp_Fields>;
-  variance?: Maybe<Users_Test_Variance_Fields>;
+  max?: Maybe<Users_Max_Fields>;
+  min?: Maybe<Users_Min_Fields>;
 };
 
 
-/** aggregate fields of "users_test" */
-export type Users_Test_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Users_Test_Select_Column>>;
+/** aggregate fields of "users" */
+export type Users_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Users_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** aggregate avg on columns */
-export type Users_Test_Avg_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
+/** Boolean expression to filter rows from the table "users". All fields are combined with a logical 'AND'. */
+export type Users_Bool_Exp = {
+  _and?: InputMaybe<Array<Users_Bool_Exp>>;
+  _not?: InputMaybe<Users_Bool_Exp>;
+  _or?: InputMaybe<Array<Users_Bool_Exp>>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
-/** Boolean expression to filter rows from the table "users_test". All fields are combined with a logical 'AND'. */
-export type Users_Test_Bool_Exp = {
-  _and?: InputMaybe<Array<Users_Test_Bool_Exp>>;
-  _not?: InputMaybe<Users_Test_Bool_Exp>;
-  _or?: InputMaybe<Array<Users_Test_Bool_Exp>>;
-  id?: InputMaybe<Bigint_Comparison_Exp>;
-  name?: InputMaybe<String_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "users_test" */
-export enum Users_Test_Constraint {
+/** unique or primary key constraints on table "users" */
+export enum Users_Constraint {
   /** unique or primary key constraint on columns "id" */
-  UsersTestPkey = 'users_test_pkey'
+  UsersPkey = 'users_pkey'
 }
 
-/** input type for incrementing numeric columns in table "users_test" */
-export type Users_Test_Inc_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-};
-
-/** input type for inserting data into table "users_test" */
-export type Users_Test_Insert_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+/** input type for inserting data into table "users" */
+export type Users_Insert_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
 };
 
 /** aggregate max on columns */
-export type Users_Test_Max_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
+export type Users_Max_Fields = {
+  id?: Maybe<Scalars['uuid']['output']>;
 };
 
 /** aggregate min on columns */
-export type Users_Test_Min_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
+export type Users_Min_Fields = {
+  id?: Maybe<Scalars['uuid']['output']>;
 };
 
-/** response of any mutation on the table "users_test" */
-export type Users_Test_Mutation_Response = {
+/** response of any mutation on the table "users" */
+export type Users_Mutation_Response = {
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
-  returning: Array<Users_Test>;
+  returning: Array<Users>;
 };
 
-/** on_conflict condition type for table "users_test" */
-export type Users_Test_On_Conflict = {
-  constraint: Users_Test_Constraint;
-  update_columns?: Array<Users_Test_Update_Column>;
-  where?: InputMaybe<Users_Test_Bool_Exp>;
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
 };
 
-/** Ordering options when selecting data from "users_test". */
-export type Users_Test_Order_By = {
+/** on_conflict condition type for table "users" */
+export type Users_On_Conflict = {
+  constraint: Users_Constraint;
+  update_columns?: Array<Users_Update_Column>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "users". */
+export type Users_Order_By = {
   id?: InputMaybe<Order_By>;
-  name?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: users_test */
-export type Users_Test_Pk_Columns_Input = {
-  id: Scalars['bigint']['input'];
+/** primary key columns input for table: users */
+export type Users_Pk_Columns_Input = {
+  id: Scalars['uuid']['input'];
 };
 
-/** select columns of table "users_test" */
-export enum Users_Test_Select_Column {
+/** select columns of table "users" */
+export enum Users_Select_Column {
   /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name'
+  Id = 'id'
 }
 
-/** input type for updating data in table "users_test" */
-export type Users_Test_Set_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+/** input type for updating data in table "users" */
+export type Users_Set_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate stddev on columns */
-export type Users_Test_Stddev_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type Users_Test_Stddev_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type Users_Test_Stddev_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** Streaming cursor of the table "users_test" */
-export type Users_Test_Stream_Cursor_Input = {
+/** Streaming cursor of the table "users" */
+export type Users_Stream_Cursor_Input = {
   /** Stream column input with initial value */
-  initial_value: Users_Test_Stream_Cursor_Value_Input;
+  initial_value: Users_Stream_Cursor_Value_Input;
   /** cursor ordering */
   ordering?: InputMaybe<Cursor_Ordering>;
 };
 
 /** Initial value of the column from where the streaming should start */
-export type Users_Test_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['bigint']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+export type Users_Stream_Cursor_Value_Input = {
+  id?: InputMaybe<Scalars['uuid']['input']>;
 };
 
-/** aggregate sum on columns */
-export type Users_Test_Sum_Fields = {
-  id?: Maybe<Scalars['bigint']['output']>;
-};
-
-/** update columns of table "users_test" */
-export enum Users_Test_Update_Column {
+/** update columns of table "users" */
+export enum Users_Update_Column {
   /** column name */
-  Id = 'id',
-  /** column name */
-  Name = 'name'
+  Id = 'id'
 }
 
-export type Users_Test_Updates = {
-  /** increments the numeric columns with given value of the filtered values */
-  _inc?: InputMaybe<Users_Test_Inc_Input>;
+export type Users_Updates = {
   /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<Users_Test_Set_Input>;
+  _set?: InputMaybe<Users_Set_Input>;
   /** filter the rows which have to be updated */
-  where: Users_Test_Bool_Exp;
+  where: Users_Bool_Exp;
 };
 
-/** aggregate var_pop on columns */
-export type Users_Test_Var_Pop_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate var_samp on columns */
-export type Users_Test_Var_Samp_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
-};
-
-/** aggregate variance on columns */
-export type Users_Test_Variance_Fields = {
-  id?: Maybe<Scalars['Float']['output']>;
+/** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
+export type Uuid_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['uuid']['input']>;
+  _gt?: InputMaybe<Scalars['uuid']['input']>;
+  _gte?: InputMaybe<Scalars['uuid']['input']>;
+  _in?: InputMaybe<Array<Scalars['uuid']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['uuid']['input']>;
+  _lte?: InputMaybe<Scalars['uuid']['input']>;
+  _neq?: InputMaybe<Scalars['uuid']['input']>;
+  _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
 export type ResignMemberMutationVariables = Exact<{
-  activity_input: Member_Status_Activities_Test_Insert_Input;
+  activityInput: MemberStatusActivities_Insert_Input;
 }>;
 
 
-export type ResignMemberMutation = { insert_member_status_activities_test_one?: Maybe<(
-    Pick<Member_Status_Activities_Test, 'member_id' | 'status'>
-    & { member_resign?: Maybe<Pick<Member_Resigned_Test, 'reason' | 'reason_detail' | 'agreement' | 'member_id'>> }
+export type ResignMemberMutation = { insert_memberStatusActivities_one?: Maybe<(
+    Pick<MemberStatusActivities, 'memberId' | 'status'>
+    & { memberResigned?: Maybe<Pick<MemberResigned, 'reasonType' | 'memberId' | 'reasonDetail' | 'agreement' | 'email'>> }
   )> };
 
 export type GetActiveMemberQueryVariables = Exact<{
-  member_id: Scalars['bigint']['input'];
+  memberId: Scalars['uuid']['input'];
 }>;
 
 
-export type GetActiveMemberQuery = { member_status_activities_test: Array<(
-    Pick<Member_Status_Activities_Test, 'id' | 'member_id' | 'status' | 'created_at'>
-    & { member_active?: Maybe<Pick<Member_Active_Test, 'address' | 'birthday' | 'created_at' | 'member_id' | 'postal_code' | 'status_activity_id'>> }
+export type GetActiveMemberQuery = { memberStatusActivities: Array<(
+    Pick<MemberStatusActivities, 'id' | 'memberId' | 'status' | 'createdAt'>
+    & { memberActive?: Maybe<Pick<MemberActive, 'address' | 'birthday' | 'createdAt' | 'email' | 'memberId' | 'postalCode' | 'statusActivityId'>> }
   )> };
 
 
 export const ResignMemberDocument = gql`
-    mutation ResignMember($activity_input: member_status_activities_test_insert_input!) {
-  insert_member_status_activities_test_one(object: $activity_input) {
-    member_id
+    mutation ResignMember($activityInput: memberStatusActivities_insert_input!) {
+  insert_memberStatusActivities_one(object: $activityInput) {
+    memberId
     status
-    member_resign {
-      reason
-      reason_detail
+    memberResigned {
+      reasonType
+      memberId
+      reasonDetail
       agreement
-      member_id
+      email
     }
   }
 }
@@ -3676,7 +2814,7 @@ export type ResignMemberMutationFn = Apollo.MutationFunction<ResignMemberMutatio
  * @example
  * const [resignMemberMutation, { data, loading, error }] = useResignMemberMutation({
  *   variables: {
- *      activity_input: // value for 'activity_input'
+ *      activityInput: // value for 'activityInput'
  *   },
  * });
  */
@@ -3688,23 +2826,24 @@ export type ResignMemberMutationHookResult = ReturnType<typeof useResignMemberMu
 export type ResignMemberMutationResult = Apollo.MutationResult<ResignMemberMutation>;
 export type ResignMemberMutationOptions = Apollo.BaseMutationOptions<ResignMemberMutation, ResignMemberMutationVariables>;
 export const GetActiveMemberDocument = gql`
-    query GetActiveMember($member_id: bigint!) {
-  member_status_activities_test(
-    order_by: {created_at: desc}
+    query GetActiveMember($memberId: uuid!) {
+  memberStatusActivities(
+    where: {memberId: {_eq: $memberId}}
+    order_by: {createdAt: desc}
     limit: 1
-    where: {member_id: {_eq: $member_id}}
   ) {
     id
-    member_id
+    memberId
     status
-    created_at
-    member_active {
+    createdAt
+    memberActive {
       address
       birthday
-      created_at
-      member_id
-      postal_code
-      status_activity_id
+      createdAt
+      email
+      memberId
+      postalCode
+      statusActivityId
     }
   }
 }
@@ -3722,7 +2861,7 @@ export const GetActiveMemberDocument = gql`
  * @example
  * const { data, loading, error } = useGetActiveMemberQuery({
  *   variables: {
- *      member_id: // value for 'member_id'
+ *      memberId: // value for 'memberId'
  *   },
  * });
  */

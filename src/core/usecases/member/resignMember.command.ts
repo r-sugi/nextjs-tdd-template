@@ -1,11 +1,10 @@
 import { memberStatus } from "@/core/domains/member/status";
 import { updateMemberStatus } from "@/core/repositories/member/members.repository";
 
-// TODO: 退会理由: ユーザーが選択した選択肢(例: "利用しないため")
 type Props = {
-  reason_type: string;
-  reason: string;
-  reason_detail: string;
+  reasonType: string;
+  reasonDetail: string;
+  email: string;
 };
 
 type Option = {
@@ -14,20 +13,23 @@ type Option = {
 
 export const resignMember = async (props: Props, opt?: Option) => {
   const res = await updateMemberStatus({
-    activity_input: {
+    // TODO: 親子レコードを一回で登録できるようにテーブルを修正する
+    // TODO: variablesがanyになっているのを修正する
+    activityInput: {
       status: memberStatus.resigned,
-      member_id: 1, // TODO: ログインメンバーのID
-      member_resign: {
+      memberId: 'ff4b01ee-15e9-4e2e-acb3-25a0347af7c1', // TODO: ログインメンバーのID
+      memberResigned: {
         data: {
-          member_id: 1, // TODO: ログインメンバーのID
-          reason: props.reason,
+          memberId: 'ff4b01ee-15e9-4e2e-acb3-25a0347af7c1', // TODO: ログインメンバーのID
+          reasonType: props.reasonType,
           agreement: true,
-          reason_detail: props.reason_detail,
-          reason_type: props.reason_type,
+          email: props.email,
+          reasonDetail: props.reasonDetail,
         },
       },
     },
   });
+  debugger
   if (!res) {
     opt?.onError?.();
   }

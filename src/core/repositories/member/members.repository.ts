@@ -2,7 +2,7 @@ import { NEXT_PUBLIC_GRAPHQL_URI } from "@/const/env";
 import {
   GetActiveMemberDocument,
   GetActiveMemberQueryVariables,
-  Member_Status_Activities_Test,
+  MemberStatusActivities,
   ResignMemberMutationVariables,
   ResignMemberDocument,
 } from "@/generated/graphql";
@@ -11,18 +11,16 @@ import { print } from "graphql/language/printer";
 import { ActiveMember } from "@/core/domains/member/activeMember";
 import { transform } from "./activeMember.transformer";
 
-// TODO: よりよい型の指定方法があるか検討したい
-// TODO: graphQLClient(apiClientをラップした関数｀を作成する)
 export type FindMemberOneSuccess = {
   data: {
-    member_status_activities_test: Array<Member_Status_Activities_Test>;
+    memberStatusActivities: Array<MemberStatusActivities>;
   };
 };
 
+// TODO: graphQLClient(apiClientをラップした関数を作成する)
 export const findActiveMemberOne = async (
   variables: GetActiveMemberQueryVariables
 ): Promise<ActiveMember | null> => {
-  // TODO: graphQLClient(apiClientをラップした関数を作成する)
   const res = await apiClient<FindMemberOneSuccess>(NEXT_PUBLIC_GRAPHQL_URI, {
     method: "POST",
     body: JSON.stringify({
@@ -44,6 +42,8 @@ export const updateMemberStatus = async (
       query: print(ResignMemberDocument),
     }),
   });
+  debugger
+
   // TODO: エラー処理をここに書く（一旦ベタがきで）
   return true;
 };

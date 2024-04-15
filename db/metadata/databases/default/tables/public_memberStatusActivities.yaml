@@ -1,0 +1,49 @@
+table:
+  name: memberStatusActivities
+  schema: public
+object_relationships:
+  - name: memberActive
+    using:
+      manual_configuration:
+        column_mapping:
+          id: statusActivityId
+        insertion_order: null
+        remote_table:
+          name: memberActive
+          schema: public
+  - name: memberBanned
+    using:
+      manual_configuration:
+        column_mapping:
+          id: statusActivityId
+        insertion_order: null
+        remote_table:
+          name: memberBanned
+          schema: public
+  - name: memberPendingActivation
+    using:
+      manual_configuration:
+        column_mapping:
+          id: statusActivityId
+        insertion_order: null
+        remote_table:
+          name: memberPendingActivation
+          schema: public
+  - name: memberResigned
+    using:
+      manual_configuration:
+        column_mapping:
+          id: statusActivityId
+        insertion_order: null
+        remote_table:
+          name: memberResigned
+          schema: public
+  - name: memberRestored
+    using:
+      manual_configuration:
+        column_mapping:
+          id: statusActivityId
+        insertion_order: null
+        remote_table:
+          name: membarRestored
+          schema: public

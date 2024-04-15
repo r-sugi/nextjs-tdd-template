@@ -3,29 +3,22 @@ import { FindMemberOneSuccess } from "./members.repository";
 import { ActiveMember } from "@/core/domains/member/activeMember";
 import { memberStatus } from "@/core/domains/member/status";
 
-type Hoge = HttpResponse<FindMemberOneSuccess>;
+type Response = HttpResponse<FindMemberOneSuccess>;
 
-export const transform = (res: Hoge): ActiveMember | null => {
-  if (res.data.data.member_status_activities_test.length === 0) {
+export const transform = (res: Response): ActiveMember | null => {
+  if (res.data.data.memberStatusActivities.length === 0) {
     return null;
   } else if (
-    res.data.data.member_status_activities_test[0].member_active == null
+    res.data.data.memberStatusActivities[0].memberActive == null
   ) {
     return null;
   }
   const responseActiveMember =
-    res.data.data.member_status_activities_test[0].member_active;
+    res.data.data.memberStatusActivities[0].memberActive;
 
-  // TODO: カラム名はキャピタルケースにする
   const activeMember: ActiveMember = {
-    // TODO: anyになっているのを直す
     status: memberStatus.active,
-    statusActivityId: responseActiveMember.status_activity_id,
-    memberId: responseActiveMember.member_id,
-    address: responseActiveMember.address,
-    postalCode: responseActiveMember.postal_code,
-    birthday: responseActiveMember.birthday,
-    createdAt: responseActiveMember.created_at,
+    ...responseActiveMember
   };
 
   return activeMember;
