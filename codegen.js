@@ -17,6 +17,9 @@ module.exports = {
   customization: {
     naming_convention: 'graphql-default'
   },
+  // TODO: 指定する
+  // enumsAsConst: true,
+  // defaultScalarType: 'unknown',
   generates: {
     "./src/generated/graphql.tsx": {
       plugins: [
