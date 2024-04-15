@@ -1,6 +1,6 @@
 import { publicPages } from "@/paths";
 import { IndexTemplate } from "@/components/templates/Index";
-import { Seo } from "@/components/Seo";
+import { Seo } from "@/pages/_seo/Seo";
 import { FC } from "react";
 
 type Props = {};
