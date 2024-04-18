@@ -1,7 +1,7 @@
 import { render } from "@testing-library/react";
 import Page from "./index.page";
-import { publicPages } from "@/paths";
-import { IndexTemplate } from "@/components/templates/Index";
+import { publicPages } from "@/const/paths";
+import { IndexTemplate } from "@/feature/mypage/index/index";
 import { toMock } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 

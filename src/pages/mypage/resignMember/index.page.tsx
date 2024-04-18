@@ -1,6 +1,6 @@
 // import { publicPages } from "@/paths";
-import { IndexTemplate } from "@/components/templates/Index";
-import { ResignMemberTemplate } from "@/components/templates/Mypage/ResignMember";
+import { IndexTemplate } from "@/feature/mypage/index/index";
+import { ResignMemberTemplate } from "@/feature/mypage/resignMember";
 // import { Seo } from "@/components/Seo";
 import { FC } from "react";
 

@@ -1,4 +1,4 @@
-import { NEXT_PUBLIC_GRAPHQL_URI } from "@/const/env";
+import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 import {
   GetActiveMemberDocument,
   GetActiveMemberQueryVariables,
@@ -42,7 +42,7 @@ export const updateMemberStatus = async (
       query: print(ResignMemberDocument),
     }),
   });
-  debugger
+  debugger;
 
   // TODO: エラー処理をここに書く（一旦ベタがきで）
   return true;
