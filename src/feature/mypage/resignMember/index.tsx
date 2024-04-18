@@ -1,11 +1,11 @@
 import { BaseSyntheticEvent, FC } from "react";
 import { resignMember } from "@/core/usecases/member/resignMember.command";
-import { ResignMemberErrorBoundary } from "./resignMemberErrorBoundary";
+import { ResignMemberErrorBoundary } from "./components/resignMemberErrorBoundary";
 
 import {
   ResignMemberSchema,
   useResignMemberForm,
-} from "@/components/molecules/form/Mypage/ResignMember";
+} from "@/feature/mypage/resignMember/components/form";
 
 type Props = {};
 
@@ -25,7 +25,11 @@ export const IndexTemplate: FC<Props> = () => {
     event && event.preventDefault();
     try {
       await resignMember(
-        { reasonDetail: "test", reasonType: "NO_USE", email: "hoge@example.com" },
+        {
+          reasonDetail: "test",
+          reasonType: "NO_USE",
+          email: "hoge@example.com",
+        },
         {
           onError: async () => {
             // TODO: エラー処理(例: 退会に失敗しました)

@@ -1,4 +1,4 @@
-import { NEXT_PUBLIC_GRAPHQL_URI } from "@/const/env";
+import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 import { ErrorBoundary } from "@/pages/_error.boundary";
 import {
   ApolloClient,

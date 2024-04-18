@@ -1,0 +1,1 @@
+// globalなhooksを記述します
