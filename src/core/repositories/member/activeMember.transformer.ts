@@ -8,17 +8,17 @@ type Response = HttpResponse<FindMemberOneSuccess>;
 export const transform = (res: Response): ActiveMember | null => {
   if (res.data.data.memberStatusActivities.length === 0) {
     return null;
-  } else if (
-    res.data.data.memberStatusActivities[0].memberActive == null
-  ) {
+  } else if (res.data.data.memberStatusActivities[0].memberActive == null) {
     return null;
   }
   const responseActiveMember =
     res.data.data.memberStatusActivities[0].memberActive;
 
   const activeMember: ActiveMember = {
+    ...responseActiveMember,
     status: memberStatus.active,
-    ...responseActiveMember
+    createdAt: new Date(responseActiveMember.createdAt),
+    birthday: new Date(responseActiveMember.birthday),
   };
 
   return activeMember;

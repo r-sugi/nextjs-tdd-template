@@ -15,11 +15,15 @@ module.exports = {
   documents: ["src/**/*.graphql"],
   overwrite: true,
   customization: {
-    naming_convention: 'graphql-default'
+    naming_convention: "graphql-default",
   },
-  // TODO: 指定する
-  // enumsAsConst: true,
-  // defaultScalarType: 'unknown',
+  enumsAsConst: true,
+  avoidOptionals: {
+    field: true,
+    inputValue: false,
+    object: true,
+    defaultValue: false,
+  },
   generates: {
     "./src/generated/graphql.tsx": {
       plugins: [
@@ -33,6 +37,12 @@ module.exports = {
         withHOC: false,
         withComponent: false,
         preResolveTypes: false,
+        scalars: {
+          uuid: "string", // TODO: 厳密な型定義
+          bigint: "number",
+          date: "string",
+          timestamptz: "string",
+        },
       },
     },
     "./graphql.schema.json": {

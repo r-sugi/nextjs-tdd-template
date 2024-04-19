@@ -42,8 +42,6 @@ export const updateMemberStatus = async (
       query: print(ResignMemberDocument),
     }),
   });
-  debugger;
-
   // TODO: エラー処理をここに書く（一旦ベタがきで）
   return true;
 };
