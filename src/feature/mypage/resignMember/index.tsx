@@ -5,17 +5,15 @@ import { ResignMemberErrorBoundary } from "./components/resignMemberErrorBoundar
 import {
   ResignMemberSchema,
   useResignMemberForm,
-} from "@/feature/mypage/resignMember/components/form";
+} from "@/feature/mypage/resignMember/hooks/form";
 
 type Props = {};
 
-// TODO: featureパターンにする
 export const IndexTemplate: FC<Props> = () => {
   const {
     handleSubmit,
     register,
     formState: { isSubmitting, isValid, errors },
-    setError,
   } = useResignMemberForm();
 
   const submitHandler = async (
@@ -23,12 +21,13 @@ export const IndexTemplate: FC<Props> = () => {
     event?: BaseSyntheticEvent
   ) => {
     event && event.preventDefault();
+
     try {
       await resignMember(
         {
-          reasonDetail: "test",
-          reasonType: "NO_USE",
-          email: "hoge@example.com",
+          reasonType: data.reasonType,
+          reasonDetail: data.reasonDetail,
+          agreement: data.agreement,
         },
         {
           onError: async () => {
@@ -53,21 +52,18 @@ export const IndexTemplate: FC<Props> = () => {
             <option value="NO_USE">利用しないため</option>
             <option value="OTHER">その他</option>
           </select>
+          {errors.reasonType?.message && <p>{errors.reasonType.message}</p>}
         </div>
 
         <div>
           <label>詳細</label>
           <textarea {...register("reasonDetail")} />
+          {errors.reasonDetail?.message && <p>{errors.reasonDetail.message}</p>}
         </div>
 
         <div>
           <label htmlFor="agreement">同意する</label>
-          <input
-            type="checkbox"
-            {...register("agreement")}
-            value="true"
-            id="agreement"
-          />
+          <input type="checkbox" {...register("agreement")} id="agreement" />
           {errors.agreement?.message && <p>{errors.agreement.message}</p>}
         </div>
 
