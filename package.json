@@ -15,6 +15,7 @@
     "db:start": "docker-compose up -d",
     "db:stop": "docker-compose stop",
     "db:export": "npm run db:export --prefix ./db",
+    "db:apply": "npm run db:apply --prefix ./db",
     "db:dump": "npm run db:dump --prefix ./db"
   },
   "dependencies": {
