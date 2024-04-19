@@ -28,6 +28,7 @@ export const resignMember = async (props: Props, opt?: Option) => {
       },
     },
   });
+  debugger;
   if (!res) {
     opt?.onError?.();
   }

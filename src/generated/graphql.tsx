@@ -797,9 +797,8 @@ export type MemberPendingActivation_Updates = {
 export type MemberResigned = {
   agreement: Scalars['Boolean']['output'];
   createdAt: Scalars['timestamptz']['output'];
-  email: Scalars['String']['output'];
   memberId: Scalars['uuid']['output'];
-  reasonDetail: Scalars['String']['output'];
+  reasonDetail?: Maybe<Scalars['String']['output']>;
   reasonType: Scalars['String']['output'];
   statusActivityId: Scalars['uuid']['output'];
 };
@@ -831,7 +830,6 @@ export type MemberResigned_Bool_Exp = {
   _or?: InputMaybe<Array<MemberResigned_Bool_Exp>>;
   agreement?: InputMaybe<Boolean_Comparison_Exp>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  email?: InputMaybe<String_Comparison_Exp>;
   memberId?: InputMaybe<Uuid_Comparison_Exp>;
   reasonDetail?: InputMaybe<String_Comparison_Exp>;
   reasonType?: InputMaybe<String_Comparison_Exp>;
@@ -848,7 +846,6 @@ export enum MemberResigned_Constraint {
 export type MemberResigned_Insert_Input = {
   agreement?: InputMaybe<Scalars['Boolean']['input']>;
   createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
   memberId?: InputMaybe<Scalars['uuid']['input']>;
   reasonDetail?: InputMaybe<Scalars['String']['input']>;
   reasonType?: InputMaybe<Scalars['String']['input']>;
@@ -858,7 +855,6 @@ export type MemberResigned_Insert_Input = {
 /** aggregate max on columns */
 export type MemberResigned_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
   memberId?: Maybe<Scalars['uuid']['output']>;
   reasonDetail?: Maybe<Scalars['String']['output']>;
   reasonType?: Maybe<Scalars['String']['output']>;
@@ -868,7 +864,6 @@ export type MemberResigned_Max_Fields = {
 /** aggregate min on columns */
 export type MemberResigned_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
   memberId?: Maybe<Scalars['uuid']['output']>;
   reasonDetail?: Maybe<Scalars['String']['output']>;
   reasonType?: Maybe<Scalars['String']['output']>;
@@ -901,7 +896,6 @@ export type MemberResigned_On_Conflict = {
 export type MemberResigned_Order_By = {
   agreement?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
-  email?: InputMaybe<Order_By>;
   memberId?: InputMaybe<Order_By>;
   reasonDetail?: InputMaybe<Order_By>;
   reasonType?: InputMaybe<Order_By>;
@@ -920,8 +914,6 @@ export enum MemberResigned_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  Email = 'email',
-  /** column name */
   MemberId = 'memberId',
   /** column name */
   ReasonDetail = 'reasonDetail',
@@ -935,7 +927,6 @@ export enum MemberResigned_Select_Column {
 export type MemberResigned_Set_Input = {
   agreement?: InputMaybe<Scalars['Boolean']['input']>;
   createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
   memberId?: InputMaybe<Scalars['uuid']['input']>;
   reasonDetail?: InputMaybe<Scalars['String']['input']>;
   reasonType?: InputMaybe<Scalars['String']['input']>;
@@ -954,7 +945,6 @@ export type MemberResigned_Stream_Cursor_Input = {
 export type MemberResigned_Stream_Cursor_Value_Input = {
   agreement?: InputMaybe<Scalars['Boolean']['input']>;
   createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
   memberId?: InputMaybe<Scalars['uuid']['input']>;
   reasonDetail?: InputMaybe<Scalars['String']['input']>;
   reasonType?: InputMaybe<Scalars['String']['input']>;
@@ -967,8 +957,6 @@ export enum MemberResigned_Update_Column {
   Agreement = 'agreement',
   /** column name */
   CreatedAt = 'createdAt',
-  /** column name */
-  Email = 'email',
   /** column name */
   MemberId = 'memberId',
   /** column name */
@@ -2770,7 +2758,7 @@ export type ResignMemberMutationVariables = Exact<{
 
 export type ResignMemberMutation = { insert_memberStatusActivities_one?: Maybe<(
     Pick<MemberStatusActivities, 'memberId' | 'status'>
-    & { memberResigned?: Maybe<Pick<MemberResigned, 'reasonType' | 'memberId' | 'reasonDetail' | 'agreement' | 'email'>> }
+    & { memberResigned?: Maybe<Pick<MemberResigned, 'reasonType' | 'memberId' | 'reasonDetail' | 'agreement'>> }
   )> };
 
 export type GetActiveMemberQueryVariables = Exact<{
@@ -2794,7 +2782,6 @@ export const ResignMemberDocument = gql`
       memberId
       reasonDetail
       agreement
-      email
     }
   }
 }
