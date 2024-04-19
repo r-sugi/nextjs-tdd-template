@@ -3,8 +3,8 @@ import { updateMemberStatus } from "@/core/repositories/member/members.repositor
 
 type Props = {
   reasonType: string;
-  reasonDetail: string;
-  email: string;
+  reasonDetail: string | null;
+  agreement: boolean;
 };
 
 type Option = {
@@ -17,19 +17,17 @@ export const resignMember = async (props: Props, opt?: Option) => {
     // TODO: variablesがanyになっているのを修正する
     activityInput: {
       status: memberStatus.resigned,
-      memberId: 'ff4b01ee-15e9-4e2e-acb3-25a0347af7c1', // TODO: ログインメンバーのID
+      memberId: "ff4b01ee-15e9-4e2e-acb3-25a0347af7c1", // TODO: ログインメンバーのID
       memberResigned: {
         data: {
-          memberId: 'ff4b01ee-15e9-4e2e-acb3-25a0347af7c1', // TODO: ログインメンバーのID
+          memberId: "ff4b01ee-15e9-4e2e-acb3-25a0347af7c1", // TODO: ログインメンバーのID
           reasonType: props.reasonType,
-          agreement: true,
-          email: props.email,
+          agreement: props.agreement,
           reasonDetail: props.reasonDetail,
         },
       },
     },
   });
-  debugger
   if (!res) {
     opt?.onError?.();
   }
