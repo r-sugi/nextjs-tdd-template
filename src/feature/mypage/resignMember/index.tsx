@@ -35,6 +35,7 @@ export const IndexTemplate: FC<Props> = () => {
           },
         }
       );
+      window.alert("退会しました!");
     } catch (error) {
       // TODO: エラー処理(例: 入力値のバリデーションエラーなど)
     }

@@ -1,6 +1,4 @@
-mutation ResignMember(
-  $activityInput: memberStatusActivities_insert_input!
-) {
+mutation ResignMember($activityInput: memberStatusActivities_insert_input!) {
   insert_memberStatusActivities_one(object: $activityInput) {
     memberId
     status
@@ -9,7 +7,6 @@ mutation ResignMember(
       memberId
       reasonDetail
       agreement
-      email
     }
   }
 }
