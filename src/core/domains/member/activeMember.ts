@@ -2,8 +2,8 @@ import { memberStatus } from "./status";
 // DBから取得したentityを扱うための型定義
 export type ActiveMember = {
   status: (typeof memberStatus)["active"];
-  statusActivityId: number;
-  memberId: number;
+  statusActivityId: string;
+  memberId: string;
   address: string;
   postalCode: string;
   birthday: Date;

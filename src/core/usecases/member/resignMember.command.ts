@@ -13,7 +13,6 @@ type Option = {
 
 export const resignMember = async (props: Props, opt?: Option) => {
   const res = await updateMemberStatus({
-    // TODO: 親子レコードを一回で登録できるようにテーブルを修正する
     // TODO: variablesがanyになっているのを修正する
     activityInput: {
       status: memberStatus.resigned,
@@ -28,7 +27,6 @@ export const resignMember = async (props: Props, opt?: Option) => {
       },
     },
   });
-  debugger;
   if (!res) {
     opt?.onError?.();
   }
