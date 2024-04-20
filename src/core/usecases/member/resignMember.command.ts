@@ -12,8 +12,8 @@ type Option = {
 };
 
 export const resignMember = async (props: Props, opt?: Option) => {
+  // TODO: useにしてapolloClientのhooksを使いたい、、、。
   const res = await updateMemberStatus({
-    // TODO: variablesがanyになっているのを修正する
     activityInput: {
       status: memberStatus.resigned,
       memberId: "ff4b01ee-15e9-4e2e-acb3-25a0347af7c1", // TODO: ログインメンバーのID
