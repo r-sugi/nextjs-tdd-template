@@ -1,18 +1,10 @@
-import { memberStatus } from "./status";
 import { ActiveMember } from "./activeMember";
-
-// TODO: ファイルに切り出す
-type ResignMember = {
-  status: (typeof memberStatus)["resigned"];
-  statusActivityId: number;
-  reason_type: string;
-  reason: string;
-  reason_detail: string;
-  createdAt: Date;
-};
+import { BannedMember } from "./bannedMember";
+import { ResignMember } from "./resignMember";
 
 // ステータスごとにユニオンで増えていく
-export type Member = ActiveMember | ResignMember;
+export type Member = ActiveMember | ResignMember | BannedMember;
+export type Members = Array<ActiveMember | ResignMember>;
 
 // const hoge = () => {
 //   const res = fetchActiveMember() as Member;

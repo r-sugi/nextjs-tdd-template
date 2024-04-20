@@ -73,189 +73,6 @@ export enum Cursor_Ordering {
   Desc = 'DESC'
 }
 
-/** columns and relationships of "membarRestored" */
-export type MembarRestored = {
-  createdAt: Scalars['timestamptz']['output'];
-  email: Scalars['String']['output'];
-  memberId: Scalars['uuid']['output'];
-  operatedBy: Scalars['uuid']['output'];
-  reason: Scalars['String']['output'];
-  statusActivityId: Scalars['uuid']['output'];
-};
-
-/** aggregated selection of "membarRestored" */
-export type MembarRestored_Aggregate = {
-  aggregate?: Maybe<MembarRestored_Aggregate_Fields>;
-  nodes: Array<MembarRestored>;
-};
-
-/** aggregate fields of "membarRestored" */
-export type MembarRestored_Aggregate_Fields = {
-  count: Scalars['Int']['output'];
-  max?: Maybe<MembarRestored_Max_Fields>;
-  min?: Maybe<MembarRestored_Min_Fields>;
-};
-
-
-/** aggregate fields of "membarRestored" */
-export type MembarRestored_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<MembarRestored_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-/** Boolean expression to filter rows from the table "membarRestored". All fields are combined with a logical 'AND'. */
-export type MembarRestored_Bool_Exp = {
-  _and?: InputMaybe<Array<MembarRestored_Bool_Exp>>;
-  _not?: InputMaybe<MembarRestored_Bool_Exp>;
-  _or?: InputMaybe<Array<MembarRestored_Bool_Exp>>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  email?: InputMaybe<String_Comparison_Exp>;
-  memberId?: InputMaybe<Uuid_Comparison_Exp>;
-  operatedBy?: InputMaybe<Uuid_Comparison_Exp>;
-  reason?: InputMaybe<String_Comparison_Exp>;
-  statusActivityId?: InputMaybe<Uuid_Comparison_Exp>;
-};
-
-/** unique or primary key constraints on table "membarRestored" */
-export enum MembarRestored_Constraint {
-  /** unique or primary key constraint on columns "statusActivityId" */
-  MembarRestoredPkey = 'membarRestored_pkey'
-}
-
-/** input type for inserting data into table "membarRestored" */
-export type MembarRestored_Insert_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
-  memberId?: InputMaybe<Scalars['uuid']['input']>;
-  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
-};
-
-/** aggregate max on columns */
-export type MembarRestored_Max_Fields = {
-  createdAt?: Maybe<Scalars['timestamptz']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
-  memberId?: Maybe<Scalars['uuid']['output']>;
-  operatedBy?: Maybe<Scalars['uuid']['output']>;
-  reason?: Maybe<Scalars['String']['output']>;
-  statusActivityId?: Maybe<Scalars['uuid']['output']>;
-};
-
-/** aggregate min on columns */
-export type MembarRestored_Min_Fields = {
-  createdAt?: Maybe<Scalars['timestamptz']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
-  memberId?: Maybe<Scalars['uuid']['output']>;
-  operatedBy?: Maybe<Scalars['uuid']['output']>;
-  reason?: Maybe<Scalars['String']['output']>;
-  statusActivityId?: Maybe<Scalars['uuid']['output']>;
-};
-
-/** response of any mutation on the table "membarRestored" */
-export type MembarRestored_Mutation_Response = {
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int']['output'];
-  /** data from the rows affected by the mutation */
-  returning: Array<MembarRestored>;
-};
-
-/** input type for inserting object relation for remote table "membarRestored" */
-export type MembarRestored_Obj_Rel_Insert_Input = {
-  data: MembarRestored_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<MembarRestored_On_Conflict>;
-};
-
-/** on_conflict condition type for table "membarRestored" */
-export type MembarRestored_On_Conflict = {
-  constraint: MembarRestored_Constraint;
-  update_columns?: Array<MembarRestored_Update_Column>;
-  where?: InputMaybe<MembarRestored_Bool_Exp>;
-};
-
-/** Ordering options when selecting data from "membarRestored". */
-export type MembarRestored_Order_By = {
-  createdAt?: InputMaybe<Order_By>;
-  email?: InputMaybe<Order_By>;
-  memberId?: InputMaybe<Order_By>;
-  operatedBy?: InputMaybe<Order_By>;
-  reason?: InputMaybe<Order_By>;
-  statusActivityId?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: membarRestored */
-export type MembarRestored_Pk_Columns_Input = {
-  statusActivityId: Scalars['uuid']['input'];
-};
-
-/** select columns of table "membarRestored" */
-export enum MembarRestored_Select_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Email = 'email',
-  /** column name */
-  MemberId = 'memberId',
-  /** column name */
-  OperatedBy = 'operatedBy',
-  /** column name */
-  Reason = 'reason',
-  /** column name */
-  StatusActivityId = 'statusActivityId'
-}
-
-/** input type for updating data in table "membarRestored" */
-export type MembarRestored_Set_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
-  memberId?: InputMaybe<Scalars['uuid']['input']>;
-  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
-};
-
-/** Streaming cursor of the table "membarRestored" */
-export type MembarRestored_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: MembarRestored_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type MembarRestored_Stream_Cursor_Value_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
-  memberId?: InputMaybe<Scalars['uuid']['input']>;
-  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
-  reason?: InputMaybe<Scalars['String']['input']>;
-  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
-};
-
-/** update columns of table "membarRestored" */
-export enum MembarRestored_Update_Column {
-  /** column name */
-  CreatedAt = 'createdAt',
-  /** column name */
-  Email = 'email',
-  /** column name */
-  MemberId = 'memberId',
-  /** column name */
-  OperatedBy = 'operatedBy',
-  /** column name */
-  Reason = 'reason',
-  /** column name */
-  StatusActivityId = 'statusActivityId'
-}
-
-export type MembarRestored_Updates = {
-  /** sets the columns of the filtered rows to the given values */
-  _set?: InputMaybe<MembarRestored_Set_Input>;
-  /** filter the rows which have to be updated */
-  where: MembarRestored_Bool_Exp;
-};
-
 /** columns and relationships of "memberActive" */
 export type MemberActive = {
   address: Scalars['String']['output'];
@@ -974,6 +791,177 @@ export type MemberResigned_Updates = {
   where: MemberResigned_Bool_Exp;
 };
 
+/** columns and relationships of "memberRestored" */
+export type MemberRestored = {
+  createdAt: Scalars['timestamptz']['output'];
+  memberId: Scalars['uuid']['output'];
+  operatedBy: Scalars['uuid']['output'];
+  reason: Scalars['String']['output'];
+  statusActivityId: Scalars['uuid']['output'];
+};
+
+/** aggregated selection of "memberRestored" */
+export type MemberRestored_Aggregate = {
+  aggregate?: Maybe<MemberRestored_Aggregate_Fields>;
+  nodes: Array<MemberRestored>;
+};
+
+/** aggregate fields of "memberRestored" */
+export type MemberRestored_Aggregate_Fields = {
+  count: Scalars['Int']['output'];
+  max?: Maybe<MemberRestored_Max_Fields>;
+  min?: Maybe<MemberRestored_Min_Fields>;
+};
+
+
+/** aggregate fields of "memberRestored" */
+export type MemberRestored_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberRestored_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "memberRestored". All fields are combined with a logical 'AND'. */
+export type MemberRestored_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberRestored_Bool_Exp>>;
+  _not?: InputMaybe<MemberRestored_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberRestored_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  operatedBy?: InputMaybe<Uuid_Comparison_Exp>;
+  reason?: InputMaybe<String_Comparison_Exp>;
+  statusActivityId?: InputMaybe<Uuid_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "memberRestored" */
+export enum MemberRestored_Constraint {
+  /** unique or primary key constraint on columns "statusActivityId" */
+  MemberRestoredPkey = 'memberRestored_pkey'
+}
+
+/** input type for inserting data into table "memberRestored" */
+export type MemberRestored_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** aggregate max on columns */
+export type MemberRestored_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  operatedBy?: Maybe<Scalars['uuid']['output']>;
+  reason?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** aggregate min on columns */
+export type MemberRestored_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  operatedBy?: Maybe<Scalars['uuid']['output']>;
+  reason?: Maybe<Scalars['String']['output']>;
+  statusActivityId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** response of any mutation on the table "memberRestored" */
+export type MemberRestored_Mutation_Response = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<MemberRestored>;
+};
+
+/** input type for inserting object relation for remote table "memberRestored" */
+export type MemberRestored_Obj_Rel_Insert_Input = {
+  data: MemberRestored_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<MemberRestored_On_Conflict>;
+};
+
+/** on_conflict condition type for table "memberRestored" */
+export type MemberRestored_On_Conflict = {
+  constraint: MemberRestored_Constraint;
+  update_columns?: Array<MemberRestored_Update_Column>;
+  where?: InputMaybe<MemberRestored_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "memberRestored". */
+export type MemberRestored_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  operatedBy?: InputMaybe<Order_By>;
+  reason?: InputMaybe<Order_By>;
+  statusActivityId?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: memberRestored */
+export type MemberRestored_Pk_Columns_Input = {
+  statusActivityId: Scalars['uuid']['input'];
+};
+
+/** select columns of table "memberRestored" */
+export enum MemberRestored_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  OperatedBy = 'operatedBy',
+  /** column name */
+  Reason = 'reason',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
+}
+
+/** input type for updating data in table "memberRestored" */
+export type MemberRestored_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** Streaming cursor of the table "memberRestored" */
+export type MemberRestored_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: MemberRestored_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type MemberRestored_Stream_Cursor_Value_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  operatedBy?: InputMaybe<Scalars['uuid']['input']>;
+  reason?: InputMaybe<Scalars['String']['input']>;
+  statusActivityId?: InputMaybe<Scalars['uuid']['input']>;
+};
+
+/** update columns of table "memberRestored" */
+export enum MemberRestored_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  OperatedBy = 'operatedBy',
+  /** column name */
+  Reason = 'reason',
+  /** column name */
+  StatusActivityId = 'statusActivityId'
+}
+
+export type MemberRestored_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<MemberRestored_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: MemberRestored_Bool_Exp;
+};
+
 /** columns and relationships of "memberStatusActivities" */
 export type MemberStatusActivities = {
   createdAt: Scalars['timestamptz']['output'];
@@ -988,7 +976,7 @@ export type MemberStatusActivities = {
   /** An object relationship */
   memberResigned?: Maybe<MemberResigned>;
   /** An object relationship */
-  memberRestored?: Maybe<MembarRestored>;
+  memberRestored?: Maybe<MemberRestored>;
   status: Scalars['String']['output'];
 };
 
@@ -1024,7 +1012,7 @@ export type MemberStatusActivities_Bool_Exp = {
   memberId?: InputMaybe<Uuid_Comparison_Exp>;
   memberPendingActivation?: InputMaybe<MemberPendingActivation_Bool_Exp>;
   memberResigned?: InputMaybe<MemberResigned_Bool_Exp>;
-  memberRestored?: InputMaybe<MembarRestored_Bool_Exp>;
+  memberRestored?: InputMaybe<MemberRestored_Bool_Exp>;
   status?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -1043,7 +1031,7 @@ export type MemberStatusActivities_Insert_Input = {
   memberId?: InputMaybe<Scalars['uuid']['input']>;
   memberPendingActivation?: InputMaybe<MemberPendingActivation_Obj_Rel_Insert_Input>;
   memberResigned?: InputMaybe<MemberResigned_Obj_Rel_Insert_Input>;
-  memberRestored?: InputMaybe<MembarRestored_Obj_Rel_Insert_Input>;
+  memberRestored?: InputMaybe<MemberRestored_Obj_Rel_Insert_Input>;
   status?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1087,7 +1075,7 @@ export type MemberStatusActivities_Order_By = {
   memberId?: InputMaybe<Order_By>;
   memberPendingActivation?: InputMaybe<MemberPendingActivation_Order_By>;
   memberResigned?: InputMaybe<MemberResigned_Order_By>;
-  memberRestored?: InputMaybe<MembarRestored_Order_By>;
+  memberRestored?: InputMaybe<MemberRestored_Order_By>;
   status?: InputMaybe<Order_By>;
 };
 
@@ -1151,11 +1139,156 @@ export type MemberStatusActivities_Updates = {
   where: MemberStatusActivities_Bool_Exp;
 };
 
+/** columns and relationships of "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  /** An object relationship */
+  memberActive?: Maybe<MemberActive>;
+  /** An object relationship */
+  memberBanned?: Maybe<MemberBanned>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  /** An object relationship */
+  memberPendingActivation?: Maybe<MemberPendingActivation>;
+  /** An object relationship */
+  memberResigned?: Maybe<MemberResigned>;
+  /** An object relationship */
+  memberRestored?: Maybe<MemberRestored>;
+  status?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregated selection of "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest_Aggregate = {
+  aggregate?: Maybe<MemberStatusActivityLatest_Aggregate_Fields>;
+  nodes: Array<MemberStatusActivityLatest>;
+};
+
+/** aggregate fields of "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest_Aggregate_Fields = {
+  count: Scalars['Int']['output'];
+  max?: Maybe<MemberStatusActivityLatest_Max_Fields>;
+  min?: Maybe<MemberStatusActivityLatest_Min_Fields>;
+};
+
+
+/** aggregate fields of "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberStatusActivityLatest_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "memberStatusActivityLatest". All fields are combined with a logical 'AND'. */
+export type MemberStatusActivityLatest_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberStatusActivityLatest_Bool_Exp>>;
+  _not?: InputMaybe<MemberStatusActivityLatest_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberStatusActivityLatest_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  id?: InputMaybe<Uuid_Comparison_Exp>;
+  memberActive?: InputMaybe<MemberActive_Bool_Exp>;
+  memberBanned?: InputMaybe<MemberBanned_Bool_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  memberPendingActivation?: InputMaybe<MemberPendingActivation_Bool_Exp>;
+  memberResigned?: InputMaybe<MemberResigned_Bool_Exp>;
+  memberRestored?: InputMaybe<MemberRestored_Bool_Exp>;
+  status?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** input type for inserting data into table "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  memberActive?: InputMaybe<MemberActive_Obj_Rel_Insert_Input>;
+  memberBanned?: InputMaybe<MemberBanned_Obj_Rel_Insert_Input>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  memberPendingActivation?: InputMaybe<MemberPendingActivation_Obj_Rel_Insert_Input>;
+  memberResigned?: InputMaybe<MemberResigned_Obj_Rel_Insert_Input>;
+  memberRestored?: InputMaybe<MemberRestored_Obj_Rel_Insert_Input>;
+  status?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type MemberStatusActivityLatest_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type MemberStatusActivityLatest_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  id?: Maybe<Scalars['uuid']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  status?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest_Mutation_Response = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<MemberStatusActivityLatest>;
+};
+
+/** Ordering options when selecting data from "memberStatusActivityLatest". */
+export type MemberStatusActivityLatest_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  memberActive?: InputMaybe<MemberActive_Order_By>;
+  memberBanned?: InputMaybe<MemberBanned_Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  memberPendingActivation?: InputMaybe<MemberPendingActivation_Order_By>;
+  memberResigned?: InputMaybe<MemberResigned_Order_By>;
+  memberRestored?: InputMaybe<MemberRestored_Order_By>;
+  status?: InputMaybe<Order_By>;
+};
+
+/** select columns of table "memberStatusActivityLatest" */
+export enum MemberStatusActivityLatest_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  Status = 'status'
+}
+
+/** input type for updating data in table "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "memberStatusActivityLatest" */
+export type MemberStatusActivityLatest_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: MemberStatusActivityLatest_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type MemberStatusActivityLatest_Stream_Cursor_Value_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  id?: InputMaybe<Scalars['uuid']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type MemberStatusActivityLatest_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<MemberStatusActivityLatest_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: MemberStatusActivityLatest_Bool_Exp;
+};
+
 /** columns and relationships of "members" */
 export type Members = {
   id: Scalars['uuid']['output'];
-  /** An object relationship */
-  user?: Maybe<Users>;
   userId: Scalars['uuid']['output'];
 };
 
@@ -1185,7 +1318,6 @@ export type Members_Bool_Exp = {
   _not?: InputMaybe<Members_Bool_Exp>;
   _or?: InputMaybe<Array<Members_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -1200,7 +1332,6 @@ export enum Members_Constraint {
 /** input type for inserting data into table "members" */
 export type Members_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
@@ -1234,7 +1365,6 @@ export type Members_On_Conflict = {
 /** Ordering options when selecting data from "members". */
 export type Members_Order_By = {
   id?: InputMaybe<Order_By>;
-  user?: InputMaybe<Users_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -1288,10 +1418,6 @@ export type Members_Updates = {
 
 /** mutation root */
 export type Mutation_Root = {
-  /** delete data from the table: "membarRestored" */
-  delete_membarRestored?: Maybe<MembarRestored_Mutation_Response>;
-  /** delete single row from the table: "membarRestored" */
-  delete_membarRestored_by_pk?: Maybe<MembarRestored>;
   /** delete data from the table: "memberActive" */
   delete_memberActive?: Maybe<MemberActive_Mutation_Response>;
   /** delete single row from the table: "memberActive" */
@@ -1308,10 +1434,16 @@ export type Mutation_Root = {
   delete_memberResigned?: Maybe<MemberResigned_Mutation_Response>;
   /** delete single row from the table: "memberResigned" */
   delete_memberResigned_by_pk?: Maybe<MemberResigned>;
+  /** delete data from the table: "memberRestored" */
+  delete_memberRestored?: Maybe<MemberRestored_Mutation_Response>;
+  /** delete single row from the table: "memberRestored" */
+  delete_memberRestored_by_pk?: Maybe<MemberRestored>;
   /** delete data from the table: "memberStatusActivities" */
   delete_memberStatusActivities?: Maybe<MemberStatusActivities_Mutation_Response>;
   /** delete single row from the table: "memberStatusActivities" */
   delete_memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
+  /** delete data from the table: "memberStatusActivityLatest" */
+  delete_memberStatusActivityLatest?: Maybe<MemberStatusActivityLatest_Mutation_Response>;
   /** delete data from the table: "members" */
   delete_members?: Maybe<Members_Mutation_Response>;
   /** delete single row from the table: "members" */
@@ -1324,10 +1456,6 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
-  /** insert data into the table: "membarRestored" */
-  insert_membarRestored?: Maybe<MembarRestored_Mutation_Response>;
-  /** insert a single row into the table: "membarRestored" */
-  insert_membarRestored_one?: Maybe<MembarRestored>;
   /** insert data into the table: "memberActive" */
   insert_memberActive?: Maybe<MemberActive_Mutation_Response>;
   /** insert a single row into the table: "memberActive" */
@@ -1344,10 +1472,18 @@ export type Mutation_Root = {
   insert_memberResigned?: Maybe<MemberResigned_Mutation_Response>;
   /** insert a single row into the table: "memberResigned" */
   insert_memberResigned_one?: Maybe<MemberResigned>;
+  /** insert data into the table: "memberRestored" */
+  insert_memberRestored?: Maybe<MemberRestored_Mutation_Response>;
+  /** insert a single row into the table: "memberRestored" */
+  insert_memberRestored_one?: Maybe<MemberRestored>;
   /** insert data into the table: "memberStatusActivities" */
   insert_memberStatusActivities?: Maybe<MemberStatusActivities_Mutation_Response>;
   /** insert a single row into the table: "memberStatusActivities" */
   insert_memberStatusActivities_one?: Maybe<MemberStatusActivities>;
+  /** insert data into the table: "memberStatusActivityLatest" */
+  insert_memberStatusActivityLatest?: Maybe<MemberStatusActivityLatest_Mutation_Response>;
+  /** insert a single row into the table: "memberStatusActivityLatest" */
+  insert_memberStatusActivityLatest_one?: Maybe<MemberStatusActivityLatest>;
   /** insert data into the table: "members" */
   insert_members?: Maybe<Members_Mutation_Response>;
   /** insert a single row into the table: "members" */
@@ -1360,12 +1496,6 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
-  /** update data of the table: "membarRestored" */
-  update_membarRestored?: Maybe<MembarRestored_Mutation_Response>;
-  /** update single row of the table: "membarRestored" */
-  update_membarRestored_by_pk?: Maybe<MembarRestored>;
-  /** update multiples rows of table: "membarRestored" */
-  update_membarRestored_many?: Maybe<Array<Maybe<MembarRestored_Mutation_Response>>>;
   /** update data of the table: "memberActive" */
   update_memberActive?: Maybe<MemberActive_Mutation_Response>;
   /** update single row of the table: "memberActive" */
@@ -1390,12 +1520,22 @@ export type Mutation_Root = {
   update_memberResigned_by_pk?: Maybe<MemberResigned>;
   /** update multiples rows of table: "memberResigned" */
   update_memberResigned_many?: Maybe<Array<Maybe<MemberResigned_Mutation_Response>>>;
+  /** update data of the table: "memberRestored" */
+  update_memberRestored?: Maybe<MemberRestored_Mutation_Response>;
+  /** update single row of the table: "memberRestored" */
+  update_memberRestored_by_pk?: Maybe<MemberRestored>;
+  /** update multiples rows of table: "memberRestored" */
+  update_memberRestored_many?: Maybe<Array<Maybe<MemberRestored_Mutation_Response>>>;
   /** update data of the table: "memberStatusActivities" */
   update_memberStatusActivities?: Maybe<MemberStatusActivities_Mutation_Response>;
   /** update single row of the table: "memberStatusActivities" */
   update_memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
   /** update multiples rows of table: "memberStatusActivities" */
   update_memberStatusActivities_many?: Maybe<Array<Maybe<MemberStatusActivities_Mutation_Response>>>;
+  /** update data of the table: "memberStatusActivityLatest" */
+  update_memberStatusActivityLatest?: Maybe<MemberStatusActivityLatest_Mutation_Response>;
+  /** update multiples rows of table: "memberStatusActivityLatest" */
+  update_memberStatusActivityLatest_many?: Maybe<Array<Maybe<MemberStatusActivityLatest_Mutation_Response>>>;
   /** update data of the table: "members" */
   update_members?: Maybe<Members_Mutation_Response>;
   /** update single row of the table: "members" */
@@ -1414,18 +1554,6 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_MembarRestoredArgs = {
-  where: MembarRestored_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_MembarRestored_By_PkArgs = {
-  statusActivityId: Scalars['uuid']['input'];
 };
 
 
@@ -1478,6 +1606,18 @@ export type Mutation_RootDelete_MemberResigned_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_MemberRestoredArgs = {
+  where: MemberRestored_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_MemberRestored_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_MemberStatusActivitiesArgs = {
   where: MemberStatusActivities_Bool_Exp;
 };
@@ -1486,6 +1626,12 @@ export type Mutation_RootDelete_MemberStatusActivitiesArgs = {
 /** mutation root */
 export type Mutation_RootDelete_MemberStatusActivities_By_PkArgs = {
   id: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_MemberStatusActivityLatestArgs = {
+  where: MemberStatusActivityLatest_Bool_Exp;
 };
 
 
@@ -1522,20 +1668,6 @@ export type Mutation_RootDelete_UsersArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Users_By_PkArgs = {
   id: Scalars['uuid']['input'];
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_MembarRestoredArgs = {
-  objects: Array<MembarRestored_Insert_Input>;
-  on_conflict?: InputMaybe<MembarRestored_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_MembarRestored_OneArgs = {
-  object: MembarRestored_Insert_Input;
-  on_conflict?: InputMaybe<MembarRestored_On_Conflict>;
 };
 
 
@@ -1596,6 +1728,20 @@ export type Mutation_RootInsert_MemberResigned_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_MemberRestoredArgs = {
+  objects: Array<MemberRestored_Insert_Input>;
+  on_conflict?: InputMaybe<MemberRestored_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_MemberRestored_OneArgs = {
+  object: MemberRestored_Insert_Input;
+  on_conflict?: InputMaybe<MemberRestored_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_MemberStatusActivitiesArgs = {
   objects: Array<MemberStatusActivities_Insert_Input>;
   on_conflict?: InputMaybe<MemberStatusActivities_On_Conflict>;
@@ -1606,6 +1752,18 @@ export type Mutation_RootInsert_MemberStatusActivitiesArgs = {
 export type Mutation_RootInsert_MemberStatusActivities_OneArgs = {
   object: MemberStatusActivities_Insert_Input;
   on_conflict?: InputMaybe<MemberStatusActivities_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_MemberStatusActivityLatestArgs = {
+  objects: Array<MemberStatusActivityLatest_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_MemberStatusActivityLatest_OneArgs = {
+  object: MemberStatusActivityLatest_Insert_Input;
 };
 
 
@@ -1648,26 +1806,6 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_MembarRestoredArgs = {
-  _set?: InputMaybe<MembarRestored_Set_Input>;
-  where: MembarRestored_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_MembarRestored_By_PkArgs = {
-  _set?: InputMaybe<MembarRestored_Set_Input>;
-  pk_columns: MembarRestored_Pk_Columns_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_MembarRestored_ManyArgs = {
-  updates: Array<MembarRestored_Updates>;
 };
 
 
@@ -1752,6 +1890,26 @@ export type Mutation_RootUpdate_MemberResigned_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_MemberRestoredArgs = {
+  _set?: InputMaybe<MemberRestored_Set_Input>;
+  where: MemberRestored_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MemberRestored_By_PkArgs = {
+  _set?: InputMaybe<MemberRestored_Set_Input>;
+  pk_columns: MemberRestored_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MemberRestored_ManyArgs = {
+  updates: Array<MemberRestored_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_MemberStatusActivitiesArgs = {
   _set?: InputMaybe<MemberStatusActivities_Set_Input>;
   where: MemberStatusActivities_Bool_Exp;
@@ -1768,6 +1926,19 @@ export type Mutation_RootUpdate_MemberStatusActivities_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_MemberStatusActivities_ManyArgs = {
   updates: Array<MemberStatusActivities_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MemberStatusActivityLatestArgs = {
+  _set?: InputMaybe<MemberStatusActivityLatest_Set_Input>;
+  where: MemberStatusActivityLatest_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MemberStatusActivityLatest_ManyArgs = {
+  updates: Array<MemberStatusActivityLatest_Updates>;
 };
 
 
@@ -1834,8 +2005,6 @@ export type Mutation_RootUpdate_Users_ManyArgs = {
 export type Operators = {
   id: Scalars['uuid']['output'];
   name: Scalars['String']['output'];
-  /** An object relationship */
-  user?: Maybe<Users>;
   userId: Scalars['uuid']['output'];
 };
 
@@ -1866,7 +2035,6 @@ export type Operators_Bool_Exp = {
   _or?: InputMaybe<Array<Operators_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
-  user?: InputMaybe<Users_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -1882,7 +2050,6 @@ export enum Operators_Constraint {
 export type Operators_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
@@ -1919,7 +2086,6 @@ export type Operators_On_Conflict = {
 export type Operators_Order_By = {
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
-  user?: InputMaybe<Users_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -1994,12 +2160,6 @@ export enum Order_By {
 }
 
 export type Query_Root = {
-  /** fetch data from the table: "membarRestored" */
-  membarRestored: Array<MembarRestored>;
-  /** fetch aggregated fields from the table: "membarRestored" */
-  membarRestored_aggregate: MembarRestored_Aggregate;
-  /** fetch data from the table: "membarRestored" using primary key columns */
-  membarRestored_by_pk?: Maybe<MembarRestored>;
   /** fetch data from the table: "memberActive" */
   memberActive: Array<MemberActive>;
   /** fetch aggregated fields from the table: "memberActive" */
@@ -2024,12 +2184,22 @@ export type Query_Root = {
   memberResigned_aggregate: MemberResigned_Aggregate;
   /** fetch data from the table: "memberResigned" using primary key columns */
   memberResigned_by_pk?: Maybe<MemberResigned>;
+  /** fetch data from the table: "memberRestored" */
+  memberRestored: Array<MemberRestored>;
+  /** fetch aggregated fields from the table: "memberRestored" */
+  memberRestored_aggregate: MemberRestored_Aggregate;
+  /** fetch data from the table: "memberRestored" using primary key columns */
+  memberRestored_by_pk?: Maybe<MemberRestored>;
   /** fetch data from the table: "memberStatusActivities" */
   memberStatusActivities: Array<MemberStatusActivities>;
   /** fetch aggregated fields from the table: "memberStatusActivities" */
   memberStatusActivities_aggregate: MemberStatusActivities_Aggregate;
   /** fetch data from the table: "memberStatusActivities" using primary key columns */
   memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
+  /** fetch data from the table: "memberStatusActivityLatest" */
+  memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
+  /** fetch aggregated fields from the table: "memberStatusActivityLatest" */
+  memberStatusActivityLatest_aggregate: MemberStatusActivityLatest_Aggregate;
   /** fetch data from the table: "members" */
   members: Array<Members>;
   /** fetch aggregated fields from the table: "members" */
@@ -2048,29 +2218,6 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
-};
-
-
-export type Query_RootMembarRestoredArgs = {
-  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
-  where?: InputMaybe<MembarRestored_Bool_Exp>;
-};
-
-
-export type Query_RootMembarRestored_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
-  where?: InputMaybe<MembarRestored_Bool_Exp>;
-};
-
-
-export type Query_RootMembarRestored_By_PkArgs = {
-  statusActivityId: Scalars['uuid']['input'];
 };
 
 
@@ -2166,6 +2313,29 @@ export type Query_RootMemberResigned_By_PkArgs = {
 };
 
 
+export type Query_RootMemberRestoredArgs = {
+  distinct_on?: InputMaybe<Array<MemberRestored_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberRestored_Order_By>>;
+  where?: InputMaybe<MemberRestored_Bool_Exp>;
+};
+
+
+export type Query_RootMemberRestored_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberRestored_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberRestored_Order_By>>;
+  where?: InputMaybe<MemberRestored_Bool_Exp>;
+};
+
+
+export type Query_RootMemberRestored_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
+};
+
+
 export type Query_RootMemberStatusActivitiesArgs = {
   distinct_on?: InputMaybe<Array<MemberStatusActivities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2186,6 +2356,24 @@ export type Query_RootMemberStatusActivities_AggregateArgs = {
 
 export type Query_RootMemberStatusActivities_By_PkArgs = {
   id: Scalars['uuid']['input'];
+};
+
+
+export type Query_RootMemberStatusActivityLatestArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivityLatest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberStatusActivityLatest_Order_By>>;
+  where?: InputMaybe<MemberStatusActivityLatest_Bool_Exp>;
+};
+
+
+export type Query_RootMemberStatusActivityLatest_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivityLatest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberStatusActivityLatest_Order_By>>;
+  where?: InputMaybe<MemberStatusActivityLatest_Bool_Exp>;
 };
 
 
@@ -2258,14 +2446,6 @@ export type Query_RootUsers_By_PkArgs = {
 };
 
 export type Subscription_Root = {
-  /** fetch data from the table: "membarRestored" */
-  membarRestored: Array<MembarRestored>;
-  /** fetch aggregated fields from the table: "membarRestored" */
-  membarRestored_aggregate: MembarRestored_Aggregate;
-  /** fetch data from the table: "membarRestored" using primary key columns */
-  membarRestored_by_pk?: Maybe<MembarRestored>;
-  /** fetch data from the table in a streaming manner: "membarRestored" */
-  membarRestored_stream: Array<MembarRestored>;
   /** fetch data from the table: "memberActive" */
   memberActive: Array<MemberActive>;
   /** fetch aggregated fields from the table: "memberActive" */
@@ -2298,6 +2478,14 @@ export type Subscription_Root = {
   memberResigned_by_pk?: Maybe<MemberResigned>;
   /** fetch data from the table in a streaming manner: "memberResigned" */
   memberResigned_stream: Array<MemberResigned>;
+  /** fetch data from the table: "memberRestored" */
+  memberRestored: Array<MemberRestored>;
+  /** fetch aggregated fields from the table: "memberRestored" */
+  memberRestored_aggregate: MemberRestored_Aggregate;
+  /** fetch data from the table: "memberRestored" using primary key columns */
+  memberRestored_by_pk?: Maybe<MemberRestored>;
+  /** fetch data from the table in a streaming manner: "memberRestored" */
+  memberRestored_stream: Array<MemberRestored>;
   /** fetch data from the table: "memberStatusActivities" */
   memberStatusActivities: Array<MemberStatusActivities>;
   /** fetch aggregated fields from the table: "memberStatusActivities" */
@@ -2306,6 +2494,12 @@ export type Subscription_Root = {
   memberStatusActivities_by_pk?: Maybe<MemberStatusActivities>;
   /** fetch data from the table in a streaming manner: "memberStatusActivities" */
   memberStatusActivities_stream: Array<MemberStatusActivities>;
+  /** fetch data from the table: "memberStatusActivityLatest" */
+  memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
+  /** fetch aggregated fields from the table: "memberStatusActivityLatest" */
+  memberStatusActivityLatest_aggregate: MemberStatusActivityLatest_Aggregate;
+  /** fetch data from the table in a streaming manner: "memberStatusActivityLatest" */
+  memberStatusActivityLatest_stream: Array<MemberStatusActivityLatest>;
   /** fetch data from the table: "members" */
   members: Array<Members>;
   /** fetch aggregated fields from the table: "members" */
@@ -2330,36 +2524,6 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
-};
-
-
-export type Subscription_RootMembarRestoredArgs = {
-  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
-  where?: InputMaybe<MembarRestored_Bool_Exp>;
-};
-
-
-export type Subscription_RootMembarRestored_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<MembarRestored_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  order_by?: InputMaybe<Array<MembarRestored_Order_By>>;
-  where?: InputMaybe<MembarRestored_Bool_Exp>;
-};
-
-
-export type Subscription_RootMembarRestored_By_PkArgs = {
-  statusActivityId: Scalars['uuid']['input'];
-};
-
-
-export type Subscription_RootMembarRestored_StreamArgs = {
-  batch_size: Scalars['Int']['input'];
-  cursor: Array<InputMaybe<MembarRestored_Stream_Cursor_Input>>;
-  where?: InputMaybe<MembarRestored_Bool_Exp>;
 };
 
 
@@ -2483,6 +2647,36 @@ export type Subscription_RootMemberResigned_StreamArgs = {
 };
 
 
+export type Subscription_RootMemberRestoredArgs = {
+  distinct_on?: InputMaybe<Array<MemberRestored_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberRestored_Order_By>>;
+  where?: InputMaybe<MemberRestored_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberRestored_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberRestored_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberRestored_Order_By>>;
+  where?: InputMaybe<MemberRestored_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberRestored_By_PkArgs = {
+  statusActivityId: Scalars['uuid']['input'];
+};
+
+
+export type Subscription_RootMemberRestored_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<MemberRestored_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberRestored_Bool_Exp>;
+};
+
+
 export type Subscription_RootMemberStatusActivitiesArgs = {
   distinct_on?: InputMaybe<Array<MemberStatusActivities_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']['input']>;
@@ -2510,6 +2704,31 @@ export type Subscription_RootMemberStatusActivities_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<MemberStatusActivities_Stream_Cursor_Input>>;
   where?: InputMaybe<MemberStatusActivities_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberStatusActivityLatestArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivityLatest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberStatusActivityLatest_Order_By>>;
+  where?: InputMaybe<MemberStatusActivityLatest_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberStatusActivityLatest_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberStatusActivityLatest_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberStatusActivityLatest_Order_By>>;
+  where?: InputMaybe<MemberStatusActivityLatest_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberStatusActivityLatest_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<MemberStatusActivityLatest_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberStatusActivityLatest_Bool_Exp>;
 };
 
 
@@ -2677,13 +2896,6 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
-/** input type for inserting object relation for remote table "users" */
-export type Users_Obj_Rel_Insert_Input = {
-  data: Users_Insert_Input;
-  /** upsert condition */
-  on_conflict?: InputMaybe<Users_On_Conflict>;
-};
-
 /** on_conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
@@ -2769,6 +2981,16 @@ export type GetActiveMemberQueryVariables = Exact<{
 export type GetActiveMemberQuery = { memberStatusActivities: Array<(
     Pick<MemberStatusActivities, 'id' | 'memberId' | 'status' | 'createdAt'>
     & { memberActive?: Maybe<Pick<MemberActive, 'address' | 'birthday' | 'createdAt' | 'email' | 'memberId' | 'postalCode' | 'statusActivityId'>> }
+  )> };
+
+export type GetMembersByStatusQueryVariables = Exact<{
+  status: Scalars['String']['input'];
+}>;
+
+
+export type GetMembersByStatusQuery = { memberStatusActivityLatest: Array<(
+    Pick<MemberStatusActivityLatest, 'status' | 'createdAt' | 'id' | 'memberId'>
+    & { memberActive?: Maybe<Pick<MemberActive, 'statusActivityId' | 'postalCode' | 'memberId' | 'email' | 'createdAt' | 'birthday' | 'address'>>, memberBanned?: Maybe<Pick<MemberBanned, 'createdAt' | 'email' | 'memberId' | 'operatedBy' | 'reason' | 'statusActivityId'>>, memberPendingActivation?: Maybe<Pick<MemberPendingActivation, 'createdAt' | 'email' | 'memberId' | 'statusActivityId'>>, memberResigned?: Maybe<Pick<MemberResigned, 'agreement' | 'createdAt' | 'memberId' | 'reasonDetail' | 'reasonType' | 'statusActivityId'>>, memberRestored?: Maybe<Pick<MemberRestored, 'createdAt' | 'memberId' | 'operatedBy' | 'reason' | 'statusActivityId'>> }
   )> };
 
 
@@ -2868,3 +3090,84 @@ export type GetActiveMemberQueryHookResult = ReturnType<typeof useGetActiveMembe
 export type GetActiveMemberLazyQueryHookResult = ReturnType<typeof useGetActiveMemberLazyQuery>;
 export type GetActiveMemberSuspenseQueryHookResult = ReturnType<typeof useGetActiveMemberSuspenseQuery>;
 export type GetActiveMemberQueryResult = Apollo.QueryResult<GetActiveMemberQuery, GetActiveMemberQueryVariables>;
+export const GetMembersByStatusDocument = gql`
+    query GetMembersByStatus($status: String!) {
+  memberStatusActivityLatest(where: {status: {_eq: $status}}) {
+    status
+    createdAt
+    id
+    memberId
+    memberActive {
+      statusActivityId
+      postalCode
+      memberId
+      email
+      createdAt
+      birthday
+      address
+    }
+    memberBanned {
+      createdAt
+      email
+      memberId
+      operatedBy
+      reason
+      statusActivityId
+    }
+    memberPendingActivation {
+      createdAt
+      email
+      memberId
+      statusActivityId
+    }
+    memberResigned {
+      agreement
+      createdAt
+      memberId
+      reasonDetail
+      reasonType
+      statusActivityId
+    }
+    memberRestored {
+      createdAt
+      memberId
+      operatedBy
+      reason
+      statusActivityId
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMembersByStatusQuery__
+ *
+ * To run a query within a React component, call `useGetMembersByStatusQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMembersByStatusQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMembersByStatusQuery({
+ *   variables: {
+ *      status: // value for 'status'
+ *   },
+ * });
+ */
+export function useGetMembersByStatusQuery(baseOptions: Apollo.QueryHookOptions<GetMembersByStatusQuery, GetMembersByStatusQueryVariables> & ({ variables: GetMembersByStatusQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetMembersByStatusQuery, GetMembersByStatusQueryVariables>(GetMembersByStatusDocument, options);
+      }
+export function useGetMembersByStatusLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetMembersByStatusQuery, GetMembersByStatusQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetMembersByStatusQuery, GetMembersByStatusQueryVariables>(GetMembersByStatusDocument, options);
+        }
+export function useGetMembersByStatusSuspenseQuery(baseOptions?: Apollo.SuspenseQueryHookOptions<GetMembersByStatusQuery, GetMembersByStatusQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetMembersByStatusQuery, GetMembersByStatusQueryVariables>(GetMembersByStatusDocument, options);
+        }
+export type GetMembersByStatusQueryHookResult = ReturnType<typeof useGetMembersByStatusQuery>;
+export type GetMembersByStatusLazyQueryHookResult = ReturnType<typeof useGetMembersByStatusLazyQuery>;
+export type GetMembersByStatusSuspenseQueryHookResult = ReturnType<typeof useGetMembersByStatusSuspenseQuery>;
+export type GetMembersByStatusQueryResult = Apollo.QueryResult<GetMembersByStatusQuery, GetMembersByStatusQueryVariables>;

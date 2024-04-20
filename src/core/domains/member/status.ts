@@ -1,8 +1,9 @@
 export const memberStatus = {
-  pendingMigration: "pendingMigration",
+  pendingActivation: "pendingActivation",
   active: "active",
   resigned: "resigned",
-  banned: "resigned",
+  banned: "banned",
+  restored: "restored",
 } as const;
 
-export type MemberStatus = typeof memberStatus[keyof typeof memberStatus];
+export type MemberStatus = (typeof memberStatus)[keyof typeof memberStatus];
