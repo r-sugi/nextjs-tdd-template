@@ -1,5 +1,5 @@
 table:
-  name: memberStatusActivities
+  name: memberStatusActivityLatest
   schema: public
 object_relationships:
   - name: memberActive
@@ -7,7 +7,7 @@ object_relationships:
       manual_configuration:
         column_mapping:
           id: statusActivityId
-        insertion_order: after_parent
+        insertion_order: null
         remote_table:
           name: memberActive
           schema: public
@@ -16,7 +16,7 @@ object_relationships:
       manual_configuration:
         column_mapping:
           id: statusActivityId
-        insertion_order: after_parent
+        insertion_order: null
         remote_table:
           name: memberBanned
           schema: public
@@ -25,7 +25,7 @@ object_relationships:
       manual_configuration:
         column_mapping:
           id: statusActivityId
-        insertion_order: after_parent
+        insertion_order: null
         remote_table:
           name: memberPendingActivation
           schema: public
@@ -34,7 +34,7 @@ object_relationships:
       manual_configuration:
         column_mapping:
           id: statusActivityId
-        insertion_order: after_parent
+        insertion_order: null
         remote_table:
           name: memberResigned
           schema: public
