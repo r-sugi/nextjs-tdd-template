@@ -1,6 +1,7 @@
+// TODO: App router対応
 import { ClientLogger } from "@/lib/clientLogger";
 import { Component, ErrorInfo, ReactNode } from "react";
-import { ErrorScreen } from "./_error.screen";
+import { ErrorScreen } from "./error.screen";
 import { ErrorTransformer } from "@/error/transformer/error.transformer";
 import { ClientError } from "@/error/errors/clientError";
 

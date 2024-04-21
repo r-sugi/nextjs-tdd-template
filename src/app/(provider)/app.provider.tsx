@@ -1,5 +1,6 @@
+"use client";
 import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
-import { ErrorBoundary } from "@/pages/_error.boundary";
+// import { ErrorBoundary } from "@/pages/_error.boundary";
 import {
   ApolloClient,
   from,
@@ -44,7 +45,9 @@ export const AppProvider = ({
 }): JSX.Element => {
   return (
     <AppApolloProvider>
-      <ErrorBoundary>{children}</ErrorBoundary>
+      {/* TODO: <ErrorBoundary> */}
+      {children}
+      {/* </ErrorBoundary> */}
     </AppApolloProvider>
   );
 };

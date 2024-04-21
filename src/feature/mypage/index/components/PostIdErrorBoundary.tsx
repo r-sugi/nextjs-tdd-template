@@ -1,6 +1,6 @@
 import { ErrorTransformer } from "@/error/transformer/error.transformer";
 import { Component, ErrorInfo, ReactNode } from "react";
-import { ErrorScreen } from "../../../../pages/_error.screen";
+import { ErrorScreen } from "../../../../app/(tmp)/error.screen";
 import { ClientLogger } from "@/lib/clientLogger";
 import { ClientError } from "@/error/errors/clientError";
 import { UnhandledRejectionError } from "@/error/errors/unhandledRejectionError";
