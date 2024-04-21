@@ -6,11 +6,10 @@ import { FetchMembersByStatusSuccess } from "./members.repository";
 import { BannedMember } from "@/core/domains/member/bannedMember";
 import { RestoredMember } from "@/core/domains/member/restoredMember";
 import { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
-
-type Response = HttpResponse<FetchMembersByStatusSuccess>;
+import { GetMembersByStatusQueryResult } from "@/generated/graphql";
 
 export const transform = (
-  res: Response,
+  res: GetMembersByStatusQueryResult,
   status: MemberStatus
 ):
   | ActiveMember[]
@@ -18,16 +17,19 @@ export const transform = (
   | BannedMember[]
   | RestoredMember[]
   | PendingActivationMember[] => {
-  if (res.data.data.memberStatusActivityLatest.length === 0) {
+  if (res.data == null) {
     return [];
   }
-  if (res.data.data.memberStatusActivityLatest == null) {
+  if (res.data.memberStatusActivityLatest.length === 0) {
+    return [];
+  }
+  if (res.data.memberStatusActivityLatest == null) {
     return [];
   }
   // TODO: 型問題を解消させたい(Member, Dateへの変換)
   // TODO: responseがMaybeになっているが、nullチェックをしているので、nullチェックを削除したい
   if (status === "active") {
-    return res.data.data.memberStatusActivityLatest
+    return res.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberActive)
       .map((activity) => ({
         ...activity.memberActive,
@@ -36,7 +38,7 @@ export const transform = (
         birthday: new Date(activity?.memberActive?.birthday ?? ""),
       })) as ActiveMember[];
   } else if (status === "resigned") {
-    return res.data.data.memberStatusActivityLatest
+    return res.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberResigned)
       .map((activity) => ({
         ...activity.memberResigned,
@@ -44,7 +46,7 @@ export const transform = (
         createdAt: new Date(activity?.memberResigned?.createdAt ?? ""),
       })) as ResignMember[];
   } else if (status === "restored") {
-    return res.data.data.memberStatusActivityLatest
+    return res.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberRestored)
       .map((activity) => ({
         ...activity.memberRestored,
@@ -52,7 +54,7 @@ export const transform = (
         createdAt: new Date(activity?.memberRestored?.createdAt ?? ""),
       })) as RestoredMember[];
   } else if (status === "banned") {
-    return res.data.data.memberStatusActivityLatest
+    return res.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberBanned)
       .map((activity) => ({
         ...activity.memberBanned,
@@ -60,7 +62,7 @@ export const transform = (
         createdAt: new Date(activity?.memberBanned?.createdAt ?? ""),
       })) as BannedMember[];
   } else if (status === "pendingActivation") {
-    return res.data.data.memberStatusActivityLatest
+    return res.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberPendingActivation)
       .map((activity) => ({
         ...activity.memberPendingActivation,

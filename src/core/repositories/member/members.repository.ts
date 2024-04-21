@@ -1,13 +1,10 @@
 import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 import {
-  GetActiveMemberDocument,
-  GetActiveMemberQueryVariables,
-  MemberStatusActivities,
   ResignMemberMutationVariables,
   ResignMemberDocument,
-  GetMembersByStatusQueryVariables,
-  GetMembersByStatusDocument,
+  useGetMembersByStatusLazyQuery,
   MemberStatusActivityLatest,
+  useGetActiveMemberLazyQuery,
 } from "@/generated/graphql";
 import { apiClient } from "@/lib/apiClient";
 import { print } from "graphql/language/printer";
@@ -16,53 +13,31 @@ import { transform } from "./activeMember.transformer";
 import { transform as membersByStatusTransform } from "./membersByStatus.transformer";
 import { MemberStatus } from "@/core/domains/member/status";
 
-export type FindMemberOneSuccess = {
-  data: {
-    memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
-  };
-};
-
 /**
  * Queries
  */
-// TODO: graphQLClient(apiClientをラップした関数を作成する)
-export const findActiveMemberOne = async (
-  variables: GetActiveMemberQueryVariables
-): Promise<ActiveMember | null> => {
-  const res = await apiClient<FindMemberOneSuccess>(NEXT_PUBLIC_GRAPHQL_URI, {
-    method: "POST",
-    body: JSON.stringify({
-      variables,
-      query: print(GetActiveMemberDocument),
-    }),
-  });
-  // TODO: エラー処理をここに書く（一旦ベタがきで）
-  return transform(res);
-};
+// TODO: キャッシュしたかったらoptionsを渡す
+type Return = (memberId: string) => Promise<ActiveMember | null>;
 
-export type FetchMembersByStatusSuccess = {
-  data: {
-    memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
+export const useFindActiveMemberOne = (): Return => {
+  const [query] = useGetActiveMemberLazyQuery();
+
+  return async (memberId) => {
+    const res = await query({ variables: { memberId } });
+    // TODO: エラー処理をここに書く（一旦ベタがきで）
+    return transform(res);
   };
 };
 
-// TODO: graphQLClient(apiClientをラップした関数を作成する)
-export const fetchMembersByStatus = async (
-  variables: GetMembersByStatusQueryVariables
-): Promise<any> => {
-  const res = await apiClient<FetchMembersByStatusSuccess>(
-    NEXT_PUBLIC_GRAPHQL_URI,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        variables,
-        query: print(GetMembersByStatusDocument),
-      }),
-    }
-  );
-  // TODO: エラー処理をここに書く（一旦ベタがきで）
-  // TODO: statusの型キャストをやめれるか？
-  return membersByStatusTransform(res, variables.status as MemberStatus);
+type Return2 = (status: MemberStatus) => Promise<any>;
+export const useFetchMembersByStatus = (): Return2 => {
+  const [query] = useGetMembersByStatusLazyQuery();
+
+  return async (status) => {
+    const res = await query({ variables: { status } });
+    // TODO: エラー処理をここに書く（一旦ベタがきで）
+    return membersByStatusTransform(res, status);
+  };
 };
 
 /**
