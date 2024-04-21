@@ -1,8 +1,6 @@
 query GetActiveMember($memberId: uuid!) {
-  memberStatusActivities(where: {memberId: {_eq: $memberId }}, order_by: {createdAt: desc}, limit: 1) {
+  memberStatusActivityLatest(where: { memberId: { _eq: $memberId } }) {
     id
-    memberId
-    status
     createdAt
     memberActive {
       address

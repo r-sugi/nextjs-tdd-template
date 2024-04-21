@@ -1289,6 +1289,8 @@ export type MemberStatusActivityLatest_Updates = {
 /** columns and relationships of "members" */
 export type Members = {
   id: Scalars['uuid']['output'];
+  /** An object relationship */
+  user: Users;
   userId: Scalars['uuid']['output'];
 };
 
@@ -1318,6 +1320,7 @@ export type Members_Bool_Exp = {
   _not?: InputMaybe<Members_Bool_Exp>;
   _or?: InputMaybe<Array<Members_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -1332,6 +1335,7 @@ export enum Members_Constraint {
 /** input type for inserting data into table "members" */
 export type Members_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
@@ -1365,6 +1369,7 @@ export type Members_On_Conflict = {
 /** Ordering options when selecting data from "members". */
 export type Members_Order_By = {
   id?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -2005,6 +2010,8 @@ export type Mutation_RootUpdate_Users_ManyArgs = {
 export type Operators = {
   id: Scalars['uuid']['output'];
   name: Scalars['String']['output'];
+  /** An object relationship */
+  user: Users;
   userId: Scalars['uuid']['output'];
 };
 
@@ -2035,6 +2042,7 @@ export type Operators_Bool_Exp = {
   _or?: InputMaybe<Array<Operators_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
+  user?: InputMaybe<Users_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
 
@@ -2050,6 +2058,7 @@ export enum Operators_Constraint {
 export type Operators_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']['input']>;
 };
 
@@ -2086,6 +2095,7 @@ export type Operators_On_Conflict = {
 export type Operators_Order_By = {
   id?: InputMaybe<Order_By>;
   name?: InputMaybe<Order_By>;
+  user?: InputMaybe<Users_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
 
@@ -2896,6 +2906,13 @@ export type Users_Mutation_Response = {
   returning: Array<Users>;
 };
 
+/** input type for inserting object relation for remote table "users" */
+export type Users_Obj_Rel_Insert_Input = {
+  data: Users_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
 /** on_conflict condition type for table "users" */
 export type Users_On_Conflict = {
   constraint: Users_Constraint;
@@ -2978,8 +2995,8 @@ export type GetActiveMemberQueryVariables = Exact<{
 }>;
 
 
-export type GetActiveMemberQuery = { memberStatusActivities: Array<(
-    Pick<MemberStatusActivities, 'id' | 'memberId' | 'status' | 'createdAt'>
+export type GetActiveMemberQuery = { memberStatusActivityLatest: Array<(
+    Pick<MemberStatusActivityLatest, 'id' | 'createdAt'>
     & { memberActive?: Maybe<Pick<MemberActive, 'address' | 'birthday' | 'createdAt' | 'email' | 'memberId' | 'postalCode' | 'statusActivityId'>> }
   )> };
 
@@ -3036,14 +3053,8 @@ export type ResignMemberMutationResult = Apollo.MutationResult<ResignMemberMutat
 export type ResignMemberMutationOptions = Apollo.BaseMutationOptions<ResignMemberMutation, ResignMemberMutationVariables>;
 export const GetActiveMemberDocument = gql`
     query GetActiveMember($memberId: uuid!) {
-  memberStatusActivities(
-    where: {memberId: {_eq: $memberId}}
-    order_by: {createdAt: desc}
-    limit: 1
-  ) {
+  memberStatusActivityLatest(where: {memberId: {_eq: $memberId}}) {
     id
-    memberId
-    status
     createdAt
     memberActive {
       address
