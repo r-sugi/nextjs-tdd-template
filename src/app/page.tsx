@@ -11,6 +11,9 @@ type Props = {};
 
 export default function Index() {
   const router = useRouter();
+
+  // FIXME: 挙動に関する確認
+  // FIXME: 関数に切り出したい。型でset, getのkey,valueをある程度担保する
   function setStateToCurrentPage() {
     // urlを指定して履歴スタックにstateを追加する
     window.history.pushState({ foo: "foo desu2" }, "", `/`);
