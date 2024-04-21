@@ -11,4 +11,5 @@ export type Member =
   | BannedMember
   | RestoredMember
   | PendingActivationMember;
-export type Members = Array<ActiveMember | ResignMember>;
+
+export type MembersByType = Array<ActiveMember> | Array<ResignMember> | Array<BannedMember> | Array<RestoredMember> | Array<PendingActivationMember>;

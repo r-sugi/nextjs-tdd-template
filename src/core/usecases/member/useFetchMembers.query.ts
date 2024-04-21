@@ -1,3 +1,4 @@
+import { MembersByType } from "@/core/domains/member/member";
 import { MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { useEffect, useState, useRef } from "react";
@@ -13,7 +14,7 @@ export const useFetchMembers = (props?: Props, opt?: Option) => {
   const [userStatus, setUserStatus] = useState<MemberStatus>(
     props?.status ?? memberStatus.pendingActivation
   );
-  const [members, setMembers] = useState<any[]>([]);
+  const [members, setMembers] = useState<MembersByType>([]);
 
   const query = useFetchMembersByStatus();
 
@@ -32,6 +33,7 @@ export const useFetchMembers = (props?: Props, opt?: Option) => {
       }
       setMembers(res);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref, userStatus]);
 
   return {

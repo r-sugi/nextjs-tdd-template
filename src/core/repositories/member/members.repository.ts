@@ -1,19 +1,15 @@
-import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 import {
   ResignMemberMutationVariables,
-  ResignMemberDocument,
   useGetMembersByStatusLazyQuery,
   useGetActiveMemberLazyQuery,
+  useResignMemberMutation,
 } from "@/generated/graphql";
-import { apiClient } from "@/lib/apiClient";
-import { print } from "graphql/language/printer";
 import { ActiveMember } from "@/core/domains/member/activeMember";
 import { transform } from "./activeMember.transformer";
-import {
-  MemberStatusToMemberMapValue,
-  transform as membersByStatusTransform,
-} from "./membersByStatus.transformer";
+import { transform as membersByStatusTransform } from "./membersByStatus.transformer";
 import { MemberStatus } from "@/core/domains/member/status";
+import { MembersByType } from "@/core/domains/member/member";
+import { UpdateMemberStatusInputType } from "@/core/usecases/member/useResignMember.command";
 
 /**
  * Queries
@@ -34,7 +30,8 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 
 type FetchMembersByStatusType = (
   status: MemberStatus
-) => Promise<MemberStatusToMemberMapValue>; // FIXME: 確認する
+) => Promise<MembersByType>; // FIXME: 依存型の確認
+
 export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
   const [query] = useGetMembersByStatusLazyQuery();
 
@@ -48,16 +45,15 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 /**
  * Mutations
  */
-export const updateMemberStatus = async (
-  variables: ResignMemberMutationVariables
-) => {
-  await apiClient<any>(NEXT_PUBLIC_GRAPHQL_URI, {
-    method: "POST",
-    body: JSON.stringify({
-      variables,
-      query: print(ResignMemberDocument),
-    }),
-  });
-  // TODO: エラー処理をここに書く（一旦ベタがきで）
-  return true;
+type UpdateMemberStatusType = (
+  input: UpdateMemberStatusInputType // FIXME: 依存型の確認
+) => Promise<boolean>;
+export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
+  const [mutate] = useResignMemberMutation();
+
+  return async (input: ResignMemberMutationVariables) => {
+    const res = await mutate({ variables: input });
+    // TODO: エラー処理をここに書く（一旦ベタがきで）
+    return !!res;
+  };
 };

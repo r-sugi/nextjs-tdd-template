@@ -30,9 +30,6 @@ type MemberStatusToMemberMap = {
   [memberStatus.restored]: Array<RestoredMember>;
 };
 
-export type MemberStatusToMemberMapValue =
-  MemberStatusToMemberMap[MemberStatus];
-
 export const transform = <K extends MemberStatus>(
   res: GetMembersByStatusQueryResult,
   status: K
