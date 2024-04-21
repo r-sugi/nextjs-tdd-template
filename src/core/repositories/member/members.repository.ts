@@ -1,83 +1,59 @@
-import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 import {
-  GetActiveMemberDocument,
-  GetActiveMemberQueryVariables,
-  MemberStatusActivities,
   ResignMemberMutationVariables,
-  ResignMemberDocument,
-  GetMembersByStatusQueryVariables,
-  GetMembersByStatusDocument,
-  MemberStatusActivityLatest,
+  useGetMembersByStatusLazyQuery,
+  useGetActiveMemberLazyQuery,
+  useResignMemberMutation,
 } from "@/generated/graphql";
-import { apiClient } from "@/lib/apiClient";
-import { print } from "graphql/language/printer";
 import { ActiveMember } from "@/core/domains/member/activeMember";
 import { transform } from "./activeMember.transformer";
 import { transform as membersByStatusTransform } from "./membersByStatus.transformer";
 import { MemberStatus } from "@/core/domains/member/status";
-
-export type FindMemberOneSuccess = {
-  data: {
-    memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
-  };
-};
+import { MembersByType } from "@/core/domains/member/member";
+import { UpdateMemberStatusInputType } from "@/core/usecases/member/useResignMember.command";
 
 /**
  * Queries
  */
-// TODO: graphQLClient(apiClientをラップした関数を作成する)
-export const findActiveMemberOne = async (
-  variables: GetActiveMemberQueryVariables
-): Promise<ActiveMember | null> => {
-  const res = await apiClient<FindMemberOneSuccess>(NEXT_PUBLIC_GRAPHQL_URI, {
-    method: "POST",
-    body: JSON.stringify({
-      variables,
-      query: print(GetActiveMemberDocument),
-    }),
-  });
-  // TODO: エラー処理をここに書く（一旦ベタがきで）
-  return transform(res);
-};
+// TODO: キャッシュしたかったらoptionsを渡す
+type FindActiveMemberOneType = (
+  memberId: string
+) => Promise<ActiveMember | null>;
+export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
+  const [query] = useGetActiveMemberLazyQuery();
 
-export type FetchMembersByStatusSuccess = {
-  data: {
-    memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
+  return async (memberId) => {
+    const res = await query({ variables: { memberId } });
+    // TODO: エラー処理をここに書く（一旦ベタがきで）
+    return transform(res);
   };
 };
 
-// TODO: graphQLClient(apiClientをラップした関数を作成する)
-export const fetchMembersByStatus = async (
-  variables: GetMembersByStatusQueryVariables
-): Promise<any> => {
-  const res = await apiClient<FetchMembersByStatusSuccess>(
-    NEXT_PUBLIC_GRAPHQL_URI,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        variables,
-        query: print(GetMembersByStatusDocument),
-      }),
-    }
-  );
-  // TODO: エラー処理をここに書く（一旦ベタがきで）
-  // TODO: statusの型キャストをやめれるか？
-  return membersByStatusTransform(res, variables.status as MemberStatus);
+type FetchMembersByStatusType = (
+  status: MemberStatus
+) => Promise<MembersByType>; // FIXME: 依存型の確認
+
+export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
+  const [query] = useGetMembersByStatusLazyQuery();
+
+  return async (status) => {
+    const res = await query({ variables: { status } });
+    // TODO: エラー処理をここに書く（一旦ベタがきで）
+    return membersByStatusTransform(res, status);
+  };
 };
 
 /**
  * Mutations
  */
-export const updateMemberStatus = async (
-  variables: ResignMemberMutationVariables
-) => {
-  await apiClient<any>(NEXT_PUBLIC_GRAPHQL_URI, {
-    method: "POST",
-    body: JSON.stringify({
-      variables,
-      query: print(ResignMemberDocument),
-    }),
-  });
-  // TODO: エラー処理をここに書く（一旦ベタがきで）
-  return true;
+type UpdateMemberStatusType = (
+  input: UpdateMemberStatusInputType // FIXME: 依存型の確認
+) => Promise<boolean>;
+export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
+  const [mutate] = useResignMemberMutation();
+
+  return async (input: ResignMemberMutationVariables) => {
+    const res = await mutate({ variables: input });
+    // TODO: エラー処理をここに書く（一旦ベタがきで）
+    return !!res;
+  };
 };

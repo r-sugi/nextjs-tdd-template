@@ -1,5 +1,5 @@
 import { BaseSyntheticEvent, FC } from "react";
-import { resignMember } from "@/core/usecases/member/resignMember.command";
+import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 import { ResignMemberErrorBoundary } from "./components/resignMemberErrorBoundary";
 
 import {
@@ -16,6 +16,8 @@ export const IndexTemplate: FC<Props> = () => {
     formState: { isSubmitting, isValid, errors },
   } = useResignMemberForm();
 
+  const resignMemberMutation = useResignMember();
+
   const submitHandler = async (
     data: ResignMemberSchema,
     event?: BaseSyntheticEvent
@@ -23,7 +25,7 @@ export const IndexTemplate: FC<Props> = () => {
     event && event.preventDefault();
 
     try {
-      await resignMember(
+      const res = await resignMemberMutation(
         {
           reasonType: data.reasonType,
           reasonDetail: data.reasonDetail,
@@ -35,6 +37,7 @@ export const IndexTemplate: FC<Props> = () => {
           },
         }
       );
+      console.log(`res: ${res}`)
       window.alert("退会しました!");
     } catch (error) {
       // TODO: エラー処理(例: 入力値のバリデーションエラーなど)

@@ -15,7 +15,6 @@ query GetMembersByStatus($status: String!) {
     }
     memberBanned {
       createdAt
-      email
       memberId
       operatedBy
       reason
