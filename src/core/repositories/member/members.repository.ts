@@ -18,7 +18,7 @@ import { MemberStatus } from "@/core/domains/member/status";
 
 export type FindMemberOneSuccess = {
   data: {
-    memberStatusActivities: Array<MemberStatusActivities>;
+    memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
   };
 };
 
