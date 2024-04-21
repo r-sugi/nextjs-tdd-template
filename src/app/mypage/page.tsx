@@ -1,7 +1,7 @@
-// import { publicPages } from "@/paths";
+"use client";
+// import { publicPages } from "@/const/paths";
 import { IndexTemplate } from "@/feature/mypage/index/index";
-import { ResignMemberTemplate } from "@/feature/mypage/resignMember";
-// import { Seo } from "@/components/Seo";
+// import { Seo } from "@/pages/_seo/Seo";
 import { FC } from "react";
 
 type Props = {};
@@ -14,7 +14,7 @@ export const Index: FC<Props> = () => {
         description={publicPages.index.description()}
         path={publicPages.index.path()}
       /> */}
-      <ResignMemberTemplate />
+      <IndexTemplate />
     </>
   );
 };

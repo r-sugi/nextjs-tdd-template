@@ -1,6 +1,7 @@
-import { publicPages } from "@/const/paths";
+"use client";
+// import { publicPages } from "@/const/paths";
 import { IndexTemplate } from "@/feature/admin/members/index";
-import { Seo } from "@/pages/_seo/Seo";
+// import { Seo } from "@/pages/_seo/Seo";
 import { FC } from "react";
 
 type Props = {};
@@ -8,11 +9,11 @@ type Props = {};
 export const Index: FC<Props> = () => {
   return (
     <>
-      <Seo
+      {/* <Seo
         title={publicPages.index.title()}
         description={publicPages.index.description()}
         path={publicPages.index.path()}
-      />
+      /> */}
       <IndexTemplate />
     </>
   );
