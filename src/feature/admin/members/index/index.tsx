@@ -20,7 +20,7 @@ export const IndexTemplate: FC = () => {
     return (
       <ul>
         {members.map((member) => (
-          <li key={member.createdAt}>{JSON.stringify(member, null, 2)}</li>
+          <li key={member.statusActivityId}>{JSON.stringify(member, null, 2)}</li>
         ))}
       </ul>
     );
