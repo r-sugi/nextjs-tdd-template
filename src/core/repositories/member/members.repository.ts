@@ -3,23 +3,26 @@ import {
   ResignMemberMutationVariables,
   ResignMemberDocument,
   useGetMembersByStatusLazyQuery,
-  MemberStatusActivityLatest,
   useGetActiveMemberLazyQuery,
 } from "@/generated/graphql";
 import { apiClient } from "@/lib/apiClient";
 import { print } from "graphql/language/printer";
 import { ActiveMember } from "@/core/domains/member/activeMember";
 import { transform } from "./activeMember.transformer";
-import { transform as membersByStatusTransform } from "./membersByStatus.transformer";
+import {
+  MemberStatusToMemberMapValue,
+  transform as membersByStatusTransform,
+} from "./membersByStatus.transformer";
 import { MemberStatus } from "@/core/domains/member/status";
 
 /**
  * Queries
  */
 // TODO: キャッシュしたかったらoptionsを渡す
-type Return = (memberId: string) => Promise<ActiveMember | null>;
-
-export const useFindActiveMemberOne = (): Return => {
+type FindActiveMemberOneType = (
+  memberId: string
+) => Promise<ActiveMember | null>;
+export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
   const [query] = useGetActiveMemberLazyQuery();
 
   return async (memberId) => {
@@ -29,8 +32,10 @@ export const useFindActiveMemberOne = (): Return => {
   };
 };
 
-type Return2 = (status: MemberStatus) => Promise<any>;
-export const useFetchMembersByStatus = (): Return2 => {
+type FetchMembersByStatusType = (
+  status: MemberStatus
+) => Promise<MemberStatusToMemberMapValue>; // FIXME: 確認する
+export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
   const [query] = useGetMembersByStatusLazyQuery();
 
   return async (status) => {

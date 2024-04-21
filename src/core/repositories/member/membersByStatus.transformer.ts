@@ -13,10 +13,11 @@ type MemberTypes = keyof Pick<
   MemberStatusActivityLatest,
   | "memberActive"
   | "memberBanned"
-  | "memberPendingActivation"
   | "memberResigned"
+  | "memberPendingActivation"
   | "memberRestored"
 >;
+
 type StrictMemberStatusActivityLatest<K extends MemberTypes> =
   MemberStatusActivityLatest &
     Record<K, NonNullable<MemberStatusActivityLatest[K]>>;
@@ -28,6 +29,9 @@ type MemberStatusToMemberMap = {
   [memberStatus.resigned]: Array<ResignMember>;
   [memberStatus.restored]: Array<RestoredMember>;
 };
+
+export type MemberStatusToMemberMapValue =
+  MemberStatusToMemberMap[MemberStatus];
 
 export const transform = <K extends MemberStatus>(
   res: GetMembersByStatusQueryResult,
@@ -59,35 +63,55 @@ export const transform = <K extends MemberStatus>(
       })) as MemberStatusToMemberMap[K];
   } else if (status === "resigned") {
     return res.data.memberStatusActivityLatest
-      .filter((activity) => !!activity?.memberResigned) // TODO: 型推論するコールバック関数を定義して、それを使う
+      .filter(
+        (
+          activity
+        ): activity is StrictMemberStatusActivityLatest<"memberResigned"> =>
+          !!activity?.memberResigned
+      )
       .map((activity) => ({
         ...activity.memberResigned,
         status: "resigned",
-        createdAt: new Date(activity?.memberResigned?.createdAt ?? ""),
-      })) as MemberStatusToMemberMap[K];
+        createdAt: new Date(activity.memberResigned.createdAt),
+      })) as any; // FIXME: 型エラーを解消する
   } else if (status === "restored") {
     return res.data.memberStatusActivityLatest
-      .filter((activity) => !!activity?.memberRestored)
+      .filter(
+        (
+          activity
+        ): activity is StrictMemberStatusActivityLatest<"memberRestored"> =>
+          !!activity?.memberRestored
+      )
       .map((activity) => ({
         ...activity.memberRestored,
         status: "restored",
-        createdAt: new Date(activity?.memberRestored?.createdAt ?? ""),
+        createdAt: new Date(activity.memberRestored.createdAt),
       })) as MemberStatusToMemberMap[K];
   } else if (status === "banned") {
     return res.data.memberStatusActivityLatest
-      .filter((activity) => !!activity?.memberBanned)
+      .filter(
+        (
+          activity
+        ): activity is StrictMemberStatusActivityLatest<"memberBanned"> =>
+          !!activity?.memberBanned
+      )
       .map((activity) => ({
         ...activity.memberBanned,
         status: "banned",
-        createdAt: new Date(activity?.memberBanned?.createdAt ?? ""),
+        createdAt: new Date(activity.memberBanned.createdAt),
       })) as MemberStatusToMemberMap[K];
   } else if (status === "pendingActivation") {
     return res.data.memberStatusActivityLatest
-      .filter((activity) => !!activity?.memberPendingActivation)
+      .filter(
+        (
+          activity
+        ): activity is StrictMemberStatusActivityLatest<"memberPendingActivation"> =>
+          !!activity?.memberPendingActivation
+      )
       .map((activity) => ({
         ...activity.memberPendingActivation,
         status: "pendingActivation",
-        createdAt: new Date(activity?.memberPendingActivation?.createdAt ?? ""),
+        createdAt: new Date(activity.memberPendingActivation.createdAt),
       })) as MemberStatusToMemberMap[K];
   } else {
     throw new Error("status is invalid");

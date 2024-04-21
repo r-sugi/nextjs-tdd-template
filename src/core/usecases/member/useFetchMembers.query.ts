@@ -1,5 +1,5 @@
 import { MemberStatus, memberStatus } from "@/core/domains/member/status";
-import { fetchMembersByStatus } from "@/core/repositories/member/members.repository";
+import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { useEffect, useState, useRef } from "react";
 
 type Props = {
@@ -15,6 +15,9 @@ export const useFetchMembers = (props?: Props, opt?: Option) => {
   );
   const [members, setMembers] = useState<any[]>([]);
 
+  const query = useFetchMembersByStatus();
+
+  // チラつき防止
   const ref = useRef(opt?.onError);
   useEffect(() => {
     ref.current = opt?.onError;
@@ -22,8 +25,7 @@ export const useFetchMembers = (props?: Props, opt?: Option) => {
 
   useEffect(() => {
     (async () => {
-      // TODO: hooksなのでapolloClientのhooksを使いたい、、、。
-      const res = await fetchMembersByStatus({ status: userStatus });
+      const res = await query(userStatus);
       if (res == null) {
         await ref.current?.();
         return;

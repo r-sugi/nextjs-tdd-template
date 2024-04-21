@@ -29,6 +29,7 @@ export const useFetchActiveMember = (opt?: Option) => {
       }
       setActiveMember(state);
     })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
 
   return {

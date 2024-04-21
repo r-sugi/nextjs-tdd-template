@@ -271,7 +271,6 @@ export type MemberActive_Updates = {
 /** columns and relationships of "memberBanned" */
 export type MemberBanned = {
   createdAt: Scalars['timestamptz']['output'];
-  email: Scalars['String']['output'];
   memberId: Scalars['uuid']['output'];
   operatedBy: Scalars['uuid']['output'];
   reason: Scalars['String']['output'];
@@ -304,7 +303,6 @@ export type MemberBanned_Bool_Exp = {
   _not?: InputMaybe<MemberBanned_Bool_Exp>;
   _or?: InputMaybe<Array<MemberBanned_Bool_Exp>>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  email?: InputMaybe<String_Comparison_Exp>;
   memberId?: InputMaybe<Uuid_Comparison_Exp>;
   operatedBy?: InputMaybe<Uuid_Comparison_Exp>;
   reason?: InputMaybe<String_Comparison_Exp>;
@@ -320,7 +318,6 @@ export enum MemberBanned_Constraint {
 /** input type for inserting data into table "memberBanned" */
 export type MemberBanned_Insert_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
   memberId?: InputMaybe<Scalars['uuid']['input']>;
   operatedBy?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
@@ -330,7 +327,6 @@ export type MemberBanned_Insert_Input = {
 /** aggregate max on columns */
 export type MemberBanned_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
   memberId?: Maybe<Scalars['uuid']['output']>;
   operatedBy?: Maybe<Scalars['uuid']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
@@ -340,7 +336,6 @@ export type MemberBanned_Max_Fields = {
 /** aggregate min on columns */
 export type MemberBanned_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']['output']>;
-  email?: Maybe<Scalars['String']['output']>;
   memberId?: Maybe<Scalars['uuid']['output']>;
   operatedBy?: Maybe<Scalars['uuid']['output']>;
   reason?: Maybe<Scalars['String']['output']>;
@@ -372,7 +367,6 @@ export type MemberBanned_On_Conflict = {
 /** Ordering options when selecting data from "memberBanned". */
 export type MemberBanned_Order_By = {
   createdAt?: InputMaybe<Order_By>;
-  email?: InputMaybe<Order_By>;
   memberId?: InputMaybe<Order_By>;
   operatedBy?: InputMaybe<Order_By>;
   reason?: InputMaybe<Order_By>;
@@ -389,8 +383,6 @@ export enum MemberBanned_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
-  Email = 'email',
-  /** column name */
   MemberId = 'memberId',
   /** column name */
   OperatedBy = 'operatedBy',
@@ -403,7 +395,6 @@ export enum MemberBanned_Select_Column {
 /** input type for updating data in table "memberBanned" */
 export type MemberBanned_Set_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
   memberId?: InputMaybe<Scalars['uuid']['input']>;
   operatedBy?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
@@ -421,7 +412,6 @@ export type MemberBanned_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type MemberBanned_Stream_Cursor_Value_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
   memberId?: InputMaybe<Scalars['uuid']['input']>;
   operatedBy?: InputMaybe<Scalars['uuid']['input']>;
   reason?: InputMaybe<Scalars['String']['input']>;
@@ -432,8 +422,6 @@ export type MemberBanned_Stream_Cursor_Value_Input = {
 export enum MemberBanned_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
-  /** column name */
-  Email = 'email',
   /** column name */
   MemberId = 'memberId',
   /** column name */
@@ -3007,7 +2995,7 @@ export type GetMembersByStatusQueryVariables = Exact<{
 
 export type GetMembersByStatusQuery = { memberStatusActivityLatest: Array<(
     Pick<MemberStatusActivityLatest, 'status' | 'createdAt' | 'id' | 'memberId'>
-    & { memberActive?: Maybe<Pick<MemberActive, 'statusActivityId' | 'postalCode' | 'memberId' | 'email' | 'createdAt' | 'birthday' | 'address'>>, memberBanned?: Maybe<Pick<MemberBanned, 'createdAt' | 'email' | 'memberId' | 'operatedBy' | 'reason' | 'statusActivityId'>>, memberPendingActivation?: Maybe<Pick<MemberPendingActivation, 'createdAt' | 'email' | 'memberId' | 'statusActivityId'>>, memberResigned?: Maybe<Pick<MemberResigned, 'agreement' | 'createdAt' | 'memberId' | 'reasonDetail' | 'reasonType' | 'statusActivityId'>>, memberRestored?: Maybe<Pick<MemberRestored, 'createdAt' | 'memberId' | 'operatedBy' | 'reason' | 'statusActivityId'>> }
+    & { memberActive?: Maybe<Pick<MemberActive, 'statusActivityId' | 'postalCode' | 'memberId' | 'email' | 'createdAt' | 'birthday' | 'address'>>, memberBanned?: Maybe<Pick<MemberBanned, 'createdAt' | 'memberId' | 'operatedBy' | 'reason' | 'statusActivityId'>>, memberPendingActivation?: Maybe<Pick<MemberPendingActivation, 'createdAt' | 'email' | 'memberId' | 'statusActivityId'>>, memberResigned?: Maybe<Pick<MemberResigned, 'agreement' | 'createdAt' | 'memberId' | 'reasonDetail' | 'reasonType' | 'statusActivityId'>>, memberRestored?: Maybe<Pick<MemberRestored, 'createdAt' | 'memberId' | 'operatedBy' | 'reason' | 'statusActivityId'>> }
   )> };
 
 
@@ -3119,7 +3107,6 @@ export const GetMembersByStatusDocument = gql`
     }
     memberBanned {
       createdAt
-      email
       memberId
       operatedBy
       reason
