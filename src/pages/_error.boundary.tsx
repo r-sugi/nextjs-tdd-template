@@ -7,6 +7,10 @@ import { ClientError } from "@/error/errors/clientError";
 type ErrorBoundaryState = { error?: Error };
 type ErrorBoundaryProps = { children: ReactNode };
 
+const expectedErrorNames = [
+  "TypeError", // 例: TypeError: Cannot read properties of null by sessionStorage value is null
+];
+
 export class ErrorBoundary extends Component<ErrorBoundaryProps> {
   state: ErrorBoundaryState = {
     error: undefined,
@@ -17,7 +21,21 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
   }
 
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { error };
+    if (expectedErrorNames.includes(error?.name ?? "")) {
+      return {
+        error: {
+          code: error?.name,
+          message: error?.message,
+          stack: error?.stack,
+        },
+      };
+    }
+    // CriticalErrorが増える、、
+    throw new FatalError(error?.message, {
+      code: error?.name,
+      cause: error, // エラーが発生した箇所
+      stack: error?.stack, // 直前でthrowしたファイル catchの都度appendする
+    });
   }
 
   componentDidCatch(err: Error, errInfo: ErrorInfo) {
