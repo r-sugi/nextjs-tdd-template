@@ -6,7 +6,7 @@ import { FC } from "react";
 
 type Props = {};
 
-export const Index: FC<Props> = () => {
+export default function Index() {
   return (
     <>
       {/* <Seo
@@ -17,6 +17,4 @@ export const Index: FC<Props> = () => {
       <ResignMemberTemplate />
     </>
   );
-};
-
-export default Index;
+}

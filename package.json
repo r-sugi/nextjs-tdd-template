@@ -1,5 +1,5 @@
 {
-  "name": "react-swiper-v10",
+  "name": "nextjs-tdd-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,7 @@
     "dev": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
     "dev:all": "npm-run-all -p dev db:start",
     "build": "next build",
-    "start": "next start",
+    "start": "serve out",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -26,6 +26,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.51.3",
+    "serve": "^14.2.1",
     "whatwg-fetch": "^3.6.20",
     "zod": "^3.22.5"
   },
