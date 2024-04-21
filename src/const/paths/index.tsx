@@ -9,16 +9,27 @@ const publicPages = {
     title: () => title("トップページ"),
     description: () => "トップページです。",
   },
-  posts: {
-    path: () => "/posts",
-    title: () => title("投稿一覧"),
-    description: () => "投稿一覧",
+};
+
+const loginRequiredPages = {
+  mypage: {
+    path: () => "/mypage",
+    title: () => title("マイページ"),
+    description: () => "マイページ",
   },
-  postId: {
-    path: (id: string | number) => `/posts/${id}`,
-    title: (postTitle: string) => title(`${postTitle} | 投稿詳細`),
-    description: () => "投稿詳細",
+  mypageResigMember: {
+    path: () => "/mypage/resign-member",
+    title: () => title("退会ページ"),
+    description: () => "退会ページ",
   },
 };
 
-export { publicPages };
+const adminSecretPages = {
+  members: {
+    path: () => "/admin/members",
+    title: () => title("会員一覧"),
+    description: () => "会員一覧",
+  },
+};
+
+export { publicPages, loginRequiredPages, adminSecretPages };
