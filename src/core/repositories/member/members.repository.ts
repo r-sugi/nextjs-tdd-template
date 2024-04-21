@@ -61,6 +61,7 @@ export const fetchMembersByStatus = async (
     }
   );
   // TODO: エラー処理をここに書く（一旦ベタがきで）
+  // TODO: statusの型キャストをやめれるか？
   return membersByStatusTransform(res, variables.status as MemberStatus);
 };
 

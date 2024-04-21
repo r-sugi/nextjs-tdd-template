@@ -1,7 +1,7 @@
 import { memberStatus } from "./status";
 
-export type BannedMember = {
-  status: (typeof memberStatus)["banned"];
+export type RestoredMember = {
+  status: (typeof memberStatus)["restored"];
   statusActivityId: string;
   memberId: string;
   reason: string;
