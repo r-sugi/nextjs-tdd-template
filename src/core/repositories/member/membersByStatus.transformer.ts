@@ -3,22 +3,30 @@ import { ActiveMember } from "@/core/domains/member/activeMember";
 import { ResignMember } from "@/core/domains/member/resignMember";
 import { MemberStatus } from "@/core/domains/member/status";
 import { FetchMembersByStatusSuccess } from "./members.repository";
-import { Members } from "@/core/domains/member/member";
 import { BannedMember } from "@/core/domains/member/bannedMember";
+import { RestoredMember } from "@/core/domains/member/restoredMember";
+import { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 
 type Response = HttpResponse<FetchMembersByStatusSuccess>;
 
 export const transform = (
   res: Response,
   status: MemberStatus
-): ActiveMember[] | ResignMember[] | BannedMember[] => {
+):
+  | ActiveMember[]
+  | ResignMember[]
+  | BannedMember[]
+  | RestoredMember[]
+  | PendingActivationMember[] => {
+  if (res.data.data.memberStatusActivityLatest.length === 0) {
+    return [];
+  }
+  if (res.data.data.memberStatusActivityLatest == null) {
+    return [];
+  }
+  // TODO: 型問題を解消させたい(Member, Dateへの変換)
+  // TODO: responseがMaybeになっているが、nullチェックをしているので、nullチェックを削除したい
   if (status === "active") {
-    if (res.data.data.memberStatusActivityLatest.length === 0) {
-      return [];
-    }
-    if (res.data.data.memberStatusActivityLatest == null) {
-      return [];
-    }
     return res.data.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberActive)
       .map((activity) => ({
@@ -28,30 +36,22 @@ export const transform = (
         birthday: new Date(activity?.memberActive?.birthday ?? ""),
       })) as ActiveMember[];
   } else if (status === "resigned") {
-    if (res.data.data.memberStatusActivityLatest.length === 0) {
-      return [];
-    }
-    if (res.data.data.memberStatusActivityLatest == null) {
-      return [];
-    }
     return res.data.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberResigned)
       .map((activity) => ({
         ...activity.memberResigned,
         status: "resigned",
-        // TODO:
         createdAt: new Date(activity?.memberResigned?.createdAt ?? ""),
       })) as ResignMember[];
   } else if (status === "restored") {
-    // TODO:
-    return [];
+    return res.data.data.memberStatusActivityLatest
+      .filter((activity) => !!activity?.memberRestored)
+      .map((activity) => ({
+        ...activity.memberRestored,
+        status: "restored",
+        createdAt: new Date(activity?.memberRestored?.createdAt ?? ""),
+      })) as RestoredMember[];
   } else if (status === "banned") {
-    if (res.data.data.memberStatusActivityLatest.length === 0) {
-      return [];
-    }
-    if (res.data.data.memberStatusActivityLatest == null) {
-      return [];
-    }
     return res.data.data.memberStatusActivityLatest
       .filter((activity) => !!activity?.memberBanned)
       .map((activity) => ({
@@ -60,7 +60,13 @@ export const transform = (
         createdAt: new Date(activity?.memberBanned?.createdAt ?? ""),
       })) as BannedMember[];
   } else if (status === "pendingActivation") {
-    return [];
+    return res.data.data.memberStatusActivityLatest
+      .filter((activity) => !!activity?.memberPendingActivation)
+      .map((activity) => ({
+        ...activity.memberPendingActivation,
+        status: "pendingActivation",
+        createdAt: new Date(activity?.memberPendingActivation?.createdAt ?? ""),
+      })) as PendingActivationMember[];
   } else {
     throw new Error("status is invalid");
   }

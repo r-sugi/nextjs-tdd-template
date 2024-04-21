@@ -44,7 +44,7 @@ export const AppProvider = ({
 }): JSX.Element => {
   return (
     <AppApolloProvider>
-      <ErrorBoundary>{children}</ErrorBoundary>;
+      <ErrorBoundary>{children}</ErrorBoundary>
     </AppApolloProvider>
   );
 };

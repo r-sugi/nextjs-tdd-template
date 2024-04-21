@@ -6,6 +6,7 @@ export type ActiveMember = {
   memberId: string;
   address: string;
   postalCode: string;
+  email: string;
   birthday: Date;
   createdAt: Date;
 };

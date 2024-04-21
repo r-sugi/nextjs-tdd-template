@@ -1,15 +1,18 @@
-import { MemberStatus } from "@/core/domains/member/status";
+import { MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { fetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { useEffect, useState, useRef } from "react";
 
 type Props = {
-  status: MemberStatus;
+  status?: MemberStatus;
 };
 type Option = {
   onError?: () => Promise<void>;
 };
 
-export const useFetchMembers = (props: Props, opt?: Option) => {
+export const useFetchMembers = (props?: Props, opt?: Option) => {
+  const [userStatus, setUserStatus] = useState<MemberStatus>(
+    props?.status ?? memberStatus.pendingActivation
+  );
   const [members, setMembers] = useState<any[]>([]);
 
   const ref = useRef(opt?.onError);
@@ -20,17 +23,18 @@ export const useFetchMembers = (props: Props, opt?: Option) => {
   useEffect(() => {
     (async () => {
       // TODO: hooksなのでapolloClientのhooksを使いたい、、、。
-      const res = await fetchMembersByStatus({ status: props.status });
+      const res = await fetchMembersByStatus({ status: userStatus });
       if (res == null) {
         await ref.current?.();
         return;
       }
       setMembers(res);
     })();
-  }, [ref]);
+  }, [ref, userStatus]);
 
   return {
     members,
-    setMembers,
+    setUserStatus,
+    userStatus,
   };
 };

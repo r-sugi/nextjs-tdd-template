@@ -1,10 +1,9 @@
 import { memberStatus } from "./status";
 
-export type BannedMember = {
-  status: (typeof memberStatus)["banned"];
+export type PendingActivationMember = {
+  status: (typeof memberStatus)["pendingActivation"];
   statusActivityId: string;
   memberId: string;
-  reason: string;
-  operatedBy: string;
+  email: string;
   createdAt: Date;
 };
