@@ -8,10 +8,13 @@ import { HeaderTemplate } from "@/feature/header";
 //   require("../../mocks");
 // }
 
-export const metadata: Metadata = {
-  title: "default title",
-  description: "default description",
-};
+export function generateMetadata(): Metadata {
+  // TODO: ここでseo関数を呼び出す
+  return {
+    title: "mypage index title",
+    description: "mypage index description",
+  };
+}
 
 export default function RootLayout({
   children,
