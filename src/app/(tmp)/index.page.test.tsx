@@ -6,6 +6,9 @@
 // import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 
 // jest.mock("@/components/templates/Index");
+describe("todo", () => {
+  it.skip("todo", () => {});
+});
 
 // describe(Page, () => {
 //   function setup() {
