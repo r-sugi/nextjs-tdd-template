@@ -1,5 +1,6 @@
-import { ClientError } from "@/error/errors/clientError";
 import { ReactNode } from "react";
+
+import { ClientError } from "@/error/errors/clientError";
 
 type Props = {
   error: ClientError;

@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+
 import { toSpyWithMock } from "./helper";
 
 export function mockNextHead() {

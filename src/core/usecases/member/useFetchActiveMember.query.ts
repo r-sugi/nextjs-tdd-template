@@ -1,6 +1,7 @@
+import { useEffect, useState, useRef } from "react";
+
 import { ActiveMember } from "@/core/domains/member/activeMember";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
-import { useEffect, useState, useRef } from "react";
 
 type Option = {
   onError?: () => void;

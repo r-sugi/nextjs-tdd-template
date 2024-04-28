@@ -1,6 +1,8 @@
 import { Metadata } from "next";
-import { generateSeo } from "../_seo/Seo";
+
 import { loginRequiredPages } from "@/const/paths";
+
+import { generateSeo } from "../_seo/Seo";
 
 export function generateMetadata(): Metadata {
   return generateSeo({

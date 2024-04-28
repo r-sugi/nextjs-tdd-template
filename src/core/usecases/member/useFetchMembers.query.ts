@@ -1,7 +1,8 @@
+import { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
+
 import { MembersByType } from "@/core/domains/member/member";
 import { MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
-import { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
 
 type Props = {
   status?: MemberStatus;

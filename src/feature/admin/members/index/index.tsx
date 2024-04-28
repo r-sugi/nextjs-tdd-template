@@ -1,8 +1,8 @@
 "use client";
-import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 import { FC } from "react";
+
 import { memberStatus } from "@/core/domains/member/status";
-import css from "styled-jsx/css";
+import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 
 export const IndexTemplate: FC = () => {
   const { data, refetch, loading } = useFetchMembers();

@@ -1,11 +1,12 @@
 "use client";
+import Link from "next/link";
+import { FC } from "react";
+
 import {
   adminSecretPages,
   loginRequiredPages,
   publicPages,
 } from "@/const/paths";
-import Link from "next/link";
-import { FC } from "react";
 
 type Props = {};
 

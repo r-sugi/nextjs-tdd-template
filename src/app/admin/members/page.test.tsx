@@ -1,5 +1,7 @@
-import { mockNextHead } from "@/__testing__/seo-helper";
 import { render } from "@testing-library/react";
+
+import { mockNextHead } from "@/__testing__/seo-helper";
+
 import Page from "./page";
 
 jest.mock("next/head");

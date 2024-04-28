@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import Head from "next/head";
-import { AppProvider } from "./_provider/app.provider";
-import { HeaderTemplate } from "@/feature/header";
+
 import { publicPages } from "@/const/paths";
+import { HeaderTemplate } from "@/feature/header";
+
+import { AppProvider } from "./_provider/app.provider";
 import { generateSeo } from "./_seo/Seo";
 
 export function generateMetadata(): Metadata {

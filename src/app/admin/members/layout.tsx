@@ -1,6 +1,7 @@
 import { Metadata } from "next";
-import { adminSecretPages } from "@/const/paths";
+
 import { generateSeo } from "@/app/_seo/Seo";
+import { adminSecretPages } from "@/const/paths";
 
 export function generateMetadata(): Metadata {
   return generateSeo({

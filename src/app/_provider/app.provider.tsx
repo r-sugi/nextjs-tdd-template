@@ -1,5 +1,4 @@
 "use client";
-import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 // import { ErrorBoundary } from "@/pages/_error.boundary";
 import {
   ApolloClient,
@@ -9,6 +8,8 @@ import {
   HttpLink,
 } from "@apollo/client";
 import { FC, ReactNode, useMemo } from "react";
+
+import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 
 const AppApolloProvider: FC<{
   children: ReactNode;

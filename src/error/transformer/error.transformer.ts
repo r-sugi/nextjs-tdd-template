@@ -1,6 +1,7 @@
 import { ClientLogger } from "@/lib/clientLogger";
-import { HttpError } from "../errors/httpError";
+
 import { ClientError, ClientErrorObject } from "../errors/clientError";
+import { HttpError } from "../errors/httpError";
 
 export class ErrorTransformer {
   constructor(private readonly logger = new ClientLogger()) {

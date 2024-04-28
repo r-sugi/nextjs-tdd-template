@@ -1,7 +1,9 @@
 "use client";
-import { FC } from "react";
-import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
 import { useRouter } from "next/navigation";
+import { FC } from "react";
+
+import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
+
 import { PostIdErrorBoundary } from "./components/PostIdErrorBoundary";
 
 export const IndexTemplate: FC = () => {
