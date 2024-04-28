@@ -1,21 +1,22 @@
-import { BaseSyntheticEvent, FC } from "react";
-import { useResignMember } from "@/core/usecases/member/useResignMember.command";
+import { BaseSyntheticEvent } from "react";
 
 import {
   ResignMemberSchema,
   useResignMemberForm,
 } from "@/feature/mypage/resignMember/hooks/form";
+import { useRouter } from "next/navigation";
+import { loginRequiredPages } from "@/const/paths";
+import { useSetCache } from "@/hooks/cache";
 
-type Props = {};
-
-export const InputTemplate: FC<Props> = () => {
+export const InputTemplate = () => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
     formState: { isSubmitting, isValid, errors },
   } = useResignMemberForm();
 
-  const resignMemberMutation = useResignMember();
+  const setCache = useSetCache("resignMember");
 
   const submitHandler = async (
     data: ResignMemberSchema,
@@ -24,22 +25,10 @@ export const InputTemplate: FC<Props> = () => {
     event && event.preventDefault();
 
     try {
-      const res = await resignMemberMutation(
-        {
-          reasonType: data.reasonType,
-          reasonDetail: data.reasonDetail,
-          agreement: data.agreement,
-        },
-        {
-          onError: async () => {
-            // TODO: エラー処理(例: 退会に失敗しました)
-          },
-        }
-      );
-      console.log(`res: ${res}`);
-      window.alert("退会しました!");
+      setCache(data);
+      router.push(loginRequiredPages.mypageResignMemberConfirm.path());
     } catch (error) {
-      // TODO: エラー処理(例: 入力値のバリデーションエラーなど)
+      window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
     }
   };
 

@@ -1,14 +1,15 @@
-import { BaseSyntheticEvent, FC } from "react";
+import { BaseSyntheticEvent } from "react";
 import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 
 import {
   ResignMemberSchema,
   useResignMemberForm,
 } from "@/feature/mypage/resignMember/hooks/form";
+import { useGetCache } from "@/hooks/cache";
 
-type Props = {};
-
-export const ConfirmTemplate: FC<Props> = () => {
+export const ConfirmTemplate = () => {
+  const cache = useGetCache("resignMember");
+  console.log(cache);
   const {
     handleSubmit,
     register,
@@ -31,15 +32,14 @@ export const ConfirmTemplate: FC<Props> = () => {
           agreement: data.agreement,
         },
         {
-          onError: async () => {
-            // TODO: エラー処理(例: 退会に失敗しました)
+          onError: () => {
+            window.alert("退会に失敗しました!");
           },
         }
       );
-      console.log(`res: ${res}`);
-      window.alert("退会しました!");
+      window.alert(`退会しました! ${res}`);
     } catch (error) {
-      // TODO: エラー処理(例: 入力値のバリデーションエラーなど)
+      window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
     }
   };
 
