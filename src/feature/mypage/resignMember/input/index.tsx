@@ -1,11 +1,11 @@
+import { useRouter } from "next/navigation";
 import { BaseSyntheticEvent } from "react";
 
+import { loginRequiredPages } from "@/const/paths";
 import {
   ResignMemberSchema,
   useResignMemberForm,
 } from "@/feature/mypage/resignMember/hooks/form";
-import { useRouter } from "next/navigation";
-import { loginRequiredPages } from "@/const/paths";
 import { setCache } from "@/utils/cache";
 
 export const InputTemplate = () => {

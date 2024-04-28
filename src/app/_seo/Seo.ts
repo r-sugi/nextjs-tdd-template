@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 
 type SeoOptions = {
   robots?: {

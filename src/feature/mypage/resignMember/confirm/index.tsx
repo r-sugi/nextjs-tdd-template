@@ -1,15 +1,15 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { BaseSyntheticEvent, useEffect } from "react";
-import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 
+import { loginRequiredPages } from "@/const/paths";
+import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 import {
   ResignMemberSchema,
   useResignMemberForm,
 } from "@/feature/mypage/resignMember/hooks/form";
 import { removeCache, getCache } from "@/utils/cache";
-import { useRouter } from "next/navigation";
-import { loginRequiredPages } from "@/const/paths";
-import { usePathname, useSearchParams } from "next/navigation";
+
 
 export const ConfirmTemplate = () => {
   const router = useRouter();

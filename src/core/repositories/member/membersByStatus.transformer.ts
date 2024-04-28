@@ -1,9 +1,9 @@
 import { ActiveMember } from "@/core/domains/member/activeMember";
-import { ResignMember } from "@/core/domains/member/resignMember";
-import { MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { BannedMember } from "@/core/domains/member/bannedMember";
-import { RestoredMember } from "@/core/domains/member/restoredMember";
 import { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
+import { ResignMember } from "@/core/domains/member/resignMember";
+import { RestoredMember } from "@/core/domains/member/restoredMember";
+import { MemberStatus, memberStatus } from "@/core/domains/member/status";
 import {
   GetMembersByStatusQueryResult,
   MemberStatusActivityLatest,
