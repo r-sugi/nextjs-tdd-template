@@ -27,8 +27,8 @@ const loginRequiredPages = {
 const adminSecretPages = {
   members: {
     path: () => "/admin/members",
-    title: () => title("会員一覧"),
-    description: () => "会員一覧",
+    title: () => title("管理画面 会員一覧"),
+    description: () => "管理画面 会員一覧",
   },
 };
 
