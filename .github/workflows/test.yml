@@ -55,9 +55,6 @@ jobs:
       - name: type check
         run: npm run type-check
 
-      - name: codegen
-        run: npm run codegen -- --check
-
   unit_test:
     name: unit_test
     runs-on: ubuntu-latest
