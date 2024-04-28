@@ -9,12 +9,14 @@ import { getCache } from "@/utils/cache";
 
 export const ConfirmTemplate = () => {
   const cache = getCache("resignMember");
-  console.log(cache);
+
   const {
     handleSubmit,
     register,
     formState: { isSubmitting, isValid, errors },
-  } = useResignMemberForm();
+  } = useResignMemberForm({
+    defaultValues: cache,
+  });
 
   const resignMemberMutation = useResignMember();
 
