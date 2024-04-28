@@ -1,19 +1,27 @@
-import { BaseSyntheticEvent, FC } from "react";
+"use client";
+import { BaseSyntheticEvent, useEffect } from "react";
 import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 
 import {
   ResignMemberSchema,
   useResignMemberForm,
 } from "@/feature/mypage/resignMember/hooks/form";
+import { removeCache, getCache } from "@/utils/cache";
+import { useRouter } from "next/navigation";
+import { loginRequiredPages } from "@/const/paths";
+import { usePathname, useSearchParams } from "next/navigation";
 
-type Props = {};
+export const ConfirmTemplate = () => {
+  const router = useRouter();
+  const cache = getCache("resignMember");
 
-export const ConfirmTemplate: FC<Props> = () => {
   const {
     handleSubmit,
     register,
     formState: { isSubmitting, isValid, errors },
-  } = useResignMemberForm();
+  } = useResignMemberForm({
+    defaultValues: cache,
+  });
 
   const resignMemberMutation = useResignMember();
 
@@ -31,17 +39,34 @@ export const ConfirmTemplate: FC<Props> = () => {
           agreement: data.agreement,
         },
         {
-          onError: async () => {
-            // TODO: エラー処理(例: 退会に失敗しました)
+          onError: () => {
+            window.alert("退会に失敗しました!");
           },
         }
       );
-      console.log(`res: ${res}`);
-      window.alert("退会しました!");
+      removeCache("resignMember");
+      window.alert(`退会しました! ${res}`);
     } catch (error) {
-      // TODO: エラー処理(例: 入力値のバリデーションエラーなど)
+      window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
     }
   };
+
+  useEffect(() => {
+    // リロード時に確認ダイアログを表示
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      return (e.returnValue = "");
+    };
+
+    // FIXME: ページ遷移 (router.push)時に確認ダイアログを表示
+    // FIXME: ページ遷移 (router.back)時に確認ダイアログを表示
+    // FIXME: ページ遷移 (aタグ)時に確認ダイアログを表示
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <div>
@@ -72,6 +97,14 @@ export const ConfirmTemplate: FC<Props> = () => {
 
         <button disabled={!isValid || isSubmitting}>退会する</button>
       </form>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          router.push(loginRequiredPages.mypageResignMemberInput.path());
+        }}
+      >
+        戻る
+      </button>
     </div>
   );
 };

@@ -8,7 +8,7 @@ type Props = {
 };
 
 type Option = {
-  onError?: () => Promise<void>;
+  onError?: () => void;
 };
 
 export type UpdateMemberStatusInputType = {
@@ -49,7 +49,7 @@ export const useResignMember = () => {
 
     const res = await mutate(activityInput);
     if (!res) {
-      await opt?.onError?.();
+      opt?.onError?.();
       return res;
     }
     return res;

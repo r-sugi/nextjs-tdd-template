@@ -11,7 +11,11 @@ export const resignMemberSchema = z.object({
 
 export type ResignMemberSchema = ZodInfer<typeof resignMemberSchema>;
 
-export const useResignMemberForm = () => {
+type Props = {
+  defaultValues?: ResignMemberSchema;
+};
+
+export const useResignMemberForm = (props?: Props) => {
   const {
     handleSubmit,
     register,
@@ -21,7 +25,7 @@ export const useResignMemberForm = () => {
     resolver: zodResolver(resignMemberSchema),
     shouldFocusError: true,
     mode: "onChange",
-    defaultValues: {
+    defaultValues: props?.defaultValues ?? {
       reasonType: "",
       reasonDetail: "",
       agreement: false,
