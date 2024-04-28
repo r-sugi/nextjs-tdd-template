@@ -4,6 +4,12 @@ export type ResignMember = {
   agreement: boolean;
 };
 
+const sessionKeys = {
+  resignMember: "resignMember",
+} as const;
+
+export type SessionStorageKeys = (typeof sessionKeys)[keyof typeof sessionKeys];
+
 export type SessionStorageKeyValues = {
-  resignMember: ResignMember;
+  [sessionKeys.resignMember]: ResignMember;
 };

@@ -1,9 +1,9 @@
 import { NoCacheError } from "./error";
-import { SessionStorageKeyValues } from "./type";
+import { SessionStorageKeys, SessionStorageKeyValues } from "./type";
 import { selectWebStorage, WebStorageType } from "./useWebStorage";
 
 export const getCache = <
-  K extends keyof SessionStorageKeyValues,
+  K extends SessionStorageKeys,
   V extends SessionStorageKeyValues[K]
 >(
   key: K,
@@ -26,7 +26,7 @@ export const getCache = <
 };
 
 export const setCache = <
-  K extends keyof SessionStorageKeyValues,
+  K extends SessionStorageKeys,
   S extends SessionStorageKeyValues[K]
 >(
   key: K,
@@ -40,4 +40,9 @@ export const setCache = <
   } catch (error) {
     throw new NoCacheError("Failed to set storage value");
   }
+};
+
+export const removeCache = (key: SessionStorageKeys): void => {
+  const storage = selectWebStorage();
+  storage.removeItem(key);
 };

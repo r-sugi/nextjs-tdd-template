@@ -1,13 +1,18 @@
-import { BaseSyntheticEvent } from "react";
+"use client";
+import { BaseSyntheticEvent, useEffect } from "react";
 import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 
 import {
   ResignMemberSchema,
   useResignMemberForm,
 } from "@/feature/mypage/resignMember/hooks/form";
-import { getCache } from "@/utils/cache";
+import { removeCache, getCache } from "@/utils/cache";
+import { useRouter } from "next/navigation";
+import { loginRequiredPages } from "@/const/paths";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export const ConfirmTemplate = () => {
+  const router = useRouter();
   const cache = getCache("resignMember");
 
   const {
@@ -39,11 +44,29 @@ export const ConfirmTemplate = () => {
           },
         }
       );
+      removeCache("resignMember");
       window.alert(`退会しました! ${res}`);
     } catch (error) {
       window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
     }
   };
+
+  useEffect(() => {
+    // リロード時に確認ダイアログを表示
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      return (e.returnValue = "");
+    };
+
+    // FIXME: ページ遷移 (router.push)時に確認ダイアログを表示
+    // FIXME: ページ遷移 (router.back)時に確認ダイアログを表示
+    // FIXME: ページ遷移 (aタグ)時に確認ダイアログを表示
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <div>
@@ -74,6 +97,14 @@ export const ConfirmTemplate = () => {
 
         <button disabled={!isValid || isSubmitting}>退会する</button>
       </form>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          router.push(loginRequiredPages.mypageResignMemberInput.path());
+        }}
+      >
+        戻る
+      </button>
     </div>
   );
 };
