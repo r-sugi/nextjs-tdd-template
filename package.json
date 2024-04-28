@@ -2,6 +2,9 @@
   "name": "nextjs-tdd-template",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "^20.12.0"
+  },
   "scripts": {
     "debug": "NODE_OPTIONS='--inspect' next src",
     "dev": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
@@ -10,6 +13,7 @@
     "start": "serve out",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
     "test": "jest",
     "test:watch": "jest --watch",
     "codegen": "graphql-codegen --config codegen.js",
