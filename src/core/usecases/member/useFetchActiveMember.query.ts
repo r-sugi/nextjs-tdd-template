@@ -3,7 +3,7 @@ import { useFindActiveMemberOne } from "@/core/repositories/member/members.repos
 import { useEffect, useState, useRef } from "react";
 
 type Option = {
-  onError?: () => Promise<void>;
+  onError?: () => void;
 };
 
 type UsecaseLoading<T> = {
@@ -36,7 +36,7 @@ export const useFetchActiveMember = (opt?: Option): Usecase<ActiveMember> => {
 
       if (state == null) {
         // エラー処理を実行する
-        await ref.current?.();
+        ref.current?.();
         return;
       }
       setActiveMember(state);

@@ -13,7 +13,8 @@ export const HeaderTemplate: FC<Props> = () => {
   const pages = [
     publicPages.index,
     loginRequiredPages.mypage,
-    loginRequiredPages.mypageResigMember,
+    loginRequiredPages.mypageResignMemberInput,
+    loginRequiredPages.mypageResignMemberConfirm,
     adminSecretPages.members,
   ];
 

@@ -113,32 +113,3 @@ export const IndexTemplate: FC = () => {
 export const PostIdTemplate: FC = () => {
   return <IndexTemplate />;
 };
-
-const style = css`
-  .tab-wrap {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .tab-label {
-    color: White;
-    background: LightGray;
-    margin-right: 5px;
-    padding: 3px 12px;
-    order: -1;
-  }
-  .tab-content {
-    width: 100%;
-    display: none;
-  }
-  /* アクティブなタブ */
-  .tab-switch:checked + .tab-label {
-    background: DeepSkyBlue;
-  }
-  .tab-switch:checked + .tab-label + .tab-content {
-    display: block;
-  }
-  /* ラジオボタン非表示 */
-  .tab-switch {
-    display: none;
-  }
-`;

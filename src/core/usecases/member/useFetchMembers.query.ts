@@ -7,7 +7,7 @@ type Props = {
   status?: MemberStatus;
 };
 type Option = {
-  onError?: () => Promise<void>;
+  onError?: () => void;
 };
 type UsecaseLoading<T> = {
   data: {
@@ -50,7 +50,7 @@ export const useFetchMembers = (
     (async () => {
       const res = await query(queryMemberStatus);
       if (res == null) {
-        await ref.current?.();
+        ref.current?.();
         return;
       }
       setMembers(res);

@@ -7,8 +7,8 @@ import { PostIdErrorBoundary } from "./components/PostIdErrorBoundary";
 export const IndexTemplate: FC = () => {
   const router = useRouter();
   const { data: activeMember, loading } = useFetchActiveMember({
-    onError: async () => {
-      await router.push("/login");
+    onError: () => {
+      router.push("/");
     },
   });
 

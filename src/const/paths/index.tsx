@@ -17,10 +17,15 @@ const loginRequiredPages = {
     title: () => title("マイページ"),
     description: () => "マイページ",
   },
-  mypageResigMember: {
-    path: () => "/mypage/resign-member",
-    title: () => title("退会ページ"),
-    description: () => "退会ページ",
+  mypageResignMemberInput: {
+    path: () => "/mypage/resign-member/input",
+    title: () => title("退会申請入力ページ"),
+    description: () => "退会申請入力ページ",
+  },
+  mypageResignMemberConfirm: {
+    path: () => "/mypage/resign-member/confirm",
+    title: () => title("退会申請確認ページ"),
+    description: () => "退会申請確認ページ",
   },
 };
 
