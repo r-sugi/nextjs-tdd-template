@@ -1,12 +1,12 @@
 import { Metadata } from "next";
-import { generateSeo } from "../(seo)/Seo";
-import { loginRequiredPages } from "@/const/paths";
+import { adminSecretPages } from "@/const/paths";
+import { generateSeo } from "@/app/(seo)/Seo";
 
 export function generateMetadata(): Metadata {
   return generateSeo({
-    title: loginRequiredPages.mypage.title(),
-    description: loginRequiredPages.mypage.description(),
-    path: loginRequiredPages.mypage.path(),
+    title: adminSecretPages.members.title(),
+    description: adminSecretPages.members.description(),
+    path: adminSecretPages.members.path(),
   });
 }
 

@@ -2,19 +2,21 @@ import { Metadata } from "next";
 import Head from "next/head";
 import { AppProvider } from "./(provider)/app.provider";
 import { HeaderTemplate } from "@/feature/header";
+import { publicPages } from "@/const/paths";
+import { generateSeo } from "./(seo)/Seo";
+
+export function generateMetadata(): Metadata {
+  return generateSeo({
+    title: publicPages.index.title(),
+    description: publicPages.index.description(),
+    path: publicPages.index.path(),
+  });
+}
 
 // TODO: app routerにmswを対応させる
 // if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 //   require("../../mocks");
 // }
-
-export function generateMetadata(): Metadata {
-  // TODO: ここでseo関数を呼び出す
-  return {
-    title: "mypage index title",
-    description: "mypage index description",
-  };
-}
 
 export default function RootLayout({
   children,
