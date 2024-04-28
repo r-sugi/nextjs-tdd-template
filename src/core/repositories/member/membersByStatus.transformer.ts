@@ -18,9 +18,11 @@ type MemberTypes = keyof Pick<
   | "memberRestored"
 >;
 
-type StrictMemberStatusActivityLatest<K extends MemberTypes> =
-  MemberStatusActivityLatest &
-    Record<K, NonNullable<MemberStatusActivityLatest[K]>>;
+type StrictMemberStatusActivityLatest<K extends MemberTypes> = Omit<
+  MemberStatusActivityLatest,
+  K
+> &
+  Record<K, NonNullable<MemberStatusActivityLatest[K]>>;
 
 type MemberStatusToMemberMap = {
   [memberStatus.active]: Array<ActiveMember>;
@@ -66,11 +68,16 @@ export const transform = <K extends MemberStatus>(
         ): activity is StrictMemberStatusActivityLatest<"memberResigned"> =>
           !!activity?.memberResigned
       )
-      .map((activity) => ({
-        ...activity.memberResigned,
-        status: "resigned",
-        createdAt: new Date(activity.memberResigned.createdAt),
-      })) as any; // FIXME: 型エラーを解消する
+      .map((activity) => {
+        return {
+          statusActivityId: activity.memberResigned.statusActivityId,
+          reasonDetail: activity.memberResigned.reasonDetail ?? undefined,
+          reasonType: activity.memberResigned.reasonType,
+          agreement: activity.memberResigned.agreement,
+          status: "resigned",
+          createdAt: new Date(activity.memberResigned.createdAt),
+        };
+      }) as MemberStatusToMemberMap[K];
   } else if (status === "restored") {
     return res.data.memberStatusActivityLatest
       .filter(
