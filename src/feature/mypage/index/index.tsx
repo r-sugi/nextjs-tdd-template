@@ -6,21 +6,15 @@ import { PostIdErrorBoundary } from "./components/PostIdErrorBoundary";
 
 export const IndexTemplate: FC = () => {
   const router = useRouter();
-  const { activeMember } = useFetchActiveMember({
+  const { data: activeMember, loading } = useFetchActiveMember({
     onError: async () => {
       await router.push("/login");
     },
   });
 
-  // if (error) {
-  //   throw new ErrorTransformer().transform(error);
-  // }
-  // if (isLoading) {
-  //   return <div>loading...</div>;
-  // }
-  // if (!data) {
-  //   return <div>no data</div>;
-  // }
+  if (loading) {
+    return <div>loading...</div>;
+  }
 
   return <div>ActiveMember: {JSON.stringify(activeMember, null, 2)}</div>;
 };

@@ -6,7 +6,19 @@ type Option = {
   onError?: () => Promise<void>;
 };
 
-export const useFetchActiveMember = (opt?: Option) => {
+type UsecaseLoading<T> = {
+  data: null;
+  loading: true;
+} & Record<string, unknown>;
+
+type UsecaseLoaded<T> = {
+  data: T;
+  loading: false;
+} & Record<string, unknown>;
+
+type Usecase<T> = UsecaseLoading<T> | UsecaseLoaded<T>;
+
+export const useFetchActiveMember = (opt?: Option): Usecase<ActiveMember> => {
   const [activeMember, setActiveMember] = useState<ActiveMember | null>(null);
   const query = useFindActiveMemberOne();
 
@@ -33,6 +45,7 @@ export const useFetchActiveMember = (opt?: Option) => {
   }, [ref]);
 
   return {
-    activeMember,
-  };
+    data: activeMember,
+    loading: activeMember === null,
+  } as Usecase<ActiveMember>;
 };
