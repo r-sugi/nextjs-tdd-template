@@ -5,10 +5,10 @@ import {
   ResignMemberSchema,
   useResignMemberForm,
 } from "@/feature/mypage/resignMember/hooks/form";
-import { useGetCache } from "@/hooks/cache";
+import { getCache } from "@/utils/cache";
 
 export const ConfirmTemplate = () => {
-  const cache = useGetCache("resignMember");
+  const cache = getCache("resignMember");
   console.log(cache);
   const {
     handleSubmit,

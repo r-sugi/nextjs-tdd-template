@@ -1,7 +1,8 @@
+import { NoCacheError } from "./error";
 import { SessionStorageKeyValues } from "./type";
 import { selectWebStorage, WebStorageType } from "./useWebStorage";
 
-export const useGetCache = <
+export const getCache = <
   K extends keyof SessionStorageKeyValues,
   V extends SessionStorageKeyValues[K]
 >(
@@ -19,26 +20,24 @@ export const useGetCache = <
 
   const object = parsedValue();
   if (object === null) {
-    throw new Error("Failed to parse storage value");
+    throw new NoCacheError("Failed to parse storage value");
   }
   return object;
 };
 
-export const useSetCache = <
+export const setCache = <
   K extends keyof SessionStorageKeyValues,
   S extends SessionStorageKeyValues[K]
 >(
   key: K,
+  object: S,
   storageType?: WebStorageType
-): ((value: S) => void) => {
+): void => {
   const storage = selectWebStorage(storageType);
 
-  const setValue = (object: S) => {
-    try {
-      storage.setItem(key, JSON.stringify(object));
-    } catch (error) {
-      throw new Error("Failed to set storage value");
-    }
-  };
-  return setValue;
+  try {
+    storage.setItem(key, JSON.stringify(object));
+  } catch (error) {
+    throw new NoCacheError("Failed to set storage value");
+  }
 };

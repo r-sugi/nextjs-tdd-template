@@ -6,7 +6,7 @@ import {
 } from "@/feature/mypage/resignMember/hooks/form";
 import { useRouter } from "next/navigation";
 import { loginRequiredPages } from "@/const/paths";
-import { useSetCache } from "@/hooks/cache";
+import { setCache } from "@/utils/cache";
 
 export const InputTemplate = () => {
   const router = useRouter();
@@ -16,8 +16,6 @@ export const InputTemplate = () => {
     formState: { isSubmitting, isValid, errors },
   } = useResignMemberForm();
 
-  const setCache = useSetCache("resignMember");
-
   const submitHandler = async (
     data: ResignMemberSchema,
     event?: BaseSyntheticEvent
@@ -25,7 +23,7 @@ export const InputTemplate = () => {
     event && event.preventDefault();
 
     try {
-      setCache(data);
+      setCache("resignMember", data);
       router.push(loginRequiredPages.mypageResignMemberConfirm.path());
     } catch (error) {
       window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
