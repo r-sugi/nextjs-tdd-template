@@ -5,22 +5,16 @@ import { memberStatus } from "@/core/domains/member/status";
 import css from "styled-jsx/css";
 
 export const IndexTemplate: FC = () => {
-  const { members, setUserStatus, userStatus } = useFetchMembers();
+  const { data, refetch, loading } = useFetchMembers();
 
-  // if (error) {
-  //   throw new ErrorTranshtmlFormer().transhtmlForm(error);
-  // }
-  // if (isLoading) {
-  //   return <div>loading...</div>;
-  // }
-  // if (!data) {
-  //   return <div>no data</div>;
-  // }
+  if (loading) {
+    return <div>loading...</div>;
+  }
 
   const memberListComponent = () => {
     return (
       <ul>
-        {members.map((member) => (
+        {data.members.map((member) => (
           <li key={member.statusActivityId}>
             {JSON.stringify(member, null, 2)}
           </li>
@@ -68,8 +62,8 @@ export const IndexTemplate: FC = () => {
           type="radio"
           name="TAB"
           className="tab-switch"
-          checked={userStatus === memberStatus.pendingActivation}
-          onChange={() => setUserStatus(memberStatus.pendingActivation)}
+          checked={data.queryMemberStatus === memberStatus.pendingActivation}
+          onChange={() => refetch(memberStatus.pendingActivation)}
         />
         <label className="tab-label" htmlFor={memberStatus.pendingActivation}>
           認証前
@@ -80,8 +74,8 @@ export const IndexTemplate: FC = () => {
           type="radio"
           name="TAB"
           className="tab-switch"
-          checked={userStatus === memberStatus.active}
-          onChange={() => setUserStatus(memberStatus.active)}
+          checked={data.queryMemberStatus === memberStatus.active}
+          onChange={() => refetch(memberStatus.active)}
         />
         <label className="tab-label" htmlFor={memberStatus.active}>
           アクティブ
@@ -92,8 +86,8 @@ export const IndexTemplate: FC = () => {
           type="radio"
           name="TAB"
           className="tab-switch"
-          checked={userStatus === memberStatus.resigned}
-          onChange={() => setUserStatus(memberStatus.resigned)}
+          checked={data.queryMemberStatus === memberStatus.resigned}
+          onChange={() => refetch(memberStatus.resigned)}
         />
         <label className="tab-label" htmlFor={memberStatus.resigned}>
           退会済み
@@ -104,8 +98,8 @@ export const IndexTemplate: FC = () => {
           type="radio"
           name="TAB"
           className="tab-switch"
-          checked={userStatus === memberStatus.banned}
-          onChange={() => setUserStatus(memberStatus.banned)}
+          checked={data.queryMemberStatus === memberStatus.banned}
+          onChange={() => refetch(memberStatus.banned)}
         />
         <label className="tab-label" htmlFor={memberStatus.banned}>
           アカウント停止
