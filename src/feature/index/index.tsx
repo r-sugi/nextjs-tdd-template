@@ -1,5 +1,4 @@
-"use client";
-import { FC } from "react";
+import { FC } from 'react';
 export const IndexTemplate: FC = () => {
   return <div>トップページです</div>;
 };

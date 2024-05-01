@@ -1,29 +1,23 @@
-// TODO: App router対応
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from 'react';
 
-import { ClientError } from "@/error/errors/clientError";
-import { ErrorTransformer } from "@/error/transformer/error.transformer";
-import { ClientLogger } from "@/lib/clientLogger";
+import { ClientError } from '@/error/errors/clientError';
+import { ErrorTransformer } from '@/error/transformer/error.transformer';
+import { ClientLogger } from '@/lib/clientLogger';
 
-import { ErrorScreen } from "./error.screen";
-
+import { ErrorScreen } from './_error.screen';
 
 type ErrorBoundaryState = { error?: Error };
 type ErrorBoundaryProps = { children: ReactNode };
-
 export class ErrorBoundary extends Component<ErrorBoundaryProps> {
   state: ErrorBoundaryState = {
     error: undefined,
   };
-
   constructor(props: ErrorBoundaryProps) {
     super(props);
   }
-
   static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { error };
   }
-
   componentDidCatch(err: Error, errInfo: ErrorInfo) {
     if (err instanceof ClientError) {
       this.setState(() => {
@@ -38,13 +32,11 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
         };
       });
     }
-
     new ClientLogger().error({
       err,
       errInfo,
     });
   }
-
   render() {
     if (this.state.error) {
       return (
@@ -60,7 +52,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
         />
       );
     }
-
     return this.props.children;
   }
 }

@@ -1,8 +1,7 @@
-"use client";
-import { FC } from "react";
+import { FC } from 'react';
 
-import { memberStatus } from "@/core/domains/member/status";
-import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
+import { memberStatus } from '@/core/domains/member/status';
+import { useFetchMembers } from '@/core/usecases/member/useFetchMembers.query';
 
 export const IndexTemplate: FC = () => {
   const { data, refetch, loading } = useFetchMembers();
@@ -15,9 +14,7 @@ export const IndexTemplate: FC = () => {
     return (
       <ul>
         {data.members.map((member) => (
-          <li key={member.statusActivityId}>
-            {JSON.stringify(member, null, 2)}
-          </li>
+          <li key={member.statusActivityId}>{JSON.stringify(member, null, 2)}</li>
         ))}
       </ul>
     );
