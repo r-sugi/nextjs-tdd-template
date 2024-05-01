@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import { mockNextHead } from '@/__testing__/seo-helper';
 
-import { Seo, SeoPops } from './Seo';
+import { SeoPops, Seo } from './seo';
 
 function setup(props: SeoPops) {
   return {
