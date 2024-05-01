@@ -1,3 +1,5 @@
+export const WebStorageTypeDefault = "session";
+
 export type WebStorageType = "local" | "session";
 
 export const selectWebStorage = (storageType?: WebStorageType) => {

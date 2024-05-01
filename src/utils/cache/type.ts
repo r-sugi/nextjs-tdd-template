@@ -4,7 +4,7 @@ export type ResignMember = {
   agreement: boolean;
 };
 
-const sessionKeys = {
+export const sessionKeys = {
   resignMember: "resignMember",
 } as const;
 
