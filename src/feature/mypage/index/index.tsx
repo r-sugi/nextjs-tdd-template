@@ -1,16 +1,15 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { FC } from "react";
+import { useRouter } from 'next/navigation';
+import { FC } from 'react';
 
-import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
+import { useFetchActiveMember } from '@/core/usecases/member/useFetchActiveMember.query';
 
-import { PostIdErrorBoundary } from "./components/PostIdErrorBoundary";
+import { PostIdErrorBoundary } from './components/PostIdErrorBoundary';
 
 export const IndexTemplate: FC = () => {
   const router = useRouter();
   const { data: activeMember, loading } = useFetchActiveMember({
     onError: () => {
-      router.push("/");
+      // router.push('/');
     },
   });
 

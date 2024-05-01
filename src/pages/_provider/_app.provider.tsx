@@ -1,15 +1,8 @@
-"use client";
-// import { ErrorBoundary } from "@/pages/_error.boundary";
-import {
-  ApolloClient,
-  from,
-  ApolloProvider,
-  InMemoryCache,
-  HttpLink,
-} from "@apollo/client";
-import { FC, ReactNode, useMemo } from "react";
+import { ApolloClient, from, ApolloProvider, InMemoryCache, HttpLink } from '@apollo/client';
+import { FC, ReactNode, useMemo } from 'react';
 
-import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
+import { NEXT_PUBLIC_GRAPHQL_URI } from '@/config/env';
+import { ErrorBoundary } from '@/pages/_error/_error.boundary';
 
 const AppApolloProvider: FC<{
   children: ReactNode;
@@ -21,7 +14,6 @@ const AppApolloProvider: FC<{
       }),
     ]);
   }, []);
-
   const client = useMemo(
     () =>
       new ApolloClient({
@@ -29,26 +21,18 @@ const AppApolloProvider: FC<{
         cache: new InMemoryCache(),
         defaultOptions: {
           watchQuery: {
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
           },
         },
       }),
-    [link]
+    [link],
   );
-
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
-
-export const AppProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}): JSX.Element => {
+export const AppProvider = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
     <AppApolloProvider>
-      {/* TODO: <ErrorBoundary> */}
-      {children}
-      {/* </ErrorBoundary> */}
+      <ErrorBoundary>{children}</ErrorBoundary>
     </AppApolloProvider>
   );
 };

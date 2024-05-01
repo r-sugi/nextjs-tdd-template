@@ -11,6 +11,11 @@ export const getCache = <K extends SessionStorageKeys, V extends SessionStorageK
   key: K,
   options?: GetCacheOption,
 ): V => {
+  if (typeof window === 'undefined') {
+    // ビルド時にwindowオブジェクトが存在せず、エラーになるのを防ぐ
+    return {} as V;
+  }
+
   const storage = selectWebStorage(options?.storageType || WebStorageTypeDefault);
   const parsedValue = () => {
     const value = storage.getItem(key) as string | null;

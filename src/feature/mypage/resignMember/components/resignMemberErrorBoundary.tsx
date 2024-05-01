@@ -1,11 +1,10 @@
-import { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from 'react';
 
-import { ClientError } from "@/error/errors/clientError";
-import { UnhandledRejectionError } from "@/error/errors/unhandledRejectionError";
-import { ErrorTransformer } from "@/error/transformer/error.transformer";
-import { ClientLogger } from "@/lib/clientLogger";
-
-import { ErrorScreen } from "../../../../app/(tmp)/error.screen";
+import { ClientError } from '@/error/errors/clientError';
+import { UnhandledRejectionError } from '@/error/errors/unhandledRejectionError';
+import { ErrorTransformer } from '@/error/transformer/error.transformer';
+import { ClientLogger } from '@/lib/clientLogger';
+import { ErrorScreen } from '@/pages/_error/_error.screen';
 
 type Props = {
   children: ReactNode;
@@ -29,10 +28,7 @@ type ErrorBoundaryState = {
   error?: ClientError;
 };
 
-export class ResignMemberErrorBoundary extends Component<
-  Props,
-  ErrorBoundaryState
-> {
+export class ResignMemberErrorBoundary extends Component<Props, ErrorBoundaryState> {
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -42,10 +38,7 @@ export class ResignMemberErrorBoundary extends Component<
   }
 
   static getDerivedStateFromError(error: ClientError) {
-    if (
-      error?.severity != null &&
-      ["critial", "fatal"].includes(error.severity)
-    ) {
+    if (error?.severity != null && ['critial', 'fatal'].includes(error.severity)) {
       // 明示的にfatal, criticalにしたものは全体のErrorBoundaryで補足する
       throw error;
     } else if (error?.severity == null) {
@@ -80,21 +73,15 @@ export class ResignMemberErrorBoundary extends Component<
   }
 
   componentDidMount() {
-    window.addEventListener(
-      "unhandledrejection",
-      (e: PromiseRejectionEvent) => {
-        throw new UnhandledRejectionError(e.reason);
-      }
-    );
+    window.addEventListener('unhandledrejection', (e: PromiseRejectionEvent) => {
+      throw new UnhandledRejectionError(e.reason);
+    });
   }
 
   componentWillUnmount() {
-    window.removeEventListener(
-      "unhandledrejection",
-      (e: PromiseRejectionEvent) => {
-        throw new UnhandledRejectionError(e.reason);
-      }
-    );
+    window.removeEventListener('unhandledrejection', (e: PromiseRejectionEvent) => {
+      throw new UnhandledRejectionError(e.reason);
+    });
   }
 
   render(): ReactNode {

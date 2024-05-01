@@ -1,5 +1,4 @@
-// TODO: App router対応
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export const ErrorScreen = ({
   error,
