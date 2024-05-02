@@ -43,13 +43,13 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
  * Mutations
  */
 type UpdateMemberStatusType = (
-  input: UpdateMemberStatusInputType, // FIXME: 依存型の確認
+  variables: UpdateMemberStatusInputType, // FIXME: 依存型の確認
 ) => Promise<boolean>;
 export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
   const [mutate] = useResignMemberMutation();
 
-  return async (input: ResignMemberMutationVariables) => {
-    const res = await mutate({ variables: input });
+  return async (variables: ResignMemberMutationVariables) => {
+    const res = await mutate({ variables });
     // TODO: エラー処理をここに書く（一旦ベタがきで）
     return !!res;
   };

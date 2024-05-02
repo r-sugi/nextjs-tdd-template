@@ -1,27 +1,17 @@
-import { ActiveMember } from "@/core/domains/member/activeMember";
-import { BannedMember } from "@/core/domains/member/bannedMember";
-import { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
-import { ResignMember } from "@/core/domains/member/resignMember";
-import { RestoredMember } from "@/core/domains/member/restoredMember";
-import { MemberStatus, memberStatus } from "@/core/domains/member/status";
-import {
-  GetMembersByStatusQueryResult,
-  MemberStatusActivityLatest,
-} from "@/generated/graphql";
+import { ActiveMember } from '@/core/domains/member/activeMember';
+import { BannedMember } from '@/core/domains/member/bannedMember';
+import { PendingActivationMember } from '@/core/domains/member/pendingActivationMember';
+import { ResignMember } from '@/core/domains/member/resignMember';
+import { RestoredMember } from '@/core/domains/member/restoredMember';
+import { MemberStatus, memberStatus } from '@/core/domains/member/status';
+import { GetMembersByStatusQueryResult, MemberStatusActivityLatest } from '@/generated/graphql';
 
 type MemberTypes = keyof Pick<
   MemberStatusActivityLatest,
-  | "memberActive"
-  | "memberBanned"
-  | "memberResigned"
-  | "memberPendingActivation"
-  | "memberRestored"
+  'memberActive' | 'memberBanned' | 'memberResigned' | 'memberPendingActivation' | 'memberRestored'
 >;
 
-type StrictMemberStatusActivityLatest<K extends MemberTypes> = Omit<
-  MemberStatusActivityLatest,
-  K
-> &
+type StrictMemberStatusActivityLatest<K extends MemberTypes> = Omit<MemberStatusActivityLatest, K> &
   Record<K, NonNullable<MemberStatusActivityLatest[K]>>;
 
 type MemberStatusToMemberMap = {
@@ -34,39 +24,36 @@ type MemberStatusToMemberMap = {
 
 export const transform = <K extends MemberStatus>(
   res: GetMembersByStatusQueryResult,
-  status: K
+  status: K,
 ): MemberStatusToMemberMap[K] => {
-  if (res.data == null) {
+  // FIXME: graphqlエラー処理を追加時に判断する
+  // if (res.data == null) {
+  //   return [];
+  // }
+  if (res?.data?.memberStatusActivityLatest?.length === 0) {
     return [];
   }
-  if (res.data.memberStatusActivityLatest.length === 0) {
-    return [];
-  }
-  if (res.data.memberStatusActivityLatest == null) {
+  if (res?.data?.memberStatusActivityLatest == null) {
     return [];
   }
 
-  if (status === "active") {
+  if (status === 'active') {
     return res.data.memberStatusActivityLatest
       .filter(
-        (
-          activity
-        ): activity is StrictMemberStatusActivityLatest<"memberActive"> =>
-          !!activity?.memberActive
+        (activity): activity is StrictMemberStatusActivityLatest<'memberActive'> =>
+          !!activity?.memberActive,
       )
       .map((activity) => ({
         ...activity.memberActive,
-        status: "active",
+        status: 'active',
         createdAt: new Date(activity.memberActive.createdAt),
         birthday: new Date(activity.memberActive.birthday),
       })) as MemberStatusToMemberMap[K];
-  } else if (status === "resigned") {
+  } else if (status === 'resigned') {
     return res.data.memberStatusActivityLatest
       .filter(
-        (
-          activity
-        ): activity is StrictMemberStatusActivityLatest<"memberResigned"> =>
-          !!activity?.memberResigned
+        (activity): activity is StrictMemberStatusActivityLatest<'memberResigned'> =>
+          !!activity?.memberResigned,
       )
       .map((activity) => {
         return {
@@ -74,50 +61,44 @@ export const transform = <K extends MemberStatus>(
           reasonDetail: activity.memberResigned.reasonDetail ?? undefined,
           reasonType: activity.memberResigned.reasonType,
           agreement: activity.memberResigned.agreement,
-          status: "resigned",
+          status: 'resigned',
           createdAt: new Date(activity.memberResigned.createdAt),
         };
       }) as MemberStatusToMemberMap[K];
-  } else if (status === "restored") {
+  } else if (status === 'restored') {
     return res.data.memberStatusActivityLatest
       .filter(
-        (
-          activity
-        ): activity is StrictMemberStatusActivityLatest<"memberRestored"> =>
-          !!activity?.memberRestored
+        (activity): activity is StrictMemberStatusActivityLatest<'memberRestored'> =>
+          !!activity?.memberRestored,
       )
       .map((activity) => ({
         ...activity.memberRestored,
-        status: "restored",
+        status: 'restored',
         createdAt: new Date(activity.memberRestored.createdAt),
       })) as MemberStatusToMemberMap[K];
-  } else if (status === "banned") {
+  } else if (status === 'banned') {
     return res.data.memberStatusActivityLatest
       .filter(
-        (
-          activity
-        ): activity is StrictMemberStatusActivityLatest<"memberBanned"> =>
-          !!activity?.memberBanned
+        (activity): activity is StrictMemberStatusActivityLatest<'memberBanned'> =>
+          !!activity?.memberBanned,
       )
       .map((activity) => ({
         ...activity.memberBanned,
-        status: "banned",
+        status: 'banned',
         createdAt: new Date(activity.memberBanned.createdAt),
       })) as MemberStatusToMemberMap[K];
-  } else if (status === "pendingActivation") {
+  } else if (status === 'pendingActivation') {
     return res.data.memberStatusActivityLatest
       .filter(
-        (
-          activity
-        ): activity is StrictMemberStatusActivityLatest<"memberPendingActivation"> =>
-          !!activity?.memberPendingActivation
+        (activity): activity is StrictMemberStatusActivityLatest<'memberPendingActivation'> =>
+          !!activity?.memberPendingActivation,
       )
       .map((activity) => ({
         ...activity.memberPendingActivation,
-        status: "pendingActivation",
+        status: 'pendingActivation',
         createdAt: new Date(activity.memberPendingActivation.createdAt),
       })) as MemberStatusToMemberMap[K];
   } else {
-    throw new Error("status is invalid");
+    throw new Error('status is invalid');
   }
 };
