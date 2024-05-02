@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from 'react';
 
-import { ActiveMember } from "@/core/domains/member/activeMember";
-import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
+import { ActiveMember } from '@/core/domains/member/activeMember';
+import { useFindActiveMemberOne } from '@/core/repositories/member/members.repository';
 
 type Option = {
   onError?: () => void;
@@ -32,7 +32,7 @@ export const useFetchActiveMember = (opt?: Option): Usecase<ActiveMember> => {
   useEffect(() => {
     (async () => {
       const state = await query(
-        "ff4b01ee-15e9-4e2e-acb3-25a0347af7c1" // TODO: 動的な値(JWTから取得したもの)
+        'ff4b01ee-15e9-4e2e-acb3-25a0347af7c1', // TODO: 動的な値(JWTから取得したもの)
       );
 
       if (state == null) {

@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef, SetStateAction, Dispatch } from "react";
+import { useEffect, useState, useRef, SetStateAction, Dispatch } from 'react';
 
-import { MembersByType } from "@/core/domains/member/member";
-import { MemberStatus, memberStatus } from "@/core/domains/member/status";
-import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
+import { MembersByType } from '@/core/domains/member/member';
+import { MemberStatus, memberStatus } from '@/core/domains/member/status';
+import { useFetchMembersByStatus } from '@/core/repositories/member/members.repository';
 
 type Props = {
   status?: MemberStatus;
@@ -30,12 +30,9 @@ type UsecaseLoaded<T> = {
 
 type Usecase<T> = UsecaseLoading<T> | UsecaseLoaded<T>;
 
-export const useFetchMembers = (
-  props?: Props,
-  opt?: Option
-): Usecase<MembersByType> => {
+export const useFetchMembers = (props?: Props, opt?: Option): Usecase<MembersByType> => {
   const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
-    props?.status ?? memberStatus.pendingActivation
+    props?.status ?? memberStatus.pendingActivation,
   );
   const [members, setMembers] = useState<MembersByType | null>(null);
 
@@ -50,10 +47,11 @@ export const useFetchMembers = (
   useEffect(() => {
     (async () => {
       const res = await query(queryMemberStatus);
-      if (res == null) {
-        ref.current?.();
-        return;
-      }
+      // FIXME: graphQLのエラーの値で分岐させる
+      // if (res == null) {
+      //   ref.current?.();
+      //   return;
+      // }
       setMembers(res);
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps

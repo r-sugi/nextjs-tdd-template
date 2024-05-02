@@ -19,15 +19,22 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Cache node_modules
+        id: cache-npm
         uses: actions/cache@v4
-        id: cache-node-modules
+        env:
+          cache-name: cache-node-modules
         with:
-          path: node_modules
-          key: modules-${{ hashFiles('package-lock.json') }}
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: npm ci
+        run: npm install
 
   lint_and_type:
     name: lint_and_type
