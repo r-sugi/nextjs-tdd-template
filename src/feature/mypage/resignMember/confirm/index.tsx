@@ -8,7 +8,7 @@ import { ResignMemberSchema, useResignMemberForm } from '@/feature/mypage/resign
 import { removeCache, getCache } from '@/utils/cache';
 import { sessionKeys } from '@/utils/cache/type';
 
-export const ConfirmTemplate = () => {
+export const IndexTemplate = () => {
   const router = useRouter();
   const cache = getCache(sessionKeys.resignMember);
 

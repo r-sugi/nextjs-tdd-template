@@ -2,12 +2,12 @@ import { render } from '@testing-library/react';
 
 import { toMock } from '@/__testing__/helper';
 import { assertSeoTags, mockNextHead } from '@/__testing__/seo-helper';
-import { publicPages } from '@/const/paths';
-import { IndexTemplate } from '@/feature/index';
+import { loginRequiredPages } from '@/const/paths';
+import { IndexTemplate } from '@/feature/mypage/resignMember/input/';
 
 import Page from './index.page';
 
-jest.mock('../feature/index');
+jest.mock('../../../../feature/mypage/resignMember/input/');
 
 describe(Page, () => {
   function setup() {
@@ -31,9 +31,9 @@ describe(Page, () => {
 
     // Assert
     assertSeoTags({
-      titleText: publicPages.index.title(),
-      descriptionText: publicPages.index.description(),
-      ogUrlText: `${process.env.NEXT_HOST_URI}${publicPages.index.path()}`,
+      titleText: loginRequiredPages.mypageResignMemberInput.title(),
+      descriptionText: loginRequiredPages.mypageResignMemberInput.description(),
+      ogUrlText: `${process.env.NEXT_HOST_URI}${loginRequiredPages.mypageResignMemberInput.path()}`,
     });
 
     const metaRobots = document.querySelector('meta[name="robots"]');
