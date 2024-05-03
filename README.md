@@ -26,3 +26,14 @@ cd /db
 エクスポートする
 hasura metadata export
 ```
+
+## firebase
+### setup local emulator
+install
+```
+npm i firebase-tools -g
+```
+start emulator
+```
+npm run fn:serve
+```
