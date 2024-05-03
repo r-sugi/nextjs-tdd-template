@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "^20.12.0"
+    "node": "^v18.19.0"
   },
   "scripts": {
     "debug": "NODE_OPTIONS='--inspect' next src",
