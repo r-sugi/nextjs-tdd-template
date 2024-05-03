@@ -22,7 +22,8 @@
     "db:export": "npm run db:export --prefix ./db",
     "db:apply": "npm run db:apply --prefix ./db",
     "db:dump": "npm run db:dump --prefix ./db",
-    "fn:serve": "npm run serve --prefix ./functions"
+    "fn:serve": "npm run serve --prefix ./functions",
+    "fn:deploy": "npm run deploy --prefix ./functions"
   },
   "dependencies": {
     "@apollo/client": "^3.9.11",

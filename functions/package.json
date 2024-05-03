@@ -1,7 +1,8 @@
 {
   "name": "functions",
   "scripts": {
-    "lint": "eslint --ext .js,.ts .",
+    "lint": "eslint --fix --ext .js,.ts .",
+    "lint:fix": "eslint --fix --ext .js,.ts .",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
@@ -11,7 +12,7 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "^v18.19.0"
+    "node": "18"
   },
   "main": "lib/index.js",
   "dependencies": {
@@ -25,7 +26,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.25.4",
     "firebase-functions-test": "^3.1.0",
-    "typescript": "^4.9.0"
+    "typescript": "^5.4.5"
   },
   "private": true
 }
