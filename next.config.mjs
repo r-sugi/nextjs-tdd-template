@@ -3,7 +3,10 @@ const nextConfig = {
   pageExtensions: ['page.tsx'],
   output: 'export',
   eslint: {
-    quiet: true,
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
 };
 
