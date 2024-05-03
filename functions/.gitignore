@@ -10,5 +10,4 @@ node_modules/
 *.local
 
 # log
-ui-debug.log
-firebase-debug.log
+*-debug.log
