@@ -2,12 +2,12 @@ import { render } from '@testing-library/react';
 
 import { toMock } from '@/__testing__/helper';
 import { assertSeoTags, mockNextHead } from '@/__testing__/seo-helper';
-import { publicPages } from '@/const/paths';
-import { IndexTemplate } from '@/feature/index';
+import { adminSecretPages } from '@/const/paths';
+import { IndexTemplate } from '@/feature/admin/members/index';
 
 import Page from './index.page';
 
-jest.mock('../feature/index');
+jest.mock('../../../feature/admin/members/index');
 
 describe(Page, () => {
   function setup() {
@@ -31,9 +31,9 @@ describe(Page, () => {
 
     // Assert
     assertSeoTags({
-      titleText: publicPages.index.title(),
-      descriptionText: publicPages.index.description(),
-      ogUrlText: `${process.env.NEXT_HOST_URI}${publicPages.index.path()}`,
+      titleText: adminSecretPages.members.title(),
+      descriptionText: adminSecretPages.members.description(),
+      ogUrlText: `${process.env.NEXT_HOST_URI}${adminSecretPages.members.path()}`,
     });
 
     const metaRobots = document.querySelector('meta[name="robots"]');

@@ -1,14 +1,11 @@
-import { useRouter } from "next/navigation";
-import { BaseSyntheticEvent } from "react";
+import { useRouter } from 'next/router';
+import { BaseSyntheticEvent } from 'react';
 
-import { loginRequiredPages } from "@/const/paths";
-import {
-  ResignMemberSchema,
-  useResignMemberForm,
-} from "@/feature/mypage/resignMember/hooks/form";
-import { setCache } from "@/utils/cache";
+import { loginRequiredPages } from '@/const/paths';
+import { ResignMemberSchema, useResignMemberForm } from '@/feature/mypage/resignMember/hooks/form';
+import { setCache } from '@/utils/cache';
 
-export const InputTemplate = () => {
+export const IndexTemplate = () => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -16,28 +13,23 @@ export const InputTemplate = () => {
     formState: { isSubmitting, isValid, errors },
   } = useResignMemberForm();
 
-  const submitHandler = async (
-    data: ResignMemberSchema,
-    event?: BaseSyntheticEvent
-  ) => {
+  const submitHandler = async (data: ResignMemberSchema, event?: BaseSyntheticEvent) => {
     event && event.preventDefault();
 
     try {
-      setCache("resignMember", data);
+      setCache('resignMember', data);
       router.push(loginRequiredPages.mypageResignMemberConfirm.path());
     } catch (error) {
-      window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
+      window.alert('TODO: エラー処理(例: 入力値のバリデーションエラーなど)');
     }
   };
 
   return (
     <div>
-      <form
-        onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
-      >
+      <form onSubmit={handleSubmit((data, event) => submitHandler(data, event))}>
         <div>
           <label>退会理由</label>
-          <select {...register("reasonType")}>
+          <select {...register('reasonType')}>
             <option value="">選択してください</option>
             <option value="NO_USE">利用しないため</option>
             <option value="OTHER">その他</option>
@@ -47,13 +39,13 @@ export const InputTemplate = () => {
 
         <div>
           <label>詳細</label>
-          <textarea {...register("reasonDetail")} />
+          <textarea {...register('reasonDetail')} />
           {errors.reasonDetail?.message && <p>{errors.reasonDetail.message}</p>}
         </div>
 
         <div>
           <label htmlFor="agreement">同意する</label>
-          <input type="checkbox" {...register("agreement")} id="agreement" />
+          <input type="checkbox" {...register('agreement')} id="agreement" />
           {errors.agreement?.message && <p>{errors.agreement.message}</p>}
         </div>
 

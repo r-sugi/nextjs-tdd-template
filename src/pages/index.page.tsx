@@ -1,13 +1,9 @@
-import { FC } from 'react';
-
 import { publicPages } from '@/const/paths';
 import { IndexTemplate } from '@/feature/index/';
 
 import { Seo } from './_seo/seo';
 
-type Props = {};
-
-const Index: FC<Props> = () => {
+const Index = () => {
   return (
     <>
       <Seo

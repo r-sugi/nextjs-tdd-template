@@ -1,6 +1,6 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { BaseSyntheticEvent, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { BaseSyntheticEvent, FC, useEffect } from 'react';
 
 import { loginRequiredPages } from '@/const/paths';
 import { useResignMember } from '@/core/usecases/member/useResignMember.command';
@@ -8,7 +8,9 @@ import { ResignMemberSchema, useResignMemberForm } from '@/feature/mypage/resign
 import { removeCache, getCache } from '@/utils/cache';
 import { sessionKeys } from '@/utils/cache/type';
 
-export const ConfirmTemplate = () => {
+import { ErrorBoundary } from './errorBoundary';
+
+const Template: FC = () => {
   const router = useRouter();
   const cache = getCache(sessionKeys.resignMember);
 
@@ -63,7 +65,7 @@ export const ConfirmTemplate = () => {
   }, []);
 
   return (
-    <div>
+    <div data-testid={loginRequiredPages.mypageResignMemberConfirm.path()}>
       <form onSubmit={handleSubmit((data, event) => submitHandler(data, event))}>
         <div>
           <label>退会理由</label>
@@ -98,5 +100,13 @@ export const ConfirmTemplate = () => {
         戻る
       </button>
     </div>
+  );
+};
+
+export const IndexTemplate: FC = () => {
+  return (
+    <ErrorBoundary>
+      <Template />
+    </ErrorBoundary>
   );
 };
