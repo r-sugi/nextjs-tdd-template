@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { BaseSyntheticEvent } from 'react';
 
 import { loginRequiredPages } from '@/const/paths';

@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import { useFetchActiveMember } from '@/core/usecases/member/useFetchActiveMember.query';
