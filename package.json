@@ -8,7 +8,7 @@
   "scripts": {
     "debug": "NODE_OPTIONS='--inspect' next src",
     "dev": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
-    "dev:all": "npm-run-all -p dev db:start",
+    "dev:all": "npm-run-all -p dev db:start fn:dev fn:watch",
     "build": "next build",
     "start": "serve out",
     "lint": "next lint",
@@ -22,8 +22,9 @@
     "db:export": "npm run db:export --prefix ./db",
     "db:apply": "npm run db:apply --prefix ./db",
     "db:dump": "npm run db:dump --prefix ./db",
-    "fn:serve": "npm run serve --prefix ./functions",
-    "fn:deploy": "npm run deploy --prefix ./functions"
+    "fn:dev": "npm run serve --prefix ./functions",
+    "fn:deploy": "npm run deploy --prefix ./functions",
+    "fn:watch": "npm run build:watch --prefix ./functions"
   },
   "dependencies": {
     "@apollo/client": "^3.9.11",
