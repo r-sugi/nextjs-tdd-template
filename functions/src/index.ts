@@ -23,34 +23,48 @@ export const authUser = functionsV1
     return admin
       .auth()
       .setCustomUserClaims(member.uid, customClaims)
-      .then(() => {
-        // テーブル
-        // TODO: member has_many ログイン方法
-        // const queryStr = {
-        //   query: `
-        //   mutation create Member($id: String = "", $email: String = "") {
-        //     insert_users_one(object: {id: $id, email: $email}, on_conflict: {constraint: users_pkey}) {
-        //       id
-        //       email
-        //     }
-        //   }
-        //   `,
-        //   variables: { id: member.uid, email: member.email },
-        // };
+      .then(async () => {
+        const queryStr = {
+          query: `
+          mutation MyMutation($uid: String!, $email: String!) {
+            insert_users_one(object: {member: {data: {memberLoginGoogle: {data: {uid: $uid, email: $email}}}}}) {
+              member {
+                userId
+                memberLoginGoogle {
+                  createdAt
+                  uid
+                  email
+                }
+                id
+              }
+            }
+          }
+          `,
+          variables: { uid: member.uid, email: member.email },
+        };
 
-        // // POST record to hasuraDB
-        // fetch('<hasura_db_endpoint>', {
-        //   method: 'post',
-        //   body: JSON.stringify(queryStr),
-        //   headers: {
-        //     'x-hasura-admin-secret': '<hasura_db_secret>',
-        //   },
-        // });
+        // TODO: 環境変数にする
+        try {
+          const res = await fetch('http://localhost:8080/v1/graphql', {
+            method: 'post',
+            body: JSON.stringify(queryStr),
+            headers: {
+              'x-hasura-admin-secret': 'xxxxxx', // TODO: 環境変数にする
+            },
+          });
+          const result = await res.json();
+          if (result.errors && result.errors.length > 0) {
+            error(result.errors);
+            return;
+          }
 
-        // firestoreにuidを入れる
-        admin.firestore().collection('member_meta').doc(member.uid).create({
-          refreshTime: Firestore.FieldValue.serverTimestamp(),
-        });
+          // firestoreにuidを入れる
+          admin.firestore().collection('member_meta').doc(member.uid).create({
+            refreshTime: Firestore.FieldValue.serverTimestamp(),
+          });
+        } catch (e) {
+          error(e);
+        }
       })
       .catch((e: any) => {
         error(e);
