@@ -9,8 +9,7 @@ import { getCache } from '@/utils/cache';
 import { IndexTemplate } from '.';
 
 jest.mock('next/router', () => jest.requireActual('next-router-mock'));
-// FIXME: うまくmockさせたい
-// jest.mock('../../../../utils/cache');
+jest.mock('../../../../utils/cache');
 
 describe(IndexTemplate, () => {
   afterEach(() => {
@@ -29,7 +28,7 @@ describe(IndexTemplate, () => {
   };
 
   describe('no cache', () => {
-    // FIXME: mockしたくない
+    // FIXME: mockでエラーを返す
     it('render ErrorScreen', async () => {
       // Arrange
       const path = loginRequiredPages.mypageResignMemberConfirm.path();

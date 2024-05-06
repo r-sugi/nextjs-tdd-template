@@ -26,9 +26,9 @@ export const getCache = <K extends SessionStorageKeys, V extends SessionStorageK
   };
 
   const object = parsedValue();
-  if (object === null && options?.fallback) {
+  if (object == null && options?.fallback) {
     return {} as V;
-  } else if (object === null) {
+  } else if (object == null) {
     throw new NoCacheError('Failed to parse storage value');
   }
   return object;
