@@ -42,6 +42,7 @@ const Template: FC = () => {
       );
       removeCache('resignMember');
       window.alert(`退会しました! ${res}`);
+      // TODO: バッチ処理で1日1回程度、firebase.authからもログアウトさせる
     } catch (error) {
       window.alert('TODO: エラー処理(例: 入力値のバリデーションエラーなど)');
     }

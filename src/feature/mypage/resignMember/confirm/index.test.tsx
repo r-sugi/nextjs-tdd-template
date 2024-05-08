@@ -5,6 +5,7 @@ import { toMock } from '@/__testing__/helper';
 import { loginRequiredPages } from '@/const/paths';
 import { AppProvider } from '@/pages/_provider/_app.provider';
 import { getCache } from '@/utils/cache';
+import { NoCacheError } from '@/utils/cache/error';
 
 import { IndexTemplate } from '.';
 
@@ -28,7 +29,11 @@ describe(IndexTemplate, () => {
   };
 
   describe('no cache', () => {
-    // FIXME: mockでエラーを返す
+    beforeEach(() => {
+      toMock(getCache).mockImplementationOnce(() => {
+        throw new NoCacheError('Failed to get cache');
+      });
+    });
     it('render ErrorScreen', async () => {
       // Arrange
       const path = loginRequiredPages.mypageResignMemberConfirm.path();
@@ -52,9 +57,8 @@ describe(IndexTemplate, () => {
     });
   });
 
-  describe.skip('cache exists', () => {
+  describe('cache exists', () => {
     beforeEach(() => {
-      // FIXME: mockしたい
       toMock(getCache).mockReturnValue({
         reasonType: '1',
         reasonDetail: 'detail',
