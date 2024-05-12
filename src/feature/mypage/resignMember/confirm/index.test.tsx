@@ -1,10 +1,10 @@
 import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { toMock } from '@/__testing__/helper';
+import { toSpyWithMock } from '@/__testing__/helper';
 import { loginRequiredPages } from '@/const/paths';
 import { AppProvider } from '@/pages/_provider/_app.provider';
-import { getCache } from '@/utils/cache';
+import * as cache from '@/utils/cache';
 import { NoCacheError } from '@/utils/cache/error';
 
 import { IndexTemplate } from '.';
@@ -28,10 +28,9 @@ describe(IndexTemplate, () => {
     };
   };
 
-  // FIXME: ErrorBoudanryが表示されない
-  describe.skip('no cache', () => {
+  describe('no cache', () => {
     beforeEach(() => {
-      toMock(getCache).mockImplementationOnce(() => {
+      toSpyWithMock(cache, 'getCache', () => {
         throw new NoCacheError('Failed to get cache');
       });
     });
@@ -60,10 +59,12 @@ describe(IndexTemplate, () => {
 
   describe('cache exists', () => {
     beforeEach(() => {
-      toMock(getCache).mockReturnValue({
-        reasonType: '1',
-        reasonDetail: 'detail',
-        agreement: true,
+      toSpyWithMock(cache, 'getCache', () => {
+        return {
+          reasonType: '1',
+          reasonDetail: 'detail',
+          agreement: true,
+        };
       });
     });
     afterEach(() => {
