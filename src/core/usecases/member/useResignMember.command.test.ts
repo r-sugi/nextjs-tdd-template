@@ -5,7 +5,7 @@ import { useUpdateMemberStatus } from '@/core/repositories/member/members.reposi
 
 import { useResignMember } from './useResignMember.command';
 
-jest.mock('../../repositories/member/members.repository');
+jest.mock('@/core/repositories/member/members.repository');
 
 describe(useResignMember, () => {
   it('success', async () => {
