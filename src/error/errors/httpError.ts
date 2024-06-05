@@ -1,4 +1,4 @@
-export type ErrorResponse = {
+type ErrorResponse = {
   data: undefined;
   error: {
     message: string;
