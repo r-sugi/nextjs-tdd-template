@@ -17,3 +17,7 @@ public/mockServiceWorker.js
 
 # swc
 .swc
+
+# db
+db/dump
+db/node_modules
