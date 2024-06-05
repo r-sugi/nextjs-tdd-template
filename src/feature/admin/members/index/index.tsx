@@ -106,7 +106,3 @@ export const IndexTemplate: FC = () => {
     </div>
   );
 };
-
-export const PostIdTemplate: FC = () => {
-  return <IndexTemplate />;
-};

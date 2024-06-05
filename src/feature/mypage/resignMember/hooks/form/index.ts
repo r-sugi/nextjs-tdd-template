@@ -4,7 +4,7 @@ import { z, infer as ZodInfer } from "zod";
 
 import { reasonType, reasonDetail, agreement } from "./validation";
 
-export const resignMemberSchema = z.object({
+const resignMemberSchema = z.object({
   reasonType: reasonType(),
   reasonDetail: reasonDetail(),
   agreement: agreement(),

@@ -1,4 +1,4 @@
-export type ResignMember = {
+type ResignMember = {
   reasonType: string;
   reasonDetail: string | null;
   agreement: boolean;
