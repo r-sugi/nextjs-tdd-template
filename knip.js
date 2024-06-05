@@ -7,16 +7,17 @@ module.exports = {
     'mocks/server.ts',
     'mocks/rest/restHandlers.ts',
     'public/mockServiceWorker.js',
+    'src/error/errors/unhandledRejectionError.ts',
     'src/__todo/PostIdErrorBoundary.tsx',
     'src/__todo/PostIdErrorScreen.tsx',
-    'src/error/errors/unhandledRejectionError.ts',
   ],
-  ignoreWorkspaces: ['src/generated/graphql.tsx'],
+  ignoreWorkspaces: ['src/generated/**'],
   ignoreDependencies: [
     // Unused devDependencies
     'next-router-mock',
     'msw',
     'jest-environment-jsdom',
+    'eslint-import-resolver-typescript',
     // Unlisted dependencies
     'dotenv',
   ],
