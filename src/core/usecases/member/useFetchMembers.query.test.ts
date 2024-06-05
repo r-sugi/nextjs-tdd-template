@@ -6,7 +6,7 @@ import { useFetchMembersByStatus } from '@/core/repositories/member/members.repo
 import { useFetchMembers } from '@/core/usecases/member/useFetchMembers.query';
 import { activeMember } from 'mocks/fixtures/activeMember';
 
-jest.mock('../../repositories/member/members.repository');
+jest.mock('@/core/repositories/member/members.repository');
 
 describe(useFetchMembers, () => {
   it('success', async () => {

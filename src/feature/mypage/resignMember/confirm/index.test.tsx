@@ -10,7 +10,7 @@ import { NoCacheError } from '@/utils/cache/error';
 import { IndexTemplate } from '.';
 
 jest.mock('next/router', () => jest.requireActual('next-router-mock'));
-jest.mock('../../../../utils/cache');
+jest.mock('@/utils/cache');
 
 describe(IndexTemplate, () => {
   afterEach(() => {

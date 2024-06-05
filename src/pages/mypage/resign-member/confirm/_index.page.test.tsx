@@ -7,7 +7,7 @@ import { IndexTemplate } from '@/feature/mypage/resignMember/confirm/';
 
 import Page from './index.page';
 
-jest.mock('../../../../feature/mypage/resignMember/confirm/');
+jest.mock('@/feature/mypage/resignMember/confirm/');
 
 describe(Page, () => {
   function setup() {

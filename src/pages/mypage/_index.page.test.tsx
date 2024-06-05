@@ -7,7 +7,7 @@ import { IndexTemplate } from '@/feature/mypage/index';
 
 import Page from './index.page';
 
-jest.mock('../../feature/mypage/index/');
+jest.mock('@/feature/mypage/index/');
 
 describe(Page, () => {
   function setup() {

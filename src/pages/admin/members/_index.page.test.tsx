@@ -7,7 +7,7 @@ import { IndexTemplate } from '@/feature/admin/members/index';
 
 import Page from './index.page';
 
-jest.mock('../../../feature/admin/members/index');
+jest.mock('@/feature/admin/members/index');
 
 describe(Page, () => {
   function setup() {
