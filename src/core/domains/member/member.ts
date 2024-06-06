@@ -1,15 +1,20 @@
-import { ActiveMember } from "./activeMember";
-import { BannedMember } from "./bannedMember";
-import { PendingActivationMember } from "./pendingActivationMember";
-import { ResignMember } from "./resignMember";
-import { RestoredMember } from "./restoredMember";
+import type { ActiveMember } from "./activeMember";
+import type { BannedMember } from "./bannedMember";
+import type { PendingActivationMember } from "./pendingActivationMember";
+import type { ResignMember } from "./resignMember";
+import type { RestoredMember } from "./restoredMember";
 
 // ステータスごとにユニオンで増えていく
-export type Member =
-  | ActiveMember
-  | ResignMember
-  | BannedMember
-  | RestoredMember
-  | PendingActivationMember;
+// type Member =
+//   | ActiveMember
+//   | ResignMember
+//   | BannedMember
+//   | RestoredMember
+//   | PendingActivationMember;
 
-export type MembersByType = Array<ActiveMember> | Array<ResignMember> | Array<BannedMember> | Array<RestoredMember> | Array<PendingActivationMember>;
+export type MembersByType =
+	| Array<ActiveMember>
+	| Array<ResignMember>
+	| Array<BannedMember>
+	| Array<RestoredMember>
+	| Array<PendingActivationMember>;

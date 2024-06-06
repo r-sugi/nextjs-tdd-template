@@ -32,6 +32,19 @@ export type Boolean_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['Boolean']['input']>>;
 };
 
+/** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
+export type Int_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['Int']['input']>;
+  _gt?: InputMaybe<Scalars['Int']['input']>;
+  _gte?: InputMaybe<Scalars['Int']['input']>;
+  _in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['Int']['input']>;
+  _lte?: InputMaybe<Scalars['Int']['input']>;
+  _neq?: InputMaybe<Scalars['Int']['input']>;
+  _nin?: InputMaybe<Array<Scalars['Int']['input']>>;
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['String']['input']>;
@@ -437,6 +450,174 @@ export type MemberBanned_Updates = {
   _set?: InputMaybe<MemberBanned_Set_Input>;
   /** filter the rows which have to be updated */
   where: MemberBanned_Bool_Exp;
+};
+
+/** columns and relationships of "memberLoginGoogle" */
+export type MemberLoginGoogle = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email: Scalars['String']['output'];
+  /** An object relationship */
+  member: Members;
+  memberId: Scalars['uuid']['output'];
+  uid: Scalars['String']['output'];
+};
+
+/** aggregated selection of "memberLoginGoogle" */
+export type MemberLoginGoogle_Aggregate = {
+  aggregate?: Maybe<MemberLoginGoogle_Aggregate_Fields>;
+  nodes: Array<MemberLoginGoogle>;
+};
+
+/** aggregate fields of "memberLoginGoogle" */
+export type MemberLoginGoogle_Aggregate_Fields = {
+  count: Scalars['Int']['output'];
+  max?: Maybe<MemberLoginGoogle_Max_Fields>;
+  min?: Maybe<MemberLoginGoogle_Min_Fields>;
+};
+
+
+/** aggregate fields of "memberLoginGoogle" */
+export type MemberLoginGoogle_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<MemberLoginGoogle_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** Boolean expression to filter rows from the table "memberLoginGoogle". All fields are combined with a logical 'AND'. */
+export type MemberLoginGoogle_Bool_Exp = {
+  _and?: InputMaybe<Array<MemberLoginGoogle_Bool_Exp>>;
+  _not?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
+  _or?: InputMaybe<Array<MemberLoginGoogle_Bool_Exp>>;
+  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  member?: InputMaybe<Members_Bool_Exp>;
+  memberId?: InputMaybe<Uuid_Comparison_Exp>;
+  uid?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "memberLoginGoogle" */
+export enum MemberLoginGoogle_Constraint {
+  /** unique or primary key constraint on columns "email" */
+  MemberLoginGoogleEmailKey = 'memberLoginGoogle_email_key',
+  /** unique or primary key constraint on columns "memberId" */
+  MemberLoginGoogleMeberIdKey = 'memberLoginGoogle_meberId_key',
+  /** unique or primary key constraint on columns "uid" */
+  MemberLoginGooglePkey = 'memberLoginGoogle_pkey'
+}
+
+/** input type for inserting data into table "memberLoginGoogle" */
+export type MemberLoginGoogle_Insert_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  member?: InputMaybe<Members_Obj_Rel_Insert_Input>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  uid?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** aggregate max on columns */
+export type MemberLoginGoogle_Max_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  uid?: Maybe<Scalars['String']['output']>;
+};
+
+/** aggregate min on columns */
+export type MemberLoginGoogle_Min_Fields = {
+  createdAt?: Maybe<Scalars['timestamptz']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  memberId?: Maybe<Scalars['uuid']['output']>;
+  uid?: Maybe<Scalars['String']['output']>;
+};
+
+/** response of any mutation on the table "memberLoginGoogle" */
+export type MemberLoginGoogle_Mutation_Response = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']['output'];
+  /** data from the rows affected by the mutation */
+  returning: Array<MemberLoginGoogle>;
+};
+
+/** input type for inserting object relation for remote table "memberLoginGoogle" */
+export type MemberLoginGoogle_Obj_Rel_Insert_Input = {
+  data: MemberLoginGoogle_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<MemberLoginGoogle_On_Conflict>;
+};
+
+/** on_conflict condition type for table "memberLoginGoogle" */
+export type MemberLoginGoogle_On_Conflict = {
+  constraint: MemberLoginGoogle_Constraint;
+  update_columns?: Array<MemberLoginGoogle_Update_Column>;
+  where?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "memberLoginGoogle". */
+export type MemberLoginGoogle_Order_By = {
+  createdAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  member?: InputMaybe<Members_Order_By>;
+  memberId?: InputMaybe<Order_By>;
+  uid?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: memberLoginGoogle */
+export type MemberLoginGoogle_Pk_Columns_Input = {
+  uid: Scalars['String']['input'];
+};
+
+/** select columns of table "memberLoginGoogle" */
+export enum MemberLoginGoogle_Select_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  Uid = 'uid'
+}
+
+/** input type for updating data in table "memberLoginGoogle" */
+export type MemberLoginGoogle_Set_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  uid?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Streaming cursor of the table "memberLoginGoogle" */
+export type MemberLoginGoogle_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: MemberLoginGoogle_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type MemberLoginGoogle_Stream_Cursor_Value_Input = {
+  createdAt?: InputMaybe<Scalars['timestamptz']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  memberId?: InputMaybe<Scalars['uuid']['input']>;
+  uid?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** update columns of table "memberLoginGoogle" */
+export enum MemberLoginGoogle_Update_Column {
+  /** column name */
+  CreatedAt = 'createdAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  MemberId = 'memberId',
+  /** column name */
+  Uid = 'uid'
+}
+
+export type MemberLoginGoogle_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<MemberLoginGoogle_Set_Input>;
+  /** filter the rows which have to be updated */
+  where: MemberLoginGoogle_Bool_Exp;
 };
 
 /** columns and relationships of "memberPendingActivation" */
@@ -1278,6 +1459,8 @@ export type MemberStatusActivityLatest_Updates = {
 export type Members = {
   id: Scalars['uuid']['output'];
   /** An object relationship */
+  memberLoginGoogle?: Maybe<MemberLoginGoogle>;
+  /** An object relationship */
   user: Users;
   userId: Scalars['uuid']['output'];
 };
@@ -1286,6 +1469,17 @@ export type Members = {
 export type Members_Aggregate = {
   aggregate?: Maybe<Members_Aggregate_Fields>;
   nodes: Array<Members>;
+};
+
+export type Members_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Members_Aggregate_Bool_Exp_Count>;
+};
+
+export type Members_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Members_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Members_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
 };
 
 /** aggregate fields of "members" */
@@ -1302,12 +1496,27 @@ export type Members_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** order by aggregate values of table "members" */
+export type Members_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Members_Max_Order_By>;
+  min?: InputMaybe<Members_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "members" */
+export type Members_Arr_Rel_Insert_Input = {
+  data: Array<Members_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Members_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "members". All fields are combined with a logical 'AND'. */
 export type Members_Bool_Exp = {
   _and?: InputMaybe<Array<Members_Bool_Exp>>;
   _not?: InputMaybe<Members_Bool_Exp>;
   _or?: InputMaybe<Array<Members_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  memberLoginGoogle?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
   user?: InputMaybe<Users_Bool_Exp>;
   userId?: InputMaybe<Uuid_Comparison_Exp>;
 };
@@ -1323,6 +1532,7 @@ export enum Members_Constraint {
 /** input type for inserting data into table "members" */
 export type Members_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
+  memberLoginGoogle?: InputMaybe<MemberLoginGoogle_Obj_Rel_Insert_Input>;
   user?: InputMaybe<Users_Obj_Rel_Insert_Input>;
   userId?: InputMaybe<Scalars['uuid']['input']>;
 };
@@ -1333,10 +1543,22 @@ export type Members_Max_Fields = {
   userId?: Maybe<Scalars['uuid']['output']>;
 };
 
+/** order by max() on columns of table "members" */
+export type Members_Max_Order_By = {
+  id?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Members_Min_Fields = {
   id?: Maybe<Scalars['uuid']['output']>;
   userId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** order by min() on columns of table "members" */
+export type Members_Min_Order_By = {
+  id?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "members" */
@@ -1345,6 +1567,13 @@ export type Members_Mutation_Response = {
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
   returning: Array<Members>;
+};
+
+/** input type for inserting object relation for remote table "members" */
+export type Members_Obj_Rel_Insert_Input = {
+  data: Members_Insert_Input;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Members_On_Conflict>;
 };
 
 /** on_conflict condition type for table "members" */
@@ -1357,6 +1586,7 @@ export type Members_On_Conflict = {
 /** Ordering options when selecting data from "members". */
 export type Members_Order_By = {
   id?: InputMaybe<Order_By>;
+  memberLoginGoogle?: InputMaybe<MemberLoginGoogle_Order_By>;
   user?: InputMaybe<Users_Order_By>;
   userId?: InputMaybe<Order_By>;
 };
@@ -1419,6 +1649,10 @@ export type Mutation_Root = {
   delete_memberBanned?: Maybe<MemberBanned_Mutation_Response>;
   /** delete single row from the table: "memberBanned" */
   delete_memberBanned_by_pk?: Maybe<MemberBanned>;
+  /** delete data from the table: "memberLoginGoogle" */
+  delete_memberLoginGoogle?: Maybe<MemberLoginGoogle_Mutation_Response>;
+  /** delete single row from the table: "memberLoginGoogle" */
+  delete_memberLoginGoogle_by_pk?: Maybe<MemberLoginGoogle>;
   /** delete data from the table: "memberPendingActivation" */
   delete_memberPendingActivation?: Maybe<MemberPendingActivation_Mutation_Response>;
   /** delete single row from the table: "memberPendingActivation" */
@@ -1457,6 +1691,10 @@ export type Mutation_Root = {
   insert_memberBanned?: Maybe<MemberBanned_Mutation_Response>;
   /** insert a single row into the table: "memberBanned" */
   insert_memberBanned_one?: Maybe<MemberBanned>;
+  /** insert data into the table: "memberLoginGoogle" */
+  insert_memberLoginGoogle?: Maybe<MemberLoginGoogle_Mutation_Response>;
+  /** insert a single row into the table: "memberLoginGoogle" */
+  insert_memberLoginGoogle_one?: Maybe<MemberLoginGoogle>;
   /** insert data into the table: "memberPendingActivation" */
   insert_memberPendingActivation?: Maybe<MemberPendingActivation_Mutation_Response>;
   /** insert a single row into the table: "memberPendingActivation" */
@@ -1501,6 +1739,12 @@ export type Mutation_Root = {
   update_memberBanned_by_pk?: Maybe<MemberBanned>;
   /** update multiples rows of table: "memberBanned" */
   update_memberBanned_many?: Maybe<Array<Maybe<MemberBanned_Mutation_Response>>>;
+  /** update data of the table: "memberLoginGoogle" */
+  update_memberLoginGoogle?: Maybe<MemberLoginGoogle_Mutation_Response>;
+  /** update single row of the table: "memberLoginGoogle" */
+  update_memberLoginGoogle_by_pk?: Maybe<MemberLoginGoogle>;
+  /** update multiples rows of table: "memberLoginGoogle" */
+  update_memberLoginGoogle_many?: Maybe<Array<Maybe<MemberLoginGoogle_Mutation_Response>>>;
   /** update data of the table: "memberPendingActivation" */
   update_memberPendingActivation?: Maybe<MemberPendingActivation_Mutation_Response>;
   /** update single row of the table: "memberPendingActivation" */
@@ -1571,6 +1815,18 @@ export type Mutation_RootDelete_MemberBannedArgs = {
 /** mutation root */
 export type Mutation_RootDelete_MemberBanned_By_PkArgs = {
   statusActivityId: Scalars['uuid']['input'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_MemberLoginGoogleArgs = {
+  where: MemberLoginGoogle_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_MemberLoginGoogle_By_PkArgs = {
+  uid: Scalars['String']['input'];
 };
 
 
@@ -1689,6 +1945,20 @@ export type Mutation_RootInsert_MemberBannedArgs = {
 export type Mutation_RootInsert_MemberBanned_OneArgs = {
   object: MemberBanned_Insert_Input;
   on_conflict?: InputMaybe<MemberBanned_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_MemberLoginGoogleArgs = {
+  objects: Array<MemberLoginGoogle_Insert_Input>;
+  on_conflict?: InputMaybe<MemberLoginGoogle_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_MemberLoginGoogle_OneArgs = {
+  object: MemberLoginGoogle_Insert_Input;
+  on_conflict?: InputMaybe<MemberLoginGoogle_On_Conflict>;
 };
 
 
@@ -1839,6 +2109,26 @@ export type Mutation_RootUpdate_MemberBanned_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootUpdate_MemberBanned_ManyArgs = {
   updates: Array<MemberBanned_Updates>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MemberLoginGoogleArgs = {
+  _set?: InputMaybe<MemberLoginGoogle_Set_Input>;
+  where: MemberLoginGoogle_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MemberLoginGoogle_By_PkArgs = {
+  _set?: InputMaybe<MemberLoginGoogle_Set_Input>;
+  pk_columns: MemberLoginGoogle_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_MemberLoginGoogle_ManyArgs = {
+  updates: Array<MemberLoginGoogle_Updates>;
 };
 
 
@@ -2009,6 +2299,17 @@ export type Operators_Aggregate = {
   nodes: Array<Operators>;
 };
 
+export type Operators_Aggregate_Bool_Exp = {
+  count?: InputMaybe<Operators_Aggregate_Bool_Exp_Count>;
+};
+
+export type Operators_Aggregate_Bool_Exp_Count = {
+  arguments?: InputMaybe<Array<Operators_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']['input']>;
+  filter?: InputMaybe<Operators_Bool_Exp>;
+  predicate: Int_Comparison_Exp;
+};
+
 /** aggregate fields of "operators" */
 export type Operators_Aggregate_Fields = {
   count: Scalars['Int']['output'];
@@ -2021,6 +2322,20 @@ export type Operators_Aggregate_Fields = {
 export type Operators_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Operators_Select_Column>>;
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+/** order by aggregate values of table "operators" */
+export type Operators_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Operators_Max_Order_By>;
+  min?: InputMaybe<Operators_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "operators" */
+export type Operators_Arr_Rel_Insert_Input = {
+  data: Array<Operators_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Operators_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "operators". All fields are combined with a logical 'AND'. */
@@ -2057,11 +2372,25 @@ export type Operators_Max_Fields = {
   userId?: Maybe<Scalars['uuid']['output']>;
 };
 
+/** order by max() on columns of table "operators" */
+export type Operators_Max_Order_By = {
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Operators_Min_Fields = {
   id?: Maybe<Scalars['uuid']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   userId?: Maybe<Scalars['uuid']['output']>;
+};
+
+/** order by min() on columns of table "operators" */
+export type Operators_Min_Order_By = {
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+  userId?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "operators" */
@@ -2170,6 +2499,12 @@ export type Query_Root = {
   memberBanned_aggregate: MemberBanned_Aggregate;
   /** fetch data from the table: "memberBanned" using primary key columns */
   memberBanned_by_pk?: Maybe<MemberBanned>;
+  /** fetch data from the table: "memberLoginGoogle" */
+  memberLoginGoogle: Array<MemberLoginGoogle>;
+  /** fetch aggregated fields from the table: "memberLoginGoogle" */
+  memberLoginGoogle_aggregate: MemberLoginGoogle_Aggregate;
+  /** fetch data from the table: "memberLoginGoogle" using primary key columns */
+  memberLoginGoogle_by_pk?: Maybe<MemberLoginGoogle>;
   /** fetch data from the table: "memberPendingActivation" */
   memberPendingActivation: Array<MemberPendingActivation>;
   /** fetch aggregated fields from the table: "memberPendingActivation" */
@@ -2198,15 +2533,15 @@ export type Query_Root = {
   memberStatusActivityLatest: Array<MemberStatusActivityLatest>;
   /** fetch aggregated fields from the table: "memberStatusActivityLatest" */
   memberStatusActivityLatest_aggregate: MemberStatusActivityLatest_Aggregate;
-  /** fetch data from the table: "members" */
+  /** An array relationship */
   members: Array<Members>;
-  /** fetch aggregated fields from the table: "members" */
+  /** An aggregate relationship */
   members_aggregate: Members_Aggregate;
   /** fetch data from the table: "members" using primary key columns */
   members_by_pk?: Maybe<Members>;
-  /** fetch data from the table: "operators" */
+  /** An array relationship */
   operators: Array<Operators>;
-  /** fetch aggregated fields from the table: "operators" */
+  /** An aggregate relationship */
   operators_aggregate: Operators_Aggregate;
   /** fetch data from the table: "operators" using primary key columns */
   operators_by_pk?: Maybe<Operators>;
@@ -2262,6 +2597,29 @@ export type Query_RootMemberBanned_AggregateArgs = {
 
 export type Query_RootMemberBanned_By_PkArgs = {
   statusActivityId: Scalars['uuid']['input'];
+};
+
+
+export type Query_RootMemberLoginGoogleArgs = {
+  distinct_on?: InputMaybe<Array<MemberLoginGoogle_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberLoginGoogle_Order_By>>;
+  where?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
+};
+
+
+export type Query_RootMemberLoginGoogle_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberLoginGoogle_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberLoginGoogle_Order_By>>;
+  where?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
+};
+
+
+export type Query_RootMemberLoginGoogle_By_PkArgs = {
+  uid: Scalars['String']['input'];
 };
 
 
@@ -2460,6 +2818,14 @@ export type Subscription_Root = {
   memberBanned_by_pk?: Maybe<MemberBanned>;
   /** fetch data from the table in a streaming manner: "memberBanned" */
   memberBanned_stream: Array<MemberBanned>;
+  /** fetch data from the table: "memberLoginGoogle" */
+  memberLoginGoogle: Array<MemberLoginGoogle>;
+  /** fetch aggregated fields from the table: "memberLoginGoogle" */
+  memberLoginGoogle_aggregate: MemberLoginGoogle_Aggregate;
+  /** fetch data from the table: "memberLoginGoogle" using primary key columns */
+  memberLoginGoogle_by_pk?: Maybe<MemberLoginGoogle>;
+  /** fetch data from the table in a streaming manner: "memberLoginGoogle" */
+  memberLoginGoogle_stream: Array<MemberLoginGoogle>;
   /** fetch data from the table: "memberPendingActivation" */
   memberPendingActivation: Array<MemberPendingActivation>;
   /** fetch aggregated fields from the table: "memberPendingActivation" */
@@ -2498,17 +2864,17 @@ export type Subscription_Root = {
   memberStatusActivityLatest_aggregate: MemberStatusActivityLatest_Aggregate;
   /** fetch data from the table in a streaming manner: "memberStatusActivityLatest" */
   memberStatusActivityLatest_stream: Array<MemberStatusActivityLatest>;
-  /** fetch data from the table: "members" */
+  /** An array relationship */
   members: Array<Members>;
-  /** fetch aggregated fields from the table: "members" */
+  /** An aggregate relationship */
   members_aggregate: Members_Aggregate;
   /** fetch data from the table: "members" using primary key columns */
   members_by_pk?: Maybe<Members>;
   /** fetch data from the table in a streaming manner: "members" */
   members_stream: Array<Members>;
-  /** fetch data from the table: "operators" */
+  /** An array relationship */
   operators: Array<Operators>;
-  /** fetch aggregated fields from the table: "operators" */
+  /** An aggregate relationship */
   operators_aggregate: Operators_Aggregate;
   /** fetch data from the table: "operators" using primary key columns */
   operators_by_pk?: Maybe<Operators>;
@@ -2582,6 +2948,36 @@ export type Subscription_RootMemberBanned_StreamArgs = {
   batch_size: Scalars['Int']['input'];
   cursor: Array<InputMaybe<MemberBanned_Stream_Cursor_Input>>;
   where?: InputMaybe<MemberBanned_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberLoginGoogleArgs = {
+  distinct_on?: InputMaybe<Array<MemberLoginGoogle_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberLoginGoogle_Order_By>>;
+  where?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberLoginGoogle_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<MemberLoginGoogle_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<MemberLoginGoogle_Order_By>>;
+  where?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
+};
+
+
+export type Subscription_RootMemberLoginGoogle_By_PkArgs = {
+  uid: Scalars['String']['input'];
+};
+
+
+export type Subscription_RootMemberLoginGoogle_StreamArgs = {
+  batch_size: Scalars['Int']['input'];
+  cursor: Array<InputMaybe<MemberLoginGoogle_Stream_Cursor_Input>>;
+  where?: InputMaybe<MemberLoginGoogle_Bool_Exp>;
 };
 
 
@@ -2835,6 +3231,56 @@ export type Timestamptz_Comparison_Exp = {
 /** columns and relationships of "users" */
 export type Users = {
   id: Scalars['uuid']['output'];
+  /** An object relationship */
+  member?: Maybe<Members>;
+  /** An array relationship */
+  members: Array<Members>;
+  /** An aggregate relationship */
+  members_aggregate: Members_Aggregate;
+  /** An array relationship */
+  operators: Array<Operators>;
+  /** An aggregate relationship */
+  operators_aggregate: Operators_Aggregate;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersMembersArgs = {
+  distinct_on?: InputMaybe<Array<Members_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Members_Order_By>>;
+  where?: InputMaybe<Members_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersMembers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Members_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Members_Order_By>>;
+  where?: InputMaybe<Members_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersOperatorsArgs = {
+  distinct_on?: InputMaybe<Array<Operators_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Operators_Order_By>>;
+  where?: InputMaybe<Operators_Bool_Exp>;
+};
+
+
+/** columns and relationships of "users" */
+export type UsersOperators_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Operators_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order_by?: InputMaybe<Array<Operators_Order_By>>;
+  where?: InputMaybe<Operators_Bool_Exp>;
 };
 
 /** aggregated selection of "users" */
@@ -2863,6 +3309,11 @@ export type Users_Bool_Exp = {
   _not?: InputMaybe<Users_Bool_Exp>;
   _or?: InputMaybe<Array<Users_Bool_Exp>>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  member?: InputMaybe<Members_Bool_Exp>;
+  members?: InputMaybe<Members_Bool_Exp>;
+  members_aggregate?: InputMaybe<Members_Aggregate_Bool_Exp>;
+  operators?: InputMaybe<Operators_Bool_Exp>;
+  operators_aggregate?: InputMaybe<Operators_Aggregate_Bool_Exp>;
 };
 
 /** unique or primary key constraints on table "users" */
@@ -2874,6 +3325,9 @@ export enum Users_Constraint {
 /** input type for inserting data into table "users" */
 export type Users_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']['input']>;
+  member?: InputMaybe<Members_Obj_Rel_Insert_Input>;
+  members?: InputMaybe<Members_Arr_Rel_Insert_Input>;
+  operators?: InputMaybe<Operators_Arr_Rel_Insert_Input>;
 };
 
 /** aggregate max on columns */
@@ -2911,6 +3365,9 @@ export type Users_On_Conflict = {
 /** Ordering options when selecting data from "users". */
 export type Users_Order_By = {
   id?: InputMaybe<Order_By>;
+  member?: InputMaybe<Members_Order_By>;
+  members_aggregate?: InputMaybe<Members_Aggregate_Order_By>;
+  operators_aggregate?: InputMaybe<Operators_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: users */
