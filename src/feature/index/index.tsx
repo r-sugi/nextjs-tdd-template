@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from "react";
 export const IndexTemplate: FC = () => {
-  return <div>トップページです</div>;
+	return <div>トップページです</div>;
 };
