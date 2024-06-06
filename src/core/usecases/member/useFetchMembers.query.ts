@@ -53,6 +53,7 @@ export const useFetchMembers = (
 		ref.current = opt?.onError;
 	}, [opt?.onError]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
 			const res = await query(queryMemberStatus);
@@ -63,8 +64,7 @@ export const useFetchMembers = (
 			// }
 			setMembers(res);
 		})();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ref, queryMemberStatus]);
+	}, [queryMemberStatus]);
 
 	return {
 		data: {

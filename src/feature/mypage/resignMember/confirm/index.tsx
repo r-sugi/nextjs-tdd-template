@@ -31,7 +31,7 @@ const Template: FC = () => {
 		data: ResignMemberSchema,
 		event?: BaseSyntheticEvent,
 	) => {
-		event && event.preventDefault();
+		event?.preventDefault?.();
 
 		try {
 			const res = await resignMemberMutation(
@@ -58,7 +58,7 @@ const Template: FC = () => {
 		// リロード時に確認ダイアログを表示
 		const handleBeforeUnload = (e: BeforeUnloadEvent) => {
 			e.preventDefault();
-			return (e.returnValue = "");
+			return;
 		};
 
 		// FIXME: ページ遷移 (router.push)時に確認ダイアログを表示
@@ -98,9 +98,12 @@ const Template: FC = () => {
 					{errors.agreement?.message && <p>{errors.agreement.message}</p>}
 				</div>
 
-				<button disabled={!isValid || isSubmitting}>退会する</button>
+				<button type="button" disabled={!isValid || isSubmitting}>
+					退会する
+				</button>
 			</form>
 			<button
+				type="button"
 				onClick={(e) => {
 					e.preventDefault();
 					router.push(loginRequiredPages.mypageResignMemberInput.path());

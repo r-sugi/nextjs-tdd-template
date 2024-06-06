@@ -12,6 +12,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	state: ErrorBoundaryState = {
 		error: undefined,
 	};
+	// biome-ignore lint/complexity/noUselessConstructor: <explanation>
 	constructor(props: ErrorBoundaryProps) {
 		super(props);
 	}

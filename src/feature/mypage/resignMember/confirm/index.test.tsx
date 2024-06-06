@@ -53,7 +53,7 @@ describe(IndexTemplate, () => {
 				),
 			).toBeVisible();
 			expect(
-				within(errorScreen).getByText(`Error: NoCacheError`),
+				within(errorScreen).getByText("Error: NoCacheError"),
 			).toBeVisible();
 			expect(
 				within(errorScreen).getByText("入力画面からやり直す"),

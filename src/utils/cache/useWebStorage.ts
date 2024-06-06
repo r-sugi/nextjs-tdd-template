@@ -7,7 +7,6 @@ export const selectWebStorage = (storageType?: WebStorageType) => {
 		case "local":
 			return window.localStorage;
 		case "session":
-		default:
 			return window.sessionStorage;
 	}
 };

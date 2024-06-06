@@ -143,7 +143,7 @@ export const FirstRowAndColumnAsHeaderCell: Story = {
 					</caption>
 					<Thead>
 						<Tr>
-							<Td className="border-r bg-solid-grey-50" scope="col"></Td>
+							<Td className="border-r bg-solid-grey-50" scope="col" />
 							<Th className="bg-solid-grey-50" scope="col">
 								ラベル
 							</Th>

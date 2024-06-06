@@ -20,7 +20,7 @@ export const IndexTemplate = () => {
 		data: ResignMemberSchema,
 		event?: BaseSyntheticEvent,
 	) => {
-		event && event.preventDefault();
+		event?.preventDefault?.();
 
 		try {
 			setCache("resignMember", data);
@@ -57,7 +57,9 @@ export const IndexTemplate = () => {
 					{errors.agreement?.message && <p>{errors.agreement.message}</p>}
 				</div>
 
-				<button disabled={!isValid || isSubmitting}>退会する</button>
+				<button type="button" disabled={!isValid || isSubmitting}>
+					退会する
+				</button>
 			</form>
 		</div>
 	);

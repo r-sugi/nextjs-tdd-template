@@ -4,7 +4,9 @@ export function toMock<T extends jest.Func>(
 	return fn as unknown as jest.Mock<ReturnType<T>, Parameters<T>>;
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function toSpyWithMock<T extends (...args: any[]) => any>(
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	obj: any,
 	method: string,
 	mockImpl: T,

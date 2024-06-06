@@ -118,7 +118,6 @@ export const transform = <K extends MemberStatus>(
 				status: "pendingActivation",
 				createdAt: new Date(activity.memberPendingActivation.createdAt),
 			})) as MemberStatusToMemberMap[K];
-	} else {
-		throw new Error("status is invalid");
 	}
+	throw new Error("status is invalid");
 };

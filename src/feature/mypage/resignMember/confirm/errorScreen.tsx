@@ -18,7 +18,9 @@ export const ErrorScreen = ({
 		<div data-testid={rootTestId}>
 			{titleShort}でエラーが発生しました
 			<div>Error: {error.name}</div>
-			<button onClick={() => onReset(inputPath)}>入力画面からやり直す</button>
+			<button type="button" onClick={() => onReset(inputPath)}>
+				入力画面からやり直す
+			</button>
 		</div>
 	);
 };
