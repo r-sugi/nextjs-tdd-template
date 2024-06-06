@@ -98,7 +98,7 @@ const Template: FC = () => {
 					{errors.agreement?.message && <p>{errors.agreement.message}</p>}
 				</div>
 
-				<button type="button" disabled={!isValid || isSubmitting}>
+				<button type="submit" disabled={!isValid || isSubmitting}>
 					退会する
 				</button>
 			</form>
