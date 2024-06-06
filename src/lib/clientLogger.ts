@@ -2,7 +2,7 @@ import pino, { type Logger as PinoLogger } from "pino";
 
 export class ClientLogger {
 	private readonly p: PinoLogger;
-	private context: Record<string, any> = {};
+	private context: Record<string, unknown> = {};
 
 	constructor() {
 		if (typeof window !== "undefined") {

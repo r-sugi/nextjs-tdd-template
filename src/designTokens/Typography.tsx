@@ -19,7 +19,7 @@ export const Typography = () => {
 				<p className="text-std-17B-7">std-17B-7 デザインシステム</p>
 				<p className="text-std-16B-7">std-16B-7 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="text-std-32M-5">std-32M-5 デザインシステム</p>
 				<p className="text-std-28M-5">std-28M-5 デザインシステム</p>
@@ -28,7 +28,7 @@ export const Typography = () => {
 				<p className="text-std-17M-7">std-17M-7 デザインシステム</p>
 				<p className="text-std-16M-7">std-16M-7 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="text-std-45N-4">std-45N-4 デザインシステム</p>
 				<p className="text-std-36N-4">std-36N-4 デザインシステム</p>
@@ -42,7 +42,7 @@ export const Typography = () => {
 				<p className="text-std-17N-7">std-17N-7 デザインシステム</p>
 				<p className="text-std-16N-7">std-16N-7 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="text-dns-17B-3">dns-17B-3 デザインシステム</p>
 				<p className="text-dns-17B-2">dns-17B-2 デザインシステム</p>
@@ -51,7 +51,7 @@ export const Typography = () => {
 				<p className="text-dns-14B-3">dns-14B-3 デザインシステム</p>
 				<p className="text-dns-14B-2">dns-14B-2 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="text-dns-17N-3">dns-17N-3 デザインシステム</p>
 				<p className="text-dns-17N-2">dns-17N-2 デザインシステム</p>
@@ -60,25 +60,25 @@ export const Typography = () => {
 				<p className="text-dns-14N-3">dns-14N-3 デザインシステム</p>
 				<p className="text-dns-14N-2">dns-14N-2 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="text-oln-17B-1">oln-17B-2 デザインシステム</p>
 				<p className="text-oln-16B-1">oln-16B-2 デザインシステム</p>
 				<p className="text-oln-14B-1">oln-14B-2 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="text-oln-17M-1">oln-17M-2 デザインシステム</p>
 				<p className="text-oln-16M-1">oln-16M-2 デザインシステム</p>
 				<p className="text-oln-14M-1">oln-14M-2 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="text-oln-17N-1">oln-17N-2 デザインシステム</p>
 				<p className="text-oln-16N-1">oln-16N-2 デザインシステム</p>
 				<p className="text-oln-14N-1">oln-14N-2 デザインシステム</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="font-mono text-mono-17B-5">
 					mono-17B-5 &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -90,7 +90,7 @@ export const Typography = () => {
 					mono-14B-5 &lt;meta charset=&quot;UTF-8&quot;&gt;
 				</p>
 
-				<hr></hr>
+				<hr />
 
 				<p className="font-mono text-mono-17N-5">
 					mono-17B-5 &lt;meta charset=&quot;UTF-8&quot;&gt;

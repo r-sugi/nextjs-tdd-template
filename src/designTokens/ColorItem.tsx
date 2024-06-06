@@ -18,8 +18,8 @@ export const ColorItem = (props: Props) => {
 				{colorClasses.map((colorClass) => {
 					return (
 						<div className="c flex flex-col gap-2" key={colorClass}>
-							<div className={`size-14 ${colorClass}`}></div>
-							<span className="text-dns-14N-3"></span>
+							<div className={`size-14 ${colorClass}`} />
+							<span className="text-dns-14N-3" />
 						</div>
 					);
 				})}

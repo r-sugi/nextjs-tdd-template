@@ -242,7 +242,7 @@ export const Colors = () => {
 				<ColorItem colorClasses={["bg-focus-blue"]} title="Focus（Blue）" />
 			</section>
 
-			<hr className="my-8"></hr>
+			<hr className="my-8" />
 
 			<section className="flex flex-col gap-8">
 				<div>

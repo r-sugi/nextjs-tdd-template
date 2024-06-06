@@ -7,9 +7,7 @@ import {
 	publicPages,
 } from "@/const/paths";
 
-type Props = {};
-
-export const HeaderTemplate: FC<Props> = () => {
+export const HeaderTemplate: FC = () => {
 	const pages = [
 		publicPages.index,
 		loginRequiredPages.mypage,
