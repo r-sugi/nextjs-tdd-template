@@ -1,56 +1,60 @@
-import { ActiveMember } from '@/core/domains/member/activeMember';
-import { MembersByType } from '@/core/domains/member/member';
-import { MemberStatus } from '@/core/domains/member/status';
-import { UpdateMemberStatusInputType } from '@/core/usecases/member/useResignMember.command';
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import type { MembersByType } from "@/core/domains/member/member";
+import type { MemberStatus } from "@/core/domains/member/status";
+import type { UpdateMemberStatusInputType } from "@/core/usecases/member/useResignMember.command";
 import {
-  ResignMemberMutationVariables,
-  useGetMembersByStatusLazyQuery,
-  useGetActiveMemberLazyQuery,
-  useResignMemberMutation,
-} from '@/generated/graphql';
+	type ResignMemberMutationVariables,
+	useGetActiveMemberLazyQuery,
+	useGetMembersByStatusLazyQuery,
+	useResignMemberMutation,
+} from "@/generated/graphql";
 
-import { transform } from './transformer/activeMember.transformer';
-import { transform as membersByStatusTransform } from './transformer/membersByStatus.transformer';
+import { transform } from "./transformer/activeMember.transformer";
+import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 
 /**
  * Queries
  */
 // TODO: キャッシュしたかったらoptionsを渡す
-type FindActiveMemberOneType = (memberId: string) => Promise<ActiveMember | null>;
+type FindActiveMemberOneType = (
+	memberId: string,
+) => Promise<ActiveMember | null>;
 export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
-  const [query] = useGetActiveMemberLazyQuery();
+	const [query] = useGetActiveMemberLazyQuery();
 
-  return async (memberId) => {
-    const res = await query({ variables: { memberId } });
-    // TODO: エラー処理をここに書く（一旦ベタがきで）
-    return transform(res);
-  };
+	return async (memberId) => {
+		const res = await query({ variables: { memberId } });
+		// TODO: エラー処理をここに書く（一旦ベタがきで）
+		return transform(res);
+	};
 };
 
-type FetchMembersByStatusType = (status: MemberStatus) => Promise<MembersByType>; // FIXME: 依存型の確認
+type FetchMembersByStatusType = (
+	status: MemberStatus,
+) => Promise<MembersByType>; // FIXME: 依存型の確認
 
 export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
-  const [query] = useGetMembersByStatusLazyQuery();
+	const [query] = useGetMembersByStatusLazyQuery();
 
-  return async (status) => {
-    const res = await query({ variables: { status } });
-    // TODO: エラー処理をここに書く（一旦ベタがきで）
-    return membersByStatusTransform(res, status);
-  };
+	return async (status) => {
+		const res = await query({ variables: { status } });
+		// TODO: エラー処理をここに書く（一旦ベタがきで）
+		return membersByStatusTransform(res, status);
+	};
 };
 
 /**
  * Mutations
  */
 type UpdateMemberStatusType = (
-  variables: UpdateMemberStatusInputType, // FIXME: 依存型の確認
+	variables: UpdateMemberStatusInputType, // FIXME: 依存型の確認
 ) => Promise<boolean>;
 export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
-  const [mutate] = useResignMemberMutation();
+	const [mutate] = useResignMemberMutation();
 
-  return async (variables: ResignMemberMutationVariables) => {
-    const res = await mutate({ variables });
-    // TODO: エラー処理をここに書く（一旦ベタがきで）
-    return !!res;
-  };
+	return async (variables: ResignMemberMutationVariables) => {
+		const res = await mutate({ variables });
+		// TODO: エラー処理をここに書く（一旦ベタがきで）
+		return !!res;
+	};
 };

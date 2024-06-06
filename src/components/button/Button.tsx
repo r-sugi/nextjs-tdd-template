@@ -2,10 +2,10 @@
  * （出典）出典：デジタル庁デザインシステムウェブサイト https://design.digital.go.jp/
  *  https://github.com/digital-go-jp/design-system-example-components/tree/main/src/components
  */
-import { type ComponentProps, forwardRef } from 'react';
+import { type ComponentProps, forwardRef } from "react";
 
-export type ButtonVariant = 'primary' | 'secondary' | 'tertiary';
-export type ButtonSize = 'lg' | 'md' | 'sm' | 'xs';
+export type ButtonVariant = "primary" | "secondary" | "tertiary";
+export type ButtonSize = "lg" | "md" | "sm" | "xs";
 
 export const buttonBaseStyle = `
   border border-transparent underline-offset-2
@@ -14,7 +14,7 @@ export const buttonBaseStyle = `
 `;
 
 export const buttonVariantStyle: { [key in ButtonVariant]: string } = {
-  primary: `
+	primary: `
   bg-blue-900
     text-white
     hover:bg-blue-1000
@@ -23,7 +23,7 @@ export const buttonVariantStyle: { [key in ButtonVariant]: string } = {
     active:underline
     disabled:bg-black/30
   `,
-  secondary: `
+	secondary: `
     !border-blue-900
     bg-white
     text-blue-900
@@ -39,7 +39,7 @@ export const buttonVariantStyle: { [key in ButtonVariant]: string } = {
     disabled:bg-white
     disabled:text-solid-grey-420
   `,
-  tertiary: `
+	tertiary: `
     bg-transparent
     text-blue-900
     underline
@@ -53,29 +53,31 @@ export const buttonVariantStyle: { [key in ButtonVariant]: string } = {
 };
 
 export const buttonSizeStyle: { [key in ButtonSize]: string } = {
-  lg: 'min-w-[8.5rem] rounded-8 p-4 text-oln-16B-1 leading-snug',
-  md: 'min-w-24 rounded-8 px-4 py-3 text-oln-16B-1 leading-snug',
-  sm: 'min-w-20 rounded-md px-3 py-1.5 text-oln-16B-1 leading-snug relative after:absolute after:-inset-x-[1px] after:-inset-y-[5px]',
-  xs: 'min-w-18 rounded px-2 py-1.5 text-oln-14B-1 relative after:absolute after:-inset-x-[1px] after:-inset-y-[9px]',
+	lg: "min-w-[8.5rem] rounded-8 p-4 text-oln-16B-1 leading-snug",
+	md: "min-w-24 rounded-8 px-4 py-3 text-oln-16B-1 leading-snug",
+	sm: "min-w-20 rounded-md px-3 py-1.5 text-oln-16B-1 leading-snug relative after:absolute after:-inset-x-[1px] after:-inset-y-[5px]",
+	xs: "min-w-18 rounded px-2 py-1.5 text-oln-14B-1 relative after:absolute after:-inset-x-[1px] after:-inset-y-[9px]",
 };
 
-export type ButtonProps = ComponentProps<'button'> & {
-  variant?: ButtonVariant;
-  size: ButtonSize;
+export type ButtonProps = ComponentProps<"button"> & {
+	variant?: ButtonVariant;
+	size: ButtonSize;
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function createButton(props, ref) {
-  const { children, className, variant, size, ...rest } = props;
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+	function createButton(props, ref) {
+		const { children, className, variant, size, ...rest } = props;
 
-  return (
-    <button
-      className={`${buttonBaseStyle} ${buttonSizeStyle[size]} ${
-        variant ? buttonVariantStyle[variant] : ''
-      } ${className ?? ''}`}
-      {...rest}
-      ref={ref}
-    >
-      {children}
-    </button>
-  );
-});
+		return (
+			<button
+				className={`${buttonBaseStyle} ${buttonSizeStyle[size]} ${
+					variant ? buttonVariantStyle[variant] : ""
+				} ${className ?? ""}`}
+				{...rest}
+				ref={ref}
+			>
+				{children}
+			</button>
+		);
+	},
+);

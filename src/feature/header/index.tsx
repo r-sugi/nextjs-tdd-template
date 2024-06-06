@@ -1,28 +1,32 @@
-import Link from 'next/link';
-import { FC } from 'react';
+import Link from "next/link";
+import type { FC } from "react";
 
-import { adminSecretPages, loginRequiredPages, publicPages } from '@/const/paths';
+import {
+	adminSecretPages,
+	loginRequiredPages,
+	publicPages,
+} from "@/const/paths";
 
 type Props = {};
 
 export const HeaderTemplate: FC<Props> = () => {
-  const pages = [
-    publicPages.index,
-    loginRequiredPages.mypage,
-    loginRequiredPages.mypageResignMemberInput,
-    loginRequiredPages.mypageResignMemberConfirm,
-    adminSecretPages.members,
-  ];
+	const pages = [
+		publicPages.index,
+		loginRequiredPages.mypage,
+		loginRequiredPages.mypageResignMemberInput,
+		loginRequiredPages.mypageResignMemberConfirm,
+		adminSecretPages.members,
+	];
 
-  return (
-    <div>
-      <ul>
-        {pages.map((page) => (
-          <li key={page.path()}>
-            <Link href={page.path()}>{page.title()}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+	return (
+		<div>
+			<ul>
+				{pages.map((page) => (
+					<li key={page.path()}>
+						<Link href={page.path()}>{page.title()}</Link>
+					</li>
+				))}
+			</ul>
+		</div>
+	);
 };
