@@ -12,8 +12,9 @@
     "dev:all": "npm-run-all -p dev db:start",
     "build": "next build",
     "start": "serve out",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "format": "biome format --write src",
+    "lint": "biome lint src",
+    "lint:fix": "biome check --apply src",
     "knip": "knip",
     "knip:fix": "knip --fix",
     "type-check": "tsc --noEmit",
@@ -43,6 +44,7 @@
     "zod": "^3.22.5"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.8.0",
     "@chromatic-com/storybook": "^1.5.0",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/introspection": "^4.0.3",
