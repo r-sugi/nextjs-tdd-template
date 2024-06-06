@@ -44,7 +44,8 @@ export class PostIdErrorBoundary extends Component<Props, ErrorBoundaryState> {
 		) {
 			// 明示的にfatal, criticalにしたものは全体のErrorBoundaryで補足する
 			throw error;
-		} else if (error?.severity == null) {
+		}
+		if (error?.severity == null) {
 			// 指定しなかったものは全体のErrorBoundaryで補足する
 			throw error;
 		}

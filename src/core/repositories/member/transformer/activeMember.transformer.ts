@@ -12,7 +12,8 @@ export const transform = (
 	// } else
 	if (res?.data?.memberStatusActivityLatest?.length === 0) {
 		return null;
-	} else if (res?.data?.memberStatusActivityLatest[0] == null) {
+	}
+	if (res?.data?.memberStatusActivityLatest[0] == null) {
 		return null;
 	}
 	const responseActiveMember = res.data

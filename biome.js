@@ -36,6 +36,10 @@ module.exports = {
 			style: {
 				useSelfClosingElements: "error",
 			},
+			suspicious: {
+				noDebugger: "error",
+				noConsoleLog: "error",
+			},
 		},
 	},
 };

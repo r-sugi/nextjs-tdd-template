@@ -15,6 +15,7 @@
     "format": "biome format --write src",
     "lint": "biome lint src",
     "lint:fix": "biome check --apply src",
+    "lint:fix:force": "biome check --fix --unsafe src",
     "knip": "knip",
     "knip:fix": "knip --fix",
     "type-check": "tsc --noEmit",

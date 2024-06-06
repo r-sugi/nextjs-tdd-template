@@ -29,6 +29,7 @@ export const useFetchActiveMember = (opt?: Option): Usecase<ActiveMember> => {
 		ref.current = opt?.onError;
 	}, [opt?.onError]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
 			const state = await query(
@@ -42,7 +43,6 @@ export const useFetchActiveMember = (opt?: Option): Usecase<ActiveMember> => {
 			}
 			setActiveMember(state);
 		})();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ref]);
 
 	return {

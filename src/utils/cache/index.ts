@@ -37,7 +37,8 @@ export const getCache = <
 	const object = parsedValue();
 	if (object == null && options?.fallback) {
 		return {} as V;
-	} else if (object == null) {
+	}
+	if (object == null) {
 		throw new NoCacheError("Failed to parse storage value");
 	}
 	return object;

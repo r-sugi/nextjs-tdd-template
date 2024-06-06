@@ -34,17 +34,20 @@ export class ClientLogger {
 		return logLevel;
 	}
 
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	info(message: any): void {
 		this.p.info({ message, ...this.context });
 	}
-
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	error(message: any): void {
 		this.p.error({ message, ...this.context });
 	}
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	critical(message: any): void {
 		// pinoにcriticalはないのでerrorで代用
 		this.p.error({ message, ...this.context });
 	}
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	fatal(message: any): void {
 		this.p.fatal({ message, ...this.context });
 	}

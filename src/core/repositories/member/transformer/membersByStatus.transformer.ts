@@ -61,7 +61,8 @@ export const transform = <K extends MemberStatus>(
 				createdAt: new Date(activity.memberActive.createdAt),
 				birthday: new Date(activity.memberActive.birthday),
 			})) as MemberStatusToMemberMap[K];
-	} else if (status === "resigned") {
+	}
+	if (status === "resigned") {
 		return res.data.memberStatusActivityLatest
 			.filter(
 				(
@@ -79,7 +80,8 @@ export const transform = <K extends MemberStatus>(
 					createdAt: new Date(activity.memberResigned.createdAt),
 				};
 			}) as MemberStatusToMemberMap[K];
-	} else if (status === "restored") {
+	}
+	if (status === "restored") {
 		return res.data.memberStatusActivityLatest
 			.filter(
 				(
@@ -92,7 +94,8 @@ export const transform = <K extends MemberStatus>(
 				status: "restored",
 				createdAt: new Date(activity.memberRestored.createdAt),
 			})) as MemberStatusToMemberMap[K];
-	} else if (status === "banned") {
+	}
+	if (status === "banned") {
 		return res.data.memberStatusActivityLatest
 			.filter(
 				(
@@ -105,7 +108,8 @@ export const transform = <K extends MemberStatus>(
 				status: "banned",
 				createdAt: new Date(activity.memberBanned.createdAt),
 			})) as MemberStatusToMemberMap[K];
-	} else if (status === "pendingActivation") {
+	}
+	if (status === "pendingActivation") {
 		return res.data.memberStatusActivityLatest
 			.filter(
 				(
