@@ -1,6 +1,13 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": ["import", "unused-imports", "@typescript-eslint/eslint-plugin"],
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "import",
+    "unused-imports",
+    "@typescript-eslint/eslint-plugin"
+  ],
   "settings": {
     "import/resolver": {
       "typescript": {
@@ -26,8 +33,13 @@
           "type"
         ],
         "newlines-between": "always",
-        "pathGroupsExcludedImportTypes": ["builtin"],
-        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
         "pathGroups": [
           {
             "pattern": "src/types/**",
