@@ -39,7 +39,7 @@ export const useResignMember = () => {
 					data: {
 						// TODO: ログインメンバーのID
 						memberId: "ff4b01ee-15e9-4e2e-acb3-25a0347af7c1",
-						reasonType: props.reasonType,
+						reasonType: "123456789012345678901", // props.reasonType,
 						agreement: props.agreement,
 						reasonDetail: props.reasonDetail,
 					},

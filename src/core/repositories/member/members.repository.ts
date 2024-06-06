@@ -53,8 +53,9 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 	const [mutate] = useResignMemberMutation();
 
 	return async (variables: ResignMemberMutationVariables) => {
-		const res = await mutate({ variables });
+		const { data, errors, extensions } = await mutate({ variables });
+		debugger;
 		// TODO: エラー処理をここに書く（一旦ベタがきで）
-		return !!res;
+		return !!data;
 	};
 };

@@ -15,18 +15,40 @@ export const AppApolloProvider: FC<{
 }> = ({ children }) => {
 	const errorLink = useMemo(
 		() =>
-			onError(({ operation, graphQLErrors, networkError }) => {
+			onError(({ operation, graphQLErrors, networkError, forward }) => {
 				if (graphQLErrors) {
-					for (const { message, extensions } of graphQLErrors) {
+					graphQLErrors.map(({ message, extensions }) => {
 						console.log(
-							`[GraphQL error]: Message: ${message}, Code: ${extensions.code}, Path: ${extensions.path}, Operation: ${operation}`,
+							`[GraphQL error]: Message: ${message}, Code: ${extensions.code}, Path: ${extensions.path}`,
 						);
-					}
+						switch (extensions.code) {
+							case "invalid-jwt": { // refetch the jwt
+								const oldHeaders = operation.getContext().headers;
+								const getAccessToken = () => "TODO: getAccessToken()";
+								const token = getAccessToken();
+								operation.setContext({
+									headers: {
+										...oldHeaders,
+										authorization: `Bearer ${token}`,
+									},
+								});
+								// retry the request, returning the new observable
+								return forward(operation);
+							}
+							case "data-exception":
+								console.log("TODO: DBが返すエラー処理");
+								break;
+							case "validation-failed":
+								// props.history.push("/something-went-wrong"); // redirect to something-went-wrong page
+								break;
+							default:
+								// default case
+								console.log(extensions.code);
+						}
+					});
 				}
 				if (networkError) {
-					console.log(
-						`[Network error]: ${networkError}, Operation: ${operation}`,
-					);
+					console.log(`TODO: [Network error]: ${networkError}`);
 				}
 			}),
 		[],
