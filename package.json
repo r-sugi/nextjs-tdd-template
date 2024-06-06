@@ -26,8 +26,10 @@
     "storybook:build": "storybook build",
     "db:start": "docker-compose up -d",
     "db:stop": "docker-compose stop",
-    "db:export": "npm run db:export --prefix ./db",
-    "db:apply": "npm run db:apply --prefix ./db",
+    "db:console": "npm run db:console --prefix ./db",
+    "db:migration": "npm run db:migration --prefix ./db",
+    "db:metadata": "npm run db:metadata --prefix ./db",
+    "db:meta:export": "npm run db:meta:export --prefix ./db",
     "db:dump": "npm run db:dump --prefix ./db"
   },
   "dependencies": {
