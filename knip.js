@@ -10,6 +10,8 @@ module.exports = {
     'src/error/errors/unhandledRejectionError.ts',
     'src/__todo/PostIdErrorBoundary.tsx',
     'src/__todo/PostIdErrorScreen.tsx',
+    // Unused exports, Unused exported types of component templates
+    'src/components/**/*.*',
   ],
   ignoreWorkspaces: ['src/generated/**'],
   ignoreDependencies: [
