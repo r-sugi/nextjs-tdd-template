@@ -5,8 +5,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "db:export": "hasura metadata export",
-    "db:apply": "hasura metadata apply",
+    "db:console": "hasura console",
+    "db:migration": "hasura migrate apply",
+    "db:metadata": "hasura metadata apply",
+    "db:meta:export": "hasura metadata export",
     "db:dump": "curl -d '{\"opts\": [\"-a\", \"-O\", \"-x\", \"--inserts\", \"--exclude-schema=hdb_catalog\"], \"clean_output\": true, \"source\": \"default\"}' -H \"x-hasura-admin-secret:xxxxxx\" http://localhost:8080/v1alpha1/pg_dump > dump/dump.sql"
   },
   "author": "",
