@@ -14,8 +14,11 @@ describe(useResignMember, () => {
 			reasonDetail: null,
 			agreement: true,
 		};
-		const options = {};
 		const mockResponse = true;
+		const expected = {
+			data: true,
+			error: null,
+		};
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
 		});
@@ -23,7 +26,7 @@ describe(useResignMember, () => {
 		const { result } = renderHook(() => useResignMember());
 
 		await waitFor(async () => {
-			expect(await result.current(props)).toBe(mockResponse);
+			expect(await result.current(props)).toEqual(expected);
 		});
 	});
 
@@ -33,11 +36,9 @@ describe(useResignMember, () => {
 			reasonDetail: null,
 			agreement: true,
 		};
-		const onErrorFn = jest.fn();
-		const options = {
-			onError: onErrorFn,
-		};
 		const mockResponse = false;
+		const expected = { data: false, error: null };
+
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
 		});
@@ -45,8 +46,7 @@ describe(useResignMember, () => {
 		const { result } = renderHook(() => useResignMember());
 
 		await waitFor(async () => {
-			expect(await result.current(props)).toBe(mockResponse);
+			expect(await result.current(props)).toEqual(expected);
 		});
-		expect(onErrorFn).toHaveBeenCalledWith();
 	});
 });
