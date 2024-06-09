@@ -8,7 +8,7 @@ const schemaErrorCodes = [
 	"data-exception", // 400であるがカラム名を含まないため画面に表示不可能 復帰不可能なエラーとして扱う
 ];
 
-// TODO: どの層で参照すべきか？
+// TODO: リポジトリのhooks関数内でtry catchしてcatch内で使用すべきか？
 export const apolloMutationErrorHandler = (
 	error: ApolloError,
 ): GraphQLErrors => {
