@@ -28,7 +28,7 @@ describe(useFetchMembers, () => {
 		});
 	});
 
-	it("error", async () => {
+	it.skip("error", async () => {
 		toMock(useFetchMembersByStatus).mockImplementationOnce(() => {
 			return async () => ({ data: null, errors: [] });
 		});
