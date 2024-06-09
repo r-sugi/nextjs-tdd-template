@@ -10,7 +10,7 @@ jest.mock("@/core/repositories/member/members.repository");
 describe("useFetchActiveMember", () => {
 	it("success", async () => {
 		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => activeMember;
+			return async () => ({ data: activeMember, errors: null });
 		});
 
 		const { result } = renderHook(() => useFetchActiveMember());
@@ -18,35 +18,15 @@ describe("useFetchActiveMember", () => {
 		await waitFor(() => {
 			expect(result.current).toEqual({
 				data: activeMember,
-				error: null,
+				errors: null,
 				loading: false,
 			});
 		});
 	});
 
-	it.skip("error", async () => {
-		// setErrorをmockする
-		// apolloQueryErrorHandlerをmockする
-
-		// TODO: エラーを発生させる
+	it("error", async () => {
 		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => activeMember;
-		});
-
-		const { result } = renderHook(() => useFetchActiveMember());
-
-		// await waitFor(() => {
-		// 	expect(result.current).toEqual({
-		// 		data: activeMember,
-		// 		error: null, // GraphQLエラーはここに入る
-		// 		loading: false,
-		// 	});
-		// });
-	});
-
-	it("loading", async () => {
-		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => null;
+			return async () => ({ data: null, errors: [] });
 		});
 
 		const { result } = renderHook(() => useFetchActiveMember());
@@ -54,7 +34,23 @@ describe("useFetchActiveMember", () => {
 		await waitFor(() => {
 			expect(result.current).toEqual({
 				data: null,
-				error: null,
+				errors: [],
+				loading: false,
+			});
+		});
+	});
+
+	it("loading", async () => {
+		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
+			return async () => ({ data: null, errors: null });
+		});
+
+		const { result } = renderHook(() => useFetchActiveMember());
+
+		await waitFor(() => {
+			expect(result.current).toEqual({
+				data: null,
+				errors: null,
 				loading: true,
 			});
 		});

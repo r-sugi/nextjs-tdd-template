@@ -1,7 +1,5 @@
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
-import { apolloMutationErrorHandler } from "@/core/repositories/apolloMutationErrorHandler";
 import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
-import { ApolloError } from "@apollo/client";
 import type { GraphQLErrors } from "@apollo/client/errors";
 
 type Props = {
@@ -10,9 +8,9 @@ type Props = {
 	agreement: boolean;
 };
 
-type ReturnType = {
+export type UseResignMemberReturnType = {
 	data: boolean;
-	error: GraphQLErrors | null;
+	errors: GraphQLErrors | null;
 };
 
 export type UpdateMemberStatusInputType = {
@@ -33,7 +31,7 @@ export type UpdateMemberStatusInputType = {
 export const useResignMember = () => {
 	const mutate = useUpdateMemberStatus();
 
-	return async (props: Props): Promise<ReturnType> => {
+	return async (props: Props): Promise<UseResignMemberReturnType> => {
 		const activityInput: UpdateMemberStatusInputType = {
 			activityInput: {
 				status: memberStatus.resigned,
@@ -50,15 +48,6 @@ export const useResignMember = () => {
 				},
 			},
 		};
-
-		try {
-			const res = await mutate(activityInput);
-			return { data: res, error: null };
-		} catch (error: unknown) {
-			if (error instanceof ApolloError) {
-				return { data: false, error: apolloMutationErrorHandler(error) };
-			}
-			return { data: false, error: null };
-		}
+		return await mutate(activityInput);
 	};
 };

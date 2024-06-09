@@ -4,18 +4,23 @@ import { memberStatus } from "@/core/domains/member/status";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 
 export const IndexTemplate: FC = () => {
-	const { data, refetch, loading, error } = useFetchMembers();
-
-	if (error) {
-		// ユーザーにエラーを回避してもらうためにエラーを画面に表示する
-		return <div>error</div>;
-	}
+	const { data, refetch, loading, errors } = useFetchMembers();
 
 	if (loading) {
 		return <div>loading...</div>;
 	}
 
+	if (errors) {
+		// TODO: （ユーザーが理解できるエラー内容であるなら）
+		// ユーザーにエラーを回避してもらうために、エラーを画面に表示した方が良いかもしれない
+		return <div>error: {JSON.stringify(errors, null, 2)}</div>;
+	}
+
 	const memberListComponent = () => {
+		if (data.members.length === 0) {
+			return <div>メンバーがいません</div>;
+		}
+
 		return (
 			<ul>
 				{data.members.map((member) => (

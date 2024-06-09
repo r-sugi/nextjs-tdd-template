@@ -8,70 +8,73 @@ import {
 
 import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
-import { apolloQueryErrorHandler } from "@/core/repositories/apolloQueryErrorHandler";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
-import { ApolloError, type GraphQLErrors } from "@apollo/client/errors";
+import type { GraphQLErrors } from "@apollo/client/errors";
 
 type Props = {
 	status?: MemberStatus;
 };
-type UsecaseLoading = {
+
+export type FetchMembersReturnType = {
+	data: MembersByType | null;
+	errors: GraphQLErrors | null;
+};
+
+type UseCaseLoading = {
 	data: {
 		members: null;
 		queryMemberStatus: MemberStatus;
 	};
-	error: GraphQLErrors | null;
+	errors: null;
 	loading: true;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
 
-type UsecaseLoaded<T> = {
+type UseCaseLoaded<T> = {
 	data: {
 		members: T;
 		queryMemberStatus: MemberStatus;
 	};
-	error: GraphQLErrors | null;
+	errors: GraphQLErrors | null;
 	loading: false;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
 
-type Usecase<T> = UsecaseLoading | UsecaseLoaded<T>;
+type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
 
-export const useFetchMembers = (props?: Props): Usecase<MembersByType> => {
+export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
 		props?.status ?? memberStatus.pendingActivation,
 	);
 	const [members, setMembers] = useState<MembersByType | null>(null);
-	const [error, setError] = useState<GraphQLErrors | null>(null);
+	const initMembers = (members: MembersByType | null) =>
+		setMembers(members ?? []);
+	const [errors, setErrors] = useState<GraphQLErrors | null>(null);
 
 	const query = useFetchMembersByStatus();
 
 	// チラつき防止
-	const ref = useRef(error);
+	const ref = useRef(errors);
 	useEffect(() => {
-		ref.current = error;
-	}, [error]);
+		ref.current = errors;
+	}, [errors]);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
-			try {
-				const res = await query(queryMemberStatus);
-				setMembers(res);
-			} catch (error: unknown) {
-				if (error instanceof ApolloError) {
-					setError(apolloQueryErrorHandler(error));
-				}
-			}
+			const { data, errors } = await query(queryMemberStatus);
+			initMembers(data);
+			setErrors(errors);
 		})();
-	}, [queryMemberStatus, query]);
+	}, [queryMemberStatus]);
 
 	return {
 		data: {
 			members,
 			queryMemberStatus,
 		},
-		error,
-		loading: members === null,
+		errors,
+		loading: members === null && errors === null,
 		refetch: setQueryMemberStatus,
-	} as Usecase<MembersByType>;
+	} as UseCase<MembersByType>;
 };

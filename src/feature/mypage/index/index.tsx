@@ -5,18 +5,22 @@ import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMembe
 
 export const IndexTemplate: FC = () => {
 	const router = useRouter();
-	const { data: activeMember, loading, error } = useFetchActiveMember();
+	const { data: activeMember, loading, errors } = useFetchActiveMember();
 
 	if (loading) {
 		return <div>loading...</div>;
 	}
 
-	if (error) {
-		return <div>error: {JSON.stringify(error, null, 2)}</div>;
+	if (errors) {
+		// TODO: （ユーザーが理解できるエラー内容であるなら）
+		// ユーザーにエラーを回避してもらうために、エラーを画面に表示した方が良いかもしれない
+		return <div>error: {JSON.stringify(errors, null, 2)}</div>;
 	}
 
-	if (!activeMember) {
-		router.push("/mypage");
+	if (activeMember == null) {
+		(async () => {
+			await router.push("/");
+		})();
 	}
 
 	return <div>ActiveMember: {JSON.stringify(activeMember, null, 2)}</div>;

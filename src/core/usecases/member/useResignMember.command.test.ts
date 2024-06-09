@@ -14,10 +14,10 @@ describe(useResignMember, () => {
 			reasonDetail: null,
 			agreement: true,
 		};
-		const mockResponse = true;
+		const mockResponse = { data: true, errors: null };
 		const expected = {
 			data: true,
-			error: null,
+			errors: null,
 		};
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
@@ -30,14 +30,14 @@ describe(useResignMember, () => {
 		});
 	});
 
-	it("onError called", async () => {
+	it("error", async () => {
 		const props = {
 			reasonType: "",
 			reasonDetail: null,
 			agreement: true,
 		};
-		const mockResponse = false;
-		const expected = { data: false, error: null };
+		const mockResponse = { data: false, errors: [] };
+		const expected = { data: false, errors: [] };
 
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
