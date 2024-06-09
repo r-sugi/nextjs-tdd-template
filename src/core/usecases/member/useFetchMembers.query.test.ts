@@ -37,9 +37,7 @@ describe(useFetchMembers, () => {
 
 		const props = {};
 
-		const { result } = renderHook(() =>
-			useFetchMembers(props, { onError: onErrorFn }),
-		);
+		const { result } = renderHook(() => useFetchMembers(props));
 
 		await waitFor(() => {
 			expect(result.current.data.members).toBe(mockMembers);

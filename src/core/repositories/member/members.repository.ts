@@ -47,15 +47,27 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
  * Mutations
  */
 type UpdateMemberStatusType = (
-	variables: UpdateMemberStatusInputType, // FIXME: 依存型の確認
+	variables: UpdateMemberStatusInputType,
 ) => Promise<boolean>;
 export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 	const [mutate] = useResignMemberMutation();
 
 	return async (variables: ResignMemberMutationVariables) => {
-		const { data, errors, extensions } = await mutate({ variables });
-		debugger;
-		// TODO: エラー処理をここに書く（一旦ベタがきで）
-		return !!data;
+		const res = await mutate({ variables });
+		if (res.data?.insert_memberStatusActivities_one) {
+			// TODO: returnの型を変更する
+			// return {
+			// 	memberId: data.insert_memberStatusActivities_one.memberId,
+			// 	status: data.insert_memberStatusActivities_one.status,
+			// 	reasonType:
+			// 		data?.insert_memberStatusActivities_one.memberResigned?.reasonType,
+			// 	reasonDetail:
+			// 		data.insert_memberStatusActivities_one.memberResigned?.reasonDetail,
+			// 	agreement:
+			// 		data.insert_memberStatusActivities_one.memberResigned?.agreement,
+			// };
+			return !!res.data;
+		}
+		return false;
 	};
 };

@@ -1,5 +1,8 @@
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
+import { apolloMutationErrorHandler } from "@/core/repositories/apolloMutationErrorHandler";
 import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
+import { ApolloError } from "@apollo/client";
+import type { GraphQLErrors } from "@apollo/client/errors";
 
 type Props = {
 	reasonType: string;
@@ -7,8 +10,9 @@ type Props = {
 	agreement: boolean;
 };
 
-type Option = {
-	onError?: () => void;
+type ReturnType = {
+	data: boolean;
+	error: GraphQLErrors | null;
 };
 
 export type UpdateMemberStatusInputType = {
@@ -29,7 +33,7 @@ export type UpdateMemberStatusInputType = {
 export const useResignMember = () => {
 	const mutate = useUpdateMemberStatus();
 
-	return async (props: Props, opt?: Option): Promise<boolean> => {
+	return async (props: Props): Promise<ReturnType> => {
 		const activityInput: UpdateMemberStatusInputType = {
 			activityInput: {
 				status: memberStatus.resigned,
@@ -39,7 +43,7 @@ export const useResignMember = () => {
 					data: {
 						// TODO: ログインメンバーのID
 						memberId: "ff4b01ee-15e9-4e2e-acb3-25a0347af7c1",
-						reasonType: "123456789012345678901", // props.reasonType,
+						reasonType: props.reasonType,
 						agreement: props.agreement,
 						reasonDetail: props.reasonDetail,
 					},
@@ -47,11 +51,14 @@ export const useResignMember = () => {
 			},
 		};
 
-		const res = await mutate(activityInput);
-		if (!res) {
-			opt?.onError?.();
-			return res;
+		try {
+			const res = await mutate(activityInput);
+			return { data: res, error: null };
+		} catch (error: unknown) {
+			if (error instanceof ApolloError) {
+				return { data: false, error: apolloMutationErrorHandler(error) };
+			}
+			return { data: false, error: null };
 		}
-		return res;
 	};
 };

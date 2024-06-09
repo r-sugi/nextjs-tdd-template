@@ -22,10 +22,13 @@ export const AppApolloProvider: FC<{
 							`[GraphQL error]: Message: ${message}, Code: ${extensions.code}, Path: ${extensions.path}`,
 						);
 						switch (extensions.code) {
-							case "invalid-jwt": { // refetch the jwt
+							// session系の処理のみ必要。
+							case "invalid-jwt": {
+								// refetch the jwt
 								const oldHeaders = operation.getContext().headers;
 								const getAccessToken = () => "TODO: getAccessToken()";
 								const token = getAccessToken();
+								// TODO: tokenが取得できない場合は、ログイン画面にリダイレクトする(window.location? or セッション切れエラーを発生させてErrroBoundaryで処理できるか調査する。unhandledrejectionかもしれない)
 								operation.setContext({
 									headers: {
 										...oldHeaders,
@@ -35,12 +38,6 @@ export const AppApolloProvider: FC<{
 								// retry the request, returning the new observable
 								return forward(operation);
 							}
-							case "data-exception":
-								console.log("TODO: DBが返すエラー処理");
-								break;
-							case "validation-failed":
-								// props.history.push("/something-went-wrong"); // redirect to something-went-wrong page
-								break;
 							default:
 								// default case
 								console.log(extensions.code);

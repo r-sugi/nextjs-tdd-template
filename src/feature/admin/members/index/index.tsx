@@ -4,7 +4,12 @@ import { memberStatus } from "@/core/domains/member/status";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 
 export const IndexTemplate: FC = () => {
-	const { data, refetch, loading } = useFetchMembers();
+	const { data, refetch, loading, error } = useFetchMembers();
+
+	if (error) {
+		// ユーザーにエラーを回避してもらうためにエラーを画面に表示する
+		return <div>error</div>;
+	}
 
 	if (loading) {
 		return <div>loading...</div>;
@@ -24,7 +29,7 @@ export const IndexTemplate: FC = () => {
 
 	return (
 		<div>
-			{/* TODO: styleに関するリファクタ */}
+			{/* TODO: styleに関するリファクタ tailwind使う */}
 			<style jsx={true}>{`
         .tab-wrap {
           display: flex;

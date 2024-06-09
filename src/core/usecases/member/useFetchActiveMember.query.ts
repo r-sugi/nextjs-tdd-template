@@ -1,52 +1,54 @@
 import { useEffect, useRef, useState } from "react";
 
 import type { ActiveMember } from "@/core/domains/member/activeMember";
+import { apolloQueryErrorHandler } from "@/core/repositories/apolloQueryErrorHandler";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
+import { ApolloError, type GraphQLErrors } from "@apollo/client/errors";
 
-type Option = {
-	onError?: () => void;
-};
-
-type UsecaseLoading<T> = {
+type UsecaseLoading = {
 	data: null;
+	error: GraphQLErrors | null;
 	loading: true;
 } & Record<string, unknown>;
 
 type UsecaseLoaded<T> = {
 	data: T;
+	error: GraphQLErrors | null;
 	loading: false;
 } & Record<string, unknown>;
 
-type Usecase<T> = UsecaseLoading<T> | UsecaseLoaded<T>;
+type Usecase<T> = UsecaseLoading | UsecaseLoaded<T>;
 
-export const useFetchActiveMember = (opt?: Option): Usecase<ActiveMember> => {
+export const useFetchActiveMember = (): Usecase<ActiveMember> => {
 	const [activeMember, setActiveMember] = useState<ActiveMember | null>(null);
 	const query = useFindActiveMemberOne();
+	const [error, setError] = useState<GraphQLErrors | null>(null);
 
 	// チラつき防止
-	const ref = useRef(opt?.onError);
+	const ref = useRef(error);
 	useEffect(() => {
-		ref.current = opt?.onError;
-	}, [opt?.onError]);
+		ref.current = error;
+	}, [error]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
-			const state = await query(
-				"ff4b01ee-15e9-4e2e-acb3-25a0347af7c1", // TODO: 動的な値(JWTから取得したもの)
-			);
-
-			if (state == null) {
-				// エラー処理を実行する
-				ref.current?.();
-				return;
+			try {
+				const state = await query(
+					// TODO: 動的な値(JWTから取得したもの)
+					"ff4b01ee-15e9-4e2e-acb3-25a0347af7c1",
+				);
+				state && setActiveMember(state);
+			} catch (error: unknown) {
+				if (error instanceof ApolloError) {
+					setError(apolloQueryErrorHandler(error));
+				}
 			}
-			setActiveMember(state);
 		})();
-	}, [ref]);
+	}, [query]);
 
 	return {
 		data: activeMember,
+		error,
 		loading: activeMember === null,
 	} as Usecase<ActiveMember>;
 };

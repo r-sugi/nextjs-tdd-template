@@ -40,6 +40,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	render() {
 		if (this.state.error) {
 			return (
+				// TODO: z-indexを大きくして、他のコンポーネントを(一部)隠す
 				<ErrorScreen
 					error={this.state.error}
 					onReset={(path: string) => {
@@ -51,6 +52,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 						window.location.href = path;
 					}}
 				/>
+				// TODO: エラーが発生したコンポーネントを表示する場合は、以下のようにする
+				// {this.props.children}
 			);
 		}
 		return this.props.children;

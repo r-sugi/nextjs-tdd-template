@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/router";
-import { type BaseSyntheticEvent, type FC, useEffect } from "react";
+import { type BaseSyntheticEvent, type FC, useEffect, useMemo } from "react";
 
-import { loginRequiredPages } from "@/const/paths";
+import { loginRequiredPages, publicPages } from "@/const/paths";
 import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 import {
 	type ResignMemberSchema,
@@ -15,7 +15,7 @@ import { ErrorBoundary } from "./errorBoundary";
 
 const Template: FC = () => {
 	const router = useRouter();
-	const cache = getCache(sessionKeys.resignMember);
+	const cache = useMemo(() => getCache(sessionKeys.resignMember), []);
 
 	const {
 		handleSubmit,
@@ -33,25 +33,16 @@ const Template: FC = () => {
 	) => {
 		event?.preventDefault?.();
 
-		try {
-			const res = await resignMemberMutation(
-				{
-					reasonType: data.reasonType,
-					reasonDetail: data.reasonDetail,
-					agreement: data.agreement,
-				},
-				{
-					onError: () => {
-						window.alert("退会に失敗しました!");
-					},
-				},
-			);
+		const res = await resignMemberMutation({
+			reasonType: data.reasonType,
+			reasonDetail: data.reasonDetail,
+			agreement: data.agreement,
+		});
+
+		if (res.data) {
 			removeCache("resignMember");
-			window.alert(`退会しました! ${res}`);
-			// TODO: バッチ処理で1日1回程度、firebase.authからもログアウトさせる
-		} catch (error) {
-			debugger;
-			window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
+			window.alert("退会しました!");
+			await router.push(publicPages.index.path());
 		}
 	};
 

@@ -8,19 +8,19 @@ import {
 
 import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
+import { apolloQueryErrorHandler } from "@/core/repositories/apolloQueryErrorHandler";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
+import { ApolloError, type GraphQLErrors } from "@apollo/client/errors";
 
 type Props = {
 	status?: MemberStatus;
 };
-type Option = {
-	onError?: () => void;
-};
-type UsecaseLoading<T> = {
+type UsecaseLoading = {
 	data: {
 		members: null;
 		queryMemberStatus: MemberStatus;
 	};
+	error: GraphQLErrors | null;
 	loading: true;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
@@ -30,47 +30,47 @@ type UsecaseLoaded<T> = {
 		members: T;
 		queryMemberStatus: MemberStatus;
 	};
+	error: GraphQLErrors | null;
 	loading: false;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
 
-type Usecase<T> = UsecaseLoading<T> | UsecaseLoaded<T>;
+type Usecase<T> = UsecaseLoading | UsecaseLoaded<T>;
 
-export const useFetchMembers = (
-	props?: Props,
-	opt?: Option,
-): Usecase<MembersByType> => {
+export const useFetchMembers = (props?: Props): Usecase<MembersByType> => {
 	const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
 		props?.status ?? memberStatus.pendingActivation,
 	);
 	const [members, setMembers] = useState<MembersByType | null>(null);
+	const [error, setError] = useState<GraphQLErrors | null>(null);
 
 	const query = useFetchMembersByStatus();
 
 	// チラつき防止
-	const ref = useRef(opt?.onError);
+	const ref = useRef(error);
 	useEffect(() => {
-		ref.current = opt?.onError;
-	}, [opt?.onError]);
+		ref.current = error;
+	}, [error]);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
-			const res = await query(queryMemberStatus);
-			// FIXME: graphQLのエラーの値で分岐させる
-			// if (res == null) {
-			//   ref.current?.();
-			//   return;
-			// }
-			setMembers(res);
+			try {
+				const res = await query(queryMemberStatus);
+				setMembers(res);
+			} catch (error: unknown) {
+				if (error instanceof ApolloError) {
+					setError(apolloQueryErrorHandler(error));
+				}
+			}
 		})();
-	}, [queryMemberStatus]);
+	}, [queryMemberStatus, query]);
 
 	return {
 		data: {
 			members,
 			queryMemberStatus,
 		},
+		error,
 		loading: members === null,
 		refetch: setQueryMemberStatus,
 	} as Usecase<MembersByType>;

@@ -23,7 +23,7 @@ describe(useResignMember, () => {
 		const { result } = renderHook(() => useResignMember());
 
 		await waitFor(async () => {
-			expect(await result.current(props, options)).toBe(mockResponse);
+			expect(await result.current(props)).toBe(mockResponse);
 		});
 	});
 
@@ -45,7 +45,7 @@ describe(useResignMember, () => {
 		const { result } = renderHook(() => useResignMember());
 
 		await waitFor(async () => {
-			expect(await result.current(props, options)).toBe(mockResponse);
+			expect(await result.current(props)).toBe(mockResponse);
 		});
 		expect(onErrorFn).toHaveBeenCalledWith();
 	});
