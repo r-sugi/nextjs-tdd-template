@@ -10,7 +10,7 @@ export default function Index() {
 				description={loginRequiredPages.mypageResignMemberInput.description()}
 				path={loginRequiredPages.mypageResignMemberInput.path()}
 			/>
-			<IndexTemplate />;
+			<IndexTemplate />
 		</>
 	);
 }

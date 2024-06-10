@@ -1,16 +1,26 @@
 import type { FC } from "react";
 
 import { memberStatus } from "@/core/domains/member/status";
+import { apolloErrorHandler } from "@/core/repositories/apolloErrorHandler";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 
 export const IndexTemplate: FC = () => {
-	const { data, refetch, loading } = useFetchMembers();
+	const { data, refetch, loading, error } = useFetchMembers();
 
 	if (loading) {
 		return <div>loading...</div>;
 	}
 
+	if (error) {
+		const graphQLErrors = apolloErrorHandler(error);
+		return <div>graphQLErrors: {JSON.stringify(graphQLErrors, null, 2)}</div>;
+	}
+
 	const memberListComponent = () => {
+		if (data.members.length === 0) {
+			return <div>メンバーがいません</div>;
+		}
+
 		return (
 			<ul>
 				{data.members.map((member) => (
@@ -24,7 +34,7 @@ export const IndexTemplate: FC = () => {
 
 	return (
 		<div>
-			{/* TODO: styleに関するリファクタ */}
+			{/* TODO: styleに関するリファクタ tailwind使う */}
 			<style jsx={true}>{`
         .tab-wrap {
           display: flex;

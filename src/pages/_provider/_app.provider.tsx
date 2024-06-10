@@ -8,8 +8,8 @@ export const AppProvider = ({
 	children,
 }: { children: ReactNode }): JSX.Element => {
 	return (
-		<AppApolloProvider>
-			<ErrorBoundary>{children}</ErrorBoundary>
-		</AppApolloProvider>
+		<ErrorBoundary>
+			<AppApolloProvider>{children}</AppApolloProvider>
+		</ErrorBoundary>
 	);
 };

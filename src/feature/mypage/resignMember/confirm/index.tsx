@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/router";
-import { type BaseSyntheticEvent, type FC, useEffect } from "react";
+import { type BaseSyntheticEvent, type FC, useEffect, useMemo } from "react";
 
-import { loginRequiredPages } from "@/const/paths";
+import { loginRequiredPages, publicPages } from "@/const/paths";
 import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 import {
 	type ResignMemberSchema,
@@ -11,11 +11,11 @@ import {
 import { getCache, removeCache } from "@/utils/cache";
 import { sessionKeys } from "@/utils/cache/type";
 
-import { ErrorBoundary } from "./errorBoundary";
+import { ErrorBoundary as ConfirmErrorBoundary } from "./errorBoundary";
 
 const Template: FC = () => {
 	const router = useRouter();
-	const cache = getCache(sessionKeys.resignMember);
+	const cache = useMemo(() => getCache(sessionKeys.resignMember), []);
 
 	const {
 		handleSubmit,
@@ -33,24 +33,20 @@ const Template: FC = () => {
 	) => {
 		event?.preventDefault?.();
 
-		try {
-			const res = await resignMemberMutation(
-				{
-					reasonType: data.reasonType,
-					reasonDetail: data.reasonDetail,
-					agreement: data.agreement,
-				},
-				{
-					onError: () => {
-						window.alert("退会に失敗しました!");
-					},
-				},
-			);
+		const res = await resignMemberMutation({
+			reasonType: data.reasonType,
+			reasonDetail: data.reasonDetail,
+			agreement: data.agreement,
+		});
+
+		if (res.data) {
+			console.log(res.data);
 			removeCache("resignMember");
-			window.alert(`退会しました! ${res}`);
-			// TODO: バッチ処理で1日1回程度、firebase.authからもログアウトさせる
-		} catch (error) {
-			window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
+			window.alert("退会しました!");
+			await router.push(publicPages.index.path());
+		} else {
+			// TODO: submit時にエラーがある場合は非同期エラーになる。エラー表示させる
+			res.error && console.error(res.error.graphQLErrors);
 		}
 	};
 
@@ -61,10 +57,6 @@ const Template: FC = () => {
 			return;
 		};
 
-		// FIXME: ページ遷移 (router.push)時に確認ダイアログを表示
-		// FIXME: ページ遷移 (router.back)時に確認ダイアログを表示
-		// FIXME: ページ遷移 (aタグ)時に確認ダイアログを表示
-
 		window.addEventListener("beforeunload", handleBeforeUnload);
 		return () => {
 			window.removeEventListener("beforeunload", handleBeforeUnload);
@@ -72,7 +64,7 @@ const Template: FC = () => {
 	}, []);
 
 	return (
-		<div data-testid={loginRequiredPages.mypageResignMemberConfirm.path()}>
+		<div data-testid={"template"}>
 			<form
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
@@ -98,7 +90,7 @@ const Template: FC = () => {
 					{errors.agreement?.message && <p>{errors.agreement.message}</p>}
 				</div>
 
-				<button type="button" disabled={!isValid || isSubmitting}>
+				<button type="submit" disabled={!isValid || isSubmitting}>
 					退会する
 				</button>
 			</form>
@@ -117,8 +109,8 @@ const Template: FC = () => {
 
 export const IndexTemplate: FC = () => {
 	return (
-		<ErrorBoundary>
+		<ConfirmErrorBoundary>
 			<Template />
-		</ErrorBoundary>
+		</ConfirmErrorBoundary>
 	);
 };

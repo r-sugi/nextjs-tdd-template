@@ -6,10 +6,6 @@ import type { GetActiveMemberQueryResult } from "@/generated/graphql";
 export const transform = (
 	res: GetActiveMemberQueryResult,
 ): ActiveMember | null => {
-	// FIXME: graphqlエラー処理を追加時に判断する
-	// if (res.data == null) {
-	//   return null;
-	// } else
 	if (res?.data?.memberStatusActivityLatest?.length === 0) {
 		return null;
 	}
@@ -20,8 +16,12 @@ export const transform = (
 		.memberStatusActivityLatest[0] as MemberActive;
 
 	const activeMember: ActiveMember = {
-		...responseActiveMember,
+		memberId: responseActiveMember.memberId,
 		status: memberStatus.active,
+		statusActivityId: responseActiveMember.statusActivityId,
+		address: responseActiveMember.address,
+		postalCode: responseActiveMember.postalCode,
+		email: responseActiveMember.email,
 		createdAt: new Date(responseActiveMember.createdAt),
 		birthday: new Date(responseActiveMember.birthday),
 	};

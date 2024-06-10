@@ -9,60 +9,62 @@ import {
 import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
+import type { ApolloError } from "@apollo/client";
 
 type Props = {
 	status?: MemberStatus;
 };
-type Option = {
-	onError?: () => void;
+
+export type FetchMembersReturnType = {
+	data: MembersByType | null;
+	error: ApolloError | null;
 };
-type UsecaseLoading<T> = {
+
+type UseCaseLoading = {
 	data: {
 		members: null;
 		queryMemberStatus: MemberStatus;
 	};
+	error: null;
 	loading: true;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
 
-type UsecaseLoaded<T> = {
+type UseCaseLoaded<T> = {
 	data: {
 		members: T;
 		queryMemberStatus: MemberStatus;
 	};
+	error: ApolloError | null;
 	loading: false;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
 
-type Usecase<T> = UsecaseLoading<T> | UsecaseLoaded<T>;
+type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
 
-export const useFetchMembers = (
-	props?: Props,
-	opt?: Option,
-): Usecase<MembersByType> => {
+export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
 		props?.status ?? memberStatus.pendingActivation,
 	);
 	const [members, setMembers] = useState<MembersByType | null>(null);
+	const initMembers = (members: MembersByType | null) =>
+		setMembers(members ?? []);
+	const [error, setError] = useState<ApolloError | null>(null);
 
 	const query = useFetchMembersByStatus();
 
 	// チラつき防止
-	const ref = useRef(opt?.onError);
+	const ref = useRef(error);
 	useEffect(() => {
-		ref.current = opt?.onError;
-	}, [opt?.onError]);
+		ref.current = error;
+	}, [error]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
-			const res = await query(queryMemberStatus);
-			// FIXME: graphQLのエラーの値で分岐させる
-			// if (res == null) {
-			//   ref.current?.();
-			//   return;
-			// }
-			setMembers(res);
+			const { data, error } = await query(queryMemberStatus);
+			initMembers(data);
+			setError(error);
 		})();
 	}, [queryMemberStatus]);
 
@@ -71,7 +73,8 @@ export const useFetchMembers = (
 			members,
 			queryMemberStatus,
 		},
-		loading: members === null,
+		error,
+		loading: members === null && error === null,
 		refetch: setQueryMemberStatus,
-	} as Usecase<MembersByType>;
+	} as UseCase<MembersByType>;
 };

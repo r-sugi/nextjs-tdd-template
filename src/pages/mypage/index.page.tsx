@@ -11,7 +11,7 @@ export default function Index() {
 				description={loginRequiredPages.mypage.description()}
 				path={loginRequiredPages.mypage.path()}
 			/>
-			<IndexTemplate />;
+			<IndexTemplate />
 		</>
 	);
 }

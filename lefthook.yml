@@ -1,0 +1,11 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      run: npm run lint
+    format:
+      run: npm run format
+    knip:
+      run: npm run knip
+    type-check:
+      run: npm run type-check

@@ -1,5 +1,6 @@
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
+import type { ApolloError } from "@apollo/client/errors";
 
 type Props = {
 	reasonType: string;
@@ -7,8 +8,9 @@ type Props = {
 	agreement: boolean;
 };
 
-type Option = {
-	onError?: () => void;
+export type UseResignMemberReturnType = {
+	data: UpdateMemberStatusInputType["activityInput"] | null;
+	error: ApolloError | null;
 };
 
 export type UpdateMemberStatusInputType = {
@@ -29,7 +31,7 @@ export type UpdateMemberStatusInputType = {
 export const useResignMember = () => {
 	const mutate = useUpdateMemberStatus();
 
-	return async (props: Props, opt?: Option): Promise<boolean> => {
+	return async (props: Props): Promise<UseResignMemberReturnType> => {
 		const activityInput: UpdateMemberStatusInputType = {
 			activityInput: {
 				status: memberStatus.resigned,
@@ -46,12 +48,6 @@ export const useResignMember = () => {
 				},
 			},
 		};
-
-		const res = await mutate(activityInput);
-		if (!res) {
-			opt?.onError?.();
-			return res;
-		}
-		return res;
+		return await mutate(activityInput);
 	};
 };
