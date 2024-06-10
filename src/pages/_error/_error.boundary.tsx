@@ -4,6 +4,7 @@ import { ClientError } from "@/error/errors/clientError";
 import { ErrorTransformer } from "@/error/transformer/error.transformer";
 import { ClientLogger } from "@/lib/clientLogger";
 
+import { UnhandledRejectionError } from "@/error/errors/unhandledRejectionError";
 import { ErrorScreen } from "./_error.screen";
 
 type ErrorBoundaryState = { error?: Error };
@@ -19,7 +20,31 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	static getDerivedStateFromError(error: Error): ErrorBoundaryState {
 		return { error };
 	}
+
+	componentDidMount() {
+		// 非同期処理内で発生したエラー Uncaught (in promise) をキャッチする
+		window.addEventListener(
+			"unhandledrejection",
+			(e: PromiseRejectionEvent) => {
+				throw new UnhandledRejectionError(e.reason);
+			},
+		);
+	}
+
+	componentWillUnmount() {
+		window.removeEventListener(
+			"unhandledrejection",
+			(e: PromiseRejectionEvent) => {
+				throw new UnhandledRejectionError(e.reason);
+			},
+		);
+	}
+
 	componentDidCatch(err: Error, errInfo: ErrorInfo) {
+		new ClientLogger().error({
+			err,
+			errInfo,
+		});
 		if (err instanceof ClientError) {
 			this.setState(() => {
 				return {
@@ -33,10 +58,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 				};
 			});
 		}
-		new ClientLogger().error({
-			err,
-			errInfo,
-		});
 	}
 	render() {
 		if (this.state.error) {

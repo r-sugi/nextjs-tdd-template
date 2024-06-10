@@ -3,7 +3,11 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { toMock } from "@/__testing__/helper";
 import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
 
-import { useResignMember } from "./useResignMember.command";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import {
+	type UpdateMemberStatusInputType,
+	useResignMember,
+} from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");
 
@@ -14,8 +18,14 @@ describe(useResignMember, () => {
 			reasonDetail: null,
 			agreement: true,
 		};
-		const options = {};
-		const mockResponse = true;
+		const mockResponse = {
+			data: {} as UpdateMemberStatusInputType["activityInput"],
+			error: null,
+		};
+		const expected = {
+			data: {} as UpdateMemberStatusInputType["activityInput"],
+			error: null,
+		};
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
 		});
@@ -23,21 +33,19 @@ describe(useResignMember, () => {
 		const { result } = renderHook(() => useResignMember());
 
 		await waitFor(async () => {
-			expect(await result.current(props, options)).toBe(mockResponse);
+			expect(await result.current(props)).toEqual(expected);
 		});
 	});
 
-	it("onError called", async () => {
+	it("error", async () => {
 		const props = {
 			reasonType: "",
 			reasonDetail: null,
 			agreement: true,
 		};
-		const onErrorFn = jest.fn();
-		const options = {
-			onError: onErrorFn,
-		};
-		const mockResponse = false;
+		const mockResponse = { data: null, error: null };
+		const expected = { data: null, error: null };
+
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
 		});
@@ -45,8 +53,7 @@ describe(useResignMember, () => {
 		const { result } = renderHook(() => useResignMember());
 
 		await waitFor(async () => {
-			expect(await result.current(props, options)).toBe(mockResponse);
+			expect(await result.current(props)).toEqual(expected);
 		});
-		expect(onErrorFn).toHaveBeenCalledWith();
 	});
 });

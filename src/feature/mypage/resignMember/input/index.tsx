@@ -24,7 +24,7 @@ export const IndexTemplate = () => {
 
 		try {
 			setCache("resignMember", data);
-			router.push(loginRequiredPages.mypageResignMemberConfirm.path());
+			await router.push(loginRequiredPages.mypageResignMemberConfirm.path());
 		} catch (error) {
 			window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
 		}
@@ -57,7 +57,7 @@ export const IndexTemplate = () => {
 					{errors.agreement?.message && <p>{errors.agreement.message}</p>}
 				</div>
 
-				<button type="button" disabled={!isValid || isSubmitting}>
+				<button type="submit" disabled={!isValid || isSubmitting}>
 					退会する
 				</button>
 			</form>

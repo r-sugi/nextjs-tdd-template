@@ -1,0 +1,38 @@
+import type { MemberStatus } from "@/core/domains/member/status";
+import type { UpdateMemberStatusInputType } from "@/core/usecases/member/useResignMember.command";
+import type { ResignMemberMutation } from "@/generated/graphql";
+import type { FetchResult } from "@apollo/client";
+
+export const resignMemberTransform = (
+	res: FetchResult<ResignMemberMutation>,
+): UpdateMemberStatusInputType["activityInput"] | null => {
+	if (res?.data) {
+		return null;
+	}
+	if (res?.data?.insert_memberStatusActivities_one == null) {
+		return null;
+	}
+	if (res?.data?.insert_memberStatusActivities_one.memberResigned == null) {
+		return null;
+	}
+
+	const { status, memberId } = res.data.insert_memberStatusActivities_one as {
+		status: MemberStatus; // TODO: ここで型エラーを解決したい
+		memberId: string;
+	};
+	const memberResigned =
+		res.data.insert_memberStatusActivities_one.memberResigned;
+
+	return {
+		status,
+		memberId,
+		memberResigned: {
+			data: {
+				memberId: memberResigned.memberId,
+				reasonType: memberResigned.reasonType,
+				agreement: memberResigned.agreement,
+				reasonDetail: memberResigned.reasonDetail ?? null,
+			},
+		},
+	};
+};
