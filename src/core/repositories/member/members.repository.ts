@@ -16,6 +16,7 @@ import { ApolloError } from "@apollo/client";
 
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
+import { resignMemberTransform } from "./transformer/resignMember.transformer";
 
 /**
  * Queries
@@ -73,13 +74,12 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 	return async (variables: ResignMemberMutationVariables) => {
 		try {
 			const res = await mutate({ variables });
-			// TODO: dataを返すようにしたい
-			return { data: !!res.data, error: null };
+			return { data: resignMemberTransform(res), error: null };
 		} catch (error) {
 			if (error instanceof ApolloError) {
-				return { data: false, error };
+				return { data: null, error };
 			}
-			return { data: false, error: null };
+			return { data: null, error: null };
 		}
 	};
 };

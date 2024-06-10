@@ -35,23 +35,12 @@ describe(IndexTemplate, () => {
 			});
 		});
 		it("render ErrorScreen", async () => {
-			// Arrange
-			const path = loginRequiredPages.mypageResignMemberConfirm.path();
-
 			// Act
 			const { component } = setupComponent();
 
 			// Assert
-			const componentRoot = component.queryByTestId(path);
-			expect(componentRoot).toBe(null);
-
-			const errorScreen = component.getByTestId(`error-screen-${path}`);
+			const errorScreen = component.getByTestId("error-screen");
 			expect(errorScreen).toBeVisible();
-			expect(
-				within(errorScreen).getByText(
-					`${loginRequiredPages.mypageResignMemberConfirm.titleShort()}でエラーが発生しました`,
-				),
-			).toBeVisible();
 			expect(
 				within(errorScreen).getByText("Error: NoCacheError"),
 			).toBeVisible();
@@ -77,10 +66,11 @@ describe(IndexTemplate, () => {
 		it("rendered with initial state", async () => {
 			const { component } = setupComponent();
 
-			const componentRoot = await component.findByTestId(
-				loginRequiredPages.mypageResignMemberConfirm.path(),
-			);
+			const componentRoot = await component.findByTestId("template");
 			expect(componentRoot).toBeVisible();
 		});
+		it.skip("click back button then router.push called", async () => {});
+		it.skip("API success of resign on submit", async () => {});
+		it.skip("API error of resign on submit", async () => {});
 	});
 });

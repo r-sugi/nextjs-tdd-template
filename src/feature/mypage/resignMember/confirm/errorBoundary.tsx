@@ -3,7 +3,8 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 import { ClientLogger } from "@/lib/clientLogger";
 import { NoCacheError } from "@/utils/cache/error";
 
-import { ErrorScreen } from "./errorScreen";
+import { loginRequiredPages, publicPages } from "@/const/paths";
+import { ErrorScreen as ConfirmErrorScreen } from "./errorScreen";
 
 type ErrorBoundaryState = { error?: Error };
 type ErrorBoundaryProps = { children: ReactNode };
@@ -38,7 +39,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	render() {
 		if (this.state.error) {
 			return (
-				<ErrorScreen
+				<ConfirmErrorScreen
 					error={this.state.error}
 					onReset={() => {
 						this.setState(() => {
@@ -46,7 +47,8 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 								error: undefined,
 							};
 						});
-						window.location.reload;
+						window.location.href =
+							loginRequiredPages.mypageResignMemberInput.path();
 					}}
 				/>
 			);

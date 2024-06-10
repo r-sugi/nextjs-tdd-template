@@ -11,8 +11,7 @@ import {
 import { getCache, removeCache } from "@/utils/cache";
 import { sessionKeys } from "@/utils/cache/type";
 
-import { apolloErrorHandler } from "@/core/repositories/apolloErrorHandler";
-import { ErrorBoundary } from "./errorBoundary";
+import { ErrorBoundary as ConfirmErrorBoundary } from "./errorBoundary";
 
 const Template: FC = () => {
 	const router = useRouter();
@@ -41,11 +40,12 @@ const Template: FC = () => {
 		});
 
 		if (res.data) {
+			console.log(res.data);
 			removeCache("resignMember");
 			window.alert("退会しました!");
 			await router.push(publicPages.index.path());
 		} else {
-			// submit時にエラーがある場合は非同期エラーになるためthrowしない
+			// TODO: submit時にエラーがある場合は非同期エラーになる。エラー表示させる
 			res.error && console.error(res.error.graphQLErrors);
 		}
 	};
@@ -109,8 +109,8 @@ const Template: FC = () => {
 
 export const IndexTemplate: FC = () => {
 	return (
-		<ErrorBoundary>
+		<ConfirmErrorBoundary>
 			<Template />
-		</ErrorBoundary>
+		</ConfirmErrorBoundary>
 	);
 };

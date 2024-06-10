@@ -9,7 +9,7 @@ type Props = {
 };
 
 export type UseResignMemberReturnType = {
-	data: boolean;
+	data: UpdateMemberStatusInputType["activityInput"] | null;
 	error: ApolloError | null;
 };
 

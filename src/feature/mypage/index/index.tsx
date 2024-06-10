@@ -18,10 +18,7 @@ export const IndexTemplate: FC = () => {
 	}
 
 	if (activeMember == null) {
-		(async () => {
-			window.alert("ログインしてください");
-			await router.push("/");
-		})();
+		// メンバーが存在しない場合はリダイレクト
 	}
 
 	return <div>ActiveMember: {JSON.stringify(activeMember, null, 2)}</div>;

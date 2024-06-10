@@ -10,7 +10,3 @@ export type ActiveMember = {
 	birthday: Date;
 	createdAt: Date;
 };
-
-// TODO: バリデーションロジック
-
-// TODO: 関数で上記タイプのオブジェクトを操作する
