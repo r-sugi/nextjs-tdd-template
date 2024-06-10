@@ -3,7 +3,11 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { toMock } from "@/__testing__/helper";
 import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
 
-import { useResignMember } from "./useResignMember.command";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import {
+	type UpdateMemberStatusInputType,
+	useResignMember,
+} from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");
 
@@ -14,10 +18,13 @@ describe(useResignMember, () => {
 			reasonDetail: null,
 			agreement: true,
 		};
-		const mockResponse = { data: true, errors: null };
+		const mockResponse = {
+			data: {} as UpdateMemberStatusInputType["activityInput"],
+			error: null,
+		};
 		const expected = {
-			data: true,
-			errors: null,
+			data: {} as UpdateMemberStatusInputType["activityInput"],
+			error: null,
 		};
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
@@ -36,8 +43,8 @@ describe(useResignMember, () => {
 			reasonDetail: null,
 			agreement: true,
 		};
-		const mockResponse = { data: false, errors: [] };
-		const expected = { data: false, errors: [] };
+		const mockResponse = { data: null, error: null };
+		const expected = { data: null, error: null };
 
 		toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 			return async () => mockResponse;
