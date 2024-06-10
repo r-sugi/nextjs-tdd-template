@@ -1,19 +1,19 @@
 import type { FC } from "react";
 
 import { memberStatus } from "@/core/domains/member/status";
+import { apolloErrorHandler } from "@/core/repositories/apolloErrorHandler";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 
 export const IndexTemplate: FC = () => {
-	const { data, refetch, loading, errors } = useFetchMembers();
+	const { data, refetch, loading, error } = useFetchMembers();
 
 	if (loading) {
 		return <div>loading...</div>;
 	}
 
-	if (errors) {
-		// TODO: （ユーザーが理解できるエラー内容であるなら）
-		// ユーザーにエラーを回避してもらうために、エラーを画面に表示した方が良いかもしれない
-		return <div>error: {JSON.stringify(errors, null, 2)}</div>;
+	if (error) {
+		const graphQLErrors = apolloErrorHandler(error);
+		return <div>graphQLErrors: {JSON.stringify(graphQLErrors, null, 2)}</div>;
 	}
 
 	const memberListComponent = () => {

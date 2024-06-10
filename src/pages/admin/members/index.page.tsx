@@ -10,7 +10,7 @@ export default function Index() {
 				description={adminSecretPages.members.description()}
 				path={adminSecretPages.members.path()}
 			/>
-			<IndexTemplate />;
+			<IndexTemplate />
 		</>
 	);
 }

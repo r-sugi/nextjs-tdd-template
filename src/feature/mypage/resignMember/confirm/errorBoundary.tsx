@@ -19,13 +19,12 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	static getDerivedStateFromError(error: Error): ErrorBoundaryState {
 		return { error };
 	}
+
 	componentDidCatch(error: Error, errInfo: ErrorInfo) {
-		// ログ出力する
 		new ClientLogger().error({
 			err: error,
 			errInfo,
 		});
-		// このコンポーネントでレンダーさせたい個別エラーの場合は、エラーをセットして処理を終了する。
 		if (error instanceof NoCacheError) {
 			this.setState(() => {
 				return {
@@ -34,26 +33,22 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 			});
 			return;
 		}
-		// 上記以外はさらに外側のエラーバウンダリに処理を委譲するため、エラーを再スローしている。
 		throw new Error(error.message);
 	}
 	render() {
 		if (this.state.error) {
 			return (
-				// TODO: z-indexを大きくして、他のコンポーネントを(一部)隠す
 				<ErrorScreen
 					error={this.state.error}
-					onReset={(path: string) => {
+					onReset={() => {
 						this.setState(() => {
 							return {
 								error: undefined,
 							};
 						});
-						window.location.href = path;
+						window.location.reload;
 					}}
 				/>
-				// TODO: エラーが発生したコンポーネントを表示する場合は、以下のようにする
-				// {this.props.children}
 			);
 		}
 		return this.props.children;

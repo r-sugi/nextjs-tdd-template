@@ -9,7 +9,7 @@ import {
 import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
-import type { GraphQLErrors } from "@apollo/client/errors";
+import type { ApolloError } from "@apollo/client";
 
 type Props = {
 	status?: MemberStatus;
@@ -17,7 +17,7 @@ type Props = {
 
 export type FetchMembersReturnType = {
 	data: MembersByType | null;
-	errors: GraphQLErrors | null;
+	error: ApolloError | null;
 };
 
 type UseCaseLoading = {
@@ -25,7 +25,7 @@ type UseCaseLoading = {
 		members: null;
 		queryMemberStatus: MemberStatus;
 	};
-	errors: null;
+	error: null;
 	loading: true;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
@@ -35,7 +35,7 @@ type UseCaseLoaded<T> = {
 		members: T;
 		queryMemberStatus: MemberStatus;
 	};
-	errors: GraphQLErrors | null;
+	error: ApolloError | null;
 	loading: false;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
@@ -49,22 +49,22 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const [members, setMembers] = useState<MembersByType | null>(null);
 	const initMembers = (members: MembersByType | null) =>
 		setMembers(members ?? []);
-	const [errors, setErrors] = useState<GraphQLErrors | null>(null);
+	const [error, setError] = useState<ApolloError | null>(null);
 
 	const query = useFetchMembersByStatus();
 
 	// チラつき防止
-	const ref = useRef(errors);
+	const ref = useRef(error);
 	useEffect(() => {
-		ref.current = errors;
-	}, [errors]);
+		ref.current = error;
+	}, [error]);
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
-			const { data, errors } = await query(queryMemberStatus);
+			const { data, error } = await query(queryMemberStatus);
 			initMembers(data);
-			setErrors(errors);
+			setError(error);
 		})();
 	}, [queryMemberStatus]);
 
@@ -73,8 +73,8 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			members,
 			queryMemberStatus,
 		},
-		errors,
-		loading: members === null && errors === null,
+		error,
+		loading: members === null && error === null,
 		refetch: setQueryMemberStatus,
 	} as UseCase<MembersByType>;
 };

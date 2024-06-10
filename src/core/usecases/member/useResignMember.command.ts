@@ -1,6 +1,6 @@
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
-import type { GraphQLErrors } from "@apollo/client/errors";
+import type { ApolloError } from "@apollo/client/errors";
 
 type Props = {
 	reasonType: string;
@@ -10,7 +10,7 @@ type Props = {
 
 export type UseResignMemberReturnType = {
 	data: boolean;
-	errors: GraphQLErrors | null;
+	error: ApolloError | null;
 };
 
 export type UpdateMemberStatusInputType = {

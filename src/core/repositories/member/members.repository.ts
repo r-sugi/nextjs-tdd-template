@@ -1,5 +1,3 @@
-import type { ActiveMember } from "@/core/domains/member/activeMember";
-import type { MembersByType } from "@/core/domains/member/member";
 import type { MemberStatus } from "@/core/domains/member/status";
 import type {
 	UpdateMemberStatusInputType,
@@ -16,7 +14,6 @@ import type { FetchActiveMemberReturnType } from "@/core/usecases/member/useFetc
 import type { FetchMembersReturnType } from "@/core/usecases/member/useFetchMembers.query";
 import { ApolloError } from "@apollo/client";
 
-import { apolloErrorHandler } from "../apolloErrorHandler";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 
@@ -33,13 +30,12 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 		try {
 			const res = await query({ variables: { memberId } });
 			const member = transform(res);
-			return { data: member, errors: null };
+			return { data: member, error: null };
 		} catch (error) {
 			if (error instanceof ApolloError) {
-				const errors = apolloErrorHandler(error);
-				return { data: null, errors };
+				return { data: null, error };
 			}
-			return { data: null, errors: null };
+			return { data: null, error: null };
 		}
 	};
 };
@@ -55,13 +51,12 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 		try {
 			const res = await query({ variables: { status } });
 			const members = membersByStatusTransform(res, status);
-			return { data: members, errors: null };
+			return { data: members, error: null };
 		} catch (error) {
 			if (error instanceof ApolloError) {
-				const errors = apolloErrorHandler(error);
-				return { data: null, errors };
+				return { data: null, error };
 			}
-			return { data: null, errors: null };
+			return { data: null, error: null };
 		}
 	};
 };
@@ -79,12 +74,12 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 		try {
 			const res = await mutate({ variables });
 			// TODO: dataを返すようにしたい
-			return { data: !!res.data, errors: null };
+			return { data: !!res.data, error: null };
 		} catch (error) {
 			if (error instanceof ApolloError) {
-				return { data: false, errors: apolloErrorHandler(error) };
+				return { data: false, error };
 			}
-			return { data: false, errors: null };
+			return { data: false, error: null };
 		}
 	};
 };

@@ -11,6 +11,7 @@ import {
 import { getCache, removeCache } from "@/utils/cache";
 import { sessionKeys } from "@/utils/cache/type";
 
+import { apolloErrorHandler } from "@/core/repositories/apolloErrorHandler";
 import { ErrorBoundary } from "./errorBoundary";
 
 const Template: FC = () => {
@@ -43,6 +44,9 @@ const Template: FC = () => {
 			removeCache("resignMember");
 			window.alert("退会しました!");
 			await router.push(publicPages.index.path());
+		} else {
+			// submit時にエラーがある場合は非同期エラーになるためthrowしない
+			res.error && console.error(res.error.graphQLErrors);
 		}
 	};
 
@@ -53,10 +57,6 @@ const Template: FC = () => {
 			return;
 		};
 
-		// FIXME: ページ遷移 (router.push)時に確認ダイアログを表示
-		// FIXME: ページ遷移 (router.back)時に確認ダイアログを表示
-		// FIXME: ページ遷移 (aタグ)時に確認ダイアログを表示
-
 		window.addEventListener("beforeunload", handleBeforeUnload);
 		return () => {
 			window.removeEventListener("beforeunload", handleBeforeUnload);
@@ -64,7 +64,7 @@ const Template: FC = () => {
 	}, []);
 
 	return (
-		<div data-testid={loginRequiredPages.mypageResignMemberConfirm.path()}>
+		<div data-testid={"template"}>
 			<form
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
