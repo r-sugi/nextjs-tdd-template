@@ -26,6 +26,7 @@ type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
 export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 	const [activeMember, setActiveMember] = useState<ActiveMember | null>(null);
 	const [error, setError] = useState<ApolloError | null>(null);
+	const [loading, setLoading] = useState<boolean>(false);
 	const query = useFindActiveMemberOne();
 
 	// チラつき防止
@@ -37,18 +38,20 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
+			setLoading(true);
 			const { data, error } = await query(
 				// TODO: 動的な値(JWTから取得したもの)
 				"ff4b01ee-15e9-4e2e-acb3-25a0347af7c1",
 			);
 			setActiveMember(data);
 			setError(error);
+			setLoading(false);
 		})();
 	}, []);
 
 	return {
 		data: activeMember,
 		error,
-		loading: activeMember === null && error === null,
+		loading,
 	} as UseCase<ActiveMember>;
 };

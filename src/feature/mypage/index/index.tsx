@@ -19,6 +19,7 @@ export const IndexTemplate: FC = () => {
 
 	if (activeMember == null) {
 		(async () => {
+			window.alert("ログインしてください");
 			await router.push("/");
 		})();
 	}

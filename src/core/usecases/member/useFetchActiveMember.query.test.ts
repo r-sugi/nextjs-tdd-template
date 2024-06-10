@@ -10,7 +10,7 @@ jest.mock("@/core/repositories/member/members.repository");
 describe("useFetchActiveMember", () => {
 	it("success", async () => {
 		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => ({ data: activeMember, errors: null });
+			return async () => ({ data: activeMember, error: null });
 		});
 
 		const { result } = renderHook(() => useFetchActiveMember());
@@ -18,7 +18,7 @@ describe("useFetchActiveMember", () => {
 		await waitFor(() => {
 			expect(result.current).toEqual({
 				data: activeMember,
-				errors: null,
+				error: null,
 				loading: false,
 			});
 		});
@@ -26,7 +26,7 @@ describe("useFetchActiveMember", () => {
 
 	it("error", async () => {
 		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => ({ data: null, errors: [] });
+			return async () => ({ data: null, error: null });
 		});
 
 		const { result } = renderHook(() => useFetchActiveMember());
@@ -34,7 +34,7 @@ describe("useFetchActiveMember", () => {
 		await waitFor(() => {
 			expect(result.current).toEqual({
 				data: null,
-				errors: [],
+				error: null,
 				loading: false,
 			});
 		});
@@ -42,7 +42,7 @@ describe("useFetchActiveMember", () => {
 
 	it("loading", async () => {
 		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => ({ data: null, errors: null });
+			return async () => ({ data: null, error: null });
 		});
 
 		const { result } = renderHook(() => useFetchActiveMember());
@@ -50,7 +50,7 @@ describe("useFetchActiveMember", () => {
 		await waitFor(() => {
 			expect(result.current).toEqual({
 				data: null,
-				errors: null,
+				error: null,
 				loading: true,
 			});
 		});
