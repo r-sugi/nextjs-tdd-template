@@ -8,9 +8,7 @@ const schemaErrorCodes = [
 	"data-exception", // 400であるがカラム名を含まないため画面に表示不可能 復帰不可能なエラーとして扱う
 ];
 
-export const apolloMutationErrorHandler = (
-	error: ApolloError,
-): GraphQLErrors => {
+export const apolloErrorHandler = (error: ApolloError): GraphQLErrors => {
 	if (error.networkError) {
 		// TODO: 専用のエラーを定義する。復帰不可能なエラーであるため、専用エラー画面を表示する
 		throw new Error("Network Error");

@@ -15,9 +15,8 @@ import {
 import type { FetchActiveMemberReturnType } from "@/core/usecases/member/useFetchActiveMember.query";
 import type { FetchMembersReturnType } from "@/core/usecases/member/useFetchMembers.query";
 import { ApolloError } from "@apollo/client";
-import type { GraphQLErrors } from "@apollo/client/errors";
-import { apolloMutationErrorHandler } from "../apolloMutationErrorHandler";
-import { apolloQueryErrorHandler } from "../apolloQueryErrorHandler";
+
+import { apolloErrorHandler } from "../apolloErrorHandler";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 
@@ -37,7 +36,7 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 			return { data: member, errors: null };
 		} catch (error) {
 			if (error instanceof ApolloError) {
-				const errors = apolloQueryErrorHandler(error);
+				const errors = apolloErrorHandler(error);
 				return { data: null, errors };
 			}
 			return { data: null, errors: null };
@@ -59,7 +58,7 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 			return { data: members, errors: null };
 		} catch (error) {
 			if (error instanceof ApolloError) {
-				const errors = apolloQueryErrorHandler(error);
+				const errors = apolloErrorHandler(error);
 				return { data: null, errors };
 			}
 			return { data: null, errors: null };
@@ -83,7 +82,7 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 			return { data: !!res.data, errors: null };
 		} catch (error) {
 			if (error instanceof ApolloError) {
-				return { data: false, errors: apolloMutationErrorHandler(error) };
+				return { data: false, errors: apolloErrorHandler(error) };
 			}
 			return { data: false, errors: null };
 		}
