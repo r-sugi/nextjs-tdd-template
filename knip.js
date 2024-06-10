@@ -2,6 +2,7 @@ module.exports = {
 	ignore: [
 		"**/*.d.ts",
 		// Unused files
+		"functions/src/index.ts",
 		"mocks/browser.ts",
 		"mocks/index.ts",
 		"mocks/server.ts",
