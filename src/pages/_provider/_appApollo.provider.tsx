@@ -1,14 +1,20 @@
 import {
+	NEXT_PUBLIC_GRAPHQL_URI,
+	NEXT_PUBLIC_GRAPHQL_WS_URI,
+} from "@/config/env";
+import {
 	ApolloClient,
 	ApolloProvider,
 	HttpLink,
 	InMemoryCache,
 	from,
+	split,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import { GraphQLWsLink } from "@apollo/client/link/subscriptions";
+import { getMainDefinition } from "@apollo/client/utilities";
+import { createClient } from "graphql-ws";
 import { type FC, type ReactNode, useMemo } from "react";
-
-import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 
 export const AppApolloProvider: FC<{
 	children: ReactNode;
@@ -51,19 +57,39 @@ export const AppApolloProvider: FC<{
 		[],
 	);
 
-	const link = useMemo(() => {
+	const httpLink = useMemo(() => {
 		return from([
-			errorLink,
+			errorLink, // TODO: エラーリンクってここでいいのか？
 			new HttpLink({
 				uri: NEXT_PUBLIC_GRAPHQL_URI,
 			}),
 		]);
 	}, [errorLink]);
 
+	const wsLink = useMemo(() => {
+		return new GraphQLWsLink(
+			createClient({
+				url: NEXT_PUBLIC_GRAPHQL_WS_URI,
+			}),
+		);
+	}, []);
+
+	const splitLink = split(
+		({ query }) => {
+			const definition = getMainDefinition(query);
+			return (
+				definition.kind === "OperationDefinition" &&
+				definition.operation === "subscription"
+			);
+		},
+		wsLink,
+		httpLink,
+	);
+
 	const client = useMemo(
 		() =>
 			new ApolloClient({
-				link,
+				link: splitLink,
 				cache: new InMemoryCache(),
 				defaultOptions: {
 					watchQuery: {
@@ -71,7 +97,7 @@ export const AppApolloProvider: FC<{
 					},
 				},
 			}),
-		[link],
+		[splitLink],
 	);
 	return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
