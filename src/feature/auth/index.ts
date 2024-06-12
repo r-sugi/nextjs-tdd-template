@@ -22,9 +22,9 @@ export const signUp = async (signUpProps: SignUp) => {
 		await sendEmailVerification(userCredential.user);
 	} catch (e) {
 		if (e instanceof FirebaseError) {
-			// TODO: Handle error
-			console.log(e);
+			throw e;
 		}
+		throw new Error("予期せぬエラー");
 	}
 };
 
@@ -42,9 +42,9 @@ export const signIn = async (signInProps: SignInProps) => {
 		);
 	} catch (e) {
 		if (e instanceof FirebaseError) {
-			// TODO: Handle error
-			console.log(e);
+			throw e;
 		}
+		throw new Error("予期せぬエラー");
 	}
 };
 
@@ -52,11 +52,10 @@ export const signOut = async () => {
 	try {
 		const auth = getAuth();
 		await firebaseSignOut(auth);
-		return true;
 	} catch (e) {
 		if (e instanceof FirebaseError) {
-			// TODO: Handle error
-			console.log(e);
+			throw e;
 		}
+		throw new Error("予期せぬエラー");
 	}
 };
