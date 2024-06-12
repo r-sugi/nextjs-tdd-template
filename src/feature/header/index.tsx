@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { FC } from "react";
 
 import {
 	adminSecretPages,
@@ -13,13 +12,15 @@ import { useAuthContext } from "../auth/provider/AuthProvider";
 
 const pages = [
 	publicPages.index,
+	publicPages.signIn,
+	publicPages.signUp,
 	loginRequiredPages.mypage,
 	loginRequiredPages.mypageResignMemberInput,
 	loginRequiredPages.mypageResignMemberConfirm,
 	adminSecretPages.members,
 ];
 
-export const HeaderTemplate: FC = () => {
+export default function HeaderTemplate() {
 	const { member } = useAuthContext();
 	const router = useRouter();
 
@@ -50,4 +51,4 @@ export const HeaderTemplate: FC = () => {
 			<hr />
 		</div>
 	);
-};
+}

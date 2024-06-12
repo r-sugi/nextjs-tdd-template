@@ -25,12 +25,6 @@ const publicPages = {
 };
 
 const loginRequiredPages = {
-	signOut: {
-		path: () => "/signOut",
-		title: () => title("サインアウト"),
-		titleShort: "サインアウト",
-		description: () => "サインアウトです。",
-	},
 	mypage: {
 		path: () => "/mypage",
 		title: () => title("マイページ"),
@@ -51,6 +45,17 @@ const loginRequiredPages = {
 	},
 };
 
+const loginFormPagePaths = [
+	publicPages.signIn.path(),
+	publicPages.signUp.path(),
+];
+
+const loginRequiredPagePaths = [
+	loginRequiredPages.mypage.path(),
+	loginRequiredPages.mypageResignMemberInput.path(),
+	loginRequiredPages.mypageResignMemberConfirm.path(),
+];
+
 const adminSecretPages = {
 	members: {
 		path: () => "/admin/members",
@@ -60,4 +65,10 @@ const adminSecretPages = {
 	},
 };
 
-export { publicPages, loginRequiredPages, adminSecretPages };
+export {
+	publicPages,
+	loginRequiredPages,
+	adminSecretPages,
+	loginFormPagePaths,
+	loginRequiredPagePaths,
+};

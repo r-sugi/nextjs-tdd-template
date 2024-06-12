@@ -7,7 +7,7 @@ import { AppProvider } from "@/pages/_provider/_app.provider";
 import * as cache from "@/utils/cache";
 import { NoCacheError } from "@/utils/cache/error";
 
-import { IndexTemplate } from ".";
+import IndexTemplate from "./index";
 
 jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 jest.mock("@/utils/cache");

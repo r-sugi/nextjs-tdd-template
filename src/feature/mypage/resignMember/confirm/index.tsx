@@ -107,10 +107,10 @@ const Template: FC = () => {
 	);
 };
 
-export const IndexTemplate: FC = () => {
+export default function IndexTemplate() {
 	return (
 		<ConfirmErrorBoundary>
 			<Template />
 		</ConfirmErrorBoundary>
 	);
-};
+}

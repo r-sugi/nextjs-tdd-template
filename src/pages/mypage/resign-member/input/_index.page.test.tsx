@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import { toMock } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 import { loginRequiredPages } from "@/const/paths";
-import { IndexTemplate } from "@/feature/mypage/resignMember/input/";
+import IndexTemplate from "@/feature/mypage/resignMember/input/";
 
 import Page from "./index.page";
 

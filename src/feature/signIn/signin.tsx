@@ -6,7 +6,7 @@ import { signIn } from "../auth";
 import { useAuthContext } from "../auth/provider/AuthProvider";
 import { type SignInSchema, useSignInForm } from "./hooks/form";
 
-export const SignInTemplate: FC = () => {
+export default function SignInTemplate() {
 	const { member } = useAuthContext();
 	const router = useRouter();
 
@@ -26,6 +26,7 @@ export const SignInTemplate: FC = () => {
 				email: data.email,
 				password: data.password,
 			});
+			await router.push(loginRequiredPages.mypage.path());
 		} catch (error) {
 			// TODO: 未登録のメールアドレスの場合、下記のようなエラーが発生するので、エラーハンドリングが必要
 			// error.name === "FirebaseError"
@@ -37,11 +38,6 @@ export const SignInTemplate: FC = () => {
 			console.error(error);
 		}
 	};
-
-	if (member) {
-		router.push(loginRequiredPages.mypage.path());
-		return <>redirecting</>;
-	}
 
 	return (
 		<div>
@@ -66,4 +62,4 @@ export const SignInTemplate: FC = () => {
 			<Link href={publicPages.signUp.path()}>サインアップ</Link>
 		</div>
 	);
-};
+}

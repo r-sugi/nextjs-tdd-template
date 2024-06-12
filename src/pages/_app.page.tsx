@@ -1,15 +1,21 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
-import { HeaderTemplate } from "@/feature/header/index";
-
 import { initializeFirebaseApp } from "@/lib/firebase";
+import dynamic from "next/dynamic";
 import { AppProvider } from "./_provider/_app.provider";
+
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 	require("../../mocks");
 }
+const HeaderTemplate = dynamic(() => import("@/feature/header/index"), {
+	ssr: false,
+});
+
+const isCSR = typeof window !== "undefined";
 
 initializeFirebaseApp();
+
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
@@ -21,7 +27,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 			</Head>
 			<AppProvider>
 				{/* 検証用のheader */}
-				<HeaderTemplate />
+				{isCSR && <HeaderTemplate />}
 				<Component {...pageProps} />
 			</AppProvider>
 		</>

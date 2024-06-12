@@ -10,10 +10,10 @@ import {
 } from "react";
 
 type GlobalAuthState = {
-	member: User | null;
+	member: User | null | undefined;
 };
 const initialState: GlobalAuthState = {
-	member: null,
+	member: undefined,
 };
 const AuthContext = createContext<GlobalAuthState>(initialState);
 

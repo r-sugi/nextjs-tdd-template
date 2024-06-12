@@ -1,6 +1,14 @@
 import { publicPages } from "@/const/paths";
-import { SignInTemplate } from "@/feature/signIn/signin";
+import dynamic from "next/dynamic";
 import { Seo } from "../_seo/seo";
+
+const IndexTemplate = dynamic(() => import("@/feature/signIn/signin"), {
+	ssr: false,
+});
+const AuthGuard = dynamic(() => import("@/feature/auth/component/AuthGuard"), {
+	ssr: false,
+});
+const isCSR = typeof window !== "undefined";
 
 export default function Index() {
 	return (
@@ -10,7 +18,11 @@ export default function Index() {
 				description={publicPages.signIn.description()}
 				path={publicPages.signIn.path()}
 			/>
-			<SignInTemplate />
+			{isCSR && (
+				<AuthGuard>
+					<IndexTemplate />
+				</AuthGuard>
+			)}
 		</>
 	);
 }

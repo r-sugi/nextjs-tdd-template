@@ -1,19 +1,9 @@
-import { useRouter } from "next/router";
 import type { FC } from "react";
 
-import { publicPages } from "@/const/paths";
 import { apolloErrorHandler } from "@/core/repositories/apolloErrorHandler";
 import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
-import { useAuthContext } from "@/feature/auth/provider/AuthProvider";
 
-export const IndexTemplate: FC = () => {
-	const { member } = useAuthContext();
-	const router = useRouter();
-
-	if (typeof window !== "undefined" && !member) {
-		router.push(publicPages.signIn.path());
-	}
-
+const IndexTemplate: FC = () => {
 	const { data: activeMember, loading, error } = useFetchActiveMember();
 
 	if (loading) {
@@ -31,3 +21,5 @@ export const IndexTemplate: FC = () => {
 
 	return <div>ActiveMember: {JSON.stringify(activeMember, null, 2)}</div>;
 };
+
+export default IndexTemplate;

@@ -6,7 +6,7 @@ import { signUp } from "../auth";
 import { useAuthContext } from "../auth/provider/AuthProvider";
 import { type SignUpSchema, useSignUpForm } from "./hooks/form";
 
-export const SignUpTemplate: FC = () => {
+export default function SignUpTemplate() {
 	const { member } = useAuthContext();
 	const router = useRouter();
 
@@ -27,6 +27,7 @@ export const SignUpTemplate: FC = () => {
 				email: data.email,
 				password: data.password,
 			});
+			await router.push(loginRequiredPages.mypage.path());
 		} catch (error) {
 			// TODO: 重複メールアドレスの場合、下記のようなエラーが発生するので、エラーハンドリングが必要
 			// error.name === "FirebaseError"
@@ -38,11 +39,6 @@ export const SignUpTemplate: FC = () => {
 			console.error(error);
 		}
 	};
-
-	if (member) {
-		router.push(loginRequiredPages.mypage.path());
-		return <>redirecting</>;
-	}
 
 	return (
 		<div>
@@ -67,4 +63,4 @@ export const SignUpTemplate: FC = () => {
 			<Link href={publicPages.signIn.path()}>サインイン</Link>
 		</div>
 	);
-};
+}
