@@ -11,13 +11,13 @@ const publicPages = {
 		description: () => "トップページです。",
 	},
 	signUp: {
-		path: () => "/signup",
+		path: () => "/signUp",
 		title: () => title("会員登録"),
 		titleShort: "会員登録",
 		description: () => "会員登録です。",
 	},
 	signIn: {
-		path: () => "/signin",
+		path: () => "/signIn",
 		title: () => title("サインイン"),
 		titleShort: "サインイン",
 		description: () => "サインインです。",
