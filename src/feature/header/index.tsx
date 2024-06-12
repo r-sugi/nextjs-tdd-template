@@ -6,8 +6,11 @@ import {
 	loginRequiredPages,
 	publicPages,
 } from "@/const/paths";
+import { useAuthContext } from "../auth/provider/AuthProvider";
 
 export const HeaderTemplate: FC = () => {
+	const { user } = useAuthContext();
+
 	const pages = [
 		publicPages.index,
 		loginRequiredPages.mypage,
@@ -18,6 +21,14 @@ export const HeaderTemplate: FC = () => {
 
 	return (
 		<div>
+			<hr />
+			ヘッダー
+			<div>{user ? "サインイン中" : "サインアウト中"}</div>
+			{user ? (
+				<Link href={loginRequiredPages.signOut.path()}>サインアウト</Link>
+			) : (
+				<Link href={publicPages.signIn.path()}>サインイン</Link>
+			)}
 			<ul>
 				{pages.map((page) => (
 					<li key={page.path()}>
@@ -25,6 +36,7 @@ export const HeaderTemplate: FC = () => {
 					</li>
 				))}
 			</ul>
+			<hr />
 		</div>
 	);
 };

@@ -10,9 +10,27 @@ const publicPages = {
 		titleShort: "トップページ",
 		description: () => "トップページです。",
 	},
+	signUp: {
+		path: () => "/signup",
+		title: () => title("会員登録"),
+		titleShort: "会員登録",
+		description: () => "会員登録です。",
+	},
+	signIn: {
+		path: () => "/signin",
+		title: () => title("サインイン"),
+		titleShort: "サインイン",
+		description: () => "サインインです。",
+	},
 };
 
 const loginRequiredPages = {
+	signOut: {
+		path: () => "/signOut",
+		title: () => title("サインアウト"),
+		titleShort: "サインアウト",
+		description: () => "サインアウトです。",
+	},
 	mypage: {
 		path: () => "/mypage",
 		title: () => title("マイページ"),

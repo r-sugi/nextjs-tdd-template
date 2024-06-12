@@ -14,6 +14,7 @@ module.exports = {
 		// Unused exports, Unused exported types of component templates
 		"src/components/**/*.*",
 		"biome.js",
+		"functions/lib/**",
 		"functions/src/index.ts",
 	],
 	ignoreWorkspaces: ["src/generated/**"],
