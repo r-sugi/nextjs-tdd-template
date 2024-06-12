@@ -31,6 +31,9 @@ export const SignInTemplate: FC = () => {
 			// error.name === "FirebaseError"
 			// error.code === "auth/user-not-found"
 			// error.message === "Firebase: Error (auth/user-not-found)."
+			// TODO: サーバーが止まっている場合、下記のようなエラーが発生するので、エラーハンドリングが必要
+			// error.name === "FirebaseError"
+			// error.code === 'auth/network-request-failed'
 			console.error(error);
 		}
 	};
