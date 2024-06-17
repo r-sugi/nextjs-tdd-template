@@ -16,6 +16,7 @@ const isCSR = typeof window !== "undefined";
 
 initializeFirebaseApp();
 
+// TODO: SSRでヘッダー内の項目の表示非表示を制御する
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>
@@ -27,7 +28,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 			</Head>
 			<AppProvider>
 				{/* 検証用のheader */}
-				{isCSR && <HeaderTemplate />}
+				<HeaderTemplate />
 				<Component {...pageProps} />
 			</AppProvider>
 		</>

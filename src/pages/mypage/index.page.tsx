@@ -9,8 +9,8 @@ const IndexTemplate = dynamic(() => import("@/feature/mypage/index/index"), {
 const AuthGuard = dynamic(() => import("@/feature/auth/component/AuthGuard"), {
 	ssr: false,
 });
-const isCSR = typeof window !== "undefined";
 
+// TODO: getServersidePropsでcookieからfirebaseの認証情報を取得する -> pageに渡して認証情報を取得する(midllewareでもやるし)
 export default function Index() {
 	return (
 		<>
@@ -19,11 +19,9 @@ export default function Index() {
 				description={loginRequiredPages.mypage.description()}
 				path={loginRequiredPages.mypage.path()}
 			/>
-			{isCSR && (
-				<AuthGuard>
-					<IndexTemplate />
-				</AuthGuard>
-			)}
+			<AuthGuard>
+				<IndexTemplate />
+			</AuthGuard>
 		</>
 	);
 }
