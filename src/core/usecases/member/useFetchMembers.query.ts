@@ -10,6 +10,7 @@ import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import type { ApolloError } from "@apollo/client";
+import { useNotifyAPIError } from "../error/useNotifyAPIError";
 
 type Props = {
 	status?: MemberStatus;
@@ -45,8 +46,8 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const initMembers = (members: MembersByType | null) =>
 		setMembers(members ?? []);
 	const [error, setError] = useState<ApolloError | null>(null);
-
 	const query = useFetchMembersByStatus();
+	const notify = useNotifyAPIError();
 
 	// チラつき防止
 	const ref = useRef(error);
@@ -60,8 +61,8 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			const { data, error } = await query(queryMemberStatus);
 			initMembers(data);
 			setError(error);
-			// TODO: ここでApolloErrorsをユーザーに通知する(hooks)
-			error && console.error(error);
+			// ApolloErrorsをユーザーに通知している
+			error && notify.setError(error);
 		})();
 	}, [queryMemberStatus]);
 

@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
 import type { ApolloError } from "@apollo/client/errors";
+import { useNotifyAPIError } from "../error/useNotifyAPIError";
 
 type UseCaseLoading = {
 	data: InitialActiveMember;
@@ -29,6 +30,7 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 	const [error, setError] = useState<ErrorState>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const query = useFindActiveMemberOne();
+	const notify = useNotifyAPIError();
 
 	// チラつき防止
 	const ref = useRef(error);
@@ -46,8 +48,8 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 			);
 			setActiveMember(data);
 			setError(error);
-			// TODO: ここでApolloErrorsをユーザーに通知する(hooks)
-			error && console.error(error);
+			// ApolloErrorsをユーザーに通知している
+			error && notify.setError(error);
 			setLoading(false);
 		})();
 	}, []);
