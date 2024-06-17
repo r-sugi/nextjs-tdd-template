@@ -1,7 +1,6 @@
 import { memberStatus } from "@/core/domains/member/status";
 import {
 	type UpdateMemberStatusInputType,
-	type UseResignMemberReturnType,
 	useUpdateMemberStatus,
 } from "@/core/repositories/member/members.repository";
 
@@ -9,6 +8,10 @@ type Props = {
 	reasonType: string;
 	reasonDetail: string | null;
 	agreement: boolean;
+};
+
+type UseResignMemberReturnType = {
+	data: UpdateMemberStatusInputType["activityInput"] | null;
 };
 
 export const useResignMember = () => {
@@ -31,6 +34,12 @@ export const useResignMember = () => {
 				},
 			},
 		};
-		return await mutate(activityInput);
+		const { data, error } = await mutate(activityInput);
+		// TODO: ここでApolloErrorsをユーザーに通知する(hooks)
+		error && console.error(error);
+
+		return {
+			data,
+		};
 	};
 };

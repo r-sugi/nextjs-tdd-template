@@ -77,7 +77,7 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 /**
  * Mutations
  */
-export type UseResignMemberReturnType = {
+type UseUpdateMemberStatusType = {
 	data: UpdateMemberStatusInputType["activityInput"] | null;
 	error: ApolloError | null;
 };
@@ -99,7 +99,7 @@ export type UpdateMemberStatusInputType = {
 
 type UpdateMemberStatusType = (
 	variables: UpdateMemberStatusInputType,
-) => Promise<UseResignMemberReturnType>;
+) => Promise<UseUpdateMemberStatusType>;
 export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 	const [mutate] = useResignMemberMutation();
 

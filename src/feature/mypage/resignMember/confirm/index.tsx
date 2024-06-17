@@ -39,15 +39,10 @@ const Template: FC = () => {
 			agreement: data.agreement,
 		});
 
-		if (res.data) {
-			console.log(res.data);
-			removeCache("resignMember");
-			window.alert("退会しました!");
-			await router.push(publicPages.index.path());
-		} else {
-			// TODO: submit時にエラーがある場合は非同期エラーになる。エラー表示させる
-			res.error && console.error(res.error.graphQLErrors);
-		}
+		console.log(res.data);
+		removeCache("resignMember");
+		window.alert("退会しました!");
+		await router.push(publicPages.index.path());
 	};
 
 	useEffect(() => {
