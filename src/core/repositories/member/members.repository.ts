@@ -10,6 +10,7 @@ import { ApolloError } from "@apollo/client";
 
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { MembersByType } from "@/core/domains/member/member";
+import { ClientLogger } from "@/lib/clientLogger";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 import { resignMemberTransform } from "./transformer/resignMember.transformer";
@@ -34,7 +35,8 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 			const member = transform(res);
 			return { data: member, error: null };
 		} catch (error) {
-			// TODO: loggerでstacktraceを出力させる(view名 -> UseCase名をログに出力させたい)
+			// loggerでstacktraceを出力させている
+			new ClientLogger().error(error);
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
@@ -61,7 +63,9 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 			const members = membersByStatusTransform(res, status);
 			return { data: members, error: null };
 		} catch (error) {
-			// TODO: loggerでstacktraceを出力させる(view名 -> UseCase名をログに出力させたい)
+			// loggerでstacktraceを出力させている
+			new ClientLogger().error(error);
+
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
@@ -104,7 +108,8 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 			const res = await mutate({ variables });
 			return { data: resignMemberTransform(res), error: null };
 		} catch (error) {
-			// TODO: loggerでstacktraceを出力させる(view名 -> UseCase名をログに出力させたい)
+			// loggerでstacktraceを出力させている
+			new ClientLogger().error(error);
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
