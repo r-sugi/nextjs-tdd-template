@@ -12,11 +12,9 @@ const HeaderTemplate = dynamic(() => import("@/feature/header/index"), {
 	ssr: false,
 });
 
-const isCSR = typeof window !== "undefined";
-
 initializeFirebaseApp();
 
-// TODO: SSRでヘッダー内の項目の表示非表示を制御する
+// TODO: SSRでヘッダー内の項目の表示非表示を制御したい
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<>

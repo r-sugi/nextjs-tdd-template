@@ -8,7 +8,6 @@ const IndexTemplate = dynamic(() => import("@/feature/signIn/signin"), {
 const AuthGuard = dynamic(() => import("@/feature/auth/component/AuthGuard"), {
 	ssr: false,
 });
-const isCSR = typeof window !== "undefined";
 
 export default function Index() {
 	return (
@@ -18,11 +17,9 @@ export default function Index() {
 				description={publicPages.signIn.description()}
 				path={publicPages.signIn.path()}
 			/>
-			{isCSR && (
-				<AuthGuard>
-					<IndexTemplate />
-				</AuthGuard>
-			)}
+			<AuthGuard>
+				<IndexTemplate />
+			</AuthGuard>
 		</>
 	);
 }
