@@ -1,13 +1,12 @@
 import { renderHook, waitFor } from "@testing-library/react";
 
 import { toMock } from "@/__testing__/helper";
-import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
-
-import type { ActiveMember } from "@/core/domains/member/activeMember";
 import {
 	type UpdateMemberStatusInputType,
-	useResignMember,
-} from "./useResignMember.command";
+	useUpdateMemberStatus,
+} from "@/core/repositories/member/members.repository";
+
+import { useResignMember } from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");
 

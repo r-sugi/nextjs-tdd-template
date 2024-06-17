@@ -15,11 +15,6 @@ type Props = {
 	status?: MemberStatus;
 };
 
-export type FetchMembersReturnType = {
-	data: MembersByType | null;
-	error: ApolloError | null;
-};
-
 type UseCaseLoading = {
 	data: {
 		members: null;
@@ -73,7 +68,6 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			members,
 			queryMemberStatus,
 		},
-		error,
 		loading: members === null && error === null,
 		refetch: setQueryMemberStatus,
 	} as UseCase<MembersByType>;

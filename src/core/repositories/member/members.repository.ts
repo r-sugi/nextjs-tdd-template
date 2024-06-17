@@ -1,8 +1,4 @@
 import type { MemberStatus } from "@/core/domains/member/status";
-import type {
-	UpdateMemberStatusInputType,
-	UseResignMemberReturnType,
-} from "@/core/usecases/member/useResignMember.command";
 import {
 	type ResignMemberMutationVariables,
 	useGetActiveMemberLazyQuery,
@@ -10,10 +6,10 @@ import {
 	useResignMemberMutation,
 } from "@/generated/graphql";
 
-import type { FetchActiveMemberReturnType } from "@/core/usecases/member/useFetchActiveMember.query";
-import type { FetchMembersReturnType } from "@/core/usecases/member/useFetchMembers.query";
 import { ApolloError } from "@apollo/client";
 
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import type { MembersByType } from "@/core/domains/member/member";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 import { resignMemberTransform } from "./transformer/resignMember.transformer";
@@ -21,9 +17,14 @@ import { resignMemberTransform } from "./transformer/resignMember.transformer";
 /**
  * Queries
  */
+type FetchActiveMemberReturnType = {
+	data: ActiveMember | null;
+	error: ApolloError | null;
+};
 type FindActiveMemberOneType = (
 	memberId: string,
 ) => Promise<FetchActiveMemberReturnType>;
+
 export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 	const [query] = useGetActiveMemberLazyQuery();
 
@@ -33,12 +34,18 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 			const member = transform(res);
 			return { data: member, error: null };
 		} catch (error) {
+			// TODO: loggerでstacktraceを出力させる(view名 -> UseCase名をログに出力させたい)
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
 			return { data: null, error: null };
 		}
 	};
+};
+
+type FetchMembersReturnType = {
+	data: MembersByType | null;
+	error: ApolloError | null;
 };
 
 type FetchMembersByStatusType = (
@@ -54,6 +61,7 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 			const members = membersByStatusTransform(res, status);
 			return { data: members, error: null };
 		} catch (error) {
+			// TODO: loggerでstacktraceを出力させる(view名 -> UseCase名をログに出力させたい)
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
@@ -65,6 +73,26 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 /**
  * Mutations
  */
+export type UseResignMemberReturnType = {
+	data: UpdateMemberStatusInputType["activityInput"] | null;
+	error: ApolloError | null;
+};
+
+export type UpdateMemberStatusInputType = {
+	activityInput: {
+		status: MemberStatus;
+		memberId: string;
+		memberResigned: {
+			data: {
+				memberId: string;
+				reasonType: string;
+				agreement: boolean;
+				reasonDetail: string | null;
+			};
+		};
+	};
+};
+
 type UpdateMemberStatusType = (
 	variables: UpdateMemberStatusInputType,
 ) => Promise<UseResignMemberReturnType>;
@@ -76,6 +104,7 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 			const res = await mutate({ variables });
 			return { data: resignMemberTransform(res), error: null };
 		} catch (error) {
+			// TODO: loggerでstacktraceを出力させる(view名 -> UseCase名をログに出力させたい)
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}

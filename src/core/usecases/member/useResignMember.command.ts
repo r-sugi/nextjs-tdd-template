@@ -1,31 +1,14 @@
-import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
-import { useUpdateMemberStatus } from "@/core/repositories/member/members.repository";
-import type { ApolloError } from "@apollo/client/errors";
+import { memberStatus } from "@/core/domains/member/status";
+import {
+	type UpdateMemberStatusInputType,
+	type UseResignMemberReturnType,
+	useUpdateMemberStatus,
+} from "@/core/repositories/member/members.repository";
 
 type Props = {
 	reasonType: string;
 	reasonDetail: string | null;
 	agreement: boolean;
-};
-
-export type UseResignMemberReturnType = {
-	data: UpdateMemberStatusInputType["activityInput"] | null;
-	error: ApolloError | null;
-};
-
-export type UpdateMemberStatusInputType = {
-	activityInput: {
-		status: MemberStatus;
-		memberId: string;
-		memberResigned: {
-			data: {
-				memberId: string;
-				reasonType: string;
-				agreement: boolean;
-				reasonDetail: string | null;
-			};
-		};
-	};
 };
 
 export const useResignMember = () => {
