@@ -12,10 +12,6 @@ import { useFetchMembersByStatus } from "@/core/repositories/member/members.repo
 import type { ApolloError } from "@apollo/client";
 import { useNotifyAPIError } from "../error/useNotifyAPIError";
 
-type Props = {
-	status?: MemberStatus;
-};
-
 type UseCaseLoading = {
 	data: {
 		members: null;
@@ -37,6 +33,10 @@ type UseCaseLoaded<T> = {
 } & Record<string, unknown>;
 
 type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
+
+type Props = {
+	status?: MemberStatus;
+};
 
 export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
