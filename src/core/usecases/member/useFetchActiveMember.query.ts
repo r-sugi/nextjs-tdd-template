@@ -48,7 +48,6 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 			);
 			setActiveMember(data);
 			setError(error);
-			// ApolloErrorsをユーザーに通知している
 			error && notify.setError(error);
 			setLoading(false);
 		})();

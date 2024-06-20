@@ -1,4 +1,3 @@
-"use client";
 import { useRouter } from "next/router";
 import { type BaseSyntheticEvent, type FC, useEffect, useMemo } from "react";
 
@@ -39,9 +38,10 @@ const Template: FC = () => {
 			agreement: data.agreement,
 		});
 
-		console.log(res.data);
+		if (!res.data) {
+			return;
+		}
 		removeCache("resignMember");
-		window.alert("退会しました!");
 		await router.push(publicPages.index.path());
 	};
 

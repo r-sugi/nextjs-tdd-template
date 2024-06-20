@@ -61,7 +61,6 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			const { data, error } = await query(queryMemberStatus);
 			initMembers(data);
 			setError(error);
-			// ApolloErrorsをユーザーに通知している
 			error && notify.setError(error);
 		})();
 	}, [queryMemberStatus]);

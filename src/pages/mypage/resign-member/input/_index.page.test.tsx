@@ -3,11 +3,12 @@ import { render } from "@testing-library/react";
 import { toMock } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 import { loginRequiredPages } from "@/const/paths";
+import AuthGuard from "@/feature/auth/component/AuthGuard";
 import IndexTemplate from "@/feature/mypage/resignMember/input/";
-
 import Page from "./index.page";
 
 jest.mock("@/feature/mypage/resignMember/input/");
+jest.mock("@/feature/auth/component/AuthGuard");
 
 describe(Page, () => {
 	function setup() {
@@ -43,13 +44,13 @@ describe(Page, () => {
 
 	it("template file called", async () => {
 		// Arrange
-		const IndexTemplateMock = toMock(IndexTemplate);
+		const AuthGuardMock = toMock(AuthGuard);
 		const COMPONENT_PROPS = {};
 
 		// Act
 		setup();
 
 		// Assert
-		expect(IndexTemplateMock).toHaveBeenCalledWith(COMPONENT_PROPS, {});
+		expect(AuthGuardMock).toHaveBeenCalled();
 	});
 });
