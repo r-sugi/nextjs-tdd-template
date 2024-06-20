@@ -1,7 +1,6 @@
+import { AuthProvider } from "@/feature/auth/provider/AuthProvider";
 import type { ReactNode } from "react";
-
-import { ErrorBoundary } from "@/pages/_error/_error.boundary";
-
+import { ErrorBoundary } from "../_error/_error.boundary";
 import { AppApolloProvider } from "./_appApollo.provider";
 
 export const AppProvider = ({
@@ -9,7 +8,9 @@ export const AppProvider = ({
 }: { children: ReactNode }): JSX.Element => {
 	return (
 		<ErrorBoundary>
-			<AppApolloProvider>{children}</AppApolloProvider>
+			<AppApolloProvider>
+				<AuthProvider>{children}</AuthProvider>
+			</AppApolloProvider>
 		</ErrorBoundary>
 	);
 };

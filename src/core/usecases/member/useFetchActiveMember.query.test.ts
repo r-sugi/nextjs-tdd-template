@@ -4,55 +4,54 @@ import { toMock } from "@/__testing__/helper";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
 import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
 import { activeMember } from "mocks/fixtures/activeMember";
+import { useNotifyAPIError } from "../error/useNotifyAPIError";
 
 jest.mock("@/core/repositories/member/members.repository");
+jest.mock("../error/useNotifyAPIError");
 
 describe("useFetchActiveMember", () => {
-	it("success", async () => {
-		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => ({ data: activeMember, error: null });
-		});
+	describe("when success", () => {
+		it("return data", async () => {
+			toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
+				return async () => ({ data: activeMember, error: null });
+			});
 
-		const { result } = renderHook(() => useFetchActiveMember());
+			const { result } = renderHook(() => useFetchActiveMember());
 
-		await waitFor(() => {
-			expect(result.current).toEqual({
-				data: activeMember,
-				error: null,
-				loading: false,
+			await waitFor(() => {
+				expect(result.current).toEqual({
+					data: activeMember,
+					loading: false,
+				});
 			});
 		});
 	});
 
-	it("error", async () => {
-		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => ({ data: null, error: null });
-		});
-
-		const { result } = renderHook(() => useFetchActiveMember());
-
-		await waitFor(() => {
-			expect(result.current).toEqual({
-				data: null,
-				error: null,
-				loading: false,
+	describe("when error", () => {
+		it("return null data, notify error called", async () => {
+			const ERROR = {
+				message: "repository error",
+				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			} as any;
+			toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
+				return async () => ({ data: null, error: ERROR });
 			});
-		});
-	});
 
-	it("loading", async () => {
-		toMock(useFindActiveMemberOne).mockImplementationOnce(() => {
-			return async () => ({ data: null, error: null });
-		});
-
-		const { result } = renderHook(() => useFetchActiveMember());
-
-		await waitFor(() => {
-			expect(result.current).toEqual({
-				data: null,
-				error: null,
-				loading: true,
+			const mockSetError = jest.fn();
+			toMock(useNotifyAPIError).mockImplementationOnce(() => {
+				return {
+					setError: mockSetError,
+				};
 			});
+
+			const { result } = renderHook(() => useFetchActiveMember());
+			await waitFor(() => {
+				expect(result.current).toEqual({
+					data: null,
+					loading: false,
+				});
+			});
+			expect(mockSetError).toHaveBeenCalledWith(ERROR);
 		});
 	});
 });

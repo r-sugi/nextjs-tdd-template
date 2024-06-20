@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { FC } from "react";
+import { useRouter } from "next/router";
 
 import {
 	adminSecretPages,
@@ -7,17 +7,41 @@ import {
 	publicPages,
 } from "@/const/paths";
 
-export const HeaderTemplate: FC = () => {
-	const pages = [
-		publicPages.index,
-		loginRequiredPages.mypage,
-		loginRequiredPages.mypageResignMemberInput,
-		loginRequiredPages.mypageResignMemberConfirm,
-		adminSecretPages.members,
-	];
+import { useSignOut } from "../auth/hooks/useSignOut.command";
+import { useAuthContext } from "../auth/provider/AuthProvider";
+
+const pages = [
+	publicPages.index,
+	publicPages.signIn,
+	publicPages.signUp,
+	loginRequiredPages.mypage,
+	loginRequiredPages.mypageResignMemberInput,
+	loginRequiredPages.mypageResignMemberConfirm,
+	adminSecretPages.members,
+];
+
+export default function HeaderTemplate() {
+	const { member } = useAuthContext();
+	const { signOut } = useSignOut();
+	const router = useRouter();
+
+	const signOutHandler = async () => {
+		await signOut();
+		await router.push(publicPages.signIn.path());
+	};
 
 	return (
 		<div>
+			<hr />
+			ヘッダー
+			<div>{member ? "サインイン中" : "サインアウト中"}</div>
+			{member ? (
+				<button type="button" onClick={() => signOutHandler()}>
+					サインアウト
+				</button>
+			) : (
+				<Link href={publicPages.signIn.path()}>サインイン</Link>
+			)}
 			<ul>
 				{pages.map((page) => (
 					<li key={page.path()}>
@@ -25,6 +49,7 @@ export const HeaderTemplate: FC = () => {
 					</li>
 				))}
 			</ul>
+			<hr />
 		</div>
 	);
-};
+}

@@ -10,6 +10,18 @@ const publicPages = {
 		titleShort: "トップページ",
 		description: () => "トップページです。",
 	},
+	signUp: {
+		path: () => "/signUp",
+		title: () => title("会員登録"),
+		titleShort: "会員登録",
+		description: () => "会員登録です。",
+	},
+	signIn: {
+		path: () => "/signIn",
+		title: () => title("サインイン"),
+		titleShort: "サインイン",
+		description: () => "サインインです。",
+	},
 };
 
 const loginRequiredPages = {
@@ -33,6 +45,17 @@ const loginRequiredPages = {
 	},
 };
 
+const loginFormPagePaths = [
+	publicPages.signIn.path(),
+	publicPages.signUp.path(),
+];
+
+const loginRequiredPagePaths = [
+	loginRequiredPages.mypage.path(),
+	loginRequiredPages.mypageResignMemberInput.path(),
+	loginRequiredPages.mypageResignMemberConfirm.path(),
+];
+
 const adminSecretPages = {
 	members: {
 		path: () => "/admin/members",
@@ -42,4 +65,10 @@ const adminSecretPages = {
 	},
 };
 
-export { publicPages, loginRequiredPages, adminSecretPages };
+export {
+	publicPages,
+	loginRequiredPages,
+	adminSecretPages,
+	loginFormPagePaths,
+	loginRequiredPagePaths,
+};

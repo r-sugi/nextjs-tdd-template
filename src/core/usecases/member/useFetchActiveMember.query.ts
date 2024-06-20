@@ -3,14 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
 import type { ApolloError } from "@apollo/client/errors";
-
-export type FetchActiveMemberReturnType = {
-	data: ActiveMember | null;
-	error: ApolloError | null;
-};
+import { useNotifyAPIError } from "../error/useNotifyAPIError";
 
 type UseCaseLoading = {
-	data: null;
+	data: InitialActiveMember;
 	error: null;
 	loading: true;
 } & Record<string, unknown>;
@@ -23,11 +19,18 @@ type UseCaseLoaded<T> = {
 
 type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
 
+type InitialActiveMember = undefined;
+type ActiveMemberState = ActiveMember | null | InitialActiveMember; // TODO: nullに型名をつける
+const initialActiveMember: InitialActiveMember = undefined;
+type ErrorState = ApolloError | null;
+
 export const useFetchActiveMember = (): UseCase<ActiveMember> => {
-	const [activeMember, setActiveMember] = useState<ActiveMember | null>(null);
-	const [error, setError] = useState<ApolloError | null>(null);
+	const [activeMember, setActiveMember] =
+		useState<ActiveMemberState>(initialActiveMember);
+	const [error, setError] = useState<ErrorState>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const query = useFindActiveMemberOne();
+	const notify = useNotifyAPIError();
 
 	// チラつき防止
 	const ref = useRef(error);
@@ -45,13 +48,13 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 			);
 			setActiveMember(data);
 			setError(error);
+			error && notify.setError(error);
 			setLoading(false);
 		})();
 	}, []);
 
 	return {
 		data: activeMember,
-		error,
 		loading,
 	} as UseCase<ActiveMember>;
 };

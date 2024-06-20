@@ -1,4 +1,3 @@
-"use client";
 import { useRouter } from "next/router";
 import { type BaseSyntheticEvent, type FC, useEffect, useMemo } from "react";
 
@@ -39,15 +38,11 @@ const Template: FC = () => {
 			agreement: data.agreement,
 		});
 
-		if (res.data) {
-			console.log(res.data);
-			removeCache("resignMember");
-			window.alert("退会しました!");
-			await router.push(publicPages.index.path());
-		} else {
-			// TODO: submit時にエラーがある場合は非同期エラーになる。エラー表示させる
-			res.error && console.error(res.error.graphQLErrors);
+		if (!res.data) {
+			return;
 		}
+		removeCache("resignMember");
+		await router.push(publicPages.index.path());
 	};
 
 	useEffect(() => {
@@ -107,10 +102,10 @@ const Template: FC = () => {
 	);
 };
 
-export const IndexTemplate: FC = () => {
+export default function IndexTemplate() {
 	return (
 		<ConfirmErrorBoundary>
 			<Template />
 		</ConfirmErrorBoundary>
 	);
-};
+}

@@ -24,6 +24,12 @@
     },
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "codegen.js"],
-  "exclude": ["node_modules", ".next", "out", "public"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "codegen.js"
+  ],
+  "exclude": ["node_modules", ".next", "out", "public", "functions"]
 }

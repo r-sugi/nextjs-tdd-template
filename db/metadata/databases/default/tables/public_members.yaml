@@ -2,6 +2,15 @@ table:
   name: members
   schema: public
 object_relationships:
+  - name: memberLoginGoogle
+    using:
+      manual_configuration:
+        column_mapping:
+          id: memberId
+        insertion_order: after_parent
+        remote_table:
+          name: memberLoginGoogle
+          schema: public
   - name: user
     using:
       foreign_key_constraint_on: userId

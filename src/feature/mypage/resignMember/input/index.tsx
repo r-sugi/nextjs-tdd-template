@@ -8,7 +8,7 @@ import {
 } from "@/feature/mypage/resignMember/hooks/form";
 import { setCache } from "@/utils/cache";
 
-export const IndexTemplate = () => {
+export default function IndexTemplate() {
 	const router = useRouter();
 	const {
 		handleSubmit,
@@ -63,4 +63,4 @@ export const IndexTemplate = () => {
 			</form>
 		</div>
 	);
-};
+}

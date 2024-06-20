@@ -1,16 +1,18 @@
 import { render, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { toSpyWithMock } from "@/__testing__/helper";
-import { loginRequiredPages } from "@/const/paths";
-import { AppProvider } from "@/pages/_provider/_app.provider";
-import * as cache from "@/utils/cache";
+import { toMock, toSpyWithMock } from "@/__testing__/helper";
+import { getCache, removeCache } from "@/utils/cache";
 import { NoCacheError } from "@/utils/cache/error";
 
-import { IndexTemplate } from ".";
+import { loginRequiredPages, publicPages } from "@/const/paths";
+import { useResignMember } from "@/core/usecases/member/useResignMember.command";
+import * as router from "next/router";
+import IndexTemplate from "./index";
 
 jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 jest.mock("@/utils/cache");
+jest.mock("@/core/usecases/member/useResignMember.command");
 
 describe(IndexTemplate, () => {
 	afterEach(() => {
@@ -20,17 +22,13 @@ describe(IndexTemplate, () => {
 	const setupComponent = () => {
 		return {
 			user: userEvent.setup(),
-			component: render(
-				<AppProvider>
-					<IndexTemplate />
-				</AppProvider>,
-			),
+			component: render(<IndexTemplate />),
 		};
 	};
 
 	describe("no cache", () => {
 		beforeEach(() => {
-			toSpyWithMock(cache, "getCache", () => {
+			toMock(getCache).mockImplementation(() => {
 				throw new NoCacheError("Failed to get cache");
 			});
 		});
@@ -51,26 +49,69 @@ describe(IndexTemplate, () => {
 	});
 
 	describe("cache exists", () => {
-		beforeEach(() => {
-			toSpyWithMock(cache, "getCache", () => {
-				return {
-					reasonType: "1",
-					reasonDetail: "detail",
-					agreement: true,
-				};
-			});
-		});
-		afterEach(() => {
-			jest.resetAllMocks();
-		});
+		const formValues = {
+			reasonType: "NO_USE",
+			reasonDetail: "detail",
+			agreement: true,
+		};
+
 		it("rendered with initial state", async () => {
 			const { component } = setupComponent();
-
 			const componentRoot = await component.findByTestId("template");
 			expect(componentRoot).toBeVisible();
 		});
-		it.skip("click back button then router.push called", async () => {});
-		it.skip("API success of resign on submit", async () => {});
-		it.skip("API error of resign on submit", async () => {});
+		it("click back button then router.push called", async () => {
+			const routerMock = jest.fn();
+			toSpyWithMock(router, "useRouter", () => ({
+				push: routerMock,
+			}));
+
+			const { component } = setupComponent();
+			await userEvent.click(component.getByRole("button", { name: "戻る" }));
+
+			expect(routerMock).toHaveBeenCalledWith(
+				loginRequiredPages.mypageResignMemberInput.path(),
+			);
+		});
+		it("success API on submit", async () => {
+			toMock(getCache).mockReturnValue(formValues);
+			const resignHookMock = jest.fn().mockResolvedValue({
+				data: {},
+			});
+			toMock(useResignMember).mockReturnValue(resignHookMock);
+
+			const routerMock = jest.fn();
+			toSpyWithMock(router, "useRouter", () => ({
+				push: routerMock,
+			}));
+
+			const { component } = setupComponent();
+			await userEvent.click(
+				component.getByRole("button", { name: "退会する" }),
+			);
+
+			expect(resignHookMock).toHaveBeenCalledWith(formValues);
+			expect(toMock(removeCache)).toHaveBeenCalled();
+			expect(routerMock).toHaveBeenCalledWith(publicPages.index.path());
+		});
+
+		it("API error of resign on submit", async () => {
+			toMock(getCache).mockReturnValue(formValues);
+			const routerMock = jest.fn();
+			toSpyWithMock(router, "useRouter", () => ({
+				push: routerMock,
+			}));
+
+			const resignHookMock = jest.fn().mockResolvedValue({ data: null });
+			toMock(useResignMember).mockReturnValue(resignHookMock);
+
+			const { component } = setupComponent();
+			await userEvent.click(
+				component.getByRole("button", { name: "退会する" }),
+			);
+
+			expect(toMock(removeCache)).not.toHaveBeenCalled();
+			expect(routerMock).not.toHaveBeenCalled();
+		});
 	});
 });

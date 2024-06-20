@@ -32,7 +32,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 					error,
 				};
 			});
-			return;
+			return error;
 		}
 		throw new Error(error.message);
 	}

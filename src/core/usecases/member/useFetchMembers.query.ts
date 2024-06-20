@@ -10,15 +10,7 @@ import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import type { ApolloError } from "@apollo/client";
-
-type Props = {
-	status?: MemberStatus;
-};
-
-export type FetchMembersReturnType = {
-	data: MembersByType | null;
-	error: ApolloError | null;
-};
+import { useNotifyAPIError } from "../error/useNotifyAPIError";
 
 type UseCaseLoading = {
 	data: {
@@ -42,6 +34,10 @@ type UseCaseLoaded<T> = {
 
 type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
 
+type Props = {
+	status?: MemberStatus;
+};
+
 export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
 		props?.status ?? memberStatus.pendingActivation,
@@ -50,8 +46,8 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const initMembers = (members: MembersByType | null) =>
 		setMembers(members ?? []);
 	const [error, setError] = useState<ApolloError | null>(null);
-
 	const query = useFetchMembersByStatus();
+	const notify = useNotifyAPIError();
 
 	// チラつき防止
 	const ref = useRef(error);
@@ -65,6 +61,7 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			const { data, error } = await query(queryMemberStatus);
 			initMembers(data);
 			setError(error);
+			error && notify.setError(error);
 		})();
 	}, [queryMemberStatus]);
 
@@ -73,7 +70,6 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			members,
 			queryMemberStatus,
 		},
-		error,
 		loading: members === null && error === null,
 		refetch: setQueryMemberStatus,
 	} as UseCase<MembersByType>;

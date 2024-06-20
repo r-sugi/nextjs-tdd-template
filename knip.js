@@ -2,6 +2,7 @@ module.exports = {
 	ignore: [
 		"**/*.d.ts",
 		// Unused files
+		"functions/src/index.ts",
 		"mocks/browser.ts",
 		"mocks/index.ts",
 		"mocks/server.ts",
@@ -13,6 +14,8 @@ module.exports = {
 		// Unused exports, Unused exported types of component templates
 		"src/components/**/*.*",
 		"biome.js",
+		"functions/lib/**",
+		"functions/src/index.ts",
 	],
 	ignoreWorkspaces: ["src/generated/**"],
 	ignoreDependencies: [

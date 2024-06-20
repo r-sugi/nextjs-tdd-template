@@ -1,5 +1,6 @@
 - "!include public_memberActive.yaml"
 - "!include public_memberBanned.yaml"
+- "!include public_memberLoginGoogle.yaml"
 - "!include public_memberPendingActivation.yaml"
 - "!include public_memberResigned.yaml"
 - "!include public_memberRestored.yaml"
