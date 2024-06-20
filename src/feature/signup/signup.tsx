@@ -1,14 +1,13 @@
 import { loginRequiredPages, publicPages } from "@/const/paths";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { BaseSyntheticEvent, FC } from "react";
-import { signUp } from "../auth";
-import { useAuthContext } from "../auth/provider/AuthProvider";
+import type { BaseSyntheticEvent } from "react";
+import { useSignUp } from "../auth/hooks/useSignUp.command";
 import { type SignUpSchema, useSignUpForm } from "./hooks/form";
 
 export default function SignUpTemplate() {
-	const { member } = useAuthContext();
 	const router = useRouter();
+	const { signUp } = useSignUp();
 
 	const {
 		register,
@@ -21,23 +20,11 @@ export default function SignUpTemplate() {
 		event?: BaseSyntheticEvent,
 	) => {
 		event?.preventDefault?.();
-
-		try {
-			await signUp({
-				email: data.email,
-				password: data.password,
-			});
-			await router.push(loginRequiredPages.mypage.path());
-		} catch (error) {
-			// TODO: 重複メールアドレスの場合、下記のようなエラーが発生するので、エラーハンドリングが必要
-			// error.name === "FirebaseError"
-			// error.code === "auth/email-already-in-use"
-			// error.message === "Firebase: Error (auth/email-already-in-use)."
-			// TODO: サーバーが止まっている場合、下記のようなエラーが発生するので、エラーハンドリングが必要
-			// error.name === "FirebaseError"
-			// error.code === 'auth/network-request-failed'
-			console.error(error);
-		}
+		await signUp({
+			email: data.email,
+			password: data.password,
+		});
+		await router.push(loginRequiredPages.mypage.path());
 	};
 
 	return (

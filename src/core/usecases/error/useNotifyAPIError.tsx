@@ -1,8 +1,9 @@
-import type { ApolloError } from "@apollo/client";
 import { useEffect, useState } from "react";
 
 export const useNotifyAPIError = () => {
-	const [error, setError] = useState<ApolloError | null>(null);
+	// TODO: Errorの型をanyにしているので、エラーの型を指定したい
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	const [error, setError] = useState<any>(null);
 
 	useEffect(() => {
 		if (error) {

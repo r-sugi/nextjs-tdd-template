@@ -6,8 +6,8 @@ import {
 	loginRequiredPages,
 	publicPages,
 } from "@/const/paths";
-import { signOut } from "@/feature/auth";
 
+import { useSignOut } from "../auth/hooks/useSignOut.command";
 import { useAuthContext } from "../auth/provider/AuthProvider";
 
 const pages = [
@@ -22,6 +22,7 @@ const pages = [
 
 export default function HeaderTemplate() {
 	const { member } = useAuthContext();
+	const { signOut } = useSignOut();
 	const router = useRouter();
 
 	const signOutHandler = async () => {
