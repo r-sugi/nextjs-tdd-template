@@ -2,7 +2,7 @@ import { useNotifyAPIError } from "@/core/usecases/error/useNotifyAPIError";
 import { ClientLogger } from "@/lib/clientLogger";
 import { FirebaseError } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { clientAuthErrorLogger } from "../error/logger";
+import { transformClientAuthError } from "../../../error/auth/transformClientAuthError";
 
 type SignInProps = {
 	email: string;
@@ -21,8 +21,7 @@ export const useSignIn = () => {
 			);
 		} catch (error) {
 			if (error instanceof FirebaseError) {
-				const formatError = clientAuthErrorLogger(error);
-				return notify.setError(formatError);
+				return notify.setError(transformClientAuthError(error));
 			}
 			new ClientLogger().fatal(error);
 			notify.setError(error);

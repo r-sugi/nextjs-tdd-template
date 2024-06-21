@@ -1,8 +1,8 @@
 import { ClientLogger } from "@/lib/clientLogger";
+import { ClientError, type ClientErrorObject } from "./http/clientError";
+import { HttpError } from "./http/httpError";
 
-import { ClientError, type ClientErrorObject } from "../errors/clientError";
-import { HttpError } from "../errors/httpError";
-
+// TODO:
 export class ErrorTransformer {
 	constructor(private readonly logger = new ClientLogger()) {
 		this.logger.setContext(this.constructor.name);
