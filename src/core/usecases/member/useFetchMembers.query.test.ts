@@ -4,10 +4,10 @@ import { toMock } from "@/__testing__/helper";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 import { activeMember } from "mocks/fixtures/activeMember";
-import { useNotifyAPIError } from "../error/useNotifyAPIError";
+import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("../error/useNotifyAPIError");
+jest.mock("@/hooks/error/useNotifyAPIError");
 
 describe(useFetchMembers, () => {
 	describe("when success", () => {

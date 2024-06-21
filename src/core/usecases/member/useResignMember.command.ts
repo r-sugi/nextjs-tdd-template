@@ -3,7 +3,7 @@ import {
 	type UpdateMemberStatusInputType,
 	useUpdateMemberStatus,
 } from "@/core/repositories/member/members.repository";
-import { useNotifyAPIError } from "../error/useNotifyAPIError";
+import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
 
 type Props = {
 	reasonType: string;

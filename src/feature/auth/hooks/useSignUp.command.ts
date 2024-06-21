@@ -1,8 +1,8 @@
-import { useNotifyAPIError } from "@/core/usecases/error/useNotifyAPIError";
-import { transformClientAuthError } from "@/error/auth/transform";
-import { transformBoundaryError } from "@/error/boundary/transform";
-import { HttpError } from "@/error/http/HttpError";
-import { transformHttpError } from "@/error/http/transform";
+import { transformClientAuthError } from "@/error/transform/auth/transform";
+import { transformBoundaryError } from "@/error/transform/boundary/transform";
+import { HttpError } from "@/error/transform/http/HttpError";
+import { transformHttpError } from "@/error/transform/http/transform";
+import { useNotifyAPIError } from "@/hooks/error/useNotifyAPIError";
 import { FirebaseError } from "firebase/app";
 import {
 	createUserWithEmailAndPassword,

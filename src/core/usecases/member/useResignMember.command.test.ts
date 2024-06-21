@@ -6,11 +6,11 @@ import {
 	useUpdateMemberStatus,
 } from "@/core/repositories/member/members.repository";
 
-import { useNotifyAPIError } from "../error/useNotifyAPIError";
+import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
 import { useResignMember } from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("../error/useNotifyAPIError");
+jest.mock("@/hooks/error/useNotifyAPIError");
 
 describe(useResignMember, () => {
 	describe("when success", () => {
