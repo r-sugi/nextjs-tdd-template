@@ -10,7 +10,6 @@ export const ErrorScreen = ({
 	return (
 		<>
 			Client Error Screen
-			{/* TODO: 元のページへ戻るボタンを配置する => errorをクリアする */}
 			<div>{JSON.stringify(error, null, 2)}</div>
 			<button type="button" onClick={onReset} />
 		</>
