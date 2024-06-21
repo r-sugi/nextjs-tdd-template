@@ -1,7 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
-import { transformBoundaryError } from "@/error/boundary/transform.error";
-import { transformUnhandledRejectionError } from "@/error/unhandledRejection/transform.error";
+import { transformBoundaryError } from "@/error/boundary/transform";
+import { transformUnhandledRejectionError } from "@/error/unhandledRejection/transform";
 import { ErrorScreen } from "./_error.screen";
 
 type ErrorBoundaryState = { error?: Error };
