@@ -1,5 +1,5 @@
 import { useNotifyAPIError } from "@/core/usecases/error/useNotifyAPIError";
-import { transformClientAuthError } from "@/error/auth/transform.error";
+import { transformClientAuthError } from "@/error/auth/transform";
 import { Logger } from "@/lib/logger";
 import { FirebaseError } from "firebase/app";
 import {

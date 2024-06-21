@@ -2,7 +2,7 @@ import { useNotifyAPIError } from "@/core/usecases/error/useNotifyAPIError";
 import { Logger } from "@/lib/logger";
 import { FirebaseError } from "firebase/app";
 import { signOut as firebaseSignOut, getAuth } from "firebase/auth";
-import { transformClientAuthError } from "../../../error/auth/transform.error";
+import { transformClientAuthError } from "../../../error/auth/transform";
 
 export const useSignOut = () => {
 	const notify = useNotifyAPIError();

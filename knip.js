@@ -17,7 +17,7 @@ module.exports = {
 		"functions/lib/**",
 		"functions/src/index.ts",
 		"src/error/const.ts",
-		"src/error/http/transform.error.ts",
+		"src/error/http/transform.ts",
 	],
 	ignoreWorkspaces: ["src/generated/**"],
 	ignoreDependencies: [
