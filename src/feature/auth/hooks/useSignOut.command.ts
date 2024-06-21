@@ -1,5 +1,5 @@
 import { useNotifyAPIError } from "@/core/usecases/error/useNotifyAPIError";
-import { ClientLogger } from "@/lib/clientLogger";
+import { Logger } from "@/lib/logger";
 import { FirebaseError } from "firebase/app";
 import { signOut as firebaseSignOut, getAuth } from "firebase/auth";
 import { transformClientAuthError } from "../../../error/auth/transformClientAuthError";
@@ -15,7 +15,7 @@ export const useSignOut = () => {
 			if (error instanceof FirebaseError) {
 				return notify.setError(transformClientAuthError(error));
 			}
-			new ClientLogger().fatal(error);
+			new Logger().fatal(error);
 			notify.setError(error);
 		}
 	};

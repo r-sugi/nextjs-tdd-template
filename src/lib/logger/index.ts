@@ -1,6 +1,6 @@
 import pino, { type Logger as PinoLogger } from "pino";
 
-export class ClientLogger {
+export class Logger {
 	private readonly p: PinoLogger;
 	private context: Record<string, unknown> = {};
 
@@ -11,7 +11,9 @@ export class ClientLogger {
 				level: this.logLevel(),
 			});
 		} else {
-			throw new Error("ClientLoggerはブラウザでのみ使用可能です");
+			this.p = pino({
+				level: this.logLevel(),
+			});
 		}
 	}
 

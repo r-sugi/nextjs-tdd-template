@@ -1,6 +1,6 @@
 import { useNotifyAPIError } from "@/core/usecases/error/useNotifyAPIError";
 import { transformClientAuthError } from "@/error/auth/transformClientAuthError";
-import { ClientLogger } from "@/lib/clientLogger";
+import { Logger } from "@/lib/logger";
 import { FirebaseError } from "firebase/app";
 import {
 	createUserWithEmailAndPassword,
@@ -28,7 +28,7 @@ export const useSignUp = () => {
 			if (error instanceof FirebaseError) {
 				return notify.setError(transformClientAuthError(error));
 			}
-			new ClientLogger().fatal(error);
+			new Logger().fatal(error);
 			notify.setError(error);
 		}
 	};

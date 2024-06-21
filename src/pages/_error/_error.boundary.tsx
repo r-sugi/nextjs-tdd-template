@@ -2,7 +2,7 @@ import { Component, type ErrorInfo, type ReactNode } from "react";
 
 import { ErrorTransformer } from "@/error/error.transformer";
 import { ClientError } from "@/error/http/clientError";
-import { ClientLogger } from "@/lib/clientLogger";
+import { Logger } from "@/lib/logger";
 
 import { UnhandledRejectionError } from "@/error/unhandledRejection/unhandledRejectionError";
 import { ErrorScreen } from "./_error.screen";
@@ -41,7 +41,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	}
 
 	componentDidCatch(err: Error, errInfo: ErrorInfo) {
-		new ClientLogger().error({
+		new Logger().error({
 			err,
 			errInfo,
 		});
