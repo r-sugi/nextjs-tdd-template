@@ -10,7 +10,7 @@ import { ApolloError } from "@apollo/client";
 
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { MembersByType } from "@/core/domains/member/member";
-import { ClientLogger } from "@/lib/clientLogger";
+import { Logger } from "@/lib/logger";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 import { resignMemberTransform } from "./transformer/resignMember.transformer";
@@ -36,7 +36,7 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 			return { data: member, error: null };
 		} catch (error) {
 			// loggerでstacktraceを出力させている
-			new ClientLogger().fatal(error);
+			new Logger().fatal(error);
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
@@ -64,7 +64,7 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 			return { data: members, error: null };
 		} catch (error) {
 			// loggerでstacktraceを出力させている
-			new ClientLogger().fatal(error);
+			new Logger().fatal(error);
 
 			if (error instanceof ApolloError) {
 				return { data: null, error };
@@ -109,7 +109,7 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 			return { data: resignMemberTransform(res), error: null };
 		} catch (error) {
 			// loggerでstacktraceを出力させている
-			new ClientLogger().fatal(error);
+			new Logger().fatal(error);
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}

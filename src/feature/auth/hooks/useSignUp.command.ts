@@ -1,12 +1,12 @@
 import { useNotifyAPIError } from "@/core/usecases/error/useNotifyAPIError";
-import { ClientLogger } from "@/lib/clientLogger";
+import { transformClientAuthError } from "@/error/auth/transformClientAuthError";
+import { Logger } from "@/lib/logger";
 import { FirebaseError } from "firebase/app";
 import {
 	createUserWithEmailAndPassword,
 	getAuth,
 	sendEmailVerification,
 } from "firebase/auth";
-import { clientAuthErrorLogger } from "../error/logger";
 
 type SignUp = {
 	email: string;
@@ -26,10 +26,9 @@ export const useSignUp = () => {
 			await sendEmailVerification(userCredential.user);
 		} catch (error) {
 			if (error instanceof FirebaseError) {
-				const formatError = clientAuthErrorLogger(error);
-				return notify.setError(formatError);
+				return notify.setError(transformClientAuthError(error));
 			}
-			new ClientLogger().fatal(error);
+			new Logger().fatal(error);
 			notify.setError(error);
 		}
 	};

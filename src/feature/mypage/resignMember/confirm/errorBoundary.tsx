@@ -1,6 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
-import { ClientLogger } from "@/lib/clientLogger";
+import { Logger } from "@/lib/logger";
 import { NoCacheError } from "@/utils/cache/error";
 
 import { loginRequiredPages, publicPages } from "@/const/paths";
@@ -22,7 +22,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	}
 
 	componentDidCatch(error: Error, errInfo: ErrorInfo) {
-		new ClientLogger().error({
+		new Logger().error({
 			err: error,
 			errInfo,
 		});
