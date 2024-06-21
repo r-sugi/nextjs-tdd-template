@@ -6,7 +6,7 @@ import {
 	useUpdateMemberStatus,
 } from "@/core/repositories/member/members.repository";
 
-import { useNotifyAPIError } from "../error/useNotifyAPIError";
+import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
 import { useResignMember } from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");

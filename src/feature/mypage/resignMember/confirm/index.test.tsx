@@ -14,6 +14,7 @@ jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 jest.mock("@/utils/cache");
 jest.mock("@/core/usecases/member/useResignMember.command");
 
+// ブラックボックステストにする
 describe(IndexTemplate, () => {
 	afterEach(() => {
 		jest.resetAllMocks();

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
 import type { ApolloError } from "@apollo/client/errors";
-import { useNotifyAPIError } from "../error/useNotifyAPIError";
+import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
 
 type UseCaseLoading = {
 	data: InitialActiveMember;
