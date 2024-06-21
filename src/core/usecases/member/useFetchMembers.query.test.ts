@@ -7,7 +7,7 @@ import { activeMember } from "mocks/fixtures/activeMember";
 import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("../error/useNotifyAPIError");
+jest.mock("@/hooks/error/useNotifyAPIError");
 
 describe(useFetchMembers, () => {
 	describe("when success", () => {
