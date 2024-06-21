@@ -1,10 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
-import { ErrorTransformer } from "@/error/error.transformer";
-import { ClientError } from "@/error/http/clientError";
-import { Logger } from "@/lib/logger";
-
-import { UnhandledRejectionError } from "@/error/unhandledRejection/unhandledRejectionError";
+import { transformError } from "@/error/boundary/transform.error";
+import { transformUnhandledRejectionError } from "@/error/unhandledRejection/transform.error";
 import { ErrorScreen } from "./_error.screen";
 
 type ErrorBoundaryState = { error?: Error };
@@ -26,7 +23,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 		window.addEventListener(
 			"unhandledrejection",
 			(e: PromiseRejectionEvent) => {
-				throw new UnhandledRejectionError(e.reason);
+				throw transformUnhandledRejectionError(e.reason);
 			},
 		);
 	}
@@ -35,29 +32,17 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 		window.removeEventListener(
 			"unhandledrejection",
 			(e: PromiseRejectionEvent) => {
-				throw new UnhandledRejectionError(e.reason);
+				throw transformUnhandledRejectionError(e.reason);
 			},
 		);
 	}
 
 	componentDidCatch(err: Error, errInfo: ErrorInfo) {
-		new Logger().error({
-			err,
-			errInfo,
+		this.setState(() => {
+			return {
+				error: transformError(err, errInfo),
+			};
 		});
-		if (err instanceof ClientError) {
-			this.setState(() => {
-				return {
-					error: err,
-				};
-			});
-		} else {
-			this.setState(() => {
-				return {
-					error: new ErrorTransformer().transform(err),
-				};
-			});
-		}
 	}
 	render() {
 		if (this.state.error) {
