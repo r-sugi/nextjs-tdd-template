@@ -25,6 +25,7 @@ export const useSignIn = () => {
 			if (error instanceof FirebaseError) {
 				return notify.setError(transformClientAuthError(error));
 			}
+			// question(zawa): ここって到達しますっけ？
 			if (error instanceof HttpError) {
 				return notify.setError(transformHttpError(error));
 			}

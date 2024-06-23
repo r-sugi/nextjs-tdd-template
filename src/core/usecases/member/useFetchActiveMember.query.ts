@@ -27,7 +27,7 @@ type ErrorState = ApolloError | null;
 export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 	const [activeMember, setActiveMember] =
 		useState<ActiveMemberState>(initialActiveMember);
-		// question(zawa): このエラーは不要ですかね？
+	// question(zawa): このエラーは不要ですかね？
 	const [error, setError] = useState<ErrorState>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const query = useFindActiveMemberOne();
