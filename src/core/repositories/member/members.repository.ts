@@ -69,6 +69,8 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
+
+			// question(zawa): ここのエラーは何で null でいいんでしたっけ？
 			return { data: null, error: null };
 		}
 	};
@@ -113,6 +115,8 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 			if (error instanceof ApolloError) {
 				return { data: null, error };
 			}
+
+			// question(zawa): ここのエラーは何で null でいいんでしたっけ？
 			return { data: null, error: null };
 		}
 	};

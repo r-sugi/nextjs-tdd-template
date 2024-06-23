@@ -44,6 +44,8 @@ export const AppApolloProvider: FC<{
 						}
 					});
 				}
+				// question(zawa): ネットワークエラーのハンドリングがされていないっぽい？
+				//                 
 				if (networkError) {
 					console.log(`TODO: [Network error]: ${networkError}`);
 				}

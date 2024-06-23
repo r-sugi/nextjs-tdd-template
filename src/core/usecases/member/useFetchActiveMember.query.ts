@@ -27,6 +27,7 @@ type ErrorState = ApolloError | null;
 export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 	const [activeMember, setActiveMember] =
 		useState<ActiveMemberState>(initialActiveMember);
+		// question(zawa): このエラーは不要ですかね？
 	const [error, setError] = useState<ErrorState>(null);
 	const [loading, setLoading] = useState<boolean>(false);
 	const query = useFindActiveMemberOne();
@@ -49,6 +50,7 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 			setActiveMember(data);
 			setError(error);
 			error && notify.setError(error);
+			// question(zawa): loading が複数回更新される場合、関数で更新する必要がある、とかじゃなかったでしたっけ？
 			setLoading(false);
 		})();
 	}, []);

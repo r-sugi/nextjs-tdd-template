@@ -4,6 +4,7 @@ import type { FirebaseError } from "firebase/app";
 // @remarks transform error log for display on screen if you want
 export const transformClientAuthError = (error: FirebaseError) => {
 	if (error.code === "auth/user-not-found") {
+		// question(zawa): mapper 層なのに logging が入っているのは認識しずらいなと思いました
 		new Logger().error(error);
 		// TODO: send error to errorlog server
 		return error;
