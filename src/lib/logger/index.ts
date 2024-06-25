@@ -35,7 +35,10 @@ export class Logger {
 		}
 		return logLevel;
 	}
-
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	debug(message: any): void {
+		this.p.debug({ message, ...this.context });
+	}
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	info(message: any): void {
 		this.p.info({ message, ...this.context });

@@ -6,13 +6,24 @@ import {
 	useUpdateMemberStatus,
 } from "@/core/repositories/member/members.repository";
 
-import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useNotification } from "../../../error/hooks/useNotification";
 import { useResignMember } from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("@/hooks/error/useNotifyAPIError");
+jest.mock("@/error/hooks/useNotification");
+jest.mock("@/error/logging");
 
 describe(useResignMember, () => {
+	const mockSetError = jest.fn();
+	toMock(useNotification).mockImplementation(() => {
+		return {
+			notify: mockSetError,
+		};
+	});
+	const mockOutputErrorLog = jest.fn();
+	toMock(outputErrorLog).mockImplementation(mockOutputErrorLog);
+
 	describe("when success", () => {
 		it("return data", async () => {
 			const props = {
@@ -36,6 +47,8 @@ describe(useResignMember, () => {
 			await waitFor(async () => {
 				expect(await result.current(props)).toEqual(expected);
 			});
+			expect(mockSetError).not.toHaveBeenCalled();
+			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
 	});
 	describe("when error", () => {
@@ -54,19 +67,14 @@ describe(useResignMember, () => {
 			toMock(useUpdateMemberStatus).mockImplementationOnce(() => {
 				return async () => mockResponse;
 			});
-			const mockSetError = jest.fn();
-			toMock(useNotifyAPIError).mockImplementationOnce(() => {
-				return {
-					setError: mockSetError,
-				};
-			});
 
 			const { result } = renderHook(() => useResignMember());
 
 			await waitFor(async () => {
 				expect(await result.current(props)).toEqual(expected);
 			});
-			expect(mockSetError).toHaveBeenCalledWith(ERROR);
+			expect(mockSetError).toHaveBeenCalled();
+			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});
 	});
 });

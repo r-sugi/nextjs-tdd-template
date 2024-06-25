@@ -3,7 +3,8 @@ import {
 	type UpdateMemberStatusInputType,
 	useUpdateMemberStatus,
 } from "@/core/repositories/member/members.repository";
-import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useNotification } from "../../../error/hooks/useNotification";
 
 type Props = {
 	reasonType: string;
@@ -17,7 +18,7 @@ type UseResignMemberReturnType = {
 
 export const useResignMember = () => {
 	const mutate = useUpdateMemberStatus();
-	const notify = useNotifyAPIError();
+	const { notify } = useNotification();
 
 	return async (props: Props): Promise<UseResignMemberReturnType> => {
 		const activityInput: UpdateMemberStatusInputType = {
@@ -37,8 +38,10 @@ export const useResignMember = () => {
 			},
 		};
 		const { data, error } = await mutate(activityInput);
-		// ApolloErrorsをユーザーに通知している
-		error && notify.setError(error);
+		if (error) {
+			notify(error);
+			await outputErrorLog(error);
+		}
 		return {
 			data,
 		};

@@ -3,13 +3,24 @@ import { renderHook, waitFor } from "@testing-library/react";
 import { toMock } from "@/__testing__/helper";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
+import { outputErrorLog } from "@/error/outputErrorLog";
 import { activeMember } from "mocks/fixtures/activeMember";
-import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
+import { useNotification } from "../../../error/hooks/useNotification";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("@/hooks/error/useNotifyAPIError");
+jest.mock("@/error/hooks/useNotification");
+jest.mock("@/error/logging");
 
 describe(useFetchMembers, () => {
+	const mockSetError = jest.fn();
+	toMock(useNotification).mockImplementation(() => {
+		return {
+			notify: mockSetError,
+		};
+	});
+	const mockOutputErrorLog = jest.fn();
+	toMock(outputErrorLog).mockImplementation(mockOutputErrorLog);
+
 	describe("when success", () => {
 		it("return data", async () => {
 			const mockMembers = [activeMember];
@@ -30,6 +41,8 @@ describe(useFetchMembers, () => {
 					refetch: expect.any(Function),
 				});
 			});
+			expect(mockSetError).not.toHaveBeenCalled();
+			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
 	});
 
@@ -41,12 +54,6 @@ describe(useFetchMembers, () => {
 			} as any;
 			toMock(useFetchMembersByStatus).mockImplementationOnce(() => {
 				return async () => ({ data: null, error: ERROR });
-			});
-			const mockSetError = jest.fn();
-			toMock(useNotifyAPIError).mockImplementationOnce(() => {
-				return {
-					setError: mockSetError,
-				};
 			});
 
 			const props = {};
@@ -62,7 +69,8 @@ describe(useFetchMembers, () => {
 					refetch: expect.any(Function),
 				}),
 			);
-			expect(mockSetError).toHaveBeenCalledWith(ERROR);
+			expect(mockSetError).toHaveBeenCalled();
+			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});
 	});
 });

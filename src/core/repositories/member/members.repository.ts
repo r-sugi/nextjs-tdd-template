@@ -6,11 +6,10 @@ import {
 	useResignMemberMutation,
 } from "@/generated/graphql";
 
-import { ApolloError } from "@apollo/client";
-
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { MembersByType } from "@/core/domains/member/member";
-import { Logger } from "@/lib/logger";
+import type { AppErrorMessage } from "@/error/const";
+import { transformApolloError } from "@/error/transform/apollo/transform";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 import { resignMemberTransform } from "./transformer/resignMember.transformer";
@@ -20,7 +19,7 @@ import { resignMemberTransform } from "./transformer/resignMember.transformer";
  */
 type FetchActiveMemberReturnType = {
 	data: ActiveMember | null;
-	error: ApolloError | null;
+	error: AppErrorMessage | null;
 };
 type FindActiveMemberOneType = (
 	memberId: string,
@@ -35,19 +34,14 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 			const member = transform(res);
 			return { data: member, error: null };
 		} catch (error) {
-			// loggerでstacktraceを出力させている
-			new Logger().fatal(error);
-			if (error instanceof ApolloError) {
-				return { data: null, error };
-			}
-			return { data: null, error: null };
+			return { data: null, error: transformApolloError(error) };
 		}
 	};
 };
 
 type FetchMembersReturnType = {
 	data: MembersByType | null;
-	error: ApolloError | null;
+	error: AppErrorMessage | null;
 };
 
 type FetchMembersByStatusType = (
@@ -62,16 +56,8 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 			const res = await query({ variables: { status } });
 			const members = membersByStatusTransform(res, status);
 			return { data: members, error: null };
-		} catch (error) {
-			// loggerでstacktraceを出力させている
-			new Logger().fatal(error);
-
-			if (error instanceof ApolloError) {
-				return { data: null, error };
-			}
-
-			// question(zawa): ここのエラーは何で null でいいんでしたっけ？
-			return { data: null, error: null };
+		} catch (error: unknown) {
+			return { data: null, error: transformApolloError(error) };
 		}
 	};
 };
@@ -81,7 +67,7 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
  */
 type UseUpdateMemberStatusType = {
 	data: UpdateMemberStatusInputType["activityInput"] | null;
-	error: ApolloError | null;
+	error: AppErrorMessage | null;
 };
 
 export type UpdateMemberStatusInputType = {
@@ -110,14 +96,7 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 			const res = await mutate({ variables });
 			return { data: resignMemberTransform(res), error: null };
 		} catch (error) {
-			// loggerでstacktraceを出力させている
-			new Logger().fatal(error);
-			if (error instanceof ApolloError) {
-				return { data: null, error };
-			}
-
-			// question(zawa): ここのエラーは何で null でいいんでしたっけ？
-			return { data: null, error: null };
+			return { data: null, error: transformApolloError(error) };
 		}
 	};
 };
