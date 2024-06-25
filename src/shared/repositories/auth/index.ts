@@ -8,7 +8,7 @@ import {
 	signInWithEmailAndPassword,
 } from "firebase/auth";
 
-type SignUpProps = {
+export type SignUpProps = {
 	email: string;
 	password: string;
 };
@@ -30,7 +30,7 @@ export const signUp = async (signUpProps: SignUpProps): Promise<ResultType> => {
 	}
 };
 
-type SignInProps = {
+export type SignInProps = {
 	email: string;
 	password: string;
 };

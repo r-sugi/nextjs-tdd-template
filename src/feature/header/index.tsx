@@ -7,7 +7,7 @@ import {
 	publicPages,
 } from "@/const/paths";
 
-import { signOut } from "@/shared/repositories/auth";
+import { useSignOut } from "@/shared/usecases/auth/useSignOut.command";
 import { useAuthContext } from "../auth/provider/AuthProvider";
 
 const pages = [
@@ -25,7 +25,7 @@ export default function HeaderTemplate() {
 	const router = useRouter();
 
 	const signOutHandler = async () => {
-		await signOut();
+		await useSignOut();
 		await router.push(publicPages.signIn.path());
 	};
 

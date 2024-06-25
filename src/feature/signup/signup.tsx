@@ -19,6 +19,7 @@ export default function SignUpTemplate() {
 		event?: BaseSyntheticEvent,
 	) => {
 		event?.preventDefault?.();
+		// TODO:
 		await signUp({
 			email: data.email,
 			password: data.password,
