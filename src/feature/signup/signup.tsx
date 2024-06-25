@@ -1,5 +1,5 @@
 import { loginRequiredPages, publicPages } from "@/const/paths";
-import { signUp } from "@/shared/repositories/auth";
+import { useSignUp } from "@/shared/usecases/auth/useSignUp.command";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import type { BaseSyntheticEvent } from "react";
@@ -19,8 +19,7 @@ export default function SignUpTemplate() {
 		event?: BaseSyntheticEvent,
 	) => {
 		event?.preventDefault?.();
-		// TODO:
-		await signUp({
+		await useSignUp({
 			email: data.email,
 			password: data.password,
 		});

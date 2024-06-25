@@ -21,13 +21,8 @@ export default function IndexTemplate() {
 		event?: BaseSyntheticEvent,
 	) => {
 		event?.preventDefault?.();
-
-		try {
-			setCache("resignMember", data);
-			await router.push(loginRequiredPages.mypageResignMemberConfirm.path());
-		} catch (error) {
-			window.alert("TODO: エラー処理(例: 入力値のバリデーションエラーなど)");
-		}
+		setCache("resignMember", data);
+		await router.push(loginRequiredPages.mypageResignMemberConfirm.path());
 	};
 
 	return (

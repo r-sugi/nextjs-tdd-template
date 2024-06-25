@@ -1,5 +1,4 @@
 import { loginRequiredPages, publicPages } from "@/const/paths";
-import { signIn } from "@/shared/repositories/auth";
 import { useSignIn } from "@/shared/usecases/auth/useSignIn.command";
 import Link from "next/link";
 import { useRouter } from "next/router";
