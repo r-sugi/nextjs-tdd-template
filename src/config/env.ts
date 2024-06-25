@@ -11,3 +11,6 @@ export const NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN =
 	process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN ?? "";
 export const NEXT_PUBLIC_FIREBASE_PROJECT_ID =
 	process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID ?? "";
+
+// sentry
+export const isSentryEnabled = process.env.NODE_ENV === "production";

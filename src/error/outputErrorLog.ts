@@ -1,4 +1,6 @@
+import { isSentryEnabled } from "@/config/env";
 import { Logger } from "@/lib/logger";
+import * as Sentry from "@sentry/nextjs";
 import type { AppErrorMessage } from "./const";
 
 const logging = (error: AppErrorMessage) => {
@@ -21,10 +23,8 @@ const logging = (error: AppErrorMessage) => {
 };
 
 const sendLog = (error: AppErrorMessage) => {
-	// TODO: STG, PRODのときだけSentryにログを送信する
-	if (["fatal", "error"].includes(error.level)) {
-		// Sentry.captureException(error);
-		console.log("TODO:");
+	if (isSentryEnabled && ["fatal", "error"].includes(error.level)) {
+		Sentry.captureException(error);
 	}
 };
 
