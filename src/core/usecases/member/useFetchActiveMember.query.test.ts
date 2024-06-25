@@ -9,7 +9,7 @@ import { useNotification } from "../../../error/hooks/useNotification";
 
 jest.mock("@/core/repositories/member/members.repository");
 jest.mock("@/error/hooks/useNotification");
-jest.mock("@/error/logging");
+jest.mock("@/error/outputErrorLog");
 
 describe("useFetchActiveMember", () => {
 	const mockSetError = jest.fn();

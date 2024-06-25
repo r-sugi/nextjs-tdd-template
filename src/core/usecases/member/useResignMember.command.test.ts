@@ -12,7 +12,7 @@ import { useResignMember } from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");
 jest.mock("@/error/hooks/useNotification");
-jest.mock("@/error/logging");
+jest.mock("@/error/outputErrorLog");
 
 describe(useResignMember, () => {
 	const mockSetError = jest.fn();
