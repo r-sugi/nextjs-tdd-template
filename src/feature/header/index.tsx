@@ -20,27 +20,39 @@ const pages = [
 	adminSecretPages.members,
 ];
 
-export default function HeaderTemplate() {
+export const HeaderTemplate = () => {
 	const { member } = useAuthContext();
 	const router = useRouter();
+	const { signOut } = useSignOut();
 
 	const signOutHandler = async () => {
-		await useSignOut();
+		await signOut();
 		await router.push(publicPages.signIn.path());
+	};
+
+	// TODO: コンポーネントに切り出す？
+	const signInButton = () => {
+		// ログイン中の場合
+		if (member) {
+			return (
+				<button type="button" onClick={() => signOutHandler()}>
+					サインアウト
+				</button>
+			);
+		}
+		// 初期値
+		if (member === undefined) {
+			return null;
+		}
+		// ログインしていない場合
+		return <Link href={publicPages.signIn.path()}>サインイン</Link>;
 	};
 
 	return (
 		<div>
 			<hr />
 			ヘッダー
-			<div>{member ? "サインイン中" : "サインアウト中"}</div>
-			{member ? (
-				<button type="button" onClick={() => signOutHandler()}>
-					サインアウト
-				</button>
-			) : (
-				<Link href={publicPages.signIn.path()}>サインイン</Link>
-			)}
+			{signInButton()}
 			<ul>
 				{pages.map((page) => (
 					<li key={page.path()}>
@@ -51,4 +63,4 @@ export default function HeaderTemplate() {
 			<hr />
 		</div>
 	);
-}
+};
