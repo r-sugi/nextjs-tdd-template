@@ -7,6 +7,7 @@ import { type SignUpSchema, useSignUpForm } from "./hooks/form";
 
 export default function SignUpTemplate() {
 	const router = useRouter();
+	const { signUpMutation } = useSignUp();
 
 	const {
 		register,
@@ -19,7 +20,7 @@ export default function SignUpTemplate() {
 		event?: BaseSyntheticEvent,
 	) => {
 		event?.preventDefault?.();
-		await useSignUp({
+		await signUpMutation({
 			email: data.email,
 			password: data.password,
 		});

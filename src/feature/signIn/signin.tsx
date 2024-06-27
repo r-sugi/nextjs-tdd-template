@@ -7,6 +7,7 @@ import { type SignInSchema, useSignInForm } from "./hooks/form";
 
 export default function SignInTemplate() {
 	const router = useRouter();
+	const { signInMutation } = useSignIn();
 
 	const {
 		register,
@@ -19,7 +20,7 @@ export default function SignInTemplate() {
 		event?: BaseSyntheticEvent,
 	) => {
 		event?.preventDefault?.();
-		await useSignIn({
+		await signInMutation({
 			email: data.email,
 			password: data.password,
 		});

@@ -2,11 +2,16 @@ import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
 import { signOut } from "@/shared/repositories/auth";
 
-export const useSignOut = async () => {
+export const useSignOut = () => {
 	const { notify } = useNotification();
-	const { error } = await signOut();
-	if (error) {
-		notify(error);
-		await outputErrorLog(error);
-	}
+
+	return {
+		signOutMutation: async () => {
+			const { error } = await signOut();
+			if (error) {
+				notify(error);
+				await outputErrorLog(error);
+			}
+		},
+	};
 };

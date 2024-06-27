@@ -23,10 +23,10 @@ const pages = [
 export const HeaderTemplate = () => {
 	const { member } = useAuthContext();
 	const router = useRouter();
-	const { signOut } = useSignOut();
+	const { signOutMutation } = useSignOut();
 
 	const signOutHandler = async () => {
-		await signOut();
+		await signOutMutation();
 		await router.push(publicPages.signIn.path());
 	};
 

@@ -29,8 +29,10 @@ describe(useSignUp, () => {
 		it("error func not called", async () => {
 			toMock(signUp).mockResolvedValue({ data: true, error: null });
 
-			await useSignUp(args);
+			const { signUpMutation } = useSignUp();
+			await signUpMutation(args);
 
+			expect(signUp).toHaveBeenCalledTimes(1);
 			expect(mockSetError).not.toHaveBeenCalled();
 			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
@@ -43,8 +45,10 @@ describe(useSignUp, () => {
 
 			toMock(signUp).mockResolvedValue({ data: null, error: ERROR });
 
-			await useSignUp(args);
+			const { signUpMutation } = useSignUp();
+			await signUpMutation(args);
 
+			expect(signUp).toHaveBeenCalled();
 			expect(mockSetError).toHaveBeenCalled();
 			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});

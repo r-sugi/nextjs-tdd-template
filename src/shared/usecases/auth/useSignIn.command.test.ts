@@ -2,6 +2,7 @@ import { toMock } from "@/__testing__/helper";
 import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
 import { signIn } from "@/shared/repositories/auth";
+import { renderHook } from "@testing-library/react";
 import { useSignIn } from "./useSignIn.command";
 
 jest.mock("@/shared/repositories/auth");
@@ -28,8 +29,10 @@ describe(useSignIn, () => {
 		it("error func not called", async () => {
 			toMock(signIn).mockResolvedValue({ data: true, error: null });
 
-			await useSignIn(args);
+			const { signInMutation } = useSignIn();
+			await signInMutation(args);
 
+			expect(signIn).toHaveBeenCalledTimes(1);
 			expect(mockSetError).not.toHaveBeenCalled();
 			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
@@ -42,8 +45,10 @@ describe(useSignIn, () => {
 
 			toMock(signIn).mockResolvedValue({ data: null, error: ERROR });
 
-			await useSignIn(args);
+			const { signInMutation } = useSignIn();
+			await signInMutation(args);
 
+			expect(signIn).toHaveBeenCalled();
 			expect(mockSetError).toHaveBeenCalled();
 			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});
