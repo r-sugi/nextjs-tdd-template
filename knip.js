@@ -3,14 +3,9 @@ module.exports = {
 		"**/*.d.ts",
 		// Unused files
 		"functions/src/index.ts",
-		"mocks/browser.ts",
-		"mocks/index.ts",
-		"mocks/server.ts",
-		"mocks/rest/restHandlers.ts",
+		"mocks/**/*.ts",
 		"public/mockServiceWorker.js",
 		"src/error/errors/unhandledRejectionError.ts",
-		"src/__todo/PostIdErrorBoundary.tsx",
-		"src/__todo/PostIdErrorScreen.tsx",
 		// Unused exports, Unused exported types of component templates
 		"src/components/**/*.*",
 		"biome.js",

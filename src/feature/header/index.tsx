@@ -54,6 +54,16 @@ export const HeaderTemplate = () => {
 			ヘッダー
 			{signInButton()}
 			<ul>
+				<li key="1">
+					<Link href={publicPages.articleDetail.path("1")}>
+						{publicPages.articleDetail.title("記事1")}
+					</Link>
+				</li>
+				<li key="2">
+					<Link href={publicPages.articleDetail.path("2")}>
+						{publicPages.articleDetail.title("記事2")}
+					</Link>
+				</li>
 				{pages.map((page) => (
 					<li key={page.path()}>
 						<Link href={page.path()}>{page.title()}</Link>

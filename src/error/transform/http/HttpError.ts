@@ -14,6 +14,7 @@ export class HttpError extends Error {
 	public error: ErrorResponse["error"];
 	public status: number;
 	public statusText: string;
+	public headers?: Headers;
 
 	constructor(response: ErrorResponse) {
 		super(response.statusText);
@@ -21,5 +22,6 @@ export class HttpError extends Error {
 		this.error = response.error;
 		this.status = response.status;
 		this.statusText = response.statusText;
+		this.headers = response.headers;
 	}
 }
