@@ -52,7 +52,7 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			initMembers(data);
 			if (error) {
 				notify(error);
-				await outputErrorLog(error);
+				outputErrorLog(error);
 			}
 		})();
 	}, [queryMemberStatus]);

@@ -10,6 +10,12 @@ const publicPages = {
 		titleShort: "トップページ",
 		description: () => "トップページです。",
 	},
+	articleDetail: {
+		path: (articleId: string) => `/articles/${articleId}`,
+		title: (aTitle?: string) => title(aTitle ?? "個別記事"),
+		titleShort: "記事タイトル",
+		description: (aDescription: string) => aDescription,
+	},
 	signUp: {
 		path: () => "/signUp",
 		title: () => title("会員登録"),

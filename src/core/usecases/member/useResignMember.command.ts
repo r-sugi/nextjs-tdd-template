@@ -40,7 +40,7 @@ export const useResignMember = () => {
 		const { data, error } = await mutate(activityInput);
 		if (error) {
 			notify(error);
-			await outputErrorLog(error);
+			outputErrorLog(error);
 		}
 		return {
 			data,

@@ -19,17 +19,14 @@ describe(useSignOut, () => {
 	const mockOutputErrorLog = jest.fn();
 	toMock(outputErrorLog).mockImplementation(mockOutputErrorLog);
 
-	const args = {
-		email: "",
-		password: "",
-	};
-
 	describe("when success", () => {
 		it("error func not called", async () => {
 			toMock(signOut).mockResolvedValue({ data: true, error: null });
 
-			await useSignOut();
+			const { signOutMutation } = useSignOut();
+			await signOutMutation();
 
+			expect(signOut).toHaveBeenCalledTimes(1);
 			expect(mockSetError).not.toHaveBeenCalled();
 			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
@@ -42,8 +39,10 @@ describe(useSignOut, () => {
 
 			toMock(signOut).mockResolvedValue({ data: null, error: ERROR });
 
-			await useSignOut();
+			const { signOutMutation } = useSignOut();
+			await signOutMutation();
 
+			expect(signOut).toHaveBeenCalled();
 			expect(mockSetError).toHaveBeenCalled();
 			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});

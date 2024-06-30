@@ -10,7 +10,7 @@ import {
 } from "react";
 
 type GlobalAuthState = {
-	member: User | null | undefined;
+	member: undefined | User | null;
 };
 const initialState: GlobalAuthState = {
 	member: undefined,

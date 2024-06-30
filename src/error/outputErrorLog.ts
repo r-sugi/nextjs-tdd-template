@@ -28,7 +28,7 @@ const sendLog = (error: AppErrorMessage) => {
 	}
 };
 
-export const outputErrorLog = async (error: AppErrorMessage) => {
+export const outputErrorLog = (error: AppErrorMessage) => {
 	logging(error);
 	sendLog(error);
 };

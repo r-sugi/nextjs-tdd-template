@@ -1,4 +1,4 @@
-type RuntimeError = {
+export type RuntimeError = {
 	cause?: unknown | string;
 	stack?: string;
 };
@@ -10,6 +10,10 @@ export type AppErrorMessage = {
 	level: "fatal" | "error" | "warning" | "info" | "debug";
 	// runtime error
 	runtime?: RuntimeError;
+};
+
+export type AppServerErrorMessage = AppErrorMessage & {
+	status: number;
 };
 
 // TODO: 下記の型だとEE99までサジェストされないので、直したい
@@ -64,8 +68,50 @@ export const APP_ERROR: AppError = {
 				myErrorCode: "AU20",
 				level: "error",
 			},
+			H400: {
+				// 不正なリクエスト
+				title: "Bad Request",
+				message: "不正なリクエストです。",
+				myErrorCode: "H400",
+				level: "error",
+			},
+			H401: {
+				// 認証エラー
+				title: "Unauthorized",
+				message: "認証エラー",
+				myErrorCode: "H401",
+				level: "error",
+			},
+			H403: {
+				// アクセス禁止
+				title: "Forbidden",
+				message: "アクセスが禁止されています。",
+				myErrorCode: "H403",
+				level: "error",
+			},
+			H404: {
+				// リソースがない
+				title: "Not Found",
+				message: "リソースが見つかりませんでした。",
+				myErrorCode: "H404",
+				level: "error",
+			},
+			H408: {
+				// タイムアウト
+				title: "Request Timeout",
+				message: "タイムアウトしました。",
+				myErrorCode: "H408",
+				level: "error",
+			},
 		},
 		UNRECOVERABLE: {
+			H500: {
+				// サーバーエラー
+				title: "Internal Server Error",
+				message: "サーバーエラーが発生しました。",
+				myErrorCode: "H500",
+				level: "fatal",
+			},
 			AU99: {
 				// firebaseエラー
 				title: "ネットワークエラー",
