@@ -39,7 +39,7 @@ export const transformHttpError = (
 			case 500:
 				// INTERNAL_SERVER_ERROR
 				return {
-					...APP_ERROR.SYSTEM.UNRECOVERABLE.H500,
+					...APP_ERROR.BUSINESS.UNRECOVERABLE.H500,
 					...errInfo,
 				};
 			default:

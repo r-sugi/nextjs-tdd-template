@@ -1,5 +1,4 @@
 import type { AppErrorMessage } from "@/error/const";
-import { transformClientAuthError } from "@/error/transform/auth/transform";
 import {
 	createUserWithEmailAndPassword,
 	signOut as firebaseSignOut,
@@ -7,6 +6,7 @@ import {
 	sendEmailVerification,
 	signInWithEmailAndPassword,
 } from "firebase/auth";
+import { transformError } from "./transformError";
 
 export type SignUpProps = {
 	email: string;
@@ -26,7 +26,7 @@ export const signUp = async (signUpProps: SignUpProps): Promise<ResultType> => {
 		await sendEmailVerification(userCredential.user);
 		return { data: true, error: null };
 	} catch (error) {
-		return { data: null, error: transformClientAuthError(error) };
+		return { data: null, error: transformError(error) };
 	}
 };
 
@@ -45,7 +45,7 @@ export const signIn = async (signInProps: SignInProps): Promise<ResultType> => {
 		);
 		return { data: true, error: null };
 	} catch (error) {
-		return { data: null, error: transformClientAuthError(error) };
+		return { data: null, error: transformError(error) };
 	}
 };
 
@@ -55,6 +55,6 @@ export const signOut = async (): Promise<ResultType> => {
 		await firebaseSignOut(auth);
 		return { data: true, error: null };
 	} catch (error) {
-		return { data: null, error: transformClientAuthError(error) };
+		return { data: null, error: transformError(error) };
 	}
 };

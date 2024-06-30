@@ -17,13 +17,6 @@ export const ServerErrorBoundary = ({
 	error,
 	render,
 }: ServerErrorScreenProps): ReactNode => {
-	// useEffect(() => {
-	// 	(async () => {
-	// 		// TODO: getServerSidePropsでloggingした方がよいか？（SSRの処理が遅くなる？）
-	// 		// outputErrorLog(error);
-	// 	})();
-	// }, [error]);
-
 	if (render) {
 		return render(error);
 	}

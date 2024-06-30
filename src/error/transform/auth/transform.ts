@@ -1,10 +1,14 @@
 import { APP_ERROR, type AppErrorMessage } from "@/error/const";
 import { FirebaseError } from "firebase/app";
 
-export const transformClientAuthError = (error: unknown): AppErrorMessage => {
+export const transformClientAuthError = (
+	error: unknown,
+): AppErrorMessage | undefined => {
 	if (error instanceof FirebaseError) {
 		// サインアップ系
 		if (error.code === "auth/email-already-in-use") {
+			// TODO: runtime errorをマージする
+			// https://github.com/r-sugi/nextjs-tdd-template/pull/113#discussion_r1653793977
 			return APP_ERROR.BUSINESS.RECOVERABLE.AU10;
 		}
 		// サインイン系
@@ -16,5 +20,4 @@ export const transformClientAuthError = (error: unknown): AppErrorMessage => {
 			return APP_ERROR.BUSINESS.UNRECOVERABLE.AU99;
 		}
 	}
-	return APP_ERROR.SYSTEM.UNRECOVERABLE.EE99;
 };
