@@ -20,6 +20,7 @@ module.exports = {
 		"msw",
 		"jest-environment-jsdom",
 		"eslint-import-resolver-typescript",
+		"pino-pretty",
 		// Unlisted dependencies
 		"dotenv",
 	],

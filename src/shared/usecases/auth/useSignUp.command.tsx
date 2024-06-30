@@ -10,7 +10,7 @@ export const useSignUp = () => {
 			const { error } = await signUp(signUpProps);
 			if (error) {
 				notify(error);
-				await outputErrorLog(error);
+				outputErrorLog(error);
 			}
 		},
 	};

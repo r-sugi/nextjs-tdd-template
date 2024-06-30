@@ -18,7 +18,7 @@ const paramsSchema = z.object({
 export const validateParams = (
 	params?: ParsedUrlQuery,
 ): ValidateParamsResult => {
-	const result = paramsSchema.safeParse(params?.id);
+	const result = paramsSchema.safeParse(params);
 	if (!result.success) {
 		const error = new HttpError({
 			error: {

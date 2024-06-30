@@ -1,4 +1,5 @@
 import { fetchArticleById } from "@/core/repositories/article/articles.repository";
+import { outputErrorLog } from "@/error/outputErrorLog";
 import { transformHttpError } from "@/error/transform/http/transform";
 import type { GetServerSideProps } from "next";
 import type { PagePropsType } from "../index.page";
@@ -30,6 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 		};
 	} catch (error) {
 		const formatError = transformError(error);
+		outputErrorLog(formatError);
 		res.statusCode = formatError.status;
 		return {
 			props: {

@@ -1,5 +1,14 @@
 import pino, { type Logger as PinoLogger } from "pino";
 
+const config = {
+	transport: {
+		target: "pino-pretty",
+		options: {
+			colorize: true,
+		},
+	},
+};
+
 export class Logger {
 	private readonly p: PinoLogger;
 	private context: Record<string, unknown> = {};
@@ -7,11 +16,13 @@ export class Logger {
 	constructor() {
 		if (typeof window !== "undefined") {
 			this.p = pino({
+				...config,
 				browser: { asObject: true },
 				level: this.logLevel(),
 			});
 		} else {
 			this.p = pino({
+				...config,
 				level: this.logLevel(),
 			});
 		}

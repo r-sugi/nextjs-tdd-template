@@ -10,7 +10,7 @@ export const useSignOut = () => {
 			const { error } = await signOut();
 			if (error) {
 				notify(error);
-				await outputErrorLog(error);
+				outputErrorLog(error);
 			}
 		},
 	};

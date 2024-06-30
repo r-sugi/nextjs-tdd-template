@@ -39,7 +39,7 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 			setActiveMember(data);
 			if (error) {
 				notify(error);
-				await outputErrorLog(error);
+				outputErrorLog(error);
 			}
 			setLoading(() => false);
 		})();

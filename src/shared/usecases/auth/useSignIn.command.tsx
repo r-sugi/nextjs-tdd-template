@@ -10,7 +10,7 @@ export const useSignIn = () => {
 			const { error } = await signIn(signInProps);
 			if (error) {
 				notify(error);
-				await outputErrorLog(error);
+				outputErrorLog(error);
 			}
 		},
 	};
