@@ -4,6 +4,7 @@ import { Logger } from "@/lib/logger";
 import { NoCacheError } from "@/utils/cache/error";
 
 import { loginRequiredPages, publicPages } from "@/const/paths";
+import { transformBoundaryError } from "@/error/transform/boundary/transform";
 import { ErrorScreen as ConfirmErrorScreen } from "./errorScreen";
 
 type ErrorBoundaryState = { error?: Error };
@@ -22,10 +23,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 	}
 
 	componentDidCatch(error: Error, errInfo: ErrorInfo) {
-		new Logger().error({
-			err: error,
-			errInfo,
-		});
 		if (error instanceof NoCacheError) {
 			this.setState(() => {
 				return {
@@ -34,7 +31,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 			});
 			return error;
 		}
-		throw new Error(error.message);
+		throw transformBoundaryError(error, errInfo);
 	}
 	render() {
 		if (this.state.error) {
