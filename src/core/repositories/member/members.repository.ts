@@ -9,7 +9,7 @@ import {
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { MembersByType } from "@/core/domains/member/member";
 import type { AppErrorMessage } from "@/error/const";
-import { transformApolloError } from "@/error/transform/apollo/transform";
+import { transformError } from "./transformError";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 import { resignMemberTransform } from "./transformer/resignMember.transformer";
@@ -34,7 +34,7 @@ export const useFindActiveMemberOne = (): FindActiveMemberOneType => {
 			const member = transform(res);
 			return { data: member, error: null };
 		} catch (error) {
-			return { data: null, error: transformApolloError(error) };
+			return { data: null, error: transformError(error) };
 		}
 	};
 };
@@ -57,7 +57,7 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 			const members = membersByStatusTransform(res, status);
 			return { data: members, error: null };
 		} catch (error: unknown) {
-			return { data: null, error: transformApolloError(error) };
+			return { data: null, error: transformError(error) };
 		}
 	};
 };
@@ -96,7 +96,7 @@ export const useUpdateMemberStatus = (): UpdateMemberStatusType => {
 			const res = await mutate({ variables });
 			return { data: resignMemberTransform(res), error: null };
 		} catch (error) {
-			return { data: null, error: transformApolloError(error) };
+			return { data: null, error: transformError(error) };
 		}
 	};
 };

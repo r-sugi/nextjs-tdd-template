@@ -16,21 +16,7 @@ export type AppServerErrorMessage = AppErrorMessage & {
 	status: number;
 };
 
-// TODO: 下記の型だとEE99までサジェストされないので、直したい
-type AppErrorObject = Record<string, AppErrorMessage>;
-
-type AppError = {
-	SYSTEM: {
-		RECOVERABLE: AppErrorObject;
-		UNRECOVERABLE: AppErrorObject;
-	};
-	BUSINESS: {
-		RECOVERABLE: AppErrorObject;
-		UNRECOVERABLE: AppErrorObject;
-	};
-};
-
-export const APP_ERROR: AppError = {
+export const APP_ERROR = {
 	SYSTEM: {
 		RECOVERABLE: {},
 		UNRECOVERABLE: {
@@ -122,4 +108,4 @@ export const APP_ERROR: AppError = {
 			},
 		},
 	},
-};
+} as const;

@@ -28,6 +28,7 @@ const sendLog = (error: AppErrorMessage) => {
 	}
 };
 
+// TODO: 関数名を改善したい
 export const outputErrorLog = (error: AppErrorMessage) => {
 	logging(error);
 	sendLog(error);
