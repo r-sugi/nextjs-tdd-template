@@ -11,8 +11,7 @@ module.exports = {
 		"biome.js",
 		"functions/lib/**",
 		"functions/src/index.ts",
-		"src/error/transform/http/HttpError.ts",
-		"src/error/transform/http/transform.ts",
+		"src/api/articles/[id]/index.ts",
 	],
 	ignoreWorkspaces: ["src/generated/**"],
 	ignoreDependencies: [

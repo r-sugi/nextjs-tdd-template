@@ -1,5 +1,5 @@
-type ErrorResponse = {
-	data: undefined;
+export type ErrorResponse = {
+	data?: undefined;
 	error: {
 		message: string;
 		errors?: { code: string; message: string; name: string }[];
@@ -10,7 +10,7 @@ type ErrorResponse = {
 };
 
 export class HttpError extends Error {
-	public data: undefined;
+	public data?: undefined;
 	public error: ErrorResponse["error"];
 	public status: number;
 	public statusText: string;

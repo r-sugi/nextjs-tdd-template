@@ -6,7 +6,7 @@ import { ServerErrorBoundary } from "@/pages/_error/_server.error.boundary";
 import { Seo } from "@/pages/_seo/seo";
 import type { NextPage } from "next";
 
-export { getServerSideProps } from "./index.server";
+export { getServerSideProps } from "./_server";
 
 type Success = { article: Article };
 type Failure = { error: AppServerErrorMessage };
