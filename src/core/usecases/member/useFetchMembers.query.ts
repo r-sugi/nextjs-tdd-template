@@ -1,16 +1,11 @@
-import {
-	type Dispatch,
-	type SetStateAction,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 
 import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
+import { useNotification } from "@/error/hooks/useNotification";
+import { outputErrorLog } from "@/error/outputErrorLog";
 import type { ApolloError } from "@apollo/client";
-import { useNotifyAPIError } from "../../../hooks/error/useNotifyAPIError";
 
 type UseCaseLoading = {
 	data: {
@@ -38,30 +33,27 @@ type Props = {
 	status?: MemberStatus;
 };
 
+type MembersState = MembersByType | null | undefined;
+
 export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
 		props?.status ?? memberStatus.pendingActivation,
 	);
-	const [members, setMembers] = useState<MembersByType | null>(null);
+	const [members, setMembers] = useState<MembersState>(undefined);
 	const initMembers = (members: MembersByType | null) =>
 		setMembers(members ?? []);
-	const [error, setError] = useState<ApolloError | null>(null);
 	const query = useFetchMembersByStatus();
-	const notify = useNotifyAPIError();
-
-	// チラつき防止
-	const ref = useRef(error);
-	useEffect(() => {
-		ref.current = error;
-	}, [error]);
+	const { notify } = useNotification();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		(async () => {
 			const { data, error } = await query(queryMemberStatus);
 			initMembers(data);
-			setError(error);
-			error && notify.setError(error);
+			if (error) {
+				notify(error);
+				await outputErrorLog(error);
+			}
 		})();
 	}, [queryMemberStatus]);
 
@@ -70,7 +62,7 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			members,
 			queryMemberStatus,
 		},
-		loading: members === null && error === null,
+		loading: members === undefined,
 		refetch: setQueryMemberStatus,
 	} as UseCase<MembersByType>;
 };

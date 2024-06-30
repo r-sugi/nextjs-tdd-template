@@ -1,24 +1,20 @@
-import { Logger } from "@/lib/logger";
-import type { FirebaseError } from "firebase/app";
+import { APP_ERROR, type AppErrorMessage } from "@/error/const";
+import { FirebaseError } from "firebase/app";
 
-// @remarks transform error log for display on screen if you want
-export const transformClientAuthError = (error: FirebaseError) => {
-	if (error.code === "auth/user-not-found") {
-		new Logger().error(error);
-		// TODO: send error to errorlog server
-		return error;
+export const transformClientAuthError = (error: unknown): AppErrorMessage => {
+	if (error instanceof FirebaseError) {
+		// サインアップ系
+		if (error.code === "auth/email-already-in-use") {
+			return APP_ERROR.BUSINESS.RECOVERABLE.AU10;
+		}
+		// サインイン系
+		if (error.code === "auth/user-not-found") {
+			return APP_ERROR.BUSINESS.RECOVERABLE.AU20;
+		}
+		// ネットワーク系
+		if (error.code === "auth/network-request-failed") {
+			return APP_ERROR.BUSINESS.UNRECOVERABLE.AU99;
+		}
 	}
-	if (error.code === "auth/email-already-in-use") {
-		new Logger().error(error);
-		// TODO: send error to errorlog server
-		return error;
-	}
-	if (error.code === "auth/network-request-failed") {
-		new Logger().fatal(error);
-		// TODO: send error to errorlog server
-		return error;
-	}
-	new Logger().fatal(error);
-	// TODO: send error to errorlog server
-	return error;
+	return APP_ERROR.SYSTEM.UNRECOVERABLE.EE99;
 };

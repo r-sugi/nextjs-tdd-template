@@ -1,13 +1,12 @@
 import { loginRequiredPages, publicPages } from "@/const/paths";
+import { useSignIn } from "@/shared/usecases/auth/useSignIn.command";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import type { BaseSyntheticEvent } from "react";
-import { useSignIn } from "../auth/hooks/useSignIn.command";
 import { type SignInSchema, useSignInForm } from "./hooks/form";
 
 export default function SignInTemplate() {
 	const router = useRouter();
-	const { signIn } = useSignIn();
 
 	const {
 		register,
@@ -20,7 +19,7 @@ export default function SignInTemplate() {
 		event?: BaseSyntheticEvent,
 	) => {
 		event?.preventDefault?.();
-		await signIn({
+		await useSignIn({
 			email: data.email,
 			password: data.password,
 		});
