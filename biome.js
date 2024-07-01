@@ -1,5 +1,13 @@
 module.exports = {
 	$schema: "https://biomejs.dev/schemas/1.8.0/schema.json",
+	files: {
+		include: ["src/**"],
+		ignore: [
+			"**/node_modules/**",
+			"src/generated/types.ts",
+			"src/**/*.generated.ts",
+		],
+	},
 	vcs: {
 		enabled: true,
 		clientKind: "git",
@@ -10,10 +18,11 @@ module.exports = {
 	},
 	formatter: {
 		enabled: true,
-		include: ["src/**"],
+		// include: ["src/**"],
 		indentWidth: 2,
 		indentStyle: "space",
 		lineWidth: 100,
+		ignore: ["**/node_modules/**", "**/generated/**"],
 	},
 	javascript: {
 		parser: {
@@ -30,7 +39,7 @@ module.exports = {
 	},
 	linter: {
 		enabled: true,
-		include: ["src/**"],
+		// include: ["src/**"],
 		rules: {
 			recommended: true,
 			style: {

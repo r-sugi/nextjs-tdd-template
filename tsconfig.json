@@ -31,5 +31,12 @@
     ".next/types/**/*.ts",
     "codegen.js"
   ],
-  "exclude": ["node_modules", ".next", "out", "public", "functions"]
+  "exclude": [
+    "node_modules",
+    ".next",
+    "out",
+    "public",
+    "functions",
+    "**/**/generated/*.ts"
+  ]
 }

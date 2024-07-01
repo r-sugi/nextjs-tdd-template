@@ -1,14 +1,14 @@
 import type { MemberStatus } from "@/core/domains/member/status";
-import {
-	type ResignMemberMutationVariables,
-	useGetActiveMemberLazyQuery,
-	useGetMembersByStatusLazyQuery,
-	useResignMemberMutation,
-} from "@/generated/graphql";
 
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { MembersByType } from "@/core/domains/member/member";
 import type { AppErrorMessage } from "@/error/const";
+import {
+	type ResignMemberMutationVariables,
+	useResignMemberMutation,
+} from "./graphql/MutationResignMember.generated";
+import { useGetActiveMemberLazyQuery } from "./graphql/QueryActiveMember.generated";
+import { useGetMembersByStatusLazyQuery } from "./graphql/QueryMembersByStatus.generated";
 import { transformError } from "./transformError";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";

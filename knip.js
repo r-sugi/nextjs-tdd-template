@@ -12,6 +12,8 @@ module.exports = {
 		"functions/lib/**",
 		"functions/src/index.ts",
 		"src/api/articles/[id]/index.ts",
+		"src/generated/types.ts",
+		"src/**/*.generated.ts",
 	],
 	ignoreWorkspaces: ["src/generated/**"],
 	ignoreDependencies: [
