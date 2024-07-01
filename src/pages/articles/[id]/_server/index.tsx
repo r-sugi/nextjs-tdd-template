@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 		}
 
 		// TODO: mswでmockできなさそう(/api/xxxがあるが、500エラーになっている)
-		// 過去にうまく行った時のPRがこれだった気がする　https://github.com/r-sugi/nextjs-tdd-template/pull/3/files#diff-4eddf35da52afa00c787cc8b42c10e7c04def3ecf6a4f83686bbdad6135ca0d4
+		// pages/api/*との疎通はできた
 		const res = await fetchArticleById(result.params.id);
 		return {
 			props: {
