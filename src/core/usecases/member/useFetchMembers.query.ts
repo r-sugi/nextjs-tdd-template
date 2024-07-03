@@ -5,43 +5,45 @@ import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
-import type { ApolloError } from "@apollo/client";
 
-type UseCaseLoading = {
+// @remarks: 配列の場合は、空配列を初期値とする(データ取得失敗時はエラー表示するためデータを参照して処理しない方針)
+type InitialMembersState = [];
+type ResultMembersState = MembersByType | null;
+type MembersState = InitialMembersState | ResultMembersState;
+const initialMemberState: InitialMembersState = [];
+const defaultStatus = memberStatus.pendingActivation;
+
+type UseCaseLoading<I> = {
 	data: {
-		members: null;
+		members: I;
 		queryMemberStatus: MemberStatus;
 	};
-	error: null;
 	loading: true;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
 
-type UseCaseLoaded<T> = {
+type UseCaseLoaded<R> = {
 	data: {
-		members: T;
+		members: R;
 		queryMemberStatus: MemberStatus;
 	};
-	error: ApolloError | null;
 	loading: false;
 	refetch: Dispatch<SetStateAction<MemberStatus>>;
 } & Record<string, unknown>;
 
-type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
+type UseCase<I, R> = UseCaseLoading<I> | UseCaseLoaded<R>;
 
 type Props = {
 	status?: MemberStatus;
 };
 
-type MembersState = MembersByType | null | undefined;
-
-export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
+export const useFetchMembers = (
+	props?: Props,
+): UseCase<InitialMembersState, ResultMembersState> => {
 	const [queryMemberStatus, setQueryMemberStatus] = useState<MemberStatus>(
-		props?.status ?? memberStatus.pendingActivation,
+		props?.status ?? defaultStatus,
 	);
-	const [members, setMembers] = useState<MembersState>(undefined);
-	const initMembers = (members: MembersByType | null) =>
-		setMembers(members ?? []);
+	const [members, setMembers] = useState<MembersState>(initialMemberState);
 	const query = useFetchMembersByStatus();
 	const { notify } = useNotification();
 
@@ -49,7 +51,7 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 	useEffect(() => {
 		(async () => {
 			const { data, error } = await query(queryMemberStatus);
-			initMembers(data);
+			setMembers(data);
 			if (error) {
 				notify(error);
 				outputErrorLog(error);
@@ -62,7 +64,7 @@ export const useFetchMembers = (props?: Props): UseCase<MembersByType> => {
 			members,
 			queryMemberStatus,
 		},
-		loading: members === undefined,
+		loading: members === initialMemberState,
 		refetch: setQueryMemberStatus,
-	} as UseCase<MembersByType>;
+	} as UseCase<InitialMembersState, ResultMembersState>;
 };

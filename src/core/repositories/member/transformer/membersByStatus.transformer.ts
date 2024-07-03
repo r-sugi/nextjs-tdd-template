@@ -36,14 +36,13 @@ export const transform = <K extends MemberStatus>(
 	res: GetMembersByStatusQueryResult,
 	status: K,
 ): MemberStatusToMemberMap[K] => {
-	// FIXME: graphqlエラー処理を追加時に判断する
-	// if (res.data == null) {
-	//   return [];
-	// }
-	if (res?.data?.memberStatusActivityLatest?.length === 0) {
+	if (res.data == null) {
 		return [];
 	}
-	if (res?.data?.memberStatusActivityLatest == null) {
+	if (res.data.memberStatusActivityLatest?.length === 0) {
+		return [];
+	}
+	if (res.data.memberStatusActivityLatest == null) {
 		return [];
 	}
 

@@ -5,23 +5,28 @@ import { useFindActiveMemberOne } from "@/core/repositories/member/members.repos
 import { outputErrorLog } from "@/error/outputErrorLog";
 import { useNotification } from "../../../error/hooks/useNotification";
 
-type UseCaseLoading = {
-	data: InitialActiveMember;
+// @remarks: 配列以外の値の場合は、nullを初期値とする(データ取得失敗時はエラー表示するためデータを参照して処理しない方針)
+type InitialActiveMember = null;
+type ResultActiveMember = ActiveMember;
+type ActiveMemberState = InitialActiveMember | ResultActiveMember;
+const initialActiveMember: InitialActiveMember = null;
+
+type UseCaseLoading<I> = {
+	data: I;
 	loading: true;
 } & Record<string, unknown>;
 
-type UseCaseLoaded<T> = {
-	data: T | null;
+type UseCaseLoaded<R> = {
+	data: R;
 	loading: false;
 } & Record<string, unknown>;
 
-type UseCase<T> = UseCaseLoading | UseCaseLoaded<T>;
+type UseCase<I, R> = UseCaseLoading<I> | UseCaseLoaded<R>;
 
-type InitialActiveMember = undefined;
-type ActiveMemberState = ActiveMember | null | InitialActiveMember; // TODO: nullに型名をつける
-const initialActiveMember: InitialActiveMember = undefined;
-
-export const useFetchActiveMember = (): UseCase<ActiveMember> => {
+export const useFetchActiveMember = (): UseCase<
+	InitialActiveMember,
+	ResultActiveMember
+> => {
 	const [activeMember, setActiveMember] =
 		useState<ActiveMemberState>(initialActiveMember);
 	const [loading, setLoading] = useState<boolean>(false);
@@ -48,5 +53,5 @@ export const useFetchActiveMember = (): UseCase<ActiveMember> => {
 	return {
 		data: activeMember,
 		loading,
-	} as UseCase<ActiveMember>;
+	} as UseCase<InitialActiveMember, ResultActiveMember>;
 };

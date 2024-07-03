@@ -2,6 +2,7 @@ import type { FC } from "react";
 
 import { memberStatus } from "@/core/domains/member/status";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
+import { MembersList } from "./MembersList";
 
 export const IndexTemplate: FC = () => {
 	const { data, refetch, loading } = useFetchMembers();
@@ -9,22 +10,9 @@ export const IndexTemplate: FC = () => {
 	if (loading) {
 		return <div>loading...</div>;
 	}
-
-	const memberListComponent = () => {
-		if (data.members.length === 0) {
-			return <div>メンバーがいません</div>;
-		}
-
-		return (
-			<ul>
-				{data.members.map((member) => (
-					<li key={member.statusActivityId}>
-						{JSON.stringify(member, null, 2)}
-					</li>
-				))}
-			</ul>
-		);
-	};
+	if (data?.members === null) {
+		return <div>CSR リクエストエラー: データ取得に失敗しました</div>;
+	}
 
 	return (
 		<div>
@@ -57,7 +45,6 @@ export const IndexTemplate: FC = () => {
           display: none;
         }
       `}</style>
-			{/* TODO: componentsのリファクタ */}
 			{/* メンバー一覧 */}
 			<div className="tab-wrap">
 				<input
@@ -71,7 +58,9 @@ export const IndexTemplate: FC = () => {
 				<label className="tab-label" htmlFor={memberStatus.pendingActivation}>
 					認証前
 				</label>
-				<div className="tab-content">{memberListComponent()}</div>
+				<div className="tab-content">
+					<MembersList members={data.members} />
+				</div>
 				<input
 					id={memberStatus.active}
 					type="radio"
@@ -83,7 +72,9 @@ export const IndexTemplate: FC = () => {
 				<label className="tab-label" htmlFor={memberStatus.active}>
 					アクティブ
 				</label>
-				<div className="tab-content">{memberListComponent()}</div>
+				<div className="tab-content">
+					<MembersList members={data.members} />
+				</div>
 				<input
 					id={memberStatus.resigned}
 					type="radio"
@@ -95,7 +86,9 @@ export const IndexTemplate: FC = () => {
 				<label className="tab-label" htmlFor={memberStatus.resigned}>
 					退会済み
 				</label>
-				<div className="tab-content">{memberListComponent()}</div>
+				<div className="tab-content">
+					<MembersList members={data.members} />
+				</div>
 				<input
 					id={memberStatus.banned}
 					type="radio"
@@ -107,7 +100,9 @@ export const IndexTemplate: FC = () => {
 				<label className="tab-label" htmlFor={memberStatus.banned}>
 					アカウント停止
 				</label>
-				<div className="tab-content">{memberListComponent()}</div>
+				<div className="tab-content">
+					<MembersList members={data.members} />
+				</div>
 			</div>
 		</div>
 	);
