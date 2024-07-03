@@ -37,16 +37,9 @@ http://localhost:8080/
 ```
 
 ### db schema export
-手動でdbのスキーマを変更したのちに実行する。
-スキーマをコードとして出力する。
+install hasura CLI on local PC
 ```
-hasura CLI をインストールしておく
-
-ディレクトリへ移動する
-cd /db
-
-エクスポートする
-hasura metadata export
+npm run db:meta:export
 ```
 
 ## firebase
@@ -55,7 +48,13 @@ install
 ```
 npm i firebase-tools -g
 ```
+
 start emulator
 ```
-npm run fn:serve
+npm run fn:dev
+```
+
+watch code changes
+```
+npm run fn:watch
 ```
