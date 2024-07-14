@@ -1,18 +1,21 @@
 import type { ParsedUrlQuery } from "node:querystring";
+import type { AppServerErrorMessage } from "@/error/const";
+import { outputErrorLog } from "@/error/outputErrorLog";
 import type {
 	GetServerSideProps,
 	GetServerSidePropsContext,
 	GetServerSidePropsResult,
 	PreviewData,
 } from "next";
+import { transformError } from "./transformError";
 
 export type SequenceOptions<T> = {
 	catchError?: (
-		e: unknown,
+		e: AppServerErrorMessage,
 	) => Promise<GetServerSidePropsResult<T>> | GetServerSidePropsResult<T>;
 };
 
-export type DefaultErrorResult = { error: unknown };
+export type DefaultErrorResult = { error: AppServerErrorMessage };
 
 export type BeforeAction<
 	Params extends ParsedUrlQuery = ParsedUrlQuery,
@@ -24,12 +27,11 @@ export type BeforeAction<
 export function sequence<
 	T extends Record<string, unknown>,
 	U extends ParsedUrlQuery,
-	V extends Record<string, unknown> = DefaultErrorResult,
 >(
 	befores: BeforeAction<U>[],
 	action: GetServerSideProps<T, U>,
-	options?: SequenceOptions<V>,
-): GetServerSideProps<T | V, U> {
+	options?: SequenceOptions<DefaultErrorResult>,
+): GetServerSideProps<T | DefaultErrorResult, U> {
 	return async (context) => {
 		try {
 			for (const action of befores) {
@@ -39,8 +41,11 @@ export function sequence<
 			const result = await action(context);
 			return result;
 		} catch (e) {
-			const result = await (options?.catchError?.(e) ?? {
-				props: { error: e } as unknown as V,
+			const error = transformError(e);
+			outputErrorLog(error);
+			context.res.statusCode = error.status;
+			const result = await (options?.catchError?.(error) ?? {
+				props: { error },
 			});
 			return result;
 		}
