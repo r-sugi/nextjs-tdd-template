@@ -7,6 +7,11 @@ on:
     types: [opened, synchronize]
   workflow_dispatch:
 
+env:
+  # Set environment variables for regconfig.json
+  REPOSITORY_CLIENT_ID: ${{ secrets.REPOSITORY_CLIENT_ID }}
+  GCS_BUCKET_NAME_VRT: ${{ secrets.GCS_BUCKET_NAME_VRT }}
+
 jobs:
   vrt:
     runs-on: ubuntu-latest
@@ -32,10 +37,6 @@ jobs:
         with:
           node-version: "^v18"
 
-      - name: Set environment variables for regconfig.json
-        run: |
-          export GITHUB_CLIENT_ID=${{ secrets.REPOSITORY_CLIENT_ID }}
-          export GCS_BUCKET_NAME=${{ secrets.GCS_BUCKET_NAME_VRT }}
       - name: npm install, build, and test
         run: npm install
 
