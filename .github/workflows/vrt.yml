@@ -39,9 +39,6 @@ jobs:
           fi
       - name: storybook build
         run: npm run storybook:build
-      - name: Start Storybook server
-        run: |
-          npx http-server storybook-static -p 6006
       - name: screenshot and visual regression test
         run: |
           npm run ci:screenshot
