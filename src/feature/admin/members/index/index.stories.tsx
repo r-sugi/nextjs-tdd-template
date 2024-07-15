@@ -1,5 +1,6 @@
 import { GetMembersByStatusDocument } from "@/generated/graphql";
 import type { Meta, StoryObj } from "@storybook/react";
+import { screen } from "@storybook/testing-library";
 
 import { graphql } from "msw";
 
@@ -28,6 +29,11 @@ export const タブ切替: Story = {
 		),
 	],
 	parameters: {
+		screenshot: {
+			waitFor: async () => {
+				await screen.findByText("statusActivityId");
+			},
+		},
 		msw: {
 			handlers: [
 				graphql.query(GetMembersByStatusDocument, (_, res, ctx) => {
