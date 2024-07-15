@@ -41,11 +41,12 @@ jobs:
         run: npm install
 
       - name: Checkout the correct branch
+        # pull_request or ブランチへのマージ
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
             git checkout ${{ github.head_ref }} && git pull
           else
-            git checkout ${{ github.ref }} && git pull
+            git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
           fi
 
       - name: storybook build
