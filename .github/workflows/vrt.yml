@@ -36,8 +36,6 @@ jobs:
         run: |
           export GITHUB_CLIENT_ID=${{ secrets.REPOSITORY_CLIENT_ID }}
           export GCS_BUCKET_NAME=${{ secrets.GCS_BUCKET_NAME_VRT }}
-          envsubst < regconfig.template.json > regconfig.json
-
       - name: npm install, build, and test
         run: npm install
 
