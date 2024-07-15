@@ -5,11 +5,14 @@
     "thresholdRate": 0
   },
   "plugins": {
+    "reg-keygen-git-hash-plugin": {
+      "branchToUse": "main"
+    },
     "reg-notify-github-plugin": {
-      "clientId": "MzczNjC2MDK31M9LrSjJKtYtSUnRLUnNLchJLEnVNzWyMLQ0tzDVL9ItLk3PBAA="
+      "clientId": "${{ secrets.REPOSITORY_CLIENT_ID }}"
     },
     "reg-publish-gcs-plugin": {
-      "bucketName": "reg-publish-bucket-b771b111-f505-432a-b0aa-4aef408eef78"
+      "bucketName": "${{ secrets.GCS_BUCKET_NAME_VRT }}"
     }
   }
 }

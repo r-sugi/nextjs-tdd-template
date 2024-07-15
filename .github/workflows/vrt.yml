@@ -15,21 +15,32 @@ jobs:
       - uses: actions/checkout@v4
       - run: |
           git fetch --prune --unshallow
+
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
       - name: Use Node.js v18
         uses: actions/setup-node@v4
         with:
           node-version: "^v18"
+
+      - name: Set environment variables for regconfig.json
+        run: |
+          export GITHUB_CLIENT_ID=${{ secrets.REPOSITORY_CLIENT_ID }}
+          export GCS_BUCKET_NAME=${{ secrets.GCS_BUCKET_NAME_VRT }}
+          envsubst < regconfig.template.json > regconfig.json
+
       - name: npm install, build, and test
         run: npm install
+
       - name: Checkout the correct branch
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
@@ -37,8 +48,10 @@ jobs:
           else
             git checkout ${{ github.ref }} && git pull
           fi
+
       - name: storybook build
         run: npm run storybook:build
+
       - name: screenshot and visual regression test then upload to GCS
         run: |
           npm run ci:screenshot
