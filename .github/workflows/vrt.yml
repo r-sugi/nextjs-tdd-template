@@ -10,7 +10,7 @@ on:
 jobs:
   vrt:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - run: |
@@ -39,10 +39,7 @@ jobs:
           fi
       - name: storybook build
         run: npm run storybook:build
-      - name: screenshot and visual regression test
+      - name: screenshot and visual regression test then upload to GCS
         run: |
           npm run ci:screenshot
           npm run ci:vrt
-      - name: Upload results to GCP bucket
-        run: |
-          gsutil cp -r ./path/to/results gs://your-bucket-name/path/to/destination
