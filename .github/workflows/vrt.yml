@@ -38,6 +38,10 @@ jobs:
           fi
       - name: storybook build
         run: npm run storybook:build
+      - name: Start Storybook server
+        run: |
+          npx http-server storybook-static --ci -p 6006 &
+          sleep 5 # Wait for server to start
       - name: screenshot and visual regression test
         run: |
           npm run ci:screenshot
