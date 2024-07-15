@@ -18,8 +18,9 @@ const preview: Preview = {
 			fullPage: false,
 			delay: 0,
 			viewports: {
-				desktop: { width: 1024, height: 768 },
-				tablet: { width: 375, height: 668 },
+				// 一旦コメントアウト。疎通完了後に追加する
+				// desktop: { width: 1024, height: 768 },
+				// tablet: { width: 375, height: 668 },
 				mobile: { width: 320, height: 568, isMobile: true, hasTouch: true },
 			},
 		},

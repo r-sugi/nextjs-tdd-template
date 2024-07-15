@@ -1,0 +1,43 @@
+name: visual regression testing
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  vrt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git fetch --prune --unshallow
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      - name: Use Node.js v18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "^v18"
+      - name: npm install, build, and test
+        run: npm install
+      - name: workaround for detached HEAD
+        run: |
+          git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
+      - name: storybook build
+        run: npm run build-storybook
+      - name: screenshot and visual regression test
+        run: |
+          npm run ci:screenshot
+          npm run ci:vrt
+      - name: Upload results to GCP bucket
+        run: |
+          gsutil cp -r ./path/to/results gs://your-bucket-name/path/to/destination
