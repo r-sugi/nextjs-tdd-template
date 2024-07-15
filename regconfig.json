@@ -1,0 +1,15 @@
+{
+  "core": {
+    "workingDir": ".reg",
+    "actualDir": "__screenshots__",
+    "thresholdRate": 0
+  },
+  "plugins": {
+    "reg-notify-github-plugin": {
+      "clientId": "MzczNjC2MDK31M9LrSjJKtYtSUnRLUnNLchJLEnVNzWyMLQ0tzDVL9ItLk3PBAA="
+    },
+    "reg-publish-gcs-plugin": {
+      "bucketName": "reg-publish-bucket-b771b111-f505-432a-b0aa-4aef408eef78"
+    }
+  }
+}

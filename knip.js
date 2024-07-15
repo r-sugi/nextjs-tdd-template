@@ -21,6 +21,9 @@ module.exports = {
 		"jest-environment-jsdom",
 		"eslint-import-resolver-typescript",
 		"pino-pretty",
+		"reg-keygen-git-hash-plugin",
+		"reg-publish-gcs-plugin",
+		"reg-notify-github-plugin",
 		// Unlisted dependencies
 		"dotenv",
 	],

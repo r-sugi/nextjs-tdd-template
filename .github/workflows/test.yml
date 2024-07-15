@@ -1,4 +1,4 @@
-name: Lint and Test
+name: Lint_UT
 
 on:
   push:
@@ -8,14 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint_test:
+  lint_ut:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '^v18.19.0'
+          node-version: "^v18.19.0"
 
       - name: Install dependencies
         run: npm ci

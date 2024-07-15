@@ -41,3 +41,9 @@ storybook-static/
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# storycap
+__screenshots__
+
+# reg-suit
+.reg
