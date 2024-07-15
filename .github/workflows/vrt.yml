@@ -32,9 +32,9 @@ jobs:
       - name: Checkout the correct branch
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
-            git checkout ${{ github.head_ref }}
+            git checkout ${{ github.head_ref }} && && git pull
           else
-            git checkout ${{ github.ref }}
+            git checkout ${{ github.ref }} && && git pull
           fi
       - name: storybook build
         run: npm run build-storybook
