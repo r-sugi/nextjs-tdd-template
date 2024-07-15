@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>;
 
 export const PrimaryLG: Story = {
 	args: {
-		// variant: "primary",
+		variant: "primary",
 		size: "lg",
 		children: "ボタン",
 		onClick: () => console.log("clicked"),
