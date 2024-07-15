@@ -29,9 +29,13 @@ jobs:
           node-version: "^v18"
       - name: npm install, build, and test
         run: npm install
-      - name: workaround for detached HEAD
+      - name: Checkout the correct branch
         run: |
-          git checkout ${GITHUB_REF#refs/heads/} || git checkout -b ${GITHUB_REF#refs/heads/} && git pull
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            git checkout ${{ github.head_ref }}
+          else
+            git checkout ${{ github.ref }}
+          fi
       - name: storybook build
         run: npm run build-storybook
       - name: screenshot and visual regression test
