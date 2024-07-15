@@ -1,4 +1,4 @@
-name: visual regression testing
+name: VRT
 
 on:
   push:
