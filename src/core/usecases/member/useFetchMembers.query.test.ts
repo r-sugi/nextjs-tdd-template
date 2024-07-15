@@ -47,7 +47,7 @@ describe(useFetchMembers, () => {
 	});
 
 	describe("when error", () => {
-		it("return empty array, notify error", async () => {
+		it("return null, notify error", async () => {
 			const ERROR = {
 				message: "repository error",
 				// biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -62,7 +62,7 @@ describe(useFetchMembers, () => {
 			await waitFor(() =>
 				expect(result.current).toEqual({
 					data: {
-						members: [],
+						members: null,
 						queryMemberStatus: "pendingActivation",
 					},
 					loading: false,
