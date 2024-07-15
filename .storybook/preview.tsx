@@ -43,6 +43,8 @@ export default {
 			}, []);
 
 			return (
+				// TODO: <AppProvider>を使いたい（AuthProviderをStubしたいができないため、一旦AppApolloProviderで対応した）
+				// StubAuthProviderを使ってstorybook時は、(client firebaseは)stubされた関数を呼び出したい
 				<AppApolloProvider>
 					<Story />
 				</AppApolloProvider>

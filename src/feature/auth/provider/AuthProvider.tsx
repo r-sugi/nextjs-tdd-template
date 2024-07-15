@@ -1,27 +1,20 @@
 import { type User, getAuth, onAuthStateChanged } from "firebase/auth";
-import {
-	type Dispatch,
-	type ReactNode,
-	type SetStateAction,
-	createContext,
-	useContext,
-	useEffect,
-	useState,
-} from "react";
+import { stubAuthContext } from "mocks/fixtures/provider/useStubAuthContext";
+import type { FC, ReactNode } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-type GlobalAuthState = {
+export type GlobalAuthState = {
 	member: undefined | User | null;
 };
 const initialState: GlobalAuthState = {
 	member: undefined,
 };
-const AuthContext = createContext<GlobalAuthState>(initialState);
+export const AuthContext = createContext<GlobalAuthState>(initialState);
 
 type Props = { children: ReactNode };
 
-export const AuthProvider = ({ children }: Props) => {
+const useAuthContextValue = () => {
 	const [member, setMember] = useState<GlobalAuthState>(initialState);
-
 	useEffect(() => {
 		try {
 			const auth = getAuth();
@@ -34,7 +27,15 @@ export const AuthProvider = ({ children }: Props) => {
 		}
 	}, []);
 
-	return <AuthContext.Provider value={member}>{children}</AuthContext.Provider>;
+	return { member, setMember };
+};
+
+export const AuthProvider: FC<Props> = ({ children }) => {
+	const testing =
+		process.env.NODE_ENV === "test" || process.env.RUNTIME_ENV === "storybook";
+	const value = testing ? stubAuthContext.signedIn : useAuthContextValue();
+
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuthContext = () => useContext(AuthContext);
