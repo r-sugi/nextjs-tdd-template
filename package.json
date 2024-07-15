@@ -24,6 +24,7 @@
     "codegen": "graphql-codegen --config codegen.js",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
+    "storycap": "npx storycap http://localhost:6006",
     "fn:dev": "npm run serve --prefix ./functions",
     "fn:deploy": "npm run deploy --prefix ./functions",
     "fn:watch": "npm run build:watch --prefix ./functions",
@@ -86,6 +87,7 @@
     "next-router-mock": "^0.9.13",
     "pino-pretty": "^11.2.1",
     "storybook": "^8.1.6",
+    "storycap": "^5.0.0",
     "typescript": "5.4.5"
   },
   "msw": {
