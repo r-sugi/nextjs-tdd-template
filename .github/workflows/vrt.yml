@@ -10,6 +10,7 @@ on:
 jobs:
   vrt:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - run: |
@@ -32,16 +33,15 @@ jobs:
       - name: Checkout the correct branch
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
-            git checkout ${{ github.head_ref }} && git pull
+            git checkout ${{ github.head_ref }} & git pull
           else
-            git checkout ${{ github.ref }} && git pull
+            git checkout ${{ github.ref }} & git pull
           fi
       - name: storybook build
         run: npm run storybook:build
       - name: Start Storybook server
         run: |
-          npx http-server storybook-static --ci -p 6006 &
-          sleep 5 # Wait for server to start
+          npx http-server storybook-static -p 6006
       - name: screenshot and visual regression test
         run: |
           npm run ci:screenshot

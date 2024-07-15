@@ -23,6 +23,7 @@ module.exports = {
 		"pino-pretty",
 		"reg-keygen-git-hash-plugin",
 		"reg-publish-gcs-plugin",
+		"reg-notify-github-plugin",
 		// Unlisted dependencies
 		"dotenv",
 	],
