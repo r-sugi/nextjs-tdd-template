@@ -37,7 +37,6 @@ yarn-error.log*
 *storybook.log
 
 # storybook
-public/storybook
 storybook-static/
 
 # Sentry Config File
