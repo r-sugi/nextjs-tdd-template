@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+import { initialize, mswDecorator } from "msw-storybook-addon";
+
+import React, { type FC, useEffect } from "react";
 import "./globals.css";
 import type { Preview } from "@storybook/react";
 import { withScreenshot } from "storycap";
@@ -10,7 +12,10 @@ if (typeof global.process === "undefined") {
 	worker.start();
 }
 
+initialize();
+
 const preview: Preview = {
+	decorators: [mswDecorator],
 	parameters: {
 		controls: {
 			matchers: {
@@ -35,7 +40,7 @@ export default {
 	...preview,
 	decorators: [
 		withScreenshot,
-		(Story) => {
+		(Story: FC) => {
 			// https://github.com/mswjs/msw-storybook-addon/issues/82
 			//mswのレスポンスを更新するために、各ストーリーでリロードする
 			useEffect(() => {
