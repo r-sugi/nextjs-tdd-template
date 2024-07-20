@@ -1,7 +1,7 @@
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { type BeforeAction, type SequenceOptions, sequence } from "./sequence";
+import { type SequenceBeforeAction, DefaultErrorResult, type SequenceOptions, sequence } from "./sequence";
 
-const isValidSchema: BeforeAction = async (context) => {
+const isValidSchema: SequenceBeforeAction = async (context) => {
 	if (!context.params?.type) {
 		throw new Error("schema error");
 	}
@@ -49,20 +49,9 @@ describe("sequence", () => {
 
 	it("preAction でエラーが発生した場合、エラーを返却できる", async () => {
 		const { noTypePropOnParam: context } = contexts;
-		const action = sequence([isValidSchema], act);
+		const action = sequence<{ user: string }>([isValidSchema], act);
 		const actual = await action(context);
 		const expected = { props: { error: new Error("schema error") } };
-		expect(expected).toEqual(actual);
-	});
-
-	it("エラー発生時の返却値を変更できる", async () => {
-		const { noTypePropOnParam: context } = contexts;
-		const options: SequenceOptions<{ error: string }> = {
-			catchError: (_) => ({ props: { error: "ERROR" } }),
-		};
-		const action = sequence([isValidSchema], act, options);
-		const actual = await action(context);
-		const expected = { props: { error: "ERROR" } };
 		expect(expected).toEqual(actual);
 	});
 });

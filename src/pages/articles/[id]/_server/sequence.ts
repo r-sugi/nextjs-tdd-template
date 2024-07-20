@@ -17,36 +17,39 @@ export type SequenceOptions<T> = {
 
 export type DefaultErrorResult = { error: AppServerErrorMessage };
 
-export type BeforeAction<
+export type SequenceBeforeAction<
 	Params extends ParsedUrlQuery = ParsedUrlQuery,
 	Preview extends PreviewData = PreviewData,
 > = (
 	context: GetServerSidePropsContext<Params, Preview>,
 ) => Promise<void> | void;
 
+type ParsedUrlQueryOr<T> = T extends ParsedUrlQuery ? T : ParsedUrlQuery
+export type SequenceActionContext<T> = T extends undefined ? GetServerSidePropsContext<ParsedUrlQuery> : Omit<GetServerSidePropsContext, 'params'> & Record<'params', T>
+export type SequenceAction<T, U> = (context: SequenceActionContext<U>) => GetServerSidePropsResult<T> | Promise<GetServerSidePropsResult<T>>
+
 export function sequence<
 	T extends Record<string, unknown>,
-	U extends ParsedUrlQuery,
+	U = undefined,
 >(
-	befores: BeforeAction<U>[],
-	action: GetServerSideProps<T, U>,
-	options?: SequenceOptions<DefaultErrorResult>,
-): GetServerSideProps<T | DefaultErrorResult, U> {
+	befores: SequenceBeforeAction<ParsedUrlQueryOr<U>>[],
+	action: SequenceAction<T, U>,
+): GetServerSideProps<T | DefaultErrorResult, ParsedUrlQueryOr<U>> {
 	return async (context) => {
 		try {
 			for (const action of befores) {
 				await action(context);
 			}
 
-			const result = await action(context);
+			const result = await action(context as SequenceActionContext<U>);
 			return result;
 		} catch (e) {
 			const error = transformError(e);
 			outputErrorLog(error);
 			context.res.statusCode = error.status;
-			const result = await (options?.catchError?.(error) ?? {
+			const result = {
 				props: { error },
-			});
+			}
 			return result;
 		}
 	};
