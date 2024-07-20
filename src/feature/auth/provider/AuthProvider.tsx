@@ -13,21 +13,21 @@ export const AuthContext = createContext<GlobalAuthState>(initialState);
 
 type Props = { children: ReactNode };
 
-const useAuthContextValue = () => {
-	const [member, setMember] = useState<GlobalAuthState>(initialState);
+const useAuthContextValue = (): GlobalAuthState => {
+	const [state, setState] = useState<GlobalAuthState>(initialState);
 	useEffect(() => {
 		try {
 			const auth = getAuth();
 			return onAuthStateChanged(auth, (member) => {
-				setMember({ member });
+				setState({ member });
 			});
 		} catch (error) {
-			setMember(initialState);
+			setState(initialState);
 			throw error;
 		}
 	}, []);
 
-	return { member, setMember };
+	return state;
 };
 
 export const AuthProvider: FC<Props> = ({ children }) => {

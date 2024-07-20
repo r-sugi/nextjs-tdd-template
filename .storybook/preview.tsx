@@ -6,7 +6,7 @@ import type { Preview } from "@storybook/react";
 import { withScreenshot } from "storycap";
 import "tailwindcss/tailwind.css";
 import { worker } from "../mocks/browser";
-import { AppApolloProvider } from "../src/pages/_provider/_appApollo.provider";
+import { AppProvider } from "../src/pages/_provider/_app.provider"
 
 if (typeof global.process === "undefined") {
 	worker.start();
@@ -48,11 +48,9 @@ export default {
 			}, []);
 
 			return (
-				// TODO: <AppProvider>を使いたい（AuthProviderをStubしたいができないため、一旦AppApolloProviderで対応した）
-				// StubAuthProviderを使ってstorybook時は、(client firebaseは)stubされた関数を呼び出したい
-				<AppApolloProvider>
+				<AppProvider>
 					<Story />
-				</AppApolloProvider>
+				</AppProvider>
 			);
 		},
 	],

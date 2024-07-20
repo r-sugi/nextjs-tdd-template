@@ -7,6 +7,8 @@ import { graphql } from "msw";
 import { fixtureGetMembersByStatus } from "mocks/fixtures/member";
 
 import { IndexTemplate } from "./index";
+import { StubAuthProvider } from "@/feature/auth/provider/StubAuthProvider";
+import { stubAuthContext } from "mocks/fixtures/provider/useStubAuthContext";
 
 export default {
 	component: IndexTemplate,
@@ -21,11 +23,9 @@ type Story = StoryObj<typeof IndexTemplate>;
 export const タブ切替: Story = {
 	decorators: [
 		(Story) => (
-			// TODO: <AppProvider>を使いたい（AuthProviderをStubしたいができないため、一旦AppApolloProviderで対応した）
-			// client firebaseはstubされた関数を呼び出したい。下記は例
-			// <StubAuthProvider value={stubAuthContext.signedIn}>
-			<Story />
-			// </StubAuthProvider>
+			<StubAuthProvider value={stubAuthContext.signedIn}>
+				<Story />
+			</StubAuthProvider>
 		),
 	],
 	parameters: {
