@@ -28,20 +28,24 @@ type ParsedUrlQueryOr<T> = T extends ParsedUrlQuery ? T : ParsedUrlQuery
 export type SequenceActionContext<T> = T extends undefined ? GetServerSidePropsContext<ParsedUrlQuery> : Omit<GetServerSidePropsContext, 'params'> & Record<'params', T>
 export type SequenceAction<T, U> = (context: SequenceActionContext<U>) => GetServerSidePropsResult<T> | Promise<GetServerSidePropsResult<T>>
 
+/**
+ * Generics は GetServerSideProps の Props と Params に紐づく
+ * Params が指定されない(= undefined )場合、ParsedUrlQuery が各パラメータに色付けされる
+ */
 export function sequence<
-	T extends Record<string, unknown>,
-	U = undefined,
+	Props extends Record<string, unknown>,
+	Params = undefined,
 >(
-	befores: SequenceBeforeAction<ParsedUrlQueryOr<U>>[],
-	action: SequenceAction<T, U>,
-): GetServerSideProps<T | DefaultErrorResult, ParsedUrlQueryOr<U>> {
+	befores: SequenceBeforeAction<ParsedUrlQueryOr<Params>>[],
+	action: SequenceAction<Props, Params>,
+): GetServerSideProps<Props | DefaultErrorResult, ParsedUrlQueryOr<Params>> {
 	return async (context) => {
 		try {
 			for (const action of befores) {
 				await action(context);
 			}
 
-			const result = await action(context as SequenceActionContext<U>);
+			const result = await action(context as SequenceActionContext<Params>);
 			return result;
 		} catch (e) {
 			const error = transformError(e);

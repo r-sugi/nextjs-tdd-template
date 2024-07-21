@@ -1,5 +1,6 @@
 import type { GetServerSideProps, GetServerSidePropsContext } from "next";
-import { type SequenceBeforeAction, DefaultErrorResult, type SequenceOptions, sequence } from "./sequence";
+import { type SequenceBeforeAction, sequence } from "./sequence";
+import { transformUnexpectedError } from "@/error/transform/unexpected/transform";
 
 const isValidSchema: SequenceBeforeAction = async (context) => {
 	if (!context.params?.type) {
@@ -51,7 +52,7 @@ describe("sequence", () => {
 		const { noTypePropOnParam: context } = contexts;
 		const action = sequence<{ user: string }>([isValidSchema], act);
 		const actual = await action(context);
-		const expected = { props: { error: new Error("schema error") } };
+		const expected = { props: { error: transformUnexpectedError(new Error("schema error")) } };
 		expect(expected).toEqual(actual);
 	});
 });
