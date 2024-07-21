@@ -20,7 +20,7 @@ const config: StorybookConfig = {
 	staticDirs: ["../public"],
 	env: (config) => ({
 		...config,
-		RUNTIME_ENV: "storybook",
+		RUNTIME_ENV: process.env.RUNTIME_ENV ?? 'storybook',
 	})
 };
 export default config;
