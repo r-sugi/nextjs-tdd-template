@@ -8,6 +8,8 @@ type ServerErrorScreenProps = {
 	render?: (error: AppServerErrorMessage) => ReactNode | undefined;
 };
 
+// reactのエラーバウンダリーと同じく、ログ出力を行う
+// 画面の表示を行う
 export const ServerErrorBoundary = ({
 	error,
 	render,
