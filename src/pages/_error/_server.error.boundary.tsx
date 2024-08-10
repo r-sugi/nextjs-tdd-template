@@ -4,23 +4,19 @@ import { type ReactNode, useEffect } from "react";
 
 type ServerErrorScreenProps = {
 	error: AppServerErrorMessage;
-	// 個別render関数を渡した場合は、それを使う
+	// render関数を渡すことで、エラー画面をカスタマイズできる
 	render?: (error: AppServerErrorMessage) => ReactNode | undefined;
 };
 
-/**
- * Server Error Screen
- * @returns {ReactNode}
- * @remarks SSRでエラーが発生した場合にSSRで表示する画面
- */
 export const ServerErrorBoundary = ({
 	error,
 	render,
 }: ServerErrorScreenProps): ReactNode => {
+	outputErrorLog(error); // ログを出力する
+
 	if (render) {
 		return render(error);
 	}
-
-	// TODO: render fallback statusコードに応じてテンプレートを変更する
+	// TODO: (statusコードに応じた)デフォルトのエラー画面
 	return <div>Server Error Screen</div>;
 };
