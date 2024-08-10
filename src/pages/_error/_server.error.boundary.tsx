@@ -1,6 +1,6 @@
 import type { AppServerErrorMessage } from "@/error/const";
 import { outputErrorLog } from "@/error/outputErrorLog";
-import { type ReactNode, useEffect } from "react";
+import type { ReactNode } from "react";
 
 type ServerErrorScreenProps = {
 	error: AppServerErrorMessage;
