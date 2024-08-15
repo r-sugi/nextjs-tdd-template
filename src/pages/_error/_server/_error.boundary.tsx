@@ -2,7 +2,7 @@ import { publicPages } from "@/const/paths";
 import type { AppServerErrorMessage } from "@/error/const";
 import { outputErrorLog } from "@/error/outputErrorLog";
 import type { ReactNode } from "react";
-import { ServerErrorScreen } from "./error.screen";
+import { ServerErrorScreen } from "./_error.screen";
 
 type ServerErrorScreenProps = {
 	error: AppServerErrorMessage;

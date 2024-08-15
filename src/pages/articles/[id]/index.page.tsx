@@ -2,7 +2,7 @@ import type { AppServerErrorMessage } from "@/error/const";
 
 import { publicPages } from "@/const/paths";
 import type { Article } from "@/core/domains/article/article";
-import { ServerErrorBoundary } from "@/pages/_error/server/_error.boundary";
+import { ServerErrorBoundary } from "@/pages/_error/_server/_error.boundary";
 import { Seo } from "@/pages/_seo/seo";
 import type { NextPage } from "next";
 import { ServerErrorScreen } from "./_server/errorScreen";
