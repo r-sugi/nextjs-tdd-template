@@ -14,7 +14,6 @@ export type PagePropsType = Success | Failure;
 
 const ArticleDetail: NextPage<PagePropsType> = (props) => {
 	if ("error" in props) {
-		// エラーが発生した場合は、ServerErrorBoundaryにエラー情報を渡す
 		return <ServerErrorBoundary error={props.error} />;
 	}
 

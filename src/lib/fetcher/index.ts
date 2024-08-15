@@ -3,15 +3,22 @@ import {
 	HttpError,
 } from "@/error/transform/http/HttpError";
 
-type DataResponse<T> = {
+type TransformedData<T> = {
 	data: T;
-	error: undefined;
 	status: number;
 	statusText: string;
 	headers?: Headers;
 };
 
-type HttpResponse<T> = DataResponse<T>;
+type Success<T> = {
+	response: TransformedData<T>;
+};
+
+type Failure = {
+	error: HttpError;
+};
+
+type HttpResponse<T> = Success<T> | Failure;
 
 function transformResponse<T>() {
 	return async (response: Response): Promise<HttpResponse<T>> => {
@@ -27,16 +34,17 @@ function transformResponse<T>() {
 				statusText: response.statusText,
 				headers: response.headers,
 			};
-			throw new HttpError(error);
+			return { error: new HttpError(error) };
 		}
 		const data: T = json;
 
 		return {
-			data,
-			error: undefined,
-			headers: response.headers,
-			status: response.status,
-			statusText: response.statusText,
+			response: {
+				data,
+				status: response.status,
+				statusText: response.statusText,
+				headers: response.headers,
+			},
 		};
 	};
 }
