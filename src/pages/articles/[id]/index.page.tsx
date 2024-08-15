@@ -2,9 +2,10 @@ import type { AppServerErrorMessage } from "@/error/const";
 
 import { publicPages } from "@/const/paths";
 import type { Article } from "@/core/domains/article/article";
-import { ServerErrorBoundary } from "@/pages/_error/_server.error.boundary";
+import { ServerErrorBoundary } from "@/pages/_error/server/error.boundary";
 import { Seo } from "@/pages/_seo/seo";
 import type { NextPage } from "next";
+import { ServerErrorScreen } from "./_server/errorScreen";
 
 export { getServerSideProps } from "./_server";
 
@@ -14,7 +15,10 @@ export type PagePropsType = Success | Failure;
 
 const ArticleDetail: NextPage<PagePropsType> = (props) => {
 	if ("error" in props) {
-		return <ServerErrorBoundary error={props.error} />;
+		// エラー画面のテンプレートを指定、リセットボタンはデフォルトのものを使用する。
+		return (
+			<ServerErrorBoundary error={props.error} render={ServerErrorScreen} />
+		);
 	}
 
 	return (
