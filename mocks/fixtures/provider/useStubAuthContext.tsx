@@ -1,21 +1,12 @@
-import jest from "jest-mock";
-
-const setMember =
-	process.env.NODE_ENV === "test" || process.env.RUNTIME === "storybook"
-		? jest.fn()
-		: undefined;
+import type { GlobalAuthState } from "@/feature/auth/provider/AuthProvider";
 
 export const stubAuthContext = {
 	signedIn: {
 		member: {
 			uid: "1",
 		},
-		setMember,
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	} as unknown,
+	} as GlobalAuthState,
 	signedOut: {
 		member: null,
-		setMember,
-		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	} as unknown,
+	} as GlobalAuthState,
 };
