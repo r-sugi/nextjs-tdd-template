@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
 
-import { stubAuthContext } from "mocks/fixtures/provider/useStubAuthContext";
-
 import { AuthContext, type GlobalAuthState } from "./AuthProvider";
 
 type Props = {
