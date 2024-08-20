@@ -31,7 +31,7 @@ export const タブ切替: Story = {
 		msw: {
 			handlers: [
 				graphql.query(GetMembersByStatusDocument, (_, res, ctx) => {
-					return res(ctx.data(fixtureGetMembersByStatus.data), ctx.delay(100));
+					return res(ctx.data(fixtureGetMembersByStatus.data));
 				}),
 			],
 		},
