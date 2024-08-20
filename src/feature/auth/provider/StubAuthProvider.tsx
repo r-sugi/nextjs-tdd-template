@@ -15,8 +15,9 @@ type Props = {
  * @returns
  */
 export function StubAuthProvider(props: Props) {
-	const state = stubAuthContext.signedIn;
 	return (
-		<AuthContext.Provider value={state}>{props.children}</AuthContext.Provider>
+		<AuthContext.Provider value={props.value}>
+			{props.children}
+		</AuthContext.Provider>
 	);
 }
