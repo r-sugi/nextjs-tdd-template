@@ -8,7 +8,6 @@ const config: StorybookConfig = {
 		"@chromatic-com/storybook",
 		"@storybook/addon-interactions",
 		"@storybook/addon-a11y",
-		"storycap",
 	],
 	framework: {
 		name: "@storybook/nextjs",
@@ -20,7 +19,7 @@ const config: StorybookConfig = {
 	staticDirs: ["../public"],
 	env: (config) => ({
 		...config,
-		RUNTIME_ENV: process.env.RUNTIME_ENV ?? 'storybook',
-	})
+		RUNTIME_ENV: process.env.RUNTIME_ENV ?? "storybook",
+	}),
 };
 export default config;
