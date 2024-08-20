@@ -1,4 +1,4 @@
-import { GlobalAuthState } from "@/feature/auth/provider/AuthProvider";
+import type { GlobalAuthState } from "@/feature/auth/provider/AuthProvider";
 
 export const stubAuthContext = {
 	signedIn: {
