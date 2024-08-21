@@ -1,20 +1,14 @@
-import { initialize, mswDecorator } from "msw-storybook-addon";
-
 import React, { type FC, useEffect } from "react";
 import "./globals.css";
 import type { Preview } from "@storybook/react";
 import "tailwindcss/tailwind.css";
-import { worker } from "../mocks/browser";
 import { AppProvider } from "../src/pages/_provider/_app.provider";
 
-if (typeof global.process === "undefined") {
-	worker.start();
-}
+import { initialize, mswLoader } from "msw-storybook-addon";
 
 initialize();
 
 const preview: Preview = {
-	decorators: [mswDecorator],
 	parameters: {
 		controls: {
 			matchers: {
@@ -23,6 +17,7 @@ const preview: Preview = {
 			},
 		},
 	},
+	loaders: [mswLoader],
 };
 
 export default {

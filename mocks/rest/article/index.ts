@@ -1,11 +1,15 @@
 import { mockArticle1, mockArticle2 } from "mocks/fixtures/article";
-import { rest } from "msw";
+import { http, HttpResponse } from "msw";
 
 export const articleHandlers = [
-	rest.get("/api/articles/1", (_, res, ctx) => {
-		return res(ctx.json(mockArticle1));
+	http.get("/api/articles/1", () => {
+		return HttpResponse.json({
+			data: mockArticle1,
+		});
 	}),
-	rest.get("/api/articles/2", (_, res, ctx) => {
-		return res(ctx.json(mockArticle2));
+	http.get("/api/articles/2", () => {
+		return HttpResponse.json({
+			data: mockArticle2,
+		});
 	}),
 ];

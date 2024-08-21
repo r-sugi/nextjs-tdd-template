@@ -1,9 +1,8 @@
 import { GetMembersByStatusDocument } from "@/generated/graphql";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { graphql } from "msw";
-
 import { fixtureGetMembersByStatus } from "mocks/fixtures/member";
+import { HttpResponse, graphql } from "msw";
 
 import { StubAuthProvider } from "@/feature/auth/provider/StubAuthProvider";
 import { stubAuthContext } from "mocks/fixtures/provider/useStubAuthContext";
@@ -30,8 +29,10 @@ export const タブ切替: Story = {
 	parameters: {
 		msw: {
 			handlers: [
-				graphql.query(GetMembersByStatusDocument, (_, res, ctx) => {
-					return res(ctx.data(fixtureGetMembersByStatus.data));
+				graphql.query(GetMembersByStatusDocument, () => {
+					return HttpResponse.json({
+						data: fixtureGetMembersByStatus.data,
+					});
 				}),
 			],
 		},
