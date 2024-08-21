@@ -1,7 +1,7 @@
 import { isSentryEnabled } from "@/config/env";
 import { Logger } from "@/lib/logger";
 import * as Sentry from "@sentry/nextjs";
-import type { AppErrorMessage } from "./const";
+import type { AppErrorMessage, AppServerErrorMessage } from "./const";
 
 const logging = (error: AppErrorMessage) => {
 	switch (error.level) {
@@ -28,8 +28,14 @@ const sendLog = (error: AppErrorMessage) => {
 	}
 };
 
-// TODO: 関数名を改善したい
 export const outputErrorLog = (error: AppErrorMessage) => {
 	logging(error);
 	sendLog(error);
+};
+
+export const outputServerErrorLog = async (error: AppServerErrorMessage) => {
+	if (isSentryEnabled && ["fatal", "error"].includes(error.level)) {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		await Sentry.captureUnderscoreErrorException(error as any);
+	}
 };
