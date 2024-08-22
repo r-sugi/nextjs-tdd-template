@@ -9,7 +9,7 @@ export const ErrorBanner = () => {
 	return (
 		<div data-testid="error-banner">
 			{items.map((item) => (
-				<div key={item.myErrorCode}>
+				<div key={item.myErrorCode} style={{ color: "red" }}>
 					<p>
 						エラーコード:<span>{item.myErrorCode}</span>
 					</p>
