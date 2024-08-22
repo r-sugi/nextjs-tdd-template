@@ -15,10 +15,11 @@ export const getServerSideProps: GetServerSideProps = async ({
 		const result = validateParams(params);
 		// 検査例外は個別に処理する
 		if ("error" in result) {
-			res.statusCode = result.error.status; // ステータスコードをセットする
+			const formatError = transformError(result.error);
+			res.statusCode = formatError.status;
 			return {
 				props: {
-					error: transformError(result.error),
+					error: formatError,
 				},
 			};
 		}
@@ -29,10 +30,11 @@ export const getServerSideProps: GetServerSideProps = async ({
 		// 3. 例: APIでデータ取得(エラーの場合は内部で)
 		const fetchResult = await fetchArticleById(result.params.id);
 		if ("error" in fetchResult) {
-			res.statusCode = fetchResult.error.status;
+			const formatError = transformError(fetchResult.error);
+			res.statusCode = formatError.status;
 			return {
 				props: {
-					error: transformError(fetchResult.error),
+					error: formatError,
 				},
 			};
 		}
