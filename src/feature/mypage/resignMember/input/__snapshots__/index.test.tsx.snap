@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[` 1`] = `
+exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
 <div>
   <div>
     <form>

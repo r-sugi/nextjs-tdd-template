@@ -24,7 +24,7 @@ describe("IndexTemplate", () => {
 	}
 
 	describe("正常系", () => {
-		describe("初期描画が変化していない", () => {
+		it("初期描画が変化していない", async () => {
 			const { view } = setup();
 			expect(view.container).toMatchSnapshot();
 		});

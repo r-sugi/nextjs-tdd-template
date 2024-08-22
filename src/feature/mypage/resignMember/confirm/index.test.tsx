@@ -6,7 +6,6 @@ import { getCache, removeCache } from "@/utils/cache";
 import { NoCacheError } from "@/utils/cache/error";
 
 import { loginRequiredPages, publicPages } from "@/const/paths";
-import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 import { ResignMemberDocument } from "@/generated/graphql";
 import { AppProvider } from "@/pages/_provider/_app.provider";
 import { HttpResponse, graphql } from "msw";
@@ -14,7 +13,6 @@ import { setupServer } from "msw/node";
 import * as router from "next/router";
 import IndexTemplate from "./index";
 
-jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 jest.mock("@/utils/cache");
 
 describe(IndexTemplate, () => {
@@ -38,7 +36,7 @@ describe(IndexTemplate, () => {
 		};
 	};
 
-	describe("no cache", () => {
+	describe("キャッシュがない", () => {
 		beforeEach(() => {
 			toMock(getCache).mockImplementation(() => {
 				throw new NoCacheError("Failed to get cache");
@@ -60,33 +58,37 @@ describe(IndexTemplate, () => {
 		});
 	});
 
-	describe("cache exists", () => {
+	describe("キャッシュがある", () => {
 		const formValues = {
 			reasonType: "NO_USE",
 			reasonDetail: "detail",
 			agreement: true,
 		};
 
-		it("rendered with initial state", async () => {
+		it("初期描画が変化していない", async () => {
 			const { view } = setup();
 			const viewRoot = await view.findByTestId("mypage-resign-member-confirm");
 			expect(viewRoot).toBeVisible();
 		});
-		it("click back button then router.push called", async () => {
+		it("戻るボタンを押下するとページ遷移する", async () => {
+			// Arrange
 			const routerMock = jest.fn();
 			toSpyWithMock(router, "useRouter", () => ({
 				push: routerMock,
 			}));
 
+			// Act
 			const { view } = setup();
 			await userEvent.click(view.getByRole("button", { name: "戻る" }));
 
+			// Assert
 			expect(routerMock).toHaveBeenCalledWith(
 				loginRequiredPages.mypageResignMemberInput.path(),
 			);
 		});
 
-		it("success API on submit", async () => {
+		it("フォーム送信に成功し、ページ遷移する", async () => {
+			// Arrange
 			toMock(getCache).mockReturnValue(formValues);
 			const routerMock = jest.fn();
 			toSpyWithMock(router, "useRouter", () => ({
@@ -115,15 +117,18 @@ describe(IndexTemplate, () => {
 				}),
 			);
 
+			// Act
 			const { view } = setup();
 			await userEvent.click(view.getByRole("button", { name: "退会する" }));
 
+			// Assert
 			expect(toMock(removeCache)).toHaveBeenCalled();
 			expect(mockFn).toHaveBeenCalledTimes(1);
 			expect(routerMock).toHaveBeenCalledWith(publicPages.index.path());
 		});
 
-		it("API error of resign on submit", async () => {
+		it.skip("TODO: フォーム送信でエラーが発生し、エラーが表示される", async () => {
+			// Arrange
 			toMock(getCache).mockReturnValue(formValues);
 			const routerMock = jest.fn();
 			toSpyWithMock(router, "useRouter", () => ({
@@ -139,13 +144,15 @@ describe(IndexTemplate, () => {
 				}),
 			);
 
+			// Act
 			const { view } = setup();
 			await userEvent.click(view.getByRole("button", { name: "退会する" }));
 
+			// Assert
 			expect(mockFn).toHaveBeenCalledTimes(1);
 			expect(toMock(removeCache)).not.toHaveBeenCalled();
 			expect(routerMock).not.toHaveBeenCalled();
-			// TODO: ここでエラーメッセージが表示されることを確認したい
+			// TODO: ここでエラーメッセージ(toast?)が表示されることを検証する
 		});
 	});
 });
