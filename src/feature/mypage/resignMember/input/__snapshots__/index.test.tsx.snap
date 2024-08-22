@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<div>
+  <div>
+    <form>
+      <div>
+        <label
+          id="reasonType"
+        >
+          退会理由
+        </label>
+        <select
+          aria-labelledby="reasonType"
+          name="reasonType"
+        >
+          <option
+            value=""
+          >
+            選択してください
+          </option>
+          <option
+            value="NO_USE"
+          >
+            利用しないため
+          </option>
+          <option
+            value="OTHER"
+          >
+            その他
+          </option>
+        </select>
+      </div>
+      <div>
+        <label
+          for="reasonDetail"
+        >
+          詳細
+        </label>
+        <textarea
+          id="reasonDetail"
+          name="reasonDetail"
+        />
+      </div>
+      <div>
+        <label
+          for="agreement"
+        >
+          同意する
+        </label>
+        <input
+          id="agreement"
+          name="agreement"
+          type="checkbox"
+        />
+      </div>
+      <button
+        disabled=""
+        type="submit"
+      >
+        退会する
+      </button>
+    </form>
+  </div>
+</div>
+`;
