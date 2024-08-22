@@ -21,7 +21,7 @@ export const AppApolloProvider: FC<{
 						// console.log(
 						// 	`[GraphQL error]: Message: ${message}, Code: ${extensions.code}, Path: ${extensions.path}`,
 						// );
-						switch (extensions.code) {
+						switch (extensions?.code) {
 							// session系の処理のみ必要。
 							case "invalid-jwt": {
 								// refetch the jwt

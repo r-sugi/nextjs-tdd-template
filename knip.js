@@ -7,6 +7,7 @@ module.exports = {
 		"mocks/**/*.ts",
 		"public/mockServiceWorker.js",
 		"src/error/errors/unhandledRejectionError.ts",
+		"postcss.config.js",
 		// Unused exports, Unused exported types of component templates
 		"src/components/**/*.*",
 		"biome.js",
