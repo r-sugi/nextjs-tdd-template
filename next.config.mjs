@@ -1,8 +1,18 @@
 import { withSentryConfig } from "@sentry/nextjs";
+
+const isProd = process.env.NODE_ENV === "production";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	pageExtensions: ["page.tsx", "page.ts"],
-	reactStrictMode: false,
+	reactStrictMode: true,
+	...(isProd && {
+		compiler: {
+			reactRemoveProperties: {
+				properties: ["^data-testid$"],
+			},
+		},
+	}),
 };
 
 export default withSentryConfig(nextConfig, {
