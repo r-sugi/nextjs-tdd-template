@@ -1,0 +1,26 @@
+name: build-storybook
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  build-storybook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js v18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "^v18"
+
+      - name: npm install, build, and test
+        run: npm i
+
+      - name: storybook build
+        run: npm run storybook:build

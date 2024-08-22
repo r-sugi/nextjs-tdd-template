@@ -7,6 +7,7 @@ module.exports = {
 		"mocks/**/*.ts",
 		"public/mockServiceWorker.js",
 		"src/error/errors/unhandledRejectionError.ts",
+		"postcss.config.js",
 		// Unused exports, Unused exported types of component templates
 		"src/components/**/*.*",
 		"biome.js",
@@ -25,6 +26,7 @@ module.exports = {
 		"reg-notify-github-plugin",
 		// Unlisted dependencies
 		"dotenv",
+		"ts-node",
 	],
 	ignoreBinaries: ["docker-compose", "npm-run-all"],
 };
