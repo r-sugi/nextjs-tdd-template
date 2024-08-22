@@ -2,7 +2,6 @@ import { toMock } from "@/__testing__/helper";
 import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
 import { signUp } from "@/shared/repositories/auth";
-import { useSignOut } from "./useSignOut.command";
 import { useSignUp } from "./useSignUp.command";
 
 jest.mock("@/shared/repositories/auth");
