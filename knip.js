@@ -2,6 +2,7 @@ module.exports = {
 	ignore: [
 		"**/*.d.ts",
 		// Unused files
+		"src/__mocks__/**/*.*",
 		"functions/src/index.ts",
 		"mocks/**/*.ts",
 		"public/mockServiceWorker.js",
@@ -17,9 +18,7 @@ module.exports = {
 	ignoreDependencies: [
 		// Unused devDependencies
 		"next-router-mock",
-		"msw",
 		"jest-environment-jsdom",
-		"eslint-import-resolver-typescript",
 		"pino-pretty",
 		"reg-keygen-git-hash-plugin",
 		"reg-publish-gcs-plugin",

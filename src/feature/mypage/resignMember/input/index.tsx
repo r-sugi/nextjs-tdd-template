@@ -32,8 +32,8 @@ export default function IndexTemplate() {
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
 				<div>
-					<label>{resignMemberLabels.reasonType}</label>
-					<select {...register("reasonType")}>
+					<label id="reasonType">{resignMemberLabels.reasonType}</label>
+					<select aria-labelledby="reasonType" {...register("reasonType")}>
 						<option value="">選択してください</option>
 						<option value="NO_USE">利用しないため</option>
 						<option value="OTHER">その他</option>
@@ -42,14 +42,16 @@ export default function IndexTemplate() {
 				</div>
 
 				<div>
-					<label>{resignMemberLabels.reasonDetail}</label>
-					<textarea {...register("reasonDetail")} />
+					<label htmlFor="reasonDetail">
+						{resignMemberLabels.reasonDetail}
+					</label>
+					<textarea id="reasonDetail" {...register("reasonDetail")} />
 					{errors.reasonDetail?.message && <p>{errors.reasonDetail.message}</p>}
 				</div>
 
 				<div>
 					<label htmlFor="agreement">{resignMemberLabels.agreement}</label>
-					<input type="checkbox" {...register("agreement")} id="agreement" />
+					<input type="checkbox" id="agreement" {...register("agreement")} />
 					{errors.agreement?.message && <p>{errors.agreement.message}</p>}
 				</div>
 
