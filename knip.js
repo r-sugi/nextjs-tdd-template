@@ -2,8 +2,7 @@ module.exports = {
 	ignore: [
 		"**/*.d.ts",
 		// Unused files
-		"src/__mocks__/@sentry/nextjs.ts",
-		"src/__mocks__/firebase/auth.ts",
+		"src/__mocks__/**/*.*",
 		"functions/src/index.ts",
 		"mocks/**/*.ts",
 		"public/mockServiceWorker.js",
