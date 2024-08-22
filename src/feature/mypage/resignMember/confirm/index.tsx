@@ -59,7 +59,7 @@ const Template: FC = () => {
 	}, []);
 
 	return (
-		<div data-testid={"template"}>
+		<div data-testid={"mypage-resign-member-confirm"}>
 			<form
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
