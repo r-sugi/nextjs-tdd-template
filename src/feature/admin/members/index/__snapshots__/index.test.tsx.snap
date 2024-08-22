@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
+<div>
+  <div
+    class="jsx-6f8c5883fcd245f"
+    data-testid="admin-members-index"
+  >
+    <div
+      class="jsx-6f8c5883fcd245f tab-wrap"
+    >
+      <input
+        checked=""
+        class="jsx-6f8c5883fcd245f tab-switch"
+        id="pendingActivation"
+        name="TAB"
+        type="radio"
+      />
+      <label
+        class="jsx-6f8c5883fcd245f tab-label"
+        for="pendingActivation"
+      >
+        認証前
+      </label>
+      <div
+        class="jsx-6f8c5883fcd245f tab-content"
+      >
+        <ul>
+          <li>
+            {
+  "createdAt": "2024-04-15T11:34:46.135Z",
+  "email": "foo@sample.com",
+  "memberId": "5422c606-4cca-4054-ac66-83b682c53584",
+  "statusActivityId": "128f3ea5-962b-4119-9d5c-05084b103708",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+          <li>
+            {
+  "createdAt": "2024-04-21T10:31:43.791Z",
+  "email": "hhhh@gmail.com",
+  "memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
+  "statusActivityId": "32833818-04fd-458e-a016-661bec557de6",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+        </ul>
+      </div>
+      <input
+        class="jsx-6f8c5883fcd245f tab-switch"
+        id="active"
+        name="TAB"
+        type="radio"
+      />
+      <label
+        class="jsx-6f8c5883fcd245f tab-label"
+        for="active"
+      >
+        アクティブ
+      </label>
+      <div
+        class="jsx-6f8c5883fcd245f tab-content"
+      >
+        <ul>
+          <li>
+            {
+  "createdAt": "2024-04-15T11:34:46.135Z",
+  "email": "foo@sample.com",
+  "memberId": "5422c606-4cca-4054-ac66-83b682c53584",
+  "statusActivityId": "128f3ea5-962b-4119-9d5c-05084b103708",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+          <li>
+            {
+  "createdAt": "2024-04-21T10:31:43.791Z",
+  "email": "hhhh@gmail.com",
+  "memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
+  "statusActivityId": "32833818-04fd-458e-a016-661bec557de6",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+        </ul>
+      </div>
+      <input
+        class="jsx-6f8c5883fcd245f tab-switch"
+        id="resigned"
+        name="TAB"
+        type="radio"
+      />
+      <label
+        class="jsx-6f8c5883fcd245f tab-label"
+        for="resigned"
+      >
+        退会済み
+      </label>
+      <div
+        class="jsx-6f8c5883fcd245f tab-content"
+      >
+        <ul>
+          <li>
+            {
+  "createdAt": "2024-04-15T11:34:46.135Z",
+  "email": "foo@sample.com",
+  "memberId": "5422c606-4cca-4054-ac66-83b682c53584",
+  "statusActivityId": "128f3ea5-962b-4119-9d5c-05084b103708",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+          <li>
+            {
+  "createdAt": "2024-04-21T10:31:43.791Z",
+  "email": "hhhh@gmail.com",
+  "memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
+  "statusActivityId": "32833818-04fd-458e-a016-661bec557de6",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+        </ul>
+      </div>
+      <input
+        class="jsx-6f8c5883fcd245f tab-switch"
+        id="banned"
+        name="TAB"
+        type="radio"
+      />
+      <label
+        class="jsx-6f8c5883fcd245f tab-label"
+        for="banned"
+      >
+        アカウント停止
+      </label>
+      <div
+        class="jsx-6f8c5883fcd245f tab-content"
+      >
+        <ul>
+          <li>
+            {
+  "createdAt": "2024-04-15T11:34:46.135Z",
+  "email": "foo@sample.com",
+  "memberId": "5422c606-4cca-4054-ac66-83b682c53584",
+  "statusActivityId": "128f3ea5-962b-4119-9d5c-05084b103708",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+          <li>
+            {
+  "createdAt": "2024-04-21T10:31:43.791Z",
+  "email": "hhhh@gmail.com",
+  "memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
+  "statusActivityId": "32833818-04fd-458e-a016-661bec557de6",
+  "__typename": "memberPendingActivation",
+  "status": "pendingActivation"
+}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+`;

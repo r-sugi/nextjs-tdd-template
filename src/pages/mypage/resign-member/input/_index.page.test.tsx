@@ -45,7 +45,6 @@ describe(Page, () => {
 	it("template file called", async () => {
 		// Arrange
 		const AuthGuardMock = toMock(AuthGuard);
-		const COMPONENT_PROPS = {};
 
 		// Act
 		setup();

@@ -35,15 +35,12 @@ type MemberStatusToMemberMap = {
 export const transform = <K extends MemberStatus>(
 	res: GetMembersByStatusQueryResult,
 	status: K,
-): MemberStatusToMemberMap[K] => {
+): MemberStatusToMemberMap[K] | null => {
 	if (res.data == null) {
-		return [];
-	}
-	if (res.data.memberStatusActivityLatest?.length === 0) {
-		return [];
+		return null;
 	}
 	if (res.data.memberStatusActivityLatest == null) {
-		return [];
+		return null;
 	}
 
 	if (status === "active") {

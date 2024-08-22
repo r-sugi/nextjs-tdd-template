@@ -7,10 +7,10 @@ import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
 
 // @remarks: 配列の場合は、空配列を初期値とする(データ取得失敗時はエラー表示するためデータを参照して処理しない方針)
-type InitialMembersState = [];
+type InitialMembersState = undefined;
 type ResultMembersState = MembersByType | null;
 type MembersState = InitialMembersState | ResultMembersState;
-const initialMemberState: InitialMembersState = [];
+const initialMemberState: InitialMembersState = undefined;
 const defaultStatus = memberStatus.pendingActivation;
 
 type UseCaseLoading<I> = {

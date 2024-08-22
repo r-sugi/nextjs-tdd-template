@@ -6,7 +6,6 @@ type Props = {
 };
 
 export const MembersList: FC<Props> = (props) => {
-	console.log(props.members);
 	if (props.members.length === 0) {
 		return <div>メンバーがいません</div>;
 	}
