@@ -26,6 +26,7 @@ module.exports = {
 		"reg-notify-github-plugin",
 		// Unlisted dependencies
 		"dotenv",
+		"ts-node",
 	],
 	ignoreBinaries: ["docker-compose", "npm-run-all"],
 };
