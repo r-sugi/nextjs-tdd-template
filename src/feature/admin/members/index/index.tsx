@@ -11,11 +11,15 @@ export const IndexTemplate: FC = () => {
 		return <div>loading...</div>;
 	}
 	if (data?.members === null) {
-		return <div>CSR リクエストエラー: データ取得に失敗しました</div>;
+		return (
+			<div data-testid="admin-members-index-error">
+				CSR リクエストエラー: データ取得に失敗しました
+			</div>
+		);
 	}
 
 	return (
-		<div>
+		<div data-testid="admin-members-index">
 			{/* TODO: styleに関するリファクタ tailwind使う */}
 			<style jsx={true}>{`
         .tab-wrap {
