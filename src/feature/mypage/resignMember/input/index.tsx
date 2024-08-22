@@ -11,6 +11,7 @@ import { setCache } from "@/utils/cache";
 export default function IndexTemplate() {
 	const router = useRouter();
 	const {
+		resignMemberLabels,
 		handleSubmit,
 		register,
 		formState: { isSubmitting, isValid, errors },
@@ -31,7 +32,7 @@ export default function IndexTemplate() {
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
 				<div>
-					<label>退会理由</label>
+					<label>{resignMemberLabels.reasonType}</label>
 					<select {...register("reasonType")}>
 						<option value="">選択してください</option>
 						<option value="NO_USE">利用しないため</option>
@@ -41,13 +42,13 @@ export default function IndexTemplate() {
 				</div>
 
 				<div>
-					<label>詳細</label>
+					<label>{resignMemberLabels.reasonDetail}</label>
 					<textarea {...register("reasonDetail")} />
 					{errors.reasonDetail?.message && <p>{errors.reasonDetail.message}</p>}
 				</div>
 
 				<div>
-					<label htmlFor="agreement">同意する</label>
+					<label htmlFor="agreement">{resignMemberLabels.agreement}</label>
 					<input type="checkbox" {...register("agreement")} id="agreement" />
 					{errors.agreement?.message && <p>{errors.agreement.message}</p>}
 				</div>
