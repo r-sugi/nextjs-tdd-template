@@ -4,8 +4,8 @@ export type RuntimeError = {
 };
 
 export type AppErrorMessage = {
-	title?: string;
-	message?: string;
+	title: string;
+	message: string;
 	myErrorCode: string;
 	level: "fatal" | "error" | "warning" | "info" | "debug";
 	// runtime error
