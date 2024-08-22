@@ -4,7 +4,7 @@ import {
 	useUpdateMemberStatus,
 } from "@/core/repositories/member/members.repository";
 import { outputErrorLog } from "@/error/outputErrorLog";
-import { useNotification } from "../../../error/hooks/useNotification";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 
 type Props = {
 	reasonType: string;
@@ -18,7 +18,7 @@ type UseResignMemberReturnType = {
 
 export const useResignMember = () => {
 	const mutate = useUpdateMemberStatus();
-	const { notify } = useNotification();
+	const { notify } = useErrorNotificationContext();
 
 	return async (props: Props): Promise<UseResignMemberReturnType> => {
 		const activityInput: UpdateMemberStatusInputType = {

@@ -18,9 +18,9 @@ export const AppApolloProvider: FC<{
 			onError(({ operation, graphQLErrors, networkError, forward }) => {
 				if (graphQLErrors) {
 					graphQLErrors.map(({ message, extensions }) => {
-						console.log(
-							`[GraphQL error]: Message: ${message}, Code: ${extensions.code}, Path: ${extensions.path}`,
-						);
+						// console.log(
+						// 	`[GraphQL error]: Message: ${message}, Code: ${extensions.code}, Path: ${extensions.path}`,
+						// );
 						switch (extensions.code) {
 							// session系の処理のみ必要。
 							case "invalid-jwt": {
@@ -39,14 +39,14 @@ export const AppApolloProvider: FC<{
 								return forward(operation);
 							}
 							default:
-								// default case
-								console.log(extensions.code);
+							// default case
+							// console.log(extensions.code);
 						}
 					});
 				}
-				if (networkError) {
-					console.log(`TODO: [Network error]: ${networkError}`);
-				}
+				// if (networkError) {
+				// console.log(`TODO: [Network error]: ${networkError}`);
+				// }
 			}),
 		[],
 	);

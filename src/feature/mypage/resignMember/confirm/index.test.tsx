@@ -6,6 +6,7 @@ import { getCache, removeCache } from "@/utils/cache";
 import { NoCacheError } from "@/utils/cache/error";
 
 import { loginRequiredPages, publicPages } from "@/const/paths";
+import { outputErrorLog } from "@/error/outputErrorLog";
 import { ResignMemberDocument } from "@/generated/graphql";
 import { AppProvider } from "@/pages/_provider/_app.provider";
 import { HttpResponse, graphql } from "msw";
@@ -14,6 +15,7 @@ import * as router from "next/router";
 import IndexTemplate from "./index";
 
 jest.mock("@/utils/cache");
+jest.mock("@/error/outputErrorLog");
 
 describe(IndexTemplate, () => {
 	const server = setupServer();
@@ -127,7 +129,7 @@ describe(IndexTemplate, () => {
 			expect(routerMock).toHaveBeenCalledWith(publicPages.index.path());
 		});
 
-		it.skip("TODO: フォーム送信でエラーが発生し、エラーが表示される", async () => {
+		it("フォーム送信でエラーが発生し、エラーが表示される", async () => {
 			// Arrange
 			toMock(getCache).mockReturnValue(formValues);
 			const routerMock = jest.fn();
@@ -139,10 +141,20 @@ describe(IndexTemplate, () => {
 				graphql.mutation(ResignMemberDocument, ({ variables }) => {
 					mockFn(variables);
 					return HttpResponse.json({
-						errors: [], // TODO: ここでエラーメッセージのもとになる値を返す
+						errors: [
+							{
+								message: "エラーが発生しました",
+								locations: [],
+								extensions: {
+									code: "ERROR_CODE", // Provide an appropriate error code
+									path: "mutation.path", // Provide a relevant path if necessary
+								},
+							},
+						],
 					});
 				}),
 			);
+			const mockOutputErrorLog = toMock(outputErrorLog);
 
 			// Act
 			const { view } = setup();
@@ -152,7 +164,13 @@ describe(IndexTemplate, () => {
 			expect(mockFn).toHaveBeenCalledTimes(1);
 			expect(toMock(removeCache)).not.toHaveBeenCalled();
 			expect(routerMock).not.toHaveBeenCalled();
-			// TODO: ここでエラーメッセージ(toast?)が表示されることを検証する
+
+			expect(mockOutputErrorLog).toHaveBeenCalled();
+
+			await waitFor(() => {
+				const errorBanner = view.getByTestId("error-banner");
+				expect(errorBanner).toBeVisible();
+			});
 		});
 	});
 });

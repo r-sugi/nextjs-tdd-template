@@ -10,7 +10,11 @@ import {
 import { getCache, removeCache } from "@/utils/cache";
 import { sessionKeys } from "@/utils/cache/type";
 
+import { ErrorBanner } from "../../../error/banner/ErrorBanner";
+import { ErrorNotificationProvider } from "../../../error/banner/ErrorNotificationContext";
 import { ErrorBoundary as ConfirmErrorBoundary } from "./errorBoundary";
+
+const templateId = "mypage-resign-member-confirm";
 
 const Template: FC = () => {
 	const router = useRouter();
@@ -59,7 +63,9 @@ const Template: FC = () => {
 	}, []);
 
 	return (
-		<div data-testid={"mypage-resign-member-confirm"}>
+		<div data-testid={templateId}>
+			<ErrorBanner />
+
 			<form
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
@@ -104,8 +110,10 @@ const Template: FC = () => {
 
 export default function IndexTemplate() {
 	return (
-		<ConfirmErrorBoundary>
-			<Template />
-		</ConfirmErrorBoundary>
+		<ErrorNotificationProvider customId={templateId}>
+			<ConfirmErrorBoundary>
+				<Template />
+			</ConfirmErrorBoundary>
+		</ErrorNotificationProvider>
 	);
 }

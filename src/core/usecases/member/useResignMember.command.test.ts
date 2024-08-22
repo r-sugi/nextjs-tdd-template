@@ -7,18 +7,20 @@ import {
 } from "@/core/repositories/member/members.repository";
 
 import { outputErrorLog } from "@/error/outputErrorLog";
-import { useNotification } from "../../../error/hooks/useNotification";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { useResignMember } from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("@/error/hooks/useNotification");
 jest.mock("@/error/outputErrorLog");
+jest.mock("@/feature/error/banner/ErrorNotificationContext");
 
 describe(useResignMember, () => {
-	const mockSetError = jest.fn();
-	toMock(useNotification).mockImplementation(() => {
+	const mockNotify = jest.fn();
+	toMock(useErrorNotificationContext).mockImplementation(() => {
 		return {
-			notify: mockSetError,
+			notify: mockNotify,
+			items: [],
+			clear: () => {},
 		};
 	});
 	const mockOutputErrorLog = jest.fn();
@@ -47,7 +49,7 @@ describe(useResignMember, () => {
 			await waitFor(async () => {
 				expect(await result.current(props)).toEqual(expected);
 			});
-			expect(mockSetError).not.toHaveBeenCalled();
+			expect(mockNotify).not.toHaveBeenCalled();
 			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
 	});
@@ -73,7 +75,7 @@ describe(useResignMember, () => {
 			await waitFor(async () => {
 				expect(await result.current(props)).toEqual(expected);
 			});
-			expect(mockSetError).toHaveBeenCalled();
+			expect(mockNotify).toHaveBeenCalled();
 			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});
 	});
