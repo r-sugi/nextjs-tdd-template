@@ -39,9 +39,6 @@ export const transform = <K extends MemberStatus>(
 	if (res.data == null) {
 		return null;
 	}
-	if (res.data.memberStatusActivityLatest?.length === 0) {
-		return null;
-	}
 	if (res.data.memberStatusActivityLatest == null) {
 		return null;
 	}
