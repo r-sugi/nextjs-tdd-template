@@ -7,14 +7,15 @@ on:
 
 permissions:
   pull-requests: write
+  issues: write
 
 jobs:
   run-pr-agent:
     runs-on: ubuntu-latest
-    name: Run Agent Review
+    name: Run PR Agent
     if: ${{ github.event.sender.type != 'Bot' }}
     steps:
-      - id: review-agent
+      - id: pr-agent
         uses: Codium-ai/pr-agent@main
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
@@ -22,6 +23,6 @@ jobs:
           GITHUB_ACTION_CONFIG.AUTO_DESCRIBE: true
           GITHUB_ACTION_CONFIG.AUTO_REVIEW: true
           GITHUB_ACTION_CONFIG.AUTO_IMPROVE: true
-          # PR_DESCRIPTION.EXTRA_INSTRUCTIONS: "Please use Japanese."
-          # PR_REVIEWER.EXTRA_INSTRUCTIONS: "Please use Japanese."
-          # PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: "Please use Japanese."
+          PR_DESCRIPTION.EXTRA_INSTRUCTIONS: "Please use Japanese."
+          PR_REVIEWER.EXTRA_INSTRUCTIONS: "Please use Japanese."
+          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: "Please use Japanese."
