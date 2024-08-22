@@ -47,3 +47,9 @@ __screenshots__
 
 # reg-suit
 .reg
+
+# E2E playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
