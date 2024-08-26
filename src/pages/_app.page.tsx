@@ -1,6 +1,6 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
-
+import "@/styles/globals.css";
 import { HeaderTemplate } from "@/feature/header";
 import { initializeFirebaseApp } from "@/lib/firebase";
 import { AppProvider } from "./_provider/_app.provider";

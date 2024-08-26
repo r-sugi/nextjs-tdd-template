@@ -1,5 +1,5 @@
 import React, { type FC, useEffect } from "react";
-import "./globals.css";
+import "../src/styles/globals.css";
 import type { Preview } from "@storybook/react";
 import "tailwindcss/tailwind.css";
 import { AppProvider } from "../src/pages/_provider/_app.provider";

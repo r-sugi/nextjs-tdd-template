@@ -26,7 +26,9 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
         class="jsx-6f8c5883fcd245f tab-content"
       >
         <ul>
-          <li>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-15T11:34:46.135Z",
   "email": "foo@sample.com",
@@ -35,8 +37,10 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
-          <li>
+          </div>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-21T10:31:43.791Z",
   "email": "hhhh@gmail.com",
@@ -45,7 +49,7 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
+          </div>
         </ul>
       </div>
       <input
@@ -64,7 +68,9 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
         class="jsx-6f8c5883fcd245f tab-content"
       >
         <ul>
-          <li>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-15T11:34:46.135Z",
   "email": "foo@sample.com",
@@ -73,8 +79,10 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
-          <li>
+          </div>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-21T10:31:43.791Z",
   "email": "hhhh@gmail.com",
@@ -83,7 +91,7 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
+          </div>
         </ul>
       </div>
       <input
@@ -102,7 +110,9 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
         class="jsx-6f8c5883fcd245f tab-content"
       >
         <ul>
-          <li>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-15T11:34:46.135Z",
   "email": "foo@sample.com",
@@ -111,8 +121,10 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
-          <li>
+          </div>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-21T10:31:43.791Z",
   "email": "hhhh@gmail.com",
@@ -121,7 +133,7 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
+          </div>
         </ul>
       </div>
       <input
@@ -140,7 +152,9 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
         class="jsx-6f8c5883fcd245f tab-content"
       >
         <ul>
-          <li>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-15T11:34:46.135Z",
   "email": "foo@sample.com",
@@ -149,8 +163,10 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
-          <li>
+          </div>
+          <div
+            class="text-xl font-bold"
+          >
             {
   "createdAt": "2024-04-21T10:31:43.791Z",
   "email": "hhhh@gmail.com",
@@ -159,7 +175,7 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
   "__typename": "memberPendingActivation",
   "status": "pendingActivation"
 }
-          </li>
+          </div>
         </ul>
       </div>
     </div>
