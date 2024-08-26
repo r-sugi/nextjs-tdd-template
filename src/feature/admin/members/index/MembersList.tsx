@@ -13,7 +13,9 @@ export const MembersList: FC<Props> = (props) => {
 	return (
 		<ul>
 			{props.members.map((member) => (
-				<li key={member.statusActivityId}>{JSON.stringify(member, null, 2)}</li>
+				<div className="text-xl font-bold" key={member.statusActivityId}>
+					{JSON.stringify(member, null, 2)}
+				</div>
 			))}
 		</ul>
 	);
