@@ -12,6 +12,7 @@ export const MemberTable = ({ members }: PropsType) => {
 		"Status Activity ID",
 		"Type",
 		"Status",
+		"",
 	];
 
 	return (
@@ -48,6 +49,9 @@ export const MemberTable = ({ members }: PropsType) => {
 						</td>
 						<td className="py-2 px-4 border-b border-gray-300">
 							{member.status}
+						</td>
+						<td className="cursor-pointer py-2 px-4 border-b border-gray-300">
+							Details
 						</td>
 					</tr>
 				))}
