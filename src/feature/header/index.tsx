@@ -18,6 +18,7 @@ const pages = [
 	loginRequiredPages.mypageResignMemberInput,
 	loginRequiredPages.mypageResignMemberConfirm,
 	adminSecretPages.members,
+	adminSecretPages.allMembers,
 ];
 
 export const HeaderTemplate = () => {

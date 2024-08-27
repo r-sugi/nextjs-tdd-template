@@ -69,6 +69,12 @@ const adminSecretPages = {
 		titleShort: "管理画面 会員一覧",
 		description: () => "管理画面 会員一覧",
 	},
+	allMembers: {
+		path: () => "/admin/allMembers",
+		title: () => title("管理画面 会員一覧2"),
+		titleShort: "管理画面 会員一覧2",
+		description: () => "管理画面 会員一覧2",
+	},
 };
 
 export {
