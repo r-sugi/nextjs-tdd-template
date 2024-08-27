@@ -22,7 +22,7 @@ export const IndexTemplate: FC = () => {
 		<div data-testid="admin-members-index">
 			{/* メンバー一覧 */}
 			<div className="container mx-auto">
-				<h1 className="text-2xl font-bold mb-4">Member Information</h1>
+				<h1 className="text-2xl font-bold mb-4">Members</h1>
 				<MemberTable members={data.members} />
 			</div>
 		</div>

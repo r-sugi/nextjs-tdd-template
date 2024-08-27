@@ -1,4 +1,5 @@
 import type { MembersByType } from "@/core/domains/member/member";
+import { ThreeDotsIcon } from "./three-dots.icon";
 
 type PropsType = {
 	members: MembersByType;
@@ -7,6 +8,7 @@ type PropsType = {
 export const MemberTable = ({ members }: PropsType) => {
 	const tableHeaders = [
 		"Created At",
+		// TODO: ドメインモデルの定義、ドメインロジックの定義を修正する
 		// "Email",
 		// "Member ID",
 		"Status Activity ID",
@@ -35,6 +37,7 @@ export const MemberTable = ({ members }: PropsType) => {
 						<td className="py-2 px-4 border-b border-gray-300">
 							{member.createdAt.getTime()}
 						</td>
+						{/* // TODO: ドメインモデルの定義、ドメインロジックの定義を修正する */}
 						{/* <td className="py-2 px-4 border-b border-gray-300">
 							{member.email}
 						</td> */}
@@ -51,7 +54,14 @@ export const MemberTable = ({ members }: PropsType) => {
 							{member.status}
 						</td>
 						<td className="cursor-pointer py-2 px-4 border-b border-gray-300">
-							Details
+							<div className="flex justify-between">
+								<div className="hover:text-blue-500 hover:underline">
+									Details
+								</div>
+								<div className="items-center">
+									<ThreeDotsIcon />
+								</div>
+							</div>
 						</td>
 					</tr>
 				))}
