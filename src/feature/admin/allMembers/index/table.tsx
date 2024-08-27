@@ -1,4 +1,5 @@
 import type { MembersByType } from "@/core/domains/member/member";
+import Link from "next/link";
 import { ThreeDotsIcon } from "./three-dots.icon";
 
 type PropsType = {
@@ -55,9 +56,12 @@ export const MemberTable = ({ members }: PropsType) => {
 						</td>
 						<td className="cursor-pointer py-2 px-4 border-b border-gray-300">
 							<div className="flex justify-between">
-								<div className="hover:text-blue-500 hover:underline">
+								<Link
+									href={"#"}
+									className="text-blue-500 hover:text-blue-800 hover:underline"
+								>
 									Details
-								</div>
+								</Link>
 								<div className="items-center">
 									<ThreeDotsIcon />
 								</div>

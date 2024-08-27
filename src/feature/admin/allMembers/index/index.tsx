@@ -1,11 +1,10 @@
 import type { FC } from "react";
 
-import { memberStatus } from "@/core/domains/member/status";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 import { MemberTable } from "./table";
 
 export const IndexTemplate: FC = () => {
-	const { data, refetch, loading } = useFetchMembers();
+	const { data, loading } = useFetchMembers();
 
 	if (loading) {
 		return <div>loading...</div>;
