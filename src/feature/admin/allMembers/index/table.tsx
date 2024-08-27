@@ -1,5 +1,7 @@
 import type { MembersByType } from "@/core/domains/member/member";
 import Link from "next/link";
+import { useState } from "react";
+import { PopupMenu } from "./popup";
 import { ThreeDotsIcon } from "./three-dots.icon";
 
 type PropsType = {
@@ -56,14 +58,18 @@ export const MemberTable = ({ members }: PropsType) => {
 						</td>
 						<td className="cursor-pointer py-2 px-4 border-b border-gray-300">
 							<div className="flex justify-between">
-								<Link
-									href={"#"}
-									className="text-blue-500 hover:text-blue-800 hover:underline"
-								>
-									Details
-								</Link>
+								<div>
+									<Link
+										href={"#"}
+										className="text-blue-500 hover:text-blue-800 hover:underline"
+									>
+										Details
+									</Link>
+								</div>
 								<div className="items-center">
-									<ThreeDotsIcon />
+									<PopupMenu>
+										<ThreeDotsIcon />
+									</PopupMenu>
 								</div>
 							</div>
 						</td>
