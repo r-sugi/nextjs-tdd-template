@@ -1,0 +1,45 @@
+query GetAllMembers {
+  memberStatusActivityLatest {
+    status
+    createdAt
+    id
+    memberId
+    memberActive {
+      statusActivityId
+      postalCode
+      memberId
+      email
+      createdAt
+      birthday
+      address
+    }
+    memberBanned {
+      createdAt
+      memberId
+      operatedBy
+      reason
+      statusActivityId
+    }
+    memberPendingActivation {
+      createdAt
+      email
+      memberId
+      statusActivityId
+    }
+    memberResigned {
+      agreement
+      createdAt
+      memberId
+      reasonDetail
+      reasonType
+      statusActivityId
+    }
+    memberRestored {
+      createdAt
+      memberId
+      operatedBy
+      reason
+      statusActivityId
+    }
+  }
+}

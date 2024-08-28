@@ -3,27 +3,26 @@
 exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
 <div>
   <div
-    class="jsx-6f8c5883fcd245f"
     data-testid="admin-members-index"
   >
     <div
-      class="jsx-6f8c5883fcd245f tab-wrap"
+      class="flex flex-wrap"
     >
       <input
         checked=""
-        class="jsx-6f8c5883fcd245f tab-switch"
+        class="tab-switch hidden"
         id="pendingActivation"
         name="TAB"
         type="radio"
       />
       <label
-        class="jsx-6f8c5883fcd245f tab-label"
+        class="cursor-pointer text-white mr-1 px-3 py-1 order-first bg-blue-500"
         for="pendingActivation"
       >
         認証前
       </label>
       <div
-        class="jsx-6f8c5883fcd245f tab-content"
+        class="w-full block"
       >
         <ul>
           <div
@@ -53,19 +52,19 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
         </ul>
       </div>
       <input
-        class="jsx-6f8c5883fcd245f tab-switch"
+        class="tab-switch hidden"
         id="active"
         name="TAB"
         type="radio"
       />
       <label
-        class="jsx-6f8c5883fcd245f tab-label"
+        class="cursor-pointer text-white mr-1 px-3 py-1 order-first bg-gray-300"
         for="active"
       >
         アクティブ
       </label>
       <div
-        class="jsx-6f8c5883fcd245f tab-content"
+        class="w-full hidden"
       >
         <ul>
           <div
@@ -95,19 +94,19 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
         </ul>
       </div>
       <input
-        class="jsx-6f8c5883fcd245f tab-switch"
+        class="tab-switch hidden"
         id="resigned"
         name="TAB"
         type="radio"
       />
       <label
-        class="jsx-6f8c5883fcd245f tab-label"
+        class="cursor-pointer text-white mr-1 px-3 py-1 order-first bg-gray-300"
         for="resigned"
       >
         退会済み
       </label>
       <div
-        class="jsx-6f8c5883fcd245f tab-content"
+        class="w-full hidden"
       >
         <ul>
           <div
@@ -137,19 +136,19 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
         </ul>
       </div>
       <input
-        class="jsx-6f8c5883fcd245f tab-switch"
+        class="tab-switch hidden"
         id="banned"
         name="TAB"
         type="radio"
       />
       <label
-        class="jsx-6f8c5883fcd245f tab-label"
+        class="cursor-pointer text-white mr-1 px-3 py-1 order-first bg-gray-300"
         for="banned"
       >
         アカウント停止
       </label>
       <div
-        class="jsx-6f8c5883fcd245f tab-content"
+        class="w-full hidden"
       >
         <ul>
           <div

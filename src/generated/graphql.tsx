@@ -3329,6 +3329,67 @@ export type GetActiveMemberQuery = {
 	>;
 };
 
+export type GetAllMembersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllMembersQuery = {
+	memberStatusActivityLatest: Array<
+		Pick<
+			MemberStatusActivityLatest,
+			"status" | "createdAt" | "id" | "memberId"
+		> & {
+			memberActive?: Maybe<
+				Pick<
+					MemberActive,
+					| "statusActivityId"
+					| "postalCode"
+					| "memberId"
+					| "email"
+					| "createdAt"
+					| "birthday"
+					| "address"
+				>
+			>;
+			memberBanned?: Maybe<
+				Pick<
+					MemberBanned,
+					| "createdAt"
+					| "memberId"
+					| "operatedBy"
+					| "reason"
+					| "statusActivityId"
+				>
+			>;
+			memberPendingActivation?: Maybe<
+				Pick<
+					MemberPendingActivation,
+					"createdAt" | "email" | "memberId" | "statusActivityId"
+				>
+			>;
+			memberResigned?: Maybe<
+				Pick<
+					MemberResigned,
+					| "agreement"
+					| "createdAt"
+					| "memberId"
+					| "reasonDetail"
+					| "reasonType"
+					| "statusActivityId"
+				>
+			>;
+			memberRestored?: Maybe<
+				Pick<
+					MemberRestored,
+					| "createdAt"
+					| "memberId"
+					| "operatedBy"
+					| "reason"
+					| "statusActivityId"
+				>
+			>;
+		}
+	>;
+};
+
 export type GetMembersByStatusQueryVariables = Exact<{
 	status: Scalars["String"]["input"];
 }>;
@@ -3535,6 +3596,118 @@ export type GetActiveMemberSuspenseQueryHookResult = ReturnType<
 export type GetActiveMemberQueryResult = Apollo.QueryResult<
 	GetActiveMemberQuery,
 	GetActiveMemberQueryVariables
+>;
+export const GetAllMembersDocument = gql`
+    query GetAllMembers {
+  memberStatusActivityLatest {
+    status
+    createdAt
+    id
+    memberId
+    memberActive {
+      statusActivityId
+      postalCode
+      memberId
+      email
+      createdAt
+      birthday
+      address
+    }
+    memberBanned {
+      createdAt
+      memberId
+      operatedBy
+      reason
+      statusActivityId
+    }
+    memberPendingActivation {
+      createdAt
+      email
+      memberId
+      statusActivityId
+    }
+    memberResigned {
+      agreement
+      createdAt
+      memberId
+      reasonDetail
+      reasonType
+      statusActivityId
+    }
+    memberRestored {
+      createdAt
+      memberId
+      operatedBy
+      reason
+      statusActivityId
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllMembersQuery__
+ *
+ * To run a query within a React component, call `useGetAllMembersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllMembersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllMembersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllMembersQuery(
+	baseOptions?: Apollo.QueryHookOptions<
+		GetAllMembersQuery,
+		GetAllMembersQueryVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useQuery<GetAllMembersQuery, GetAllMembersQueryVariables>(
+		GetAllMembersDocument,
+		options,
+	);
+}
+export function useGetAllMembersLazyQuery(
+	baseOptions?: Apollo.LazyQueryHookOptions<
+		GetAllMembersQuery,
+		GetAllMembersQueryVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useLazyQuery<GetAllMembersQuery, GetAllMembersQueryVariables>(
+		GetAllMembersDocument,
+		options,
+	);
+}
+export function useGetAllMembersSuspenseQuery(
+	baseOptions?: Apollo.SuspenseQueryHookOptions<
+		GetAllMembersQuery,
+		GetAllMembersQueryVariables
+	>,
+) {
+	const options = { ...defaultOptions, ...baseOptions };
+	return Apollo.useSuspenseQuery<
+		GetAllMembersQuery,
+		GetAllMembersQueryVariables
+	>(GetAllMembersDocument, options);
+}
+export type GetAllMembersQueryHookResult = ReturnType<
+	typeof useGetAllMembersQuery
+>;
+export type GetAllMembersLazyQueryHookResult = ReturnType<
+	typeof useGetAllMembersLazyQuery
+>;
+export type GetAllMembersSuspenseQueryHookResult = ReturnType<
+	typeof useGetAllMembersSuspenseQuery
+>;
+export type GetAllMembersQueryResult = Apollo.QueryResult<
+	GetAllMembersQuery,
+	GetAllMembersQueryVariables
 >;
 export const GetMembersByStatusDocument = gql`
     query GetMembersByStatus($status: String!) {

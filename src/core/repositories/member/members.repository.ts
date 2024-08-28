@@ -2,15 +2,17 @@ import type { MemberStatus } from "@/core/domains/member/status";
 import {
 	type ResignMemberMutationVariables,
 	useGetActiveMemberLazyQuery,
+	useGetAllMembersLazyQuery,
 	useGetMembersByStatusLazyQuery,
 	useResignMemberMutation,
 } from "@/generated/graphql";
 
 import type { ActiveMember } from "@/core/domains/member/activeMember";
-import type { MembersByType } from "@/core/domains/member/member";
+import type { AllMembers, MembersByType } from "@/core/domains/member/member";
 import type { AppErrorMessage } from "@/error/const";
 import { transformError } from "./transformError";
 import { transform } from "./transformer/activeMember.transformer";
+import { transform as transformAllMembers } from "./transformer/allMembers.transformer";
 import { transform as membersByStatusTransform } from "./transformer/membersByStatus.transformer";
 import { resignMemberTransform } from "./transformer/resignMember.transformer";
 
@@ -55,6 +57,27 @@ export const useFetchMembersByStatus = (): FetchMembersByStatusType => {
 		try {
 			const res = await query({ variables: { status } });
 			const members = membersByStatusTransform(res, status);
+			return { data: members, error: null };
+		} catch (error: unknown) {
+			return { data: null, error: transformError(error) };
+		}
+	};
+};
+
+type FetchAllMembers = () => Promise<FetchAllMembersReturnType>;
+
+type FetchAllMembersReturnType = {
+	data: AllMembers | null;
+	error: AppErrorMessage | null;
+};
+
+export const useFetchMembersAll = (): FetchAllMembers => {
+	const [query] = useGetAllMembersLazyQuery();
+
+	return async () => {
+		try {
+			const res = await query();
+			const members = transformAllMembers(res);
 			return { data: members, error: null };
 		} catch (error: unknown) {
 			return { data: null, error: transformError(error) };
