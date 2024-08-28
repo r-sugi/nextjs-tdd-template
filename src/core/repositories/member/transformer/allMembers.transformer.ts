@@ -5,37 +5,9 @@ import type { PendingActivationMember } from "@/core/domains/member/pendingActiv
 import type { ResignMember } from "@/core/domains/member/resignMember";
 import type { RestoredMember } from "@/core/domains/member/restoredMember";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
-import type {
-	GetMembersByStatusQueryResult,
-	MemberStatusActivityLatest,
-} from "@/generated/graphql";
+import type { GetAllMembersQueryResult } from "@/generated/graphql";
 
-// type MemberTypes = keyof Pick<
-// 	MemberStatusActivityLatest,
-// 	| "memberActive"
-// 	| "memberBanned"
-// 	| "memberResigned"
-// 	| "memberPendingActivation"
-// 	| "memberRestored"
-// >;
-
-// type StrictMemberStatusActivityLatest<K extends MemberTypes> = Omit<
-// 	MemberStatusActivityLatest,
-// 	K
-// > &
-// 	Record<K, NonNullable<MemberStatusActivityLatest[K]>>;
-
-// type MemberStatusToMemberMap = {
-// 	[memberStatus.active]: ActiveMember;
-// 	[memberStatus.banned]: BannedMember;
-// 	[memberStatus.pendingActivation]: PendingActivationMember;
-// 	[memberStatus.resigned]: ResignMember;
-// 	[memberStatus.restored]: RestoredMember;
-// };
-
-export const transform = <K extends MemberStatus>(
-	res: GetMembersByStatusQueryResult,
-): AllMembers | null => {
+export const transform = (res: GetAllMembersQueryResult): AllMembers | null => {
 	if (res.data == null) {
 		return null;
 	}

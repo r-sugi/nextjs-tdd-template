@@ -1,6 +1,10 @@
 import { type PropsWithChildren, useState } from "react";
 
-export const PopupMenu = ({ children }: PropsWithChildren) => {
+type Props = {
+	opener: React.ReactNode;
+};
+
+export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 	const [isDropdownVisible, setDropdownVisible] = useState(false);
 
 	const handleFocus = () => {
@@ -21,7 +25,7 @@ export const PopupMenu = ({ children }: PropsWithChildren) => {
 					onFocus={handleFocus}
 					onBlur={handleBlur}
 				>
-					{children}
+					{opener}
 				</button>
 
 				<div
@@ -32,19 +36,7 @@ export const PopupMenu = ({ children }: PropsWithChildren) => {
 							: "scale-0 opacity-0 ease-out duration-75"
 					} top-13`}
 				>
-					<div
-						className="p-4 bg-white rounded-md shadow-xs"
-						role="menu"
-						aria-orientation="vertical"
-						aria-labelledby="user-menu"
-					>
-						<div
-							className="block px-6 py-2 mb-2 font-bold rounded"
-							role="menuitem"
-						>
-							Delete
-						</div>
-					</div>
+					{children}
 				</div>
 			</div>
 		</nav>

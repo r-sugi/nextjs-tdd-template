@@ -3329,9 +3329,7 @@ export type GetActiveMemberQuery = {
 	>;
 };
 
-export type GetAllMembersQueryVariables = Exact<{
-	status: Scalars["String"]["input"];
-}>;
+export type GetAllMembersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetAllMembersQuery = {
 	memberStatusActivityLatest: Array<
@@ -3600,7 +3598,7 @@ export type GetActiveMemberQueryResult = Apollo.QueryResult<
 	GetActiveMemberQueryVariables
 >;
 export const GetAllMembersDocument = gql`
-    query GetAllMembers($status: String!) {
+    query GetAllMembers {
   memberStatusActivityLatest {
     status
     createdAt
@@ -3659,19 +3657,14 @@ export const GetAllMembersDocument = gql`
  * @example
  * const { data, loading, error } = useGetAllMembersQuery({
  *   variables: {
- *      status: // value for 'status'
  *   },
  * });
  */
 export function useGetAllMembersQuery(
-	baseOptions: Apollo.QueryHookOptions<
+	baseOptions?: Apollo.QueryHookOptions<
 		GetAllMembersQuery,
 		GetAllMembersQueryVariables
-	> &
-		(
-			| { variables: GetAllMembersQueryVariables; skip?: boolean }
-			| { skip: boolean }
-		),
+	>,
 ) {
 	const options = { ...defaultOptions, ...baseOptions };
 	return Apollo.useQuery<GetAllMembersQuery, GetAllMembersQueryVariables>(

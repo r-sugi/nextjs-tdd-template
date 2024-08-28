@@ -25,6 +25,7 @@ type UseCaseLoaded<R> = {
 
 type UseCase<I, R> = UseCaseLoading<I> | UseCaseLoaded<R>;
 
+// ユースケース(ユーザーが実現させたいこと)用の型定義
 export const useFetchAllMembers = () => {
 	const [members, setMembers] = useState<MembersState>(initialAllMembersState);
 	const query = useFetchMembersAll();

@@ -1,10 +1,14 @@
 import type { FC } from "react";
 
 import { useFetchAllMembers } from "@/core/usecases/member/useFetchAllMembers.query";
-import { MemberTable } from "./table";
+import { MemberTable } from "./table/table";
 
 export const IndexTemplate: FC = () => {
 	const { data, loading } = useFetchAllMembers();
+
+	// TODO: データ型を変換しておく
+
+	// TODO: listItems = [{}, {}]
 
 	if (loading) {
 		return <div>loading...</div>;
@@ -16,6 +20,8 @@ export const IndexTemplate: FC = () => {
 			</div>
 		);
 	}
+
+	// TODO: モーダルで決定orキャンセルの確認を出す(portal)
 
 	return (
 		<div data-testid="admin-members-index">

@@ -5,7 +5,7 @@ import type { ResignMember } from "./resignMember";
 import type { RestoredMember } from "./restoredMember";
 
 // ステータスごとにユニオンで増えていく
-type AllMember =
+export type AllMember =
 	| ActiveMember
 	| ResignMember
 	| BannedMember

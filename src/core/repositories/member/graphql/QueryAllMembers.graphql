@@ -1,4 +1,4 @@
-query GetAllMembers($status: String!) {
+query GetAllMembers {
   memberStatusActivityLatest {
     status
     createdAt
