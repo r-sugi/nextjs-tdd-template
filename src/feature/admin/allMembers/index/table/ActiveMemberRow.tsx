@@ -6,19 +6,14 @@ import { ThreeDotsIcon } from "../three-dots.icon";
 
 export const ActiveMemberRow: FC<{
 	member: ActiveMember;
-}> = ({ member }) => {
-	const onClickDelete = () => {
-		// mutate
-		console.log("TODO: mutate", member);
-		// refresh cache
-		console.log("TODO: refresh cache", member);
-	};
-	const onClickDisable = () => {
-		// mutate
-		console.log("TODO: mutate", member);
-		// refresh cache
-		console.log("TODO: refresh cache", member);
-	};
+	onClickDelete: (member: ActiveMember) => void;
+	onClickDisable: (member: ActiveMember) => void;
+}> = ({ member, onClickDelete, onClickDisable }) => {
+	// 1 const ref = useRef でrefを定義する
+	// 2 <Dialog ref={ref}>　でDOMを定義する
+	// 3 ref.current?.showModal();　で表示する
+	// 4 onClickイベントを受け取る
+	// 5 API通信する
 
 	return (
 		<tr>
@@ -34,8 +29,11 @@ export const ActiveMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem onClick={onClickDelete} label="Delete" />
-							<MenuItem onClick={onClickDisable} label="disable" />
+							<MenuItem onClick={() => onClickDelete(member)} label="Delete" />
+							<MenuItem
+								onClick={() => onClickDisable(member)}
+								label="disable"
+							/>
 						</PopupMenu>
 					</div>
 				</div>

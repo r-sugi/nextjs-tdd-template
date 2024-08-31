@@ -15,7 +15,10 @@ export const MenuItem = ({ onClick, label }: ListItemProps) => {
 				type="button"
 				className="block px-6 py-2 mb-2 font-bold rounded"
 				role="menuitem"
-				onClick={onClick}
+				onClick={() => {
+					console.log("onClick");
+					onClick();
+				}}
 			>
 				{label}
 			</button>

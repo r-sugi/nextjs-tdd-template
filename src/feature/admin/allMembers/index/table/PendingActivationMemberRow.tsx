@@ -6,14 +6,8 @@ import { ThreeDotsIcon } from "../three-dots.icon";
 
 export const PendingActivationMemberRow: FC<{
 	member: PendingActivationMember;
-}> = ({ member }) => {
-	const onClickDelete = () => {
-		// mutate
-		console.log("TODO: mutate", member);
-		// refresh cache
-		console.log("TODO: refresh cache", member);
-	};
-
+	onClickDelete: (member: PendingActivationMember) => void;
+}> = ({ member, onClickDelete }) => {
 	return (
 		<tr>
 			<td className="py-2 px-4 border-b border-gray-300">
@@ -27,7 +21,13 @@ export const PendingActivationMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem onClick={onClickDelete} label="Delete" />
+							<MenuItem
+								onClick={() => {
+									console.log("ddddd");
+									onClickDelete(member);
+								}}
+								label="Delete"
+							/>
 						</PopupMenu>
 					</div>
 				</div>
