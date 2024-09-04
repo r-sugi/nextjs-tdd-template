@@ -64,6 +64,7 @@ const Template: FC = () => {
 
 	return (
 		<div data-testid={templateId}>
+			{/* // TODO: Layoutっぽくラップしたい。 */}
 			<ErrorBanner />
 
 			<form
@@ -110,6 +111,7 @@ const Template: FC = () => {
 
 export default function IndexTemplate() {
 	return (
+		// TODO: Layoutっぽくラップしたい。
 		<ErrorNotificationProvider customId={templateId}>
 			<ConfirmErrorBoundary>
 				<Template />
