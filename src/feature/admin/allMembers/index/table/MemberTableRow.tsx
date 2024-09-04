@@ -12,13 +12,16 @@ type Prop = {
 	member: AllMember;
 };
 
-// TODO: 呼び方　いわゆるView用のWriteModel?と呼ぶ型？
-type OnClickDelete = <K extends ActiveMember | PendingActivationMember>(
+type onClickBan = <K extends PendingActivationMember | ActiveMember>(
 	member: K,
 ) => void;
+type onSubmitBan = <K extends PendingActivationMember | ActiveMember>(
+	member: K,
+	reason: string,
+) => void;
 
-// TODO: 呼び方　いわゆるView用のWriteModel?と呼ぶ型？
 type OnClickDisable = <K extends ActiveMember>(member: K) => void;
+type onSubmitDisable = <K extends ActiveMember>(member: K) => void;
 
 export const MemberTableRow: FC<Prop> = ({ member }) => {
 	// 1 DONE const ref = useRef でrefを定義する
@@ -30,33 +33,28 @@ export const MemberTableRow: FC<Prop> = ({ member }) => {
 	// 6 dialogからsumitイベントを受け取る
 	// 7 API通信する
 	const ref = useRef<HTMLDialogElement>(null);
-	const onClickDelete: OnClickDelete = (member) => {
+	const onClickBan: onClickBan = (member) => {
 		console.log("onClickDisable", member);
+		// TODO: statusじゃなくて一意に特定できるタグの方が良いかも、、
 		if (member.status === "active") {
-			// TODO: activeの場合のモーダル表示する
 			ref.current?.showModal();
 		} else if (member.status === "pendingActivation") {
-			// TODO: disableの場合のモーダル表示する
 			ref.current?.showModal();
 		}
 	};
-	const onClickDisable: OnClickDisable = (member: ActiveMember) => {
+	const onClickDisable: OnClickDisable = (member) => {
 		console.log("onClickDisable", member);
 		ref.current?.showModal();
+	};
+	const onSubmitBan: onSubmitBan = (member, reason) => {
 		// // mutate
-		// console.log("TODO: mutate", member);
+		console.log(member, reason, "current_member_id");
 		// // refresh cache
 		// console.log("TODO: refresh cache", member);
 	};
-	const onSubmitDelete = () => {
+	const onSubmitDisable: onSubmitDisable = (member) => {
 		// // mutate
-		// console.log("TODO: mutate", member);
-		// // refresh cache
-		// console.log("TODO: refresh cache", member);
-	};
-	const onSubmitDisable = () => {
-		// // mutate
-		// console.log("TODO: mutate", member);
+		console.log(member);
 		// // refresh cache
 		// console.log("TODO: refresh cache", member);
 	};
@@ -67,17 +65,17 @@ export const MemberTableRow: FC<Prop> = ({ member }) => {
 				<>
 					<ActiveMemberRow
 						member={member}
-						onClickDelete={onClickDelete}
+						onClickBan={onClickBan}
 						onClickDisable={onClickDisable}
 					/>
-					{/* to Delete */}
+					{/* to Ban */}
 					<Dialog ref={ref}>
 						<DialogBody>
 							<h2
 								className="text-std-24B-5 desktop:text-std-28B-5"
 								id="example-heading1"
 							>
-								Delete
+								強制退会する
 							</h2>
 							<p className="text-std-16N-7">
 								ダイアログの補助テキストが入ります。ダイアログの補助テキストが入ります。
@@ -90,7 +88,7 @@ export const MemberTableRow: FC<Prop> = ({ member }) => {
 									size="lg"
 									variant="primary"
 								>
-									削除する
+									強制退会する
 								</Button>
 								<Button
 									onClick={() => {
@@ -143,10 +141,7 @@ export const MemberTableRow: FC<Prop> = ({ member }) => {
 		case "pendingActivation":
 			return (
 				<>
-					<PendingActivationMemberRow
-						member={member}
-						onClickDelete={onClickDelete}
-					/>
+					<PendingActivationMemberRow member={member} onClickBan={onClickBan} />
 					{/* to Disable */}
 					<Dialog ref={ref}>
 						<DialogBody>

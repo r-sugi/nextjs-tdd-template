@@ -6,8 +6,8 @@ import { ThreeDotsIcon } from "../three-dots.icon";
 
 export const PendingActivationMemberRow: FC<{
 	member: PendingActivationMember;
-	onClickDelete: (member: PendingActivationMember) => void;
-}> = ({ member, onClickDelete }) => {
+	onClickBan: (member: PendingActivationMember) => void;
+}> = ({ member, onClickBan }) => {
 	return (
 		<tr>
 			<td className="py-2 px-4 border-b border-gray-300">
@@ -24,7 +24,7 @@ export const PendingActivationMemberRow: FC<{
 							<MenuItem
 								onClick={() => {
 									console.log("ddddd");
-									onClickDelete(member);
+									onClickBan(member);
 								}}
 								label="Delete"
 							/>

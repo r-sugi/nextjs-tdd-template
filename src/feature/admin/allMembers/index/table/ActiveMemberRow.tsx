@@ -6,9 +6,9 @@ import { ThreeDotsIcon } from "../three-dots.icon";
 
 export const ActiveMemberRow: FC<{
 	member: ActiveMember;
-	onClickDelete: (member: ActiveMember) => void;
+	onClickBan: (member: ActiveMember) => void;
 	onClickDisable: (member: ActiveMember) => void;
-}> = ({ member, onClickDelete, onClickDisable }) => {
+}> = ({ member, onClickBan, onClickDisable }) => {
 	// 1 const ref = useRef でrefを定義する
 	// 2 <Dialog ref={ref}>　でDOMを定義する
 	// 3 ref.current?.showModal();　で表示する
@@ -29,7 +29,7 @@ export const ActiveMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem onClick={() => onClickDelete(member)} label="Delete" />
+							<MenuItem onClick={() => onClickBan(member)} label="Delete" />
 							<MenuItem
 								onClick={() => onClickDisable(member)}
 								label="disable"
