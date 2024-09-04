@@ -4,18 +4,20 @@ import { toMock } from "@/__testing__/helper";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
 import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
 import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { activeMember } from "mocks/fixtures/activeMember";
-import { useNotification } from "../../../error/hooks/useNotification";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("@/error/hooks/useNotification");
+jest.mock("@/feature/error/banner/ErrorNotificationContext");
 jest.mock("@/error/outputErrorLog");
 
 describe("useFetchActiveMember", () => {
-	const mockSetError = jest.fn();
-	toMock(useNotification).mockImplementation(() => {
+	const mockNotify = jest.fn();
+	toMock(useErrorNotificationContext).mockImplementation(() => {
 		return {
-			notify: mockSetError,
+			notify: mockNotify,
+			items: [],
+			clear: () => {},
 		};
 	});
 	const mockOutputErrorLog = jest.fn();
@@ -35,7 +37,7 @@ describe("useFetchActiveMember", () => {
 					loading: false,
 				});
 			});
-			expect(mockSetError).not.toHaveBeenCalled();
+			expect(mockNotify).not.toHaveBeenCalled();
 			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
 	});
@@ -57,7 +59,7 @@ describe("useFetchActiveMember", () => {
 					loading: false,
 				});
 			});
-			expect(mockSetError).toHaveBeenCalledWith(ERROR);
+			expect(mockNotify).toHaveBeenCalledWith(ERROR);
 			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});
 	});
