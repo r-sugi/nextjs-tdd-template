@@ -4,18 +4,20 @@ import { toMock } from "@/__testing__/helper";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { activeMember } from "mocks/fixtures/activeMember";
-import { useNotification } from "../../../error/hooks/useNotification";
 
 jest.mock("@/core/repositories/member/members.repository");
-jest.mock("@/error/hooks/useNotification");
+jest.mock("@/feature/error/banner/ErrorNotificationContext");
 jest.mock("@/error/outputErrorLog");
 
 describe(useFetchMembers, () => {
-	const mockSetError = jest.fn();
-	toMock(useNotification).mockImplementation(() => {
+	const mockNotify = jest.fn();
+	toMock(useErrorNotificationContext).mockImplementation(() => {
 		return {
-			notify: mockSetError,
+			notify: mockNotify,
+			items: [],
+			clear: () => {},
 		};
 	});
 	const mockOutputErrorLog = jest.fn();
@@ -41,7 +43,7 @@ describe(useFetchMembers, () => {
 					refetch: expect.any(Function),
 				});
 			});
-			expect(mockSetError).not.toHaveBeenCalled();
+			expect(mockNotify).not.toHaveBeenCalled();
 			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
 	});
@@ -69,7 +71,7 @@ describe(useFetchMembers, () => {
 					refetch: expect.any(Function),
 				}),
 			);
-			expect(mockSetError).toHaveBeenCalled();
+			expect(mockNotify).toHaveBeenCalled();
 			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});
 	});

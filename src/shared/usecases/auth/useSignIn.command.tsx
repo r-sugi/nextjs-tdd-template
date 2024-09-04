@@ -1,9 +1,9 @@
-import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { type SignInProps, signIn } from "@/shared/repositories/auth";
 
 export const useSignIn = () => {
-	const { notify } = useNotification();
+	const { notify } = useErrorNotificationContext();
 
 	return {
 		signInMutation: async (signInProps: SignInProps) => {
