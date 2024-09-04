@@ -11,8 +11,15 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 
 initializeFirebaseApp();
 
+type AppPropsWithLayout = AppProps & {
+	Component: { getLayout?: (page: JSX.Element) => JSX.Element };
+};
+
 // TODO: SSRでヘッダー内の項目の表示非表示を制御したい
-export default function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+	// Use the layout defined at the page level, if available
+	const getLayout = Component.getLayout ?? ((page) => page);
+
 	return (
 		<>
 			<Head>
@@ -22,8 +29,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				/>
 			</Head>
 			<AppProvider>
+				{/* 共通のヘッダーテンプレート */}
 				<HeaderTemplate />
-				<Component {...pageProps} />
+				{getLayout(<Component {...pageProps} />)}
 			</AppProvider>
 		</>
 	);
