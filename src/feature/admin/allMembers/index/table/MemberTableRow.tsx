@@ -5,13 +5,16 @@ import type { PendingActivationMember } from "@/core/domains/member/pendingActiv
 
 import { DialogBody } from "@/components/dialog/Dialog";
 import { type FC, useRef } from "react";
+import type { OnSubmitStatusChange } from "..";
 import { ActiveMemberRow } from "./ActiveMemberRow";
 import { PendingActivationMemberRow } from "./PendingActivationMemberRow";
 
 type Prop = {
 	member: AllMember;
+	onSubmit: OnSubmitStatusChange;
 };
 
+// TODO: onClickEventっぽいI/Fにする　EventName（'onClickBan' | 'onClickDisable'）, EventDetail(event or 入力値のみ)の組み合わせ
 type onClickBan = <K extends PendingActivationMember | ActiveMember>(
 	member: K,
 ) => void;
@@ -21,9 +24,9 @@ type onSubmitBan = <K extends PendingActivationMember | ActiveMember>(
 ) => void;
 
 type OnClickDisable = <K extends ActiveMember>(member: K) => void;
-type onSubmitDisable = <K extends ActiveMember>(member: K) => void;
+type OnSubmitDisable = <K extends ActiveMember>(member: K) => void;
 
-export const MemberTableRow: FC<Prop> = ({ member }) => {
+export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 	// 1 DONE const ref = useRef でrefを定義する
 	// 2 DONE <Dialog ref={ref}>　でDOMを定義する
 	// 3 DONE イベント受け取って、ref.current?.showModal();　で表示する
@@ -33,6 +36,7 @@ export const MemberTableRow: FC<Prop> = ({ member }) => {
 	// 6 dialogからsumitイベントを受け取る
 	// 7 API通信する
 	const ref = useRef<HTMLDialogElement>(null);
+
 	const onClickBan: onClickBan = (member) => {
 		console.log("onClickDisable", member);
 		// TODO: statusじゃなくて一意に特定できるタグの方が良いかも、、
@@ -46,17 +50,16 @@ export const MemberTableRow: FC<Prop> = ({ member }) => {
 		console.log("onClickDisable", member);
 		ref.current?.showModal();
 	};
-	const onSubmitBan: onSubmitBan = (member, reason) => {
-		// // mutate
-		console.log(member, reason, "current_member_id");
-		// // refresh cache
-		// console.log("TODO: refresh cache", member);
+	const onSubmitBan: onSubmitBan = (member, reason: string) => {
+		// input.value
+		// const reason = event.target.value;
+
+		// call mutation
+		onSubmit("onClickBan", { member, reason, operatedBy: "current_member_id" });
 	};
-	const onSubmitDisable: onSubmitDisable = (member) => {
-		// // mutate
-		console.log(member);
-		// // refresh cache
-		// console.log("TODO: refresh cache", member);
+	const onSubmitDisable: OnSubmitDisable = (member) => {
+		// call mutation
+		onSubmit("onClickDisable", { member });
 	};
 
 	switch (member.status) {

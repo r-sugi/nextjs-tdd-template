@@ -1,17 +1,20 @@
 import type { AllMembers } from "@/core/domains/member/member";
+import type { OnSubmitStatusChange } from "..";
 import { MemberTableRow } from "./MemberTableRow";
 
 type PropsType = {
 	members: AllMembers;
+	onSubmit: OnSubmitStatusChange;
 };
 
-export const MemberTable = ({ members }: PropsType) => {
+export const MemberTable = ({ members, onSubmit }: PropsType) => {
 	const tableHeaders = ["Created At", "Status Activity ID", "Status", ""];
 
-	// UI shadcn tableを使う
+	// TODO: table layoutを追加する
 
 	return (
 		<table className="min-w-full bg-white border border-gray-300">
+			{/* childrenで渡す */}
 			<thead>
 				<tr>
 					{tableHeaders.map((header) => (
@@ -24,9 +27,14 @@ export const MemberTable = ({ members }: PropsType) => {
 					))}
 				</tr>
 			</thead>
+			{/* childrenで渡す */}
 			<tbody>
 				{members.map((member) => (
-					<MemberTableRow member={member} key={member.statusActivityId} />
+					<MemberTableRow
+						member={member}
+						key={member.statusActivityId}
+						onSubmit={onSubmit}
+					/>
 				))}
 			</tbody>
 		</table>
