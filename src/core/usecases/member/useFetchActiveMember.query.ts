@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
 import { outputErrorLog } from "@/error/outputErrorLog";
-import { useNotification } from "../../../error/hooks/useNotification";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 
 // @remarks: 配列以外の値の場合は、nullを初期値とする(データ取得失敗時はエラー表示するためデータを参照して処理しない方針)
 type InitialActiveMember = null;
@@ -31,7 +31,7 @@ export const useFetchActiveMember = (): UseCase<
 		useState<ActiveMemberState>(initialActiveMember);
 	const [loading, setLoading] = useState<boolean>(false);
 	const query = useFindActiveMemberOne();
-	const { notify } = useNotification();
+	const { notify } = useErrorNotificationContext();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {

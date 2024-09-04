@@ -1,19 +1,21 @@
 import { toMock } from "@/__testing__/helper";
-import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { signIn } from "@/shared/repositories/auth";
-import { renderHook } from "@testing-library/react";
 import { useSignIn } from "./useSignIn.command";
 
 jest.mock("@/shared/repositories/auth");
-jest.mock("@/error/hooks/useNotification");
+jest.mock("@/feature/error/banner/ErrorNotificationContext");
+
 jest.mock("@/error/outputErrorLog");
 
 describe(useSignIn, () => {
-	const mockSetError = jest.fn();
-	toMock(useNotification).mockImplementation(() => {
+	const mockNotify = jest.fn();
+	toMock(useErrorNotificationContext).mockImplementation(() => {
 		return {
-			notify: mockSetError,
+			notify: mockNotify,
+			items: [],
+			clear: () => {},
 		};
 	});
 
@@ -33,7 +35,7 @@ describe(useSignIn, () => {
 			await signInMutation(args);
 
 			expect(signIn).toHaveBeenCalledTimes(1);
-			expect(mockSetError).not.toHaveBeenCalled();
+			expect(mockNotify).not.toHaveBeenCalled();
 			expect(mockOutputErrorLog).not.toHaveBeenCalled();
 		});
 	});
@@ -49,7 +51,7 @@ describe(useSignIn, () => {
 			await signInMutation(args);
 
 			expect(signIn).toHaveBeenCalled();
-			expect(mockSetError).toHaveBeenCalled();
+			expect(mockNotify).toHaveBeenCalled();
 			expect(mockOutputErrorLog).toHaveBeenCalled();
 		});
 	});

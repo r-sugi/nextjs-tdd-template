@@ -3,8 +3,8 @@ import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 import type { MembersByType } from "@/core/domains/member/member";
 import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
-import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 
 // @remarks: 配列の場合は、空配列を初期値とする(データ取得失敗時はエラー表示するためデータを参照して処理しない方針)
 type InitialMembersState = undefined;
@@ -45,7 +45,7 @@ export const useFetchMembers = (
 	);
 	const [members, setMembers] = useState<MembersState>(initialMemberState);
 	const query = useFetchMembersByStatus();
-	const { notify } = useNotification();
+	const { notify } = useErrorNotificationContext();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {

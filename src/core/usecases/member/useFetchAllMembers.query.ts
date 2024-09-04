@@ -1,7 +1,7 @@
 import type { AllMembers } from "@/core/domains/member/member";
 import { useFetchMembersAll } from "@/core/repositories/member/members.repository";
-import { useNotification } from "@/error/hooks/useNotification";
 import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { useEffect, useState } from "react";
 
 type InitialAllMembers = undefined;
@@ -29,7 +29,7 @@ type UseCase<I, R> = UseCaseLoading<I> | UseCaseLoaded<R>;
 export const useFetchAllMembers = () => {
 	const [members, setMembers] = useState<MembersState>(initialAllMembersState);
 	const query = useFetchMembersAll();
-	const { notify } = useNotification();
+	const { notify } = useErrorNotificationContext();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
