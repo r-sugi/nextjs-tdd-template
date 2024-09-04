@@ -8,6 +8,9 @@ module.exports = {
 	organizeImports: {
 		enabled: true,
 	},
+	rules: {
+		useImportType: "off",
+	},
 	formatter: {
 		enabled: true,
 		include: ["src/**"],
