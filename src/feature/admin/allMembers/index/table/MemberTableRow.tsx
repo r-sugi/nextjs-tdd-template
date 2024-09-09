@@ -98,7 +98,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 						onClickBan={onClickBan}
 						onClickDisable={onClickDisable}
 					/>
-					{/* to Ban */}
+					{/* TODO: コンポーネントのリファクタをしたい */}
 					<Dialog ref={ref}>
 						<DialogBody>
 							<h2
@@ -140,7 +140,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 							</div>
 						</DialogBody>
 					</Dialog>
-					{/* to Disable */}
+					{/* TODO: コンポーネントのリファクタをしたい */}
 					<Dialog ref={disableDialogRef}>
 						<DialogBody>
 							<h2
@@ -178,7 +178,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 			return (
 				<>
 					<PendingActivationMemberRow member={member} onClickBan={onClickBan} />
-					{/* to Disable */}
+					{/* TODO: コンポーネントのリファクタをしたい */}
 					<Dialog ref={ref}>
 						<DialogBody>
 							<h2

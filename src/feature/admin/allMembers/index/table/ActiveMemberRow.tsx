@@ -14,7 +14,6 @@ export const ActiveMemberRow: FC<{
 		<tr>
 			<td className="py-2 px-4 border-b border-gray-300">
 				{member.createdAt.getTime()}
-				row.createdAt
 			</td>
 			<td className="py-2 px-4 border-b border-gray-300">
 				{member.statusActivityId}
