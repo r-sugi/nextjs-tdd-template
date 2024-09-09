@@ -3,18 +3,13 @@ import type { FC } from "react";
 import { MenuItem } from "../list/MenuItem";
 import { PopupMenu } from "../popup";
 import { ThreeDotsIcon } from "../three-dots.icon";
+import type { OnClickBan, OnClickDisable } from "./type";
 
 export const ActiveMemberRow: FC<{
 	member: ActiveMember;
-	onClickBan: (member: ActiveMember) => void;
-	onClickDisable: (member: ActiveMember) => void;
+	onClickBan: OnClickBan<ActiveMember>;
+	onClickDisable: OnClickDisable<ActiveMember>;
 }> = ({ member, onClickBan, onClickDisable }) => {
-	// 1 const ref = useRef でrefを定義する
-	// 2 <Dialog ref={ref}>　でDOMを定義する
-	// 3 ref.current?.showModal();　で表示する
-	// 4 onClickイベントを受け取る
-	// 5 API通信する
-
 	return (
 		<tr>
 			<td className="py-2 px-4 border-b border-gray-300">
@@ -32,7 +27,7 @@ export const ActiveMemberRow: FC<{
 							<MenuItem onClick={() => onClickBan(member)} label="Delete" />
 							<MenuItem
 								onClick={() => onClickDisable(member)}
-								label="disable"
+								label="Disable"
 							/>
 						</PopupMenu>
 					</div>

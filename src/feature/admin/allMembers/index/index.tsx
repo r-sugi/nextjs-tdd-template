@@ -2,15 +2,9 @@ import type { FC } from "react";
 
 import { useFetchAllMembers } from "@/core/usecases/member/useFetchAllMembers.query";
 
+import { MemberTableRow } from "./table/MemberTableRow";
 import { MemberTable } from "./table/table";
-
-// TODO: 型定義, 命名
-// EventTypeの関数を用意して、presentaionに渡す
-export type OnSubmitStatusChange = (
-	type: "onClickBan" | "onClickDisable",
-	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
-	detail: any,
-) => void;
+import { type OnSubmitStatusChange, eventTypes } from "./table/type";
 
 export const IndexTemplate: FC = () => {
 	const { data, loading } = useFetchAllMembers();
@@ -27,13 +21,11 @@ export const IndexTemplate: FC = () => {
 	}
 
 	// Event
-	const onSubmit: OnSubmitStatusChange = (type, detail) => {
-		if (type === "onClickBan") {
-			// note: UseCaseがほしいI/Fで呼び出す
-			// mutationYYY.mutate(detail);
-		} else if (type === "onClickDisable") {
-			// note: UseCaseがほしいI/Fで呼び出す
-			// mutationXXX.mutate(detail);
+	const onSubmit: OnSubmitStatusChange = (payload) => {
+		if (payload.type === eventTypes.onClickBan) {
+			console.log("API処理", payload.detail);
+		} else if (payload.type === eventTypes.onClickDisable) {
+			console.log("API処理", payload.detail);
 		}
 	};
 
@@ -42,7 +34,15 @@ export const IndexTemplate: FC = () => {
 			{/* メンバー一覧 */}
 			<div className="container mx-auto">
 				<h1 className="text-2xl font-bold mb-4">Members</h1>
-				<MemberTable members={data.members} onSubmit={onSubmit} />
+				<MemberTable>
+					{data.members.map((member) => (
+						<MemberTableRow
+							member={member}
+							key={member.statusActivityId}
+							onSubmit={onSubmit}
+						/>
+					))}
+				</MemberTable>
 			</div>
 		</div>
 	);

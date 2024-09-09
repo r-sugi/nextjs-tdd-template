@@ -1,65 +1,92 @@
 import { Button, Dialog } from "@/components";
-import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { AllMember } from "@/core/domains/member/member";
-import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 
 import { DialogBody } from "@/components/dialog/Dialog";
-import { type FC, useRef } from "react";
-import type { OnSubmitStatusChange } from "..";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
+import { type BaseSyntheticEvent, type FC, useRef } from "react";
+import {
+	type BanMemberSchema,
+	useBanMemberForm,
+} from "../form/useBanMemberForm";
 import { ActiveMemberRow } from "./ActiveMemberRow";
 import { PendingActivationMemberRow } from "./PendingActivationMemberRow";
+import {
+	type OnClickBan,
+	type OnClickDisable,
+	type OnSubmitStatusChange,
+	eventTypes,
+} from "./type";
 
 type Prop = {
 	member: AllMember;
 	onSubmit: OnSubmitStatusChange;
 };
 
-// TODO: onClickEventっぽいI/Fにする　EventName（'onClickBan' | 'onClickDisable'）, EventDetail(event or 入力値のみ)の組み合わせ
-type onClickBan = <K extends PendingActivationMember | ActiveMember>(
-	member: K,
-) => void;
-type onSubmitBan = <K extends PendingActivationMember | ActiveMember>(
-	member: K,
-	reason: string,
-) => void;
-
-type OnClickDisable = <K extends ActiveMember>(member: K) => void;
-type OnSubmitDisable = <K extends ActiveMember>(member: K) => void;
-
 export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
-	// 1 DONE const ref = useRef でrefを定義する
-	// 2 DONE <Dialog ref={ref}>　でDOMを定義する
-	// 3 DONE イベント受け取って、ref.current?.showModal();　で表示する
-
-	// 4　どのイベントか判別するための条件分岐(型制約)
-	// 5 モーダル表示する
-	// 6 dialogからsumitイベントを受け取る
-	// 7 API通信する
 	const ref = useRef<HTMLDialogElement>(null);
+	const disableDialogRef = useRef<HTMLDialogElement>(null);
 
-	const onClickBan: onClickBan = (member) => {
-		console.log("onClickDisable", member);
-		// TODO: statusじゃなくて一意に特定できるタグの方が良いかも、、
-		if (member.status === "active") {
-			ref.current?.showModal();
-		} else if (member.status === "pendingActivation") {
-			ref.current?.showModal();
-		}
-	};
-	const onClickDisable: OnClickDisable = (member) => {
-		console.log("onClickDisable", member);
+	const onClickBan: OnClickBan<ActiveMember | PendingActivationMember> = (
+		member,
+	) => {
+		console.log("onClickBan", member);
 		ref.current?.showModal();
 	};
-	const onSubmitBan: onSubmitBan = (member, reason: string) => {
-		// input.value
-		// const reason = event.target.value;
 
-		// call mutation
-		onSubmit("onClickBan", { member, reason, operatedBy: "current_member_id" });
+	const onClickDisable: OnClickDisable<ActiveMember> = (member) => {
+		console.log("onClickDisable", member);
+		disableDialogRef.current?.showModal();
 	};
-	const onSubmitDisable: OnSubmitDisable = (member) => {
-		// call mutation
-		onSubmit("onClickDisable", { member });
+
+	const {
+		handleSubmit,
+		register,
+		formState: { isSubmitting, isValid, errors },
+		banMemberLabels,
+		reset,
+	} = useBanMemberForm();
+
+	const onSubmitBan = <K extends ActiveMember | PendingActivationMember>(
+		member: K,
+	) => {
+		return (data: BanMemberSchema, event?: BaseSyntheticEvent) => {
+			event?.preventDefault?.();
+			console.log("onSubmitBan");
+
+			// close dialog
+			ref.current?.close();
+			// reset form state
+			reset();
+
+			// call mutation
+			onSubmit({
+				type: eventTypes.onClickBan,
+				detail: {
+					member,
+					reason: data.reason,
+				},
+			});
+		};
+	};
+
+	const onSubmitDisable = <K extends ActiveMember>(member: K) => {
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+		return (e: any) => {
+			e.preventDefault();
+			console.log("onSubmitDisable");
+
+			// close dialog
+			disableDialogRef.current?.close();
+			// reset form state
+			reset();
+
+			// call mutation
+			onSubmit({
+				type: eventTypes.onClickDisable,
+				detail: { member },
+			});
+		};
 	};
 
 	switch (member.status) {
@@ -78,35 +105,43 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 								className="text-std-24B-5 desktop:text-std-28B-5"
 								id="example-heading1"
 							>
-								強制退会する
+								BAN
 							</h2>
 							<p className="text-std-16N-7">
-								ダイアログの補助テキストが入ります。ダイアログの補助テキストが入ります。
+								ダイアログの補助テキストが入ります。
 							</p>
 							<div className="mt-2 flex w-full max-w-xs flex-col gap-4 desktop:mt-6">
-								<Button
-									onClick={() => {
-										ref.current?.close();
-									}}
-									size="lg"
-									variant="primary"
-								>
-									強制退会する
-								</Button>
-								<Button
-									onClick={() => {
-										ref.current?.close();
-									}}
-									size="lg"
-									variant="tertiary"
-								>
-									キャンセル
-								</Button>
+								<form onSubmit={handleSubmit(onSubmitBan(member))}>
+									<div>
+										<label htmlFor="reason">{banMemberLabels.reason}</label>
+										<textarea id="reason" {...register("reason")} />
+										{errors.reason?.message && <p>{errors.reason.message}</p>}
+									</div>
+
+									<Button
+										size="lg"
+										variant="primary"
+										disabled={!isValid || isSubmitting}
+									>
+										送信
+									</Button>
+									<Button
+										onClick={(e) => {
+											e.preventDefault();
+											reset();
+											ref.current?.close();
+										}}
+										size="lg"
+										variant="tertiary"
+									>
+										キャンセル
+									</Button>
+								</form>
 							</div>
 						</DialogBody>
 					</Dialog>
 					{/* to Disable */}
-					<Dialog ref={ref}>
+					<Dialog ref={disableDialogRef}>
 						<DialogBody>
 							<h2
 								className="text-std-24B-5 desktop:text-std-28B-5"
@@ -119,9 +154,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 							</p>
 							<div className="mt-2 flex w-full max-w-xs flex-col gap-4 desktop:mt-6">
 								<Button
-									onClick={() => {
-										ref.current?.close();
-									}}
+									onClick={onSubmitDisable(member)}
 									size="lg"
 									variant="primary"
 								>
@@ -129,7 +162,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 								</Button>
 								<Button
 									onClick={() => {
-										ref.current?.close();
+										disableDialogRef.current?.close();
 									}}
 									size="lg"
 									variant="tertiary"
@@ -152,30 +185,38 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 								className="text-std-24B-5 desktop:text-std-28B-5"
 								id="example-heading1"
 							>
-								無効化します
+								BAN
 							</h2>
 							<p className="text-std-16N-7">
-								ダイアログの補助テキストが入ります。ダイアログの補助テキストが入ります。
+								ダイアログの補助テキストが入ります。
 							</p>
 							<div className="mt-2 flex w-full max-w-xs flex-col gap-4 desktop:mt-6">
-								<Button
-									onClick={() => {
-										ref.current?.close();
-									}}
-									size="lg"
-									variant="primary"
-								>
-									無効化する
-								</Button>
-								<Button
-									onClick={() => {
-										ref.current?.close();
-									}}
-									size="lg"
-									variant="tertiary"
-								>
-									キャンセル
-								</Button>
+								<form onSubmit={handleSubmit(onSubmitBan(member))}>
+									<div>
+										<label htmlFor="reason">{banMemberLabels.reason}</label>
+										<textarea id="reason" {...register("reason")} />
+										{errors.reason?.message && <p>{errors.reason.message}</p>}
+									</div>
+
+									<Button
+										size="lg"
+										variant="primary"
+										disabled={!isValid || isSubmitting}
+									>
+										送信
+									</Button>
+									<Button
+										onClick={(e) => {
+											e.preventDefault();
+											reset();
+											ref.current?.close();
+										}}
+										size="lg"
+										variant="tertiary"
+									>
+										キャンセル
+									</Button>
+								</form>
 							</div>
 						</DialogBody>
 					</Dialog>

@@ -3,10 +3,11 @@ import type { FC } from "react";
 import { MenuItem } from "../list/MenuItem";
 import { PopupMenu } from "../popup";
 import { ThreeDotsIcon } from "../three-dots.icon";
+import type { OnClickBan } from "./type";
 
 export const PendingActivationMemberRow: FC<{
 	member: PendingActivationMember;
-	onClickBan: (member: PendingActivationMember) => void;
+	onClickBan: OnClickBan<PendingActivationMember>;
 }> = ({ member, onClickBan }) => {
 	return (
 		<tr>
@@ -23,7 +24,6 @@ export const PendingActivationMemberRow: FC<{
 						<PopupMenu opener={<ThreeDotsIcon />}>
 							<MenuItem
 								onClick={() => {
-									console.log("ddddd");
 									onClickBan(member);
 								}}
 								label="Delete"

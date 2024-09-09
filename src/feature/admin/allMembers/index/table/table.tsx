@@ -1,20 +1,12 @@
-import type { AllMembers } from "@/core/domains/member/member";
-import type { OnSubmitStatusChange } from "..";
-import { MemberTableRow } from "./MemberTableRow";
+import type { PropsWithChildren } from "react";
 
-type PropsType = {
-	members: AllMembers;
-	onSubmit: OnSubmitStatusChange;
-};
-
-export const MemberTable = ({ members, onSubmit }: PropsType) => {
+// Layout component
+export const MemberTable = ({ children }: PropsWithChildren) => {
 	const tableHeaders = ["Created At", "Status Activity ID", "Status", ""];
-
-	// TODO: table layoutを追加する
 
 	return (
 		<table className="min-w-full bg-white border border-gray-300">
-			{/* childrenで渡す */}
+			{/* 一旦固定 */}
 			<thead>
 				<tr>
 					{tableHeaders.map((header) => (
@@ -27,16 +19,7 @@ export const MemberTable = ({ members, onSubmit }: PropsType) => {
 					))}
 				</tr>
 			</thead>
-			{/* childrenで渡す */}
-			<tbody>
-				{members.map((member) => (
-					<MemberTableRow
-						member={member}
-						key={member.statusActivityId}
-						onSubmit={onSubmit}
-					/>
-				))}
-			</tbody>
+			<tbody>{children}</tbody>
 		</table>
 	);
 };

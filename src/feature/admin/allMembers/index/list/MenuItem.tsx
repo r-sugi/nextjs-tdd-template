@@ -1,3 +1,5 @@
+import { Button } from "@/components";
+
 type ListItemProps = {
 	onClick: () => void;
 	label: string;
@@ -5,23 +7,16 @@ type ListItemProps = {
 
 export const MenuItem = ({ onClick, label }: ListItemProps) => {
 	return (
-		<div
+		<button
+			type="button"
 			className="p-4 bg-white rounded-md shadow-xs"
-			role="menu"
 			aria-orientation="vertical"
 			aria-labelledby="user-menu"
+			onClick={() => onClick()}
 		>
-			<button
-				type="button"
-				className="block px-6 py-2 mb-2 font-bold rounded"
-				role="menuitem"
-				onClick={() => {
-					console.log("onClick");
-					onClick();
-				}}
-			>
+			<div className="block px-6 py-2 mb-2 font-bold rounded" role="menuitem">
 				{label}
-			</button>
-		</div>
+			</div>
+		</button>
 	);
 };
