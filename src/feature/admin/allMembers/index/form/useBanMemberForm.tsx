@@ -10,7 +10,7 @@ const banReason = () =>
 		.min(1, "必須です") // 1文字以上を強制することで必須項目にできる
 		.max(50, "50文字以内で入力してください");
 
-export const banMemberLabels = {
+const banMemberLabels = {
 	reason: "理由",
 } as const satisfies Record<SchemaKey, string>;
 
