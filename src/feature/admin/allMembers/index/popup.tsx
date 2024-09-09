@@ -43,6 +43,7 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 							? "scale-100 opacity-100 ease-in duration-100"
 							: "scale-0 opacity-0 ease-out duration-75"
 					} top-13`}
+					// TODO: dropdown要素以外をクリックした時(blur)に現状とじない。ため一旦ここにイベントをつけている状態。要修正
 					onBlur={handleBlur}
 				>
 					{/* onclickした */}
