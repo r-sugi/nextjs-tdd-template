@@ -3,17 +3,12 @@ import type { FC } from "react";
 import { MenuItem } from "../list/MenuItem";
 import { PopupMenu } from "../popup";
 import { ThreeDotsIcon } from "../three-dots.icon";
+import type { OnClickBan } from "./type";
 
 export const PendingActivationMemberRow: FC<{
 	member: PendingActivationMember;
-}> = ({ member }) => {
-	const onClickDelete = () => {
-		// mutate
-		console.log("TODO: mutate", member);
-		// refresh cache
-		console.log("TODO: refresh cache", member);
-	};
-
+	onClickBan: OnClickBan<PendingActivationMember>;
+}> = ({ member, onClickBan }) => {
 	return (
 		<tr>
 			<td className="py-2 px-4 border-b border-gray-300">
@@ -27,7 +22,12 @@ export const PendingActivationMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem onClick={onClickDelete} label="Delete" />
+							<MenuItem
+								onClick={() => {
+									onClickBan(member);
+								}}
+								label="Delete"
+							/>
 						</PopupMenu>
 					</div>
 				</div>

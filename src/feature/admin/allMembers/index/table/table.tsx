@@ -1,17 +1,12 @@
-import type { AllMembers } from "@/core/domains/member/member";
-import { MemberTableRow } from "./MemberTableRow";
+import type { PropsWithChildren } from "react";
 
-type PropsType = {
-	members: AllMembers;
-};
-
-export const MemberTable = ({ members }: PropsType) => {
+// Layout component
+export const MemberTable = ({ children }: PropsWithChildren) => {
 	const tableHeaders = ["Created At", "Status Activity ID", "Status", ""];
-
-	// UI shadcn tableを使う
 
 	return (
 		<table className="min-w-full bg-white border border-gray-300">
+			{/* 一旦固定 */}
 			<thead>
 				<tr>
 					{tableHeaders.map((header) => (
@@ -24,11 +19,7 @@ export const MemberTable = ({ members }: PropsType) => {
 					))}
 				</tr>
 			</thead>
-			<tbody>
-				{members.map((member) => (
-					<MemberTableRow member={member} key={member.statusActivityId} />
-				))}
-			</tbody>
+			<tbody>{children}</tbody>
 		</table>
 	);
 };
