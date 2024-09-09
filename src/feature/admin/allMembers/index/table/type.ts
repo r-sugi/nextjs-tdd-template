@@ -47,5 +47,3 @@ export type OnClickBan<K extends ActiveMember | PendingActivationMember> = (
 ) => void;
 
 export type OnClickDisable<K extends ActiveMember> = (member: K) => void;
-
-export type OnSubmitDisable<K extends ActiveMember> = (member: K) => void;
