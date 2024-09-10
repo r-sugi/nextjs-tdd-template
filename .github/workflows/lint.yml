@@ -12,6 +12,7 @@ jobs:
     uses: ./.github/workflows/setup-node-modules.yml
 
   Lint:
+    needs: Setup
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
