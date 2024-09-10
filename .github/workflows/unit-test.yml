@@ -1,10 +1,11 @@
 name: UT
 
 on:
-  push:
-    branches: [main, dev]
   pull_request:
+    paths: [src/**, package.json, package-lock.json]
     types: [opened, synchronize]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
