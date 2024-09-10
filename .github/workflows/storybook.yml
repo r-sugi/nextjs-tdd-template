@@ -15,10 +15,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: .github/workflows/shared/setup-node-modules.yml
+      - name: Use Node.js v18
+        uses: actions/setup-node@v4
+        with:
+          node-version: "^v18"
+
+      - name: npm install, build, and test
+        run: npm i
 
       - name: storybook build
         run: npm run storybook:build
-
-      # 計測結果を表示する
-      - uses: Kesin11/actions-timeline@v1
