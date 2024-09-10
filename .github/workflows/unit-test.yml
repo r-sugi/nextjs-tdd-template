@@ -10,7 +10,7 @@ on:
 
 jobs:
   Setup:
-    uses: ./.github/workflows/shared/setup-node-modules.yml
+    uses: ./.github/workflows/setup-node-modules.yml
 
   Run-Unit-Test:
     runs-on: ubuntu-latest
