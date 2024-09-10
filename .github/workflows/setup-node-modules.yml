@@ -1,15 +1,17 @@
-name: Shared Node Modules Setup
+name: Setup Node Modules
 
 on:
   workflow_call:
     outputs:
       node-version:
         description: 'The Node.js version used'
-        value: ${{ steps.node.outputs.node-version }}
+        value: ${{ jobs.setup.outputs.node-version }}
 
 jobs:
   setup:
     runs-on: ubuntu-latest
+    outputs:
+      node-version: ${{ steps.node.outputs.node-version }}  # Move the output here at the job level
     steps:
       - uses: actions/setup-node@v4
         id: node
