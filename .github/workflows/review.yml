@@ -3,8 +3,8 @@ name: Agent-Review
 on:
   pull_request:
     types: [opened, synchronize]
-  push:
-    branches: [main]
+  # push:
+  #   branches: [main]
   workflow_dispatch:
 
 permissions:
