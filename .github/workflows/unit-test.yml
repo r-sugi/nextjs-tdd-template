@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: ./.github/workflows/shared/setup-node-modules.yml
+      - uses: ./.github/workflows/actions/setup-node-modules
 
       - name: Unit test
         run: npm run test
