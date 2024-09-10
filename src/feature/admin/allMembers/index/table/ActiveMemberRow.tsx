@@ -3,28 +3,17 @@ import type { FC } from "react";
 import { MenuItem } from "../list/MenuItem";
 import { PopupMenu } from "../popup";
 import { ThreeDotsIcon } from "../three-dots.icon";
+import type { OnClickBan, OnClickDisable } from "./type";
 
 export const ActiveMemberRow: FC<{
 	member: ActiveMember;
-}> = ({ member }) => {
-	const onClickDelete = () => {
-		// mutate
-		console.log("TODO: mutate", member);
-		// refresh cache
-		console.log("TODO: refresh cache", member);
-	};
-	const onClickDisable = () => {
-		// mutate
-		console.log("TODO: mutate", member);
-		// refresh cache
-		console.log("TODO: refresh cache", member);
-	};
-
+	onClickBan: OnClickBan<ActiveMember>;
+	onClickDisable: OnClickDisable<ActiveMember>;
+}> = ({ member, onClickBan, onClickDisable }) => {
 	return (
 		<tr>
 			<td className="py-2 px-4 border-b border-gray-300">
 				{member.createdAt.getTime()}
-				row.createdAt
 			</td>
 			<td className="py-2 px-4 border-b border-gray-300">
 				{member.statusActivityId}
@@ -34,8 +23,11 @@ export const ActiveMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem onClick={onClickDelete} label="Delete" />
-							<MenuItem onClick={onClickDisable} label="disable" />
+							<MenuItem onClick={() => onClickBan(member)} label="Delete" />
+							<MenuItem
+								onClick={() => onClickDisable(member)}
+								label="Disable"
+							/>
 						</PopupMenu>
 					</div>
 				</div>

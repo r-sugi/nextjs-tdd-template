@@ -1,14 +1,14 @@
-name: Lint_Test
+name: Lint
 
 on:
-  push:
-    branches: [main, dev]
   pull_request:
     types: [opened, synchronize]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  lint_ut:
+  Run-Lint:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -28,6 +28,3 @@ jobs:
 
       - name: knip unused
         run: npm run knip
-
-      - name: Unit test
-        run: npm run test

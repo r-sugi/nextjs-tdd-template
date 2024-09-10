@@ -1,4 +1,8 @@
-import { type PropsWithChildren, useState } from "react";
+import {
+	type FocusEventHandler,
+	type PropsWithChildren,
+	useState,
+} from "react";
 
 type Props = {
 	opener: React.ReactNode;
@@ -11,7 +15,11 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 		setDropdownVisible(true);
 	};
 
-	const handleBlur = () => {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	const handleBlur = (event: any) => {
+		console.log("handleBlur", event.currentTarget);
+
+		// 非表示にする
 		setDropdownVisible(false);
 	};
 
@@ -22,22 +30,25 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 					id="user-menu"
 					type="button"
 					aria-haspopup="true"
-					onFocus={handleFocus}
-					onBlur={handleBlur}
+					onClick={handleFocus}
 				>
 					{opener}
 				</button>
 
-				<div
+				<button
 					id="user-menu-dropdown"
-					className={`z-10 absolute right-0 w-48 mt-2 origin-top-right rounded-lg shadow-lg transform ${
+					type="button"
+					className={`absolute right-0 w-48 mt-2 origin-top-right rounded-lg shadow-lg transform ${
 						isDropdownVisible
 							? "scale-100 opacity-100 ease-in duration-100"
 							: "scale-0 opacity-0 ease-out duration-75"
 					} top-13`}
+					// TODO: dropdown要素以外をクリックした時(blur)に現状とじない。ため一旦ここにイベントをつけている状態。要修正
+					onBlur={handleBlur}
 				>
+					{/* onclickした */}
 					{children}
-				</div>
+				</button>
 			</div>
 		</nav>
 	);
