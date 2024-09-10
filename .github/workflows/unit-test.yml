@@ -1,0 +1,25 @@
+name: UT
+
+on:
+  pull_request:
+    paths: [src/**, package.json, package-lock.json, mocks/**]
+    types: [opened, synchronize]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  Run-Unit-Test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "^v18.19.0"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Unit test
+        run: npm run test
