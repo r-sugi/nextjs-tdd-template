@@ -8,13 +8,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  Run-Lint:
+  Setup:
+    uses: ./.github/workflows/shared/setup-node-modules.yml
+
+  Lint:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
-
-      - uses: ./.github/workflows/actions/setup-node-modules
 
       - name: Lint
         run: npm run lint

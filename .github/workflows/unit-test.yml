@@ -9,13 +9,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  Setup:
+    uses: ./.github/workflows/shared/setup-node-modules.yml
+
   Run-Unit-Test:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
-
-      - uses: ./.github/workflows/actions/setup-node-modules
 
       - name: Unit test
         run: npm run test

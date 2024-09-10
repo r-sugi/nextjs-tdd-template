@@ -1,4 +1,4 @@
-name: Shared Lint Setup
+name: Shared Node Modules Setup
 
 on:
   workflow_call:
@@ -23,16 +23,6 @@ jobs:
           path: node_modules
           key: |
             ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
-
-      - uses: actions/setup-node@v4
-        if: steps.cache.outputs.cache-hit != 'true'
-        with:
-          path: |
-            ~/.npm
-          key: |
-            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
