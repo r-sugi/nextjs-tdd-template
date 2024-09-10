@@ -8,13 +8,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  Run-Lint:
+  Setup:
+    uses: ./.github/workflows/setup-node-modules.yml
+
+  Lint:
+    needs: Setup
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
 
-      - uses: .github/workflows/shared/setup-node-modules.yml
+      - uses: actions/setup-node@v4
+        id: node
+        with:
+          cache: npm
+          node-version: "^v18.19.0"
+
+      - uses: actions/cache@v4
+        id: cache
+        with:
+          path: node_modules
+          key: |
+            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Lint
         run: npm run lint
