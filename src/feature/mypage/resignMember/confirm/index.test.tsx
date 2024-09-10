@@ -31,9 +31,7 @@ describe(IndexTemplate, () => {
 		return {
 			user: userEvent.setup(),
 			view: render(
-				<AppProvider>
-					<IndexTemplate />
-				</AppProvider>,
+				<AppProvider>{IndexTemplate.getLayout(<IndexTemplate />)}</AppProvider>,
 			),
 		};
 	};
@@ -69,7 +67,9 @@ describe(IndexTemplate, () => {
 
 		it("初期描画が変化していない", async () => {
 			const { view } = setup();
-			const viewRoot = await view.findByTestId("mypage-resign-member-confirm");
+			const viewRoot = await view.findByTestId(
+				"feature-mypage-resign-member-confirm",
+			);
 			expect(viewRoot).toBeVisible();
 		});
 		it("戻るボタンを押下するとページ遷移する", async () => {
@@ -81,6 +81,7 @@ describe(IndexTemplate, () => {
 
 			// Act
 			const { view } = setup();
+			view.debug();
 			await userEvent.click(view.getByRole("button", { name: "戻る" }));
 
 			// Assert
