@@ -1,4 +1,4 @@
-name: Agent Review
+name: Agent-Review
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
   issues: write
 
 jobs:
-  run-pr-agent:
+  Run-PR-Agent:
     runs-on: ubuntu-latest
     name: Run PR Agent
     if: ${{ github.event.sender.type != 'Bot' }}

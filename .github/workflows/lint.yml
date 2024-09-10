@@ -1,0 +1,30 @@
+name: Lint
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  Run-Lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "^v18.19.0"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: type check
+        run: npm run type-check
+
+      - name: knip unused
+        run: npm run knip

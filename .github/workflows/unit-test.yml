@@ -1,4 +1,4 @@
-name: Lint_Test
+name: UT
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint_ut:
+  Run-Unit-Test:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
@@ -19,15 +19,6 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: type check
-        run: npm run type-check
-
-      - name: knip unused
-        run: npm run knip
 
       - name: Unit test
         run: npm run test
