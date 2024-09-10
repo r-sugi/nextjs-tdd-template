@@ -15,7 +15,7 @@ export const transform = (
 	const responseActiveMember = res.data
 		.memberStatusActivityLatest[0] as MemberActive;
 
-	const activeMember: ActiveMember = {
+	const activeMember = {
 		memberId: responseActiveMember.memberId,
 		status: memberStatus.active,
 		statusActivityId: responseActiveMember.statusActivityId,
@@ -24,7 +24,7 @@ export const transform = (
 		email: responseActiveMember.email,
 		createdAt: new Date(responseActiveMember.createdAt),
 		birthday: new Date(responseActiveMember.birthday),
-	};
+	} as const satisfies ActiveMember;
 
 	return activeMember;
 };
