@@ -2,7 +2,7 @@ name: UT
 
 on:
   pull_request:
-    paths: [src/**, package.json, package-lock.json, mocks/**]
+    # paths: [src/**, package.json, package-lock.json, mocks/**]
     types: [opened, synchronize]
   push:
     branches: [main]
@@ -13,10 +13,28 @@ jobs:
     uses: ./.github/workflows/setup-node-modules.yml
 
   Run-Unit-Test:
+    needs: Setup
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        id: node
+        with:
+          cache: npm
+          node-version: "^v18.19.0"
+
+      - uses: actions/cache@v4
+        id: cache
+        with:
+          path: node_modules
+          key: |
+            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
 
       - name: Unit test
         run: npm run test
