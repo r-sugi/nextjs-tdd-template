@@ -13,7 +13,7 @@ jest.mock("@/feature/auth/component/AuthGuard");
 describe(Page, () => {
 	function setup() {
 		return {
-			view: render(<Page />),
+			view: render(Page.getLayout(<Page />)),
 		};
 	}
 

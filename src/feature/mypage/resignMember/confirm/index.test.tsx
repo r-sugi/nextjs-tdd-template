@@ -9,10 +9,10 @@ import { loginRequiredPages, publicPages } from "@/const/paths";
 import { outputErrorLog } from "@/error/outputErrorLog";
 import { ResignMemberDocument } from "@/generated/graphql";
 import { AppProvider } from "@/pages/_provider/_app.provider";
+import IndexTemplate from "@/pages/mypage/resign-member/confirm/index.page";
 import { HttpResponse, graphql } from "msw";
 import { setupServer } from "msw/node";
 import * as router from "next/router";
-import IndexTemplate from "./index";
 
 jest.mock("@/utils/cache");
 jest.mock("@/error/outputErrorLog");
