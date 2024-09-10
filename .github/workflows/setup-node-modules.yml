@@ -1,20 +1,17 @@
-name: Lint
+name: Setup Node Modules
 
 on:
-  pull_request:
-    types: [opened, synchronize]
-  push:
-    branches: [main]
-  workflow_dispatch:
+  workflow_call:
+    outputs:
+      node-version:
+        description: 'The Node.js version used'
+        value: ${{ jobs.setup.outputs.node-version }}
 
 jobs:
-  Setup:
-    uses: ./.github/workflows/setup-node-modules.yml
-
-  Lint:
-    needs: Setup
+  setup:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    outputs:
+      node-version: ${{ steps.node.outputs.node-version }}  # Move the output here at the job level
     steps:
       - uses: actions/checkout@v4
 
@@ -34,15 +31,3 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: type check
-        run: npm run type-check
-
-      - name: knip unused
-        run: npm run knip
-
-      # 計測結果を表示する
-      - uses: Kesin11/actions-timeline@v1
