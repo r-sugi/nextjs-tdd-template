@@ -13,6 +13,8 @@ jobs:
     outputs:
       node-version: ${{ steps.node.outputs.node-version }}  # Move the output here at the job level
     steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         id: node
         with:
