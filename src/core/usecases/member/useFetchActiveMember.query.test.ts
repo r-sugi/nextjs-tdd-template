@@ -5,7 +5,7 @@ import { useFindActiveMemberOne } from "@/core/repositories/member/members.repos
 import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
 import { outputErrorLog } from "@/error/outputErrorLog";
 import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
-import { activeMember } from "mocks/fixtures/activeMember";
+import { activeMember } from "@/mocks/fixtures/activeMember";
 
 jest.mock("@/core/repositories/member/members.repository");
 jest.mock("@/feature/error/banner/ErrorNotificationContext");

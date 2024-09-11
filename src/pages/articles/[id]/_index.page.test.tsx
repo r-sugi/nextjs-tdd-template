@@ -4,7 +4,7 @@ import { toMock } from "@/__testing__/helper";
 import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
 import { publicPages } from "@/const/paths";
 import { ServerErrorBoundary } from "@/pages/_error/_server/_error.boundary";
-import { mockArticle1 } from "mocks/fixtures/article";
+import { mockArticle1 } from "@/mocks/fixtures/article";
 import { ServerErrorScreen } from "./_server/errorScreen";
 import Page, { type PagePropsType } from "./index.page";
 

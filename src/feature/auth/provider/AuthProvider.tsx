@@ -1,5 +1,5 @@
 import { type User, getAuth, onAuthStateChanged } from "firebase/auth";
-import { stubAuthContext } from "mocks/fixtures/provider/useStubAuthContext";
+import { stubAuthContext } from "@/mocks/fixtures/provider/useStubAuthContext";
 import type { FC, ReactNode } from "react";
 import { createContext, useContext, useEffect, useState } from "react";
 
