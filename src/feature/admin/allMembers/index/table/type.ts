@@ -1,5 +1,7 @@
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
+import type { BaseSyntheticEvent } from "react";
+import type { BanMemberSchema } from "../form/useBanMemberForm";
 
 //
 // Payload
@@ -47,3 +49,10 @@ export type OnClickBan<K extends ActiveMember | PendingActivationMember> = (
 ) => void;
 
 export type OnClickDisable<K extends ActiveMember> = (member: K) => void;
+
+export type OnSubmitDisable<K extends ActiveMember> = (member: K) => () => void;
+
+export type OnSubmitBan<K extends ActiveMember | PendingActivationMember> = (
+	member: K,
+	data: BanMemberSchema,
+) => void;
