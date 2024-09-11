@@ -6,7 +6,7 @@ import {
 	ResignMemberDocument,
 } from "@/generated/graphql";
 import { AppProvider } from "@/pages/_provider/_app.provider";
-import { fixtureGetMembersByStatus } from "mocks/fixtures/member";
+import { fixtureGetMembersByStatus } from "@/mocks/fixtures/member";
 import { HttpResponse, graphql } from "msw";
 import { setupServer } from "msw/node";
 import { IndexTemplate } from "./index";

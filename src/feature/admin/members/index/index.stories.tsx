@@ -1,11 +1,11 @@
 import { GetMembersByStatusDocument } from "@/generated/graphql";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { fixtureGetMembersByStatus } from "mocks/fixtures/member";
+import { fixtureGetMembersByStatus } from "@/mocks/fixtures/member";
 import { HttpResponse, graphql } from "msw";
 
 import { StubAuthProvider } from "@/feature/auth/provider/StubAuthProvider";
-import { stubAuthContext } from "mocks/fixtures/provider/useStubAuthContext";
+import { stubAuthContext } from "@/mocks/fixtures/provider/useStubAuthContext";
 import { IndexTemplate } from "./index";
 
 export default {
