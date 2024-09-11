@@ -5,8 +5,16 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
+  pull_request:
+    types: [opened, synchronize]
   push:
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  repository-projects: write
+  id-token: write
 
 jobs:
   test:
@@ -69,15 +77,16 @@ jobs:
       #   run: vercel alias ${{ steps.deploy.outputs.url }} pr.${{ github.event.number }}.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Comment Preview Link
+        # if: ${{ github.event_name == 'pull_request' }}
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const url = `Preview: preview_app - ${{ steps.deploy.outputs.url }}`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: url
+              body: Preview: preview_app - ${{ steps.deploy.outputs.url }}
             });
 
       # 計測結果を表示する
