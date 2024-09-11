@@ -14,6 +14,7 @@ module.exports = {
 		"functions/lib/**",
 		"functions/src/index.ts",
 		"src/api/articles/[id]/index.ts",
+		"src/mocks/fixtures/member/allMembers.ts",
 	],
 	ignoreWorkspaces: ["src/generated/**"],
 	ignoreDependencies: [
