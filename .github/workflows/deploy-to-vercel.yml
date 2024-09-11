@@ -59,11 +59,14 @@ jobs:
 
       - name: Assign staging domain to deployment (if main branch)
         if: ${{ github.ref == 'refs/heads/main' }}
-        run: vercel alias ${{ steps.deploy.outputs.url }} stg.nextjs-tdd-template.com --scope=my-team --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel alias ${{ steps.deploy.outputs.url }} stg.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Assign preview domain to deployment (if preview branch)
         if: ${{ github.ref != 'refs/heads/main' }}
-        run: vercel alias ${{ steps.deploy.outputs.url }} .nextjs-tdd-template.com --scope=my-team --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel alias ${{ steps.deploy.outputs.url }} .nextjs-tdd-template.com --scope=${{ secrets.VERCEL_ALIAS_SCOPE }} --token=${{ secrets.VERCEL_TOKEN }}
+
+      # 計測結果を表示する
+      - uses: Kesin11/actions-timeline@v1
 
   prod:
     if: ${{ github.ref == 'refs/heads/release' }}
@@ -83,3 +86,6 @@ jobs:
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      # 計測結果を表示する
+      - uses: Kesin11/actions-timeline@v1
