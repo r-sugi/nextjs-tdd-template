@@ -58,13 +58,16 @@ jobs:
         # TODO: urlの形式を指定したい
         run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
 
-      - name: Assign staging domain to deployment (if main branch)
-        if: ${{ github.ref == 'refs/heads/main' }}
-        run: vercel alias ${{ steps.deploy.outputs.url }} stg.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
+      # - name: Assign staging domain to deployment (if main branch)
+      #   if: ${{ github.ref == 'refs/heads/main' }}
+      #   # Vercelにドメインを設定したのち、aliasを設定できる
+      #   run: vercel alias ${{ steps.deploy.outputs.url }} stg.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
 
-      - name: Assign preview domain to deployment (if preview branch)
-        if: ${{ github.ref != 'refs/heads/main' }}
-        run: vercel alias ${{ steps.deploy.outputs.url }} nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
+      # - name: Assign preview domain to deployment (if preview branch)
+      #   if: ${{ github.ref != 'refs/heads/main' }}
+      #   # PR番号を利用してプレビューURLを生成する
+      #   # Vercelにドメインを設定したのち、aliasを設定できる
+      #   run: vercel alias ${{ steps.deploy.outputs.url }} pr.${{ github.event.number }}.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
 
       # 計測結果を表示する
       - uses: Kesin11/actions-timeline@v1
