@@ -12,7 +12,7 @@ jest.mock("@/feature/index");
 describe(Page, () => {
 	function setup() {
 		return {
-			view: render(<Page />),
+			view: render(Page.getLayout(<Page />)),
 		};
 	}
 

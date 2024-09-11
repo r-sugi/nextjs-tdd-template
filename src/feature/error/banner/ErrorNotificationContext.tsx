@@ -12,7 +12,7 @@ type NotificationItem = {
 	myErrorCode: string;
 };
 
-type ErrorNotificationStore = {
+export type ErrorNotificationStore = {
 	items: Readonly<NotificationItem[]>;
 	notify: (appErrorMessage: AppErrorMessage) => void;
 	clear: () => void;

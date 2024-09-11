@@ -1,22 +1,14 @@
 import { toMock } from "@/__testing__/helper";
 import { outputErrorLog } from "@/error/outputErrorLog";
-import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
+import { useMockErrorNotificationContext } from "@/feature/error/banner/__mock__/ErrorNotificationContext";
 import { signUp } from "@/shared/repositories/auth";
 import { useSignUp } from "./useSignUp.command";
 
 jest.mock("@/shared/repositories/auth");
-jest.mock("@/feature/error/banner/ErrorNotificationContext");
 jest.mock("@/error/outputErrorLog");
 
 describe(useSignUp, () => {
-	const mockNotify = jest.fn();
-	toMock(useErrorNotificationContext).mockImplementation(() => {
-		return {
-			notify: mockNotify,
-			items: [],
-			clear: () => {},
-		};
-	});
+	const { notify: mockNotify } = useMockErrorNotificationContext();
 
 	const mockOutputErrorLog = jest.fn();
 	toMock(outputErrorLog).mockImplementation(mockOutputErrorLog);
