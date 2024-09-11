@@ -1,0 +1,117 @@
+name: APP Deploy To Vercel
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  push:
+    branches:
+      - main
+      - release
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        id: node
+        with:
+          cache: npm
+          node-version: "^v18.19.0"
+
+      - uses: actions/cache@v4
+        id: cache
+        with:
+          path: node_modules
+          key: |
+            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Unit test
+        run: npm run test
+
+  preview:
+    if: ${{ github.ref != 'refs/heads/release' }}
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: preview_app
+      url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        id: deploy
+        run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
+
+      # - name: Assign staging domain to deployment (if main branch)
+      #   if: ${{ github.ref == 'refs/heads/main' }}
+      #   # Vercelにドメインを設定したのち、aliasを設定できる
+      #   run: vercel alias ${{ steps.deploy.outputs.url }} stg.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
+
+      # - name: Assign preview domain to deployment (if preview branch)
+      #   if: ${{ github.ref != 'refs/heads/main' }}
+      #   # PR番号を利用してプレビューURLを生成する
+      #   # Vercelにドメインを設定したのち、aliasを設定できる
+      #   run: vercel alias ${{ steps.deploy.outputs.url }} pr.${{ github.event.number }}.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Comment Preview Link
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const previewUrl = `Preview APP: '${{ steps.deploy.outputs.url }}'`;
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: previewUrl
+            });
+
+      # 計測結果を表示する
+      - uses: Kesin11/actions-timeline@v1
+
+  prod:
+    if: ${{ github.ref == 'refs/heads/release' }}
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prod --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      # 計測結果を表示する
+      - uses: Kesin11/actions-timeline@v1
