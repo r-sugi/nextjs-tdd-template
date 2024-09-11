@@ -55,7 +55,6 @@ jobs:
 
       - name: Deploy Project Artifacts to Vercel
         id: deploy
-        # TODO: urlの形式を指定したい
         run: echo "url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})" >> $GITHUB_OUTPUT
 
       # - name: Assign staging domain to deployment (if main branch)
@@ -68,6 +67,19 @@ jobs:
       #   # PR番号を利用してプレビューURLを生成する
       #   # Vercelにドメインを設定したのち、aliasを設定できる
       #   run: vercel alias ${{ steps.deploy.outputs.url }} pr.${{ github.event.number }}.nextjs-tdd-template.com --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Comment Preview Link
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const url = `Preview: preview_app - ${{ steps.deploy.outputs.url }}`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: url
+            });
 
       # 計測結果を表示する
       - uses: Kesin11/actions-timeline@v1
