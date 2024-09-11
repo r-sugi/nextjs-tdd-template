@@ -14,9 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
   pull-requests: write
-  repository-projects: write
   id-token: write
 
 jobs:
@@ -85,15 +83,13 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const previewUrl = `Preview: preview_app - ${url}`;
+            const previewUrl = `Preview: preview_app - ${{ steps.deploy.outputs.url }}`;
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: previewUrl
             });
-          result-encoding: string
-          url: ${{ steps.deploy.outputs.url }}
 
       # 計測結果を表示する
       - uses: Kesin11/actions-timeline@v1
