@@ -83,12 +83,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const previewUrl = `Preview: preview_app - ${{ steps.deploy.outputs.url }}`;
-            github.rest.issues.createComment({
+            await github.rest.issues.createComment({
               issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: previewUrl
+              body: preview_app - '${{ steps.deploy.outputs.url }}'
             });
 
       # 計測結果を表示する
