@@ -1,4 +1,4 @@
-import { mockArticle1, mockArticle2 } from "mocks/fixtures/article";
+import { mockArticle1, mockArticle2 } from "@/mocks/fixtures/article";
 import { http, HttpResponse } from "msw";
 
 export const articleHandlers = [

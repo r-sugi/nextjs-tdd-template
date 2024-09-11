@@ -6,7 +6,7 @@ import { initializeFirebaseApp } from "@/lib/firebase";
 import { AppProvider } from "./_provider/_app.provider";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-	require("../../mocks");
+	require("../mocks");
 }
 
 initializeFirebaseApp();
