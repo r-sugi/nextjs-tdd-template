@@ -13,5 +13,9 @@ node_modules/
 *-debug.log
 
 # cache
-bin/
-cache/
+# cache/
+
+# functions
+.bin/
+.config/
+.data/

@@ -12,7 +12,7 @@ module.exports = {
 		"src/components/**/*.*",
 		"biome.js",
 		"functions/lib/**",
-		"functions/bin/**",
+		"functions/.bin/**",
 		"functions/src/index.ts",
 		"src/api/articles/[id]/index.ts",
 		"src/mocks/fixtures/member/allMembers.ts",
