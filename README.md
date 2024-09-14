@@ -51,6 +51,11 @@ npm run db:meta:export
 ```
 
 ## firebase
+### firebase認証する
+```
+docker compose run --rm firebase firebase login --no-localhost
+```
+
 ### setup local emulator
 install
 ```

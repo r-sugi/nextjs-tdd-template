@@ -1,4 +1,3 @@
-version: "3.6"
 services:
   postgres:
     image: postgres:15
@@ -47,5 +46,30 @@ services:
       timeout: 10s
       retries: 5
       start_period: 5s
+
+  firebase:
+    container_name: firebase
+    build:
+      context: .
+      dockerfile: ./functions/Dockerfile
+    working_dir: /opt/firebase
+    command: firebase emulators:start --only functions,auth,firestore
+    #  -P default --import=./data/export_my_data
+    volumes:
+      - ./functions:/opt/firebase/functions
+      - ./functions/firebase.json:/opt/firebase/firebase.json
+      - ./functions/.firebaserc:/opt/firebase/.firebaserc
+      # ログイン情報をキャッシュするために以下の設定を有効にする
+      - ./functions/bin/:/root/.cache:cached
+      - ./functions/config/:/root/.config:cached
+
+    ports:
+      - 9099:9099 # Firebase Authentication
+      - 5001:5001 # Clound Functions
+      - 5002:5002 # Cloud Firestore
+      - 4000:4000 # Emulator Suite UI
+    # environment:
+    #   FIREBASE_PROJECT_ID: next-hasura-tdd-stg
+
 volumes:
   db_data:
