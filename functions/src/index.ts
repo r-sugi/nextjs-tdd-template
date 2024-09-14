@@ -50,13 +50,16 @@ export const authUser = functionsV1
 
 				// TODO: 環境変数にする
 				try {
-					const res = await fetch("http://localhost:8080/v1/graphql", {
-						method: "post",
-						body: JSON.stringify(queryStr),
-						headers: {
-							"x-hasura-admin-secret": "xxxxxx", // TODO: 環境変数にする
+					const res = await fetch(
+						"http://host.docker.internal:8080/v1/graphql",
+						{
+							method: "post",
+							body: JSON.stringify(queryStr),
+							headers: {
+								"x-hasura-admin-secret": "xxxxxx", // TODO: 環境変数にする
+							},
 						},
-					});
+					);
 					const result = await res.json();
 					if (result.errors && result.errors.length > 0) {
 						error(result.errors);
