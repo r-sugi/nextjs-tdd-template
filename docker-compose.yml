@@ -53,15 +53,16 @@ services:
       context: .
       dockerfile: ./functions/Dockerfile
     working_dir: /opt/firebase
-    command: firebase emulators:start --only functions,auth,firestore
-    #  -P default --import=./data/export_my_data
+    command: firebase emulators:start --only functions,auth,firestore --import=./functions/.data/export_my_data --export-on-exit=./functions/.data/export_my_data
     volumes:
       - ./functions:/opt/firebase/functions
       - ./functions/firebase.json:/opt/firebase/firebase.json
       - ./functions/.firebaserc:/opt/firebase/.firebaserc
       # ログイン情報をキャッシュするために以下の設定を有効にする
-      - ./functions/bin/:/root/.cache:cached
-      - ./functions/config/:/root/.config:cached
+      - ./functions/.bin/:/root/.cache:cached
+      - ./functions/.config/:/root/.config:cached
+      # ローカルデータのexport
+      - ./functions/.data:/opt/firebase/functions/.data
 
     ports:
       - 9099:9099 # Firebase Authentication
