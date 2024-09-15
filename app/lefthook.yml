@@ -1,0 +1,22 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      run: npm run lint
+    format:
+      run: npm run format
+    type-check:
+      run: npm run type-check
+    # commit時は作業中なのでknipを実行しない
+
+pre-push:
+  parallel: true
+  commands:
+    lint:
+      run: npm run lint
+    format:
+      run: npm run format
+    type-check:
+      run: npm run type-check
+    knip:
+      run: npm run knip

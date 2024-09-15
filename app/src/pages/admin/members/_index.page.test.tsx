@@ -1,0 +1,55 @@
+import { render } from "@testing-library/react";
+
+import { toMock } from "app/src/__testing__/helper";
+import { assertSeoTags, mockNextHead } from "app/src/__testing__/seo-helper";
+import { adminSecretPages } from "app/src/const/paths";
+import { IndexTemplate } from "app/src/feature/admin/members/index/index";
+
+import Page from "./index.page";
+
+jest.mock("@/feature/admin/members/index");
+
+describe(Page, () => {
+	function setup() {
+		return {
+			view: render(Page.getLayout(<Page />)),
+		};
+	}
+
+	beforeAll(() => {
+		mockNextHead();
+	});
+
+	afterEach(() => {
+		jest.resetAllMocks();
+		jest.restoreAllMocks();
+	});
+
+	it("SEO tag rendered", async () => {
+		// Act
+		setup();
+
+		// Assert
+		assertSeoTags({
+			titleText: adminSecretPages.members.title(),
+			descriptionText: adminSecretPages.members.description(),
+			ogUrlText: `${process.env.NEXT_HOST_URI}${adminSecretPages.members.path()}`,
+		});
+
+		const metaRobots = document.querySelector('meta[name="robots"]');
+		expect(metaRobots).toBeInTheDocument();
+		expect(metaRobots).toHaveAttribute("content", "all");
+	});
+
+	it("template file called", async () => {
+		// Arrange
+		const IndexTemplateMock = toMock(IndexTemplate);
+		const COMPONENT_PROPS = {};
+
+		// Act
+		setup();
+
+		// Assert
+		expect(IndexTemplateMock).toHaveBeenCalledWith(COMPONENT_PROPS, {});
+	});
+});

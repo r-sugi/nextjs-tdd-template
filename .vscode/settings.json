@@ -27,5 +27,6 @@
     "Style = ",
     "= `([^`]*)",
     ": `([^`]*)"
-  ]
+  ],
+  "git.ignoreLimitWarning": true
 }
