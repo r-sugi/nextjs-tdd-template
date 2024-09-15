@@ -7,10 +7,6 @@ on:
         description: "The Node.js version used"
         value: ${{ jobs.setup.outputs.node-version }}
 
-defaults:
-  run:
-    working-directory: app
-
 jobs:
   setup:
     runs-on: ubuntu-latest
