@@ -7,9 +7,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: app
+# defaults:
+#   run:
+#     working-directory: app
 
 jobs:
   Lint:
@@ -27,9 +27,9 @@ jobs:
       - uses: actions/cache@v4
         id: cache
         with:
-          path: node_modules
+          path: app/node_modules
           key: |
-            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('package-lock.json') }}
+            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('app/package-lock.json') }}
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
@@ -38,11 +38,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: type check
+      - name: Type check
         run: npm run type-check
 
-      - name: knip unused
+      - name: Knip unused
         run: npm run knip
 
-      # 計測結果を表示する
       - uses: Kesin11/actions-timeline@v1
