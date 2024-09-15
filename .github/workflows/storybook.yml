@@ -13,8 +13,8 @@ defaults:
     working-directory: app/
 
 jobs:
-  Setup:
-    uses: ./.github/workflows/setup-node-modules.yml
+  # Setup:
+  #   uses: ./.github/workflows/setup-node-modules.yml
 
   Run-Build:
     needs: Setup
