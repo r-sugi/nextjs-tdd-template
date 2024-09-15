@@ -17,6 +17,10 @@ permissions:
   pull-requests: write
   id-token: write
 
+defaults:
+  run:
+    working-directory: app
+
 jobs:
   test:
     runs-on: ubuntu-latest

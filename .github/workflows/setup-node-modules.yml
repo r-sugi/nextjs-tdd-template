@@ -4,14 +4,18 @@ on:
   workflow_call:
     outputs:
       node-version:
-        description: 'The Node.js version used'
+        description: "The Node.js version used"
         value: ${{ jobs.setup.outputs.node-version }}
+
+defaults:
+  run:
+    working-directory: app
 
 jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      node-version: ${{ steps.node.outputs.node-version }}  # Move the output here at the job level
+      node-version: ${{ steps.node.outputs.node-version }} # Move the output here at the job level
     steps:
       - uses: actions/checkout@v4
 

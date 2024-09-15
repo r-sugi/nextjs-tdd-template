@@ -8,6 +8,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: app
+
 jobs:
   Setup:
     uses: ./.github/workflows/setup-node-modules.yml
