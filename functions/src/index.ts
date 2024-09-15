@@ -48,10 +48,9 @@ export const authUser = functionsV1
 					variables: { uid: member.uid, email: member.email },
 				};
 
-				// TODO: 環境変数にする
 				try {
 					const res = await fetch(
-						"http://host.docker.internal:8080/v1/graphql",
+						"http://graphql-engine:8080/v1/graphql", // TODO: 環境変数にする
 						{
 							method: "post",
 							body: JSON.stringify(queryStr),
