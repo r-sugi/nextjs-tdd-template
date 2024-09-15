@@ -7,9 +7,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# defaults:
-#   run:
-#     working-directory: app
+defaults:
+  run:
+    working-directory: app
 
 jobs:
   Lint:
@@ -21,16 +21,16 @@ jobs:
       - uses: actions/setup-node@v4
         id: node
         with:
-          path: app
           cache: npm
           node-version: "^v18.19.0"
+          cache-dependency-path: app/package-lock.json
 
       - uses: actions/cache@v4
         id: cache
         with:
           path: app/node_modules
           key: |
-            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('app/package-lock.json') }}
+            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
