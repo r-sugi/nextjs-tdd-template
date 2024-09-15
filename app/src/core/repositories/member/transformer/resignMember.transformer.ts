@@ -1,6 +1,6 @@
 import type { FetchResult } from "@apollo/client";
-import type { MemberStatus } from "app/src/core/domains/member/status";
-import type { ResignMemberMutation } from "app/src/generated/graphql";
+import type { MemberStatus } from "@/core/domains/member/status";
+import type { ResignMemberMutation } from "@/generated/graphql";
 import type { UpdateMemberStatusInputType } from "../members.repository";
 
 export const resignMemberTransform = (

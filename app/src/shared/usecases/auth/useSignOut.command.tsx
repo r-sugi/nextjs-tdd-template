@@ -1,6 +1,6 @@
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
-import { signOut } from "app/src/shared/repositories/auth";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
+import { signOut } from "@/shared/repositories/auth";
 
 export const useSignOut = () => {
 	const { notify } = useErrorNotificationContext();

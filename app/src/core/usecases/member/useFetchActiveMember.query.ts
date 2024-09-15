@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
-import { useFindActiveMemberOne } from "app/src/core/repositories/member/members.repository";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 
 // @remarks: 配列以外の値の場合は、nullを初期値とする(データ取得失敗時はエラー表示するためデータを参照して処理しない方針)
 type InitialActiveMember = null;

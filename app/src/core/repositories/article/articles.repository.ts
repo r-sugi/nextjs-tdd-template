@@ -1,5 +1,5 @@
-import type { Article } from "app/src/core/domains/article/article";
-import { fetcher } from "app/src/lib/fetcher";
+import type { Article } from "@/core/domains/article/article";
+import { fetcher } from "@/lib/fetcher";
 
 const ORIGIN = "http://localhost:3000";
 

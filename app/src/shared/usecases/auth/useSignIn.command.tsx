@@ -1,6 +1,6 @@
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
-import { type SignInProps, signIn } from "app/src/shared/repositories/auth";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
+import { type SignInProps, signIn } from "@/shared/repositories/auth";
 
 export const useSignIn = () => {
 	const { notify } = useErrorNotificationContext();

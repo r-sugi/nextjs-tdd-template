@@ -1,7 +1,7 @@
-import { Button, Dialog } from "app/src/components";
-import { DialogBody } from "app/src/components/dialog/Dialog";
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
-import type { PendingActivationMember } from "app/src/core/domains/member/pendingActivationMember";
+import { Button, Dialog } from "@/components";
+import { DialogBody } from "@/components/dialog/Dialog";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 import { type BaseSyntheticEvent, forwardRef } from "react";
 import {
 	type BanMemberSchema,

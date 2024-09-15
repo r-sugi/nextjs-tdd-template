@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { useFetchActiveMember } from "app/src/core/usecases/member/useFetchActiveMember.query";
+import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
 
 const IndexTemplate: FC = () => {
 	const { data: activeMember, loading } = useFetchActiveMember();

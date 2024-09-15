@@ -1,4 +1,4 @@
-import { Button } from "app/src/components";
+import { Button } from "@/components";
 
 type ListItemProps = {
 	onClick: () => void;

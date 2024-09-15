@@ -1,6 +1,6 @@
-import { toMock } from "app/src/__testing__/helper";
-import { fetchArticleById } from "app/src/core/repositories/article/articles.repository";
-import { mockArticle1 } from "app/src/mocks/fixtures/article";
+import { toMock } from "@/__testing__/helper";
+import { fetchArticleById } from "@/core/repositories/article/articles.repository";
+import { mockArticle1 } from "@/mocks/fixtures/article";
 import { getServerSideProps } from "./index";
 import { transformError } from "./transformError";
 

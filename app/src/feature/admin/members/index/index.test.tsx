@@ -4,9 +4,9 @@ import userEvent from "@testing-library/user-event";
 import {
 	GetMembersByStatusDocument,
 	ResignMemberDocument,
-} from "app/src/generated/graphql";
-import { fixtureGetMembersByStatus } from "app/src/mocks/fixtures/member";
-import { AppProvider } from "app/src/pages/_provider/_app.provider";
+} from "@/generated/graphql";
+import { fixtureGetMembersByStatus } from "@/mocks/fixtures/member";
+import { AppProvider } from "@/pages/_provider/_app.provider";
 import { HttpResponse, graphql } from "msw";
 import { setupServer } from "msw/node";
 import { IndexTemplate } from "./index";

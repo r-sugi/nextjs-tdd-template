@@ -1,6 +1,6 @@
-import { publicPages } from "app/src/const/paths";
-import { APP_ERROR, type AppServerErrorMessage } from "app/src/error/const";
-import { outputServerErrorLog } from "app/src/error/outputErrorLog";
+import { publicPages } from "@/const/paths";
+import { APP_ERROR, type AppServerErrorMessage } from "@/error/const";
+import { outputServerErrorLog } from "@/error/outputErrorLog";
 // biome-ignore lint/suspicious/noShadowRestrictedNames: <explanation>
 import Error from "next/error";
 import { ServerErrorScreen } from "./_error/_server/_error.screen";

@@ -1,8 +1,8 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import "@/styles/globals.css";
-import { HeaderTemplate } from "app/src/feature/header";
-import { initializeFirebaseApp } from "app/src/lib/firebase";
+import { HeaderTemplate } from "@/feature/header";
+import { initializeFirebaseApp } from "@/lib/firebase";
 import { AppProvider } from "./_provider/_app.provider";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {

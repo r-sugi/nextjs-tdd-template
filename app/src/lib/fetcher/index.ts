@@ -1,7 +1,7 @@
 import {
 	type ErrorResponse,
 	HttpError,
-} from "app/src/error/transform/http/HttpError";
+} from "@/error/transform/http/HttpError";
 
 type TransformedData<T> = {
 	data: T;

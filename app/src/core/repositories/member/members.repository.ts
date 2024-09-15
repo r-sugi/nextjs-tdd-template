@@ -1,18 +1,18 @@
-import type { MemberStatus } from "app/src/core/domains/member/status";
+import type { MemberStatus } from "@/core/domains/member/status";
 import {
 	type ResignMemberMutationVariables,
 	useGetActiveMemberLazyQuery,
 	useGetAllMembersLazyQuery,
 	useGetMembersByStatusLazyQuery,
 	useResignMemberMutation,
-} from "app/src/generated/graphql";
+} from "@/generated/graphql";
 
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type {
 	AllMembers,
 	MembersByType,
-} from "app/src/core/domains/member/member";
-import type { AppErrorMessage } from "app/src/error/const";
+} from "@/core/domains/member/member";
+import type { AppErrorMessage } from "@/error/const";
 import { transformError } from "./transformError";
 import { transform } from "./transformer/activeMember.transformer";
 import { transform as transformAllMembers } from "./transformer/allMembers.transformer";

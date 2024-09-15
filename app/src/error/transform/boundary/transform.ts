@@ -1,4 +1,4 @@
-import { APP_ERROR, type AppErrorMessage } from "app/src/error/const";
+import { APP_ERROR, type AppErrorMessage } from "@/error/const";
 
 export const transformBoundaryError = (
 	error: Error,

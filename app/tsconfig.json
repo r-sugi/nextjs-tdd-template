@@ -20,7 +20,7 @@
       }
     ],
     "paths": {
-      "@/*": ["app/src/*"]
+      "@/*": ["src/*"]
     },
     "forceConsistentCasingInFileNames": true
   },
@@ -31,5 +31,5 @@
     ".next/types/**/*.ts",
     "codegen.js"
   ],
-  "exclude": ["app/node_modules", ".next", "out", "public", "functions"]
+  "exclude": ["node_modules", ".next", "out", "public", "functions"]
 }

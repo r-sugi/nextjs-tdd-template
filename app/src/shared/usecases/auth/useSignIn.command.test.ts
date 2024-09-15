@@ -1,7 +1,7 @@
-import { toMock } from "app/src/__testing__/helper";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
-import { signIn } from "app/src/shared/repositories/auth";
+import { toMock } from "@/__testing__/helper";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
+import { signIn } from "@/shared/repositories/auth";
 import { useSignIn } from "./useSignIn.command";
 
 jest.mock("@/shared/repositories/auth");

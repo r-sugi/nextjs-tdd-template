@@ -2,7 +2,7 @@ import {
 	NEXT_PUBLIC_FIREBASE_API_KEY,
 	NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
 	NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-} from "app/src/config/env";
+} from "@/config/env";
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";

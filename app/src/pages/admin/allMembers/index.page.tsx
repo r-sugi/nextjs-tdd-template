@@ -1,8 +1,8 @@
-import { adminSecretPages } from "app/src/const/paths";
-import { IndexTemplate } from "app/src/feature/admin/allMembers/index/index";
-import { ErrorBanner } from "app/src/feature/error/banner/ErrorBanner";
-import { ErrorNotificationProvider } from "app/src/feature/error/banner/ErrorNotificationContext";
-import { Seo } from "app/src/pages/_seo/seo";
+import { adminSecretPages } from "@/const/paths";
+import { IndexTemplate } from "@/feature/admin/allMembers/index/index";
+import { ErrorBanner } from "@/feature/error/banner/ErrorBanner";
+import { ErrorNotificationProvider } from "@/feature/error/banner/ErrorNotificationContext";
+import { Seo } from "@/pages/_seo/seo";
 import type { ReactNode } from "react";
 
 export default function Index() {

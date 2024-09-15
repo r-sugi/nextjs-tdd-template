@@ -1,4 +1,4 @@
-import { fetchArticleById } from "app/src/core/repositories/article/articles.repository";
+import { fetchArticleById } from "@/core/repositories/article/articles.repository";
 import type { GetServerSideProps } from "next";
 import type { PagePropsType } from "../index.page";
 import { transformError } from "./transformError";

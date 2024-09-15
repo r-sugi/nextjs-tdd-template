@@ -1,4 +1,4 @@
-import type { AppServerErrorMessage } from "app/src/error/const";
+import type { AppServerErrorMessage } from "@/error/const";
 import type { ReactNode } from "react";
 
 export const ServerErrorScreen = ({

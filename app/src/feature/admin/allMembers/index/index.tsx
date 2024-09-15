@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { useFetchAllMembers } from "app/src/core/usecases/member/useFetchAllMembers.query";
+import { useFetchAllMembers } from "@/core/usecases/member/useFetchAllMembers.query";
 
 import { MemberTableRow } from "./table/MemberTableRow";
 import { MemberTable } from "./table/table";

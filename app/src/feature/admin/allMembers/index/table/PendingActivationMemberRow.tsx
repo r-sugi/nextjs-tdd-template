@@ -1,4 +1,4 @@
-import type { PendingActivationMember } from "app/src/core/domains/member/pendingActivationMember";
+import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 import type { FC } from "react";
 import { MenuItem } from "../list/MenuItem";
 import { PopupMenu } from "../popup";

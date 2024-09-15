@@ -1,7 +1,7 @@
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
-import { memberStatus } from "app/src/core/domains/member/status";
-import type { MemberActive } from "app/src/generated/graphql";
-import type { GetActiveMemberQueryResult } from "app/src/generated/graphql";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import { memberStatus } from "@/core/domains/member/status";
+import type { MemberActive } from "@/generated/graphql";
+import type { GetActiveMemberQueryResult } from "@/generated/graphql";
 
 export const transform = (
 	res: GetActiveMemberQueryResult,

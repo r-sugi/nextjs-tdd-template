@@ -1,4 +1,4 @@
-import type { Article } from "app/src/core/domains/article/article";
+import type { Article } from "@/core/domains/article/article";
 
 export const mockArticle1: Article = {
 	id: "1",

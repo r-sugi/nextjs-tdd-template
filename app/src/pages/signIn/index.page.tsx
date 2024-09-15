@@ -1,15 +1,15 @@
-import { publicPages } from "app/src/const/paths";
-import { ErrorBanner } from "app/src/feature/error/banner/ErrorBanner";
-import { ErrorNotificationProvider } from "app/src/feature/error/banner/ErrorNotificationContext";
+import { publicPages } from "@/const/paths";
+import { ErrorBanner } from "@/feature/error/banner/ErrorBanner";
+import { ErrorNotificationProvider } from "@/feature/error/banner/ErrorNotificationContext";
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 import { Seo } from "../_seo/seo";
 
-const IndexTemplate = dynamic(() => import("app/src/feature/signIn/signin"), {
+const IndexTemplate = dynamic(() => import("@/feature/signIn/signin"), {
 	ssr: false,
 });
 const AuthGuard = dynamic(
-	() => import("app/src/feature/auth/component/AuthGuard"),
+	() => import("@/feature/auth/component/AuthGuard"),
 	{
 		ssr: false,
 	},

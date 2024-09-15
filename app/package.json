@@ -23,7 +23,7 @@
     "test:watch": "jest --watch",
     "codegen": "graphql-codegen --config codegen.js",
     "storybook": "RUNTIME_ENV=storybook storybook dev -p 6006",
-    "storybook:build": "RUNTIME_ENV=storybook storybook build",
+    "storybook:build": "rm -rf ./storybook-static && RUNTIME_ENV=storybook storybook build",
     "fn:dev": "npm run serve --prefix ./functions",
     "fn:deploy": "npm run deploy --prefix ./functions",
     "fn:watch": "npm run build:watch --prefix ./functions",

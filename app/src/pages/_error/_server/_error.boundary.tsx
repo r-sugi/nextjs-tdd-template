@@ -1,6 +1,6 @@
-import { publicPages } from "app/src/const/paths";
-import type { AppServerErrorMessage } from "app/src/error/const";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
+import { publicPages } from "@/const/paths";
+import type { AppServerErrorMessage } from "@/error/const";
+import { outputErrorLog } from "@/error/outputErrorLog";
 import type { ReactNode } from "react";
 import { ServerErrorScreen } from "./_error.screen";
 

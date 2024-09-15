@@ -1,7 +1,7 @@
-import type { AppServerErrorMessage } from "app/src/error/const";
-import { HttpError } from "app/src/error/transform/http/HttpError";
-import { transformHttpError } from "app/src/error/transform/http/transform";
-import { transformUnexpectedError } from "app/src/error/transform/unexpected/transform";
+import type { AppServerErrorMessage } from "@/error/const";
+import { HttpError } from "@/error/transform/http/HttpError";
+import { transformHttpError } from "@/error/transform/http/transform";
+import { transformUnexpectedError } from "@/error/transform/unexpected/transform";
 
 // @remarks: ユースケースごとに想定される検査例外をキャッチして。変換している。
 export const transformError = (error: unknown): AppServerErrorMessage => {

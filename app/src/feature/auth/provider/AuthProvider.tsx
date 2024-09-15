@@ -1,4 +1,4 @@
-import { stubAuthContext } from "app/src/mocks/fixtures/provider/useStubAuthContext";
+import { stubAuthContext } from "@/mocks/fixtures/provider/useStubAuthContext";
 import { type User, getAuth, onAuthStateChanged } from "firebase/auth";
 import type { FC, ReactNode } from "react";
 import { createContext, useContext, useEffect, useState } from "react";

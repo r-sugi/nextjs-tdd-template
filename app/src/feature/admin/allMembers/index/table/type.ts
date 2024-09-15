@@ -1,5 +1,5 @@
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
-import type { PendingActivationMember } from "app/src/core/domains/member/pendingActivationMember";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 import type { BaseSyntheticEvent } from "react";
 import type { BanMemberSchema } from "../form/useBanMemberForm";
 

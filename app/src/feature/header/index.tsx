@@ -5,9 +5,9 @@ import {
 	adminSecretPages,
 	loginRequiredPages,
 	publicPages,
-} from "app/src/const/paths";
+} from "@/const/paths";
 
-import { useSignOut } from "app/src/shared/usecases/auth/useSignOut.command";
+import { useSignOut } from "@/shared/usecases/auth/useSignOut.command";
 import { useAuthContext } from "../auth/provider/AuthProvider";
 
 const pages = [

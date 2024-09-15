@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { toMock, toSpyWithMock } from "app/src/__testing__/helper";
-import { loginRequiredPages } from "app/src/const/paths";
-import { setCache } from "app/src/utils/cache";
+import { toMock, toSpyWithMock } from "@/__testing__/helper";
+import { loginRequiredPages } from "@/const/paths";
+import { setCache } from "@/utils/cache";
 import * as router from "next/router";
 import IndexTemplate from "./index";
 

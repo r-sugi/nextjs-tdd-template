@@ -1,4 +1,4 @@
-import type { MembersByType } from "app/src/core/domains/member/member";
+import type { MembersByType } from "@/core/domains/member/member";
 import type { FC } from "react";
 
 type Props = {

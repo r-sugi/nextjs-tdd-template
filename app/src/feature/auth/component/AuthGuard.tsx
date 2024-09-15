@@ -3,7 +3,7 @@ import {
 	loginRequiredPagePaths,
 	loginRequiredPages,
 	publicPages,
-} from "app/src/const/paths";
+} from "@/const/paths";
 import { useRouter } from "next/router";
 import type { ReactNode } from "react";
 import { useAuthContext } from "../provider/AuthProvider";

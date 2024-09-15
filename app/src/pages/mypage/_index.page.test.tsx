@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 
-import { toMock } from "app/src/__testing__/helper";
-import { assertSeoTags, mockNextHead } from "app/src/__testing__/seo-helper";
-import { loginRequiredPages } from "app/src/const/paths";
-import AuthGuard from "app/src/feature/auth/component/AuthGuard";
+import { toMock } from "@/__testing__/helper";
+import { assertSeoTags, mockNextHead } from "@/__testing__/seo-helper";
+import { loginRequiredPages } from "@/const/paths";
+import AuthGuard from "@/feature/auth/component/AuthGuard";
 
 import Page from "./index.page";
 

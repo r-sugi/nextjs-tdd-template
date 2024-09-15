@@ -1,4 +1,4 @@
-import { APP_ERROR, type AppErrorMessage } from "app/src/error/const";
+import { APP_ERROR, type AppErrorMessage } from "@/error/const";
 import { FirebaseError } from "firebase/app";
 
 export const transformClientAuthError = (

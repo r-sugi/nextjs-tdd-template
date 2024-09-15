@@ -1,5 +1,5 @@
 import type { ParsedUrlQuery } from "node:querystring";
-import { HttpError } from "app/src/error/transform/http/HttpError";
+import { HttpError } from "@/error/transform/http/HttpError";
 import { z } from "zod";
 
 type Success = { params: { id: string } };

@@ -1,10 +1,10 @@
-import { memberStatus } from "app/src/core/domains/member/status";
+import { memberStatus } from "@/core/domains/member/status";
 import {
 	type UpdateMemberStatusInputType,
 	useUpdateMemberStatus,
-} from "app/src/core/repositories/member/members.repository";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
+} from "@/core/repositories/member/members.repository";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 
 type Props = {
 	reasonType: string;

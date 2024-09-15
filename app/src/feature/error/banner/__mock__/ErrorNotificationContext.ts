@@ -1,4 +1,4 @@
-import { toMock } from "app/src/__testing__/helper";
+import { toMock } from "@/__testing__/helper";
 import {
 	type ErrorNotificationStore,
 	useErrorNotificationContext,

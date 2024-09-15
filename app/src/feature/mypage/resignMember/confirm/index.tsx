@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import { type BaseSyntheticEvent, type FC, useEffect, useMemo } from "react";
 
-import { loginRequiredPages, publicPages } from "app/src/const/paths";
-import { useResignMember } from "app/src/core/usecases/member/useResignMember.command";
+import { loginRequiredPages, publicPages } from "@/const/paths";
+import { useResignMember } from "@/core/usecases/member/useResignMember.command";
 import {
 	type ResignMemberSchema,
 	useResignMemberForm,
-} from "app/src/feature/mypage/resignMember/hooks/form";
-import { getCache, removeCache } from "app/src/utils/cache";
-import { sessionKeys } from "app/src/utils/cache/type";
+} from "@/feature/mypage/resignMember/hooks/form";
+import { getCache, removeCache } from "@/utils/cache";
+import { sessionKeys } from "@/utils/cache/type";
 
 import { ErrorBoundary as ConfirmErrorBoundary } from "./errorBoundary";
 

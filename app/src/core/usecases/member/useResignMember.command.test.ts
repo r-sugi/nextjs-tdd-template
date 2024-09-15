@@ -1,13 +1,13 @@
 import { renderHook, waitFor } from "@testing-library/react";
 
-import { toMock } from "app/src/__testing__/helper";
+import { toMock } from "@/__testing__/helper";
 import {
 	type UpdateMemberStatusInputType,
 	useUpdateMemberStatus,
-} from "app/src/core/repositories/member/members.repository";
+} from "@/core/repositories/member/members.repository";
 
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { useResignMember } from "./useResignMember.command";
 
 jest.mock("@/core/repositories/member/members.repository");

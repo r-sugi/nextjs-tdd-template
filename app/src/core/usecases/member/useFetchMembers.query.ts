@@ -1,13 +1,13 @@
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 
-import type { MembersByType } from "app/src/core/domains/member/member";
+import type { MembersByType } from "@/core/domains/member/member";
 import {
 	type MemberStatus,
 	memberStatus,
-} from "app/src/core/domains/member/status";
-import { useFetchMembersByStatus } from "app/src/core/repositories/member/members.repository";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
+} from "@/core/domains/member/status";
+import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 
 // @remarks: 配列の場合は、空配列を初期値とする(データ取得失敗時はエラー表示するためデータを参照して処理しない方針)
 type InitialMembersState = undefined;

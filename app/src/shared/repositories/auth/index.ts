@@ -1,4 +1,4 @@
-import type { AppErrorMessage } from "app/src/error/const";
+import type { AppErrorMessage } from "@/error/const";
 import {
 	createUserWithEmailAndPassword,
 	signOut as firebaseSignOut,

@@ -2,7 +2,7 @@ import {
 	APP_ERROR,
 	type AppServerErrorMessage,
 	type RuntimeError,
-} from "app/src/error/const";
+} from "@/error/const";
 
 export const transformUnexpectedError = (
 	error: unknown,

@@ -1,6 +1,6 @@
-import type { Article } from "app/src/core/domains/article/article";
-import { Logger } from "app/src/lib/logger";
-import { mockArticle1, mockArticle2 } from "app/src/mocks/fixtures/article";
+import type { Article } from "@/core/domains/article/article";
+import { Logger } from "@/lib/logger";
+import { mockArticle1, mockArticle2 } from "@/mocks/fixtures/article";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type ResponseData = Article;

@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { mockNextHead } from "app/src/__testing__/seo-helper";
+import { mockNextHead } from "@/__testing__/seo-helper";
 
 import { Seo, type SeoPops } from "./seo";
 

@@ -8,7 +8,7 @@ import {
 import { onError } from "@apollo/client/link/error";
 import { type FC, type ReactNode, useMemo } from "react";
 
-import { NEXT_PUBLIC_GRAPHQL_URI } from "app/src/config/env";
+import { NEXT_PUBLIC_GRAPHQL_URI } from "@/config/env";
 
 export const AppApolloProvider: FC<{
 	children: ReactNode;

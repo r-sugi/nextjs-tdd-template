@@ -1,16 +1,16 @@
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
-import type { BannedMember } from "app/src/core/domains/member/bannedMember";
-import type { PendingActivationMember } from "app/src/core/domains/member/pendingActivationMember";
-import type { ResignMember } from "app/src/core/domains/member/resignMember";
-import type { RestoredMember } from "app/src/core/domains/member/restoredMember";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
+import type { BannedMember } from "@/core/domains/member/bannedMember";
+import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
+import type { ResignMember } from "@/core/domains/member/resignMember";
+import type { RestoredMember } from "@/core/domains/member/restoredMember";
 import {
 	type MemberStatus,
 	memberStatus,
-} from "app/src/core/domains/member/status";
+} from "@/core/domains/member/status";
 import type {
 	GetMembersByStatusQueryResult,
 	MemberStatusActivityLatest,
-} from "app/src/generated/graphql";
+} from "@/generated/graphql";
 
 type MemberTypes = keyof Pick<
 	MemberStatusActivityLatest,

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 
-import { memberStatus } from "app/src/core/domains/member/status";
-import { useFetchMembers } from "app/src/core/usecases/member/useFetchMembers.query";
+import { memberStatus } from "@/core/domains/member/status";
+import { useFetchMembers } from "@/core/usecases/member/useFetchMembers.query";
 import { MembersList } from "./MembersList";
 
 export const IndexTemplate: FC = () => {

@@ -1,4 +1,4 @@
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { FC } from "react";
 import { MenuItem } from "../list/MenuItem";
 import { PopupMenu } from "../popup";

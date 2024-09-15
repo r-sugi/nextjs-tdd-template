@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import type { BaseSyntheticEvent } from "react";
 
-import { loginRequiredPages } from "app/src/const/paths";
+import { loginRequiredPages } from "@/const/paths";
 import {
 	type ResignMemberSchema,
 	useResignMemberForm,
-} from "app/src/feature/mypage/resignMember/hooks/form";
-import { setCache } from "app/src/utils/cache";
+} from "@/feature/mypage/resignMember/hooks/form";
+import { setCache } from "@/utils/cache";
 
 export default function IndexTemplate() {
 	const router = useRouter();

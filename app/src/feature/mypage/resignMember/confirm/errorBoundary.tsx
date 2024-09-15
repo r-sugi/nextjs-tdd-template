@@ -1,10 +1,10 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
 
-import { Logger } from "app/src/lib/logger";
-import { NoCacheError } from "app/src/utils/cache/error";
+import { Logger } from "@/lib/logger";
+import { NoCacheError } from "@/utils/cache/error";
 
-import { loginRequiredPages, publicPages } from "app/src/const/paths";
-import { transformBoundaryError } from "app/src/error/transform/boundary/transform";
+import { loginRequiredPages, publicPages } from "@/const/paths";
+import { transformBoundaryError } from "@/error/transform/boundary/transform";
 import { ErrorScreen as ConfirmErrorScreen } from "./errorScreen";
 
 type ErrorBoundaryState = { error?: Error };

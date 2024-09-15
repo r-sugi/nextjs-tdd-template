@@ -1,18 +1,18 @@
-import { loginRequiredPages } from "app/src/const/paths";
-import { ErrorBanner } from "app/src/feature/error/banner/ErrorBanner";
-import { ErrorNotificationProvider } from "app/src/feature/error/banner/ErrorNotificationContext";
-import { Seo } from "app/src/pages/_seo/seo";
+import { loginRequiredPages } from "@/const/paths";
+import { ErrorBanner } from "@/feature/error/banner/ErrorBanner";
+import { ErrorNotificationProvider } from "@/feature/error/banner/ErrorNotificationContext";
+import { Seo } from "@/pages/_seo/seo";
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 
 const IndexTemplate = dynamic(
-	() => import("app/src/feature/mypage/resignMember/confirm"),
+	() => import("@/feature/mypage/resignMember/confirm"),
 	{
 		ssr: false,
 	},
 );
 const AuthGuard = dynamic(
-	() => import("app/src/feature/auth/component/AuthGuard"),
+	() => import("@/feature/auth/component/AuthGuard"),
 	{
 		ssr: false,
 	},

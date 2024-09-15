@@ -1,15 +1,15 @@
-import { loginRequiredPages } from "app/src/const/paths";
-import { Seo } from "app/src/pages/_seo/seo";
+import { loginRequiredPages } from "@/const/paths";
+import { Seo } from "@/pages/_seo/seo";
 import dynamic from "next/dynamic";
 
 const IndexTemplate = dynamic(
-	() => import("app/src/feature/mypage/resignMember/input"),
+	() => import("@/feature/mypage/resignMember/input"),
 	{
 		ssr: false,
 	},
 );
 const AuthGuard = dynamic(
-	() => import("app/src/feature/auth/component/AuthGuard"),
+	() => import("@/feature/auth/component/AuthGuard"),
 	{
 		ssr: false,
 	},

@@ -1,5 +1,5 @@
-import { loginRequiredPages, publicPages } from "app/src/const/paths";
-import { useSignIn } from "app/src/shared/usecases/auth/useSignIn.command";
+import { loginRequiredPages, publicPages } from "@/const/paths";
+import { useSignIn } from "@/shared/usecases/auth/useSignIn.command";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import type { BaseSyntheticEvent } from "react";

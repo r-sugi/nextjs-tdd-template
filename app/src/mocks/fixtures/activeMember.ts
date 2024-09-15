@@ -1,4 +1,4 @@
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
 
 export const activeMember = {
 	status: "active",

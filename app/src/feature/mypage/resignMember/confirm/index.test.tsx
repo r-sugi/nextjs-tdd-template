@@ -1,15 +1,15 @@
 import { render, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { toMock, toSpyWithMock } from "app/src/__testing__/helper";
-import { getCache, removeCache } from "app/src/utils/cache";
-import { NoCacheError } from "app/src/utils/cache/error";
+import { toMock, toSpyWithMock } from "@/__testing__/helper";
+import { getCache, removeCache } from "@/utils/cache";
+import { NoCacheError } from "@/utils/cache/error";
 
-import { loginRequiredPages, publicPages } from "app/src/const/paths";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { ResignMemberDocument } from "app/src/generated/graphql";
-import { AppProvider } from "app/src/pages/_provider/_app.provider";
-import IndexTemplate from "app/src/pages/mypage/resign-member/confirm/index.page";
+import { loginRequiredPages, publicPages } from "@/const/paths";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { ResignMemberDocument } from "@/generated/graphql";
+import { AppProvider } from "@/pages/_provider/_app.provider";
+import IndexTemplate from "@/pages/mypage/resign-member/confirm/index.page";
 import { HttpResponse, graphql } from "msw";
 import { setupServer } from "msw/node";
 import * as router from "next/router";

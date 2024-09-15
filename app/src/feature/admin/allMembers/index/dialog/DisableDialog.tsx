@@ -1,6 +1,6 @@
-import { Button, Dialog } from "app/src/components";
-import { DialogBody } from "app/src/components/dialog/Dialog";
-import type { ActiveMember } from "app/src/core/domains/member/activeMember";
+import { Button, Dialog } from "@/components";
+import { DialogBody } from "@/components/dialog/Dialog";
+import type { ActiveMember } from "@/core/domains/member/activeMember";
 import { forwardRef } from "react";
 import type { OnSubmitDisable } from "../table/type";
 

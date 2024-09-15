@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { loginRequiredPages } from "app/src/const/paths";
+import { loginRequiredPages } from "@/const/paths";
 
 export const ErrorScreen = ({
 	error,

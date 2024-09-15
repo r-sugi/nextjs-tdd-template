@@ -1,9 +1,9 @@
-import type { AppServerErrorMessage } from "app/src/error/const";
+import type { AppServerErrorMessage } from "@/error/const";
 
-import { publicPages } from "app/src/const/paths";
-import type { Article } from "app/src/core/domains/article/article";
-import { ServerErrorBoundary } from "app/src/pages/_error/_server/_error.boundary";
-import { Seo } from "app/src/pages/_seo/seo";
+import { publicPages } from "@/const/paths";
+import type { Article } from "@/core/domains/article/article";
+import { ServerErrorBoundary } from "@/pages/_error/_server/_error.boundary";
+import { Seo } from "@/pages/_seo/seo";
 import type { NextPage } from "next";
 import { ServerErrorScreen } from "./_server/errorScreen";
 

@@ -1,11 +1,11 @@
 import { renderHook, waitFor } from "@testing-library/react";
 
-import { toMock } from "app/src/__testing__/helper";
-import { useFindActiveMemberOne } from "app/src/core/repositories/member/members.repository";
-import { useFetchActiveMember } from "app/src/core/usecases/member/useFetchActiveMember.query";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
-import { activeMember } from "app/src/mocks/fixtures/activeMember";
+import { toMock } from "@/__testing__/helper";
+import { useFindActiveMemberOne } from "@/core/repositories/member/members.repository";
+import { useFetchActiveMember } from "@/core/usecases/member/useFetchActiveMember.query";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
+import { activeMember } from "@/mocks/fixtures/activeMember";
 
 jest.mock("@/core/repositories/member/members.repository");
 jest.mock("@/feature/error/banner/ErrorNotificationContext");

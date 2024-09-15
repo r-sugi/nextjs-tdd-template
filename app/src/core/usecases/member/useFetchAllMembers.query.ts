@@ -1,7 +1,7 @@
-import type { AllMembers } from "app/src/core/domains/member/member";
-import { useFetchMembersAll } from "app/src/core/repositories/member/members.repository";
-import { outputErrorLog } from "app/src/error/outputErrorLog";
-import { useErrorNotificationContext } from "app/src/feature/error/banner/ErrorNotificationContext";
+import type { AllMembers } from "@/core/domains/member/member";
+import { useFetchMembersAll } from "@/core/repositories/member/members.repository";
+import { outputErrorLog } from "@/error/outputErrorLog";
+import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";
 import { useEffect, useState } from "react";
 
 type InitialAllMembers = undefined;

@@ -1,4 +1,4 @@
-import { APP_ERROR, type AppServerErrorMessage } from "app/src/error/const";
+import { APP_ERROR, type AppServerErrorMessage } from "@/error/const";
 import { HttpError } from "./HttpError";
 
 export const transformHttpError = (
