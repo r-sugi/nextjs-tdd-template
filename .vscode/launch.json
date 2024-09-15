@@ -1,28 +1,53 @@
 {
   "version": "0.2.0",
   "configurations": [
+    // 公式に記載があったもの
     // {
     //   "name": "Next.js: debug server-side",
     //   "type": "node-terminal",
     //   "request": "launch",
     //   "command": "npm run dev"
     // },
+    // 公式に記載があったもの
     // {
     //   "name": "Next.js: debug client-side",
     //   "type": "chrome",
     //   "request": "launch",
     //   "url": "http://localhost:3000"
     // },
+    // vscodeのdebuggerパネルからデバッグモードでサーバーを起動する場合
+    // {
+    //   "name": "Next.js: debug full stack",
+    //   "type": "node-terminal",
+    //   "request": "launch",
+    //   "cwd": "${workspaceFolder}/app",
+    //   "command": "npm run dev",
+    //   "serverReadyAction": {
+    //     "pattern": "- Local:.+(https?://.+)",
+    //     "uriFormat": "%s",
+    //     "action": "debugWithChrome"
+    //   }
+    // }
+    // For server side rendering debug
     {
-      "name": "Next.js: debug full stack",
-      "type": "node-terminal",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/app",
-      "command": "npm run dev",
-      "serverReadyAction": {
-        "pattern": "- Local:.+(https?://.+)",
-        "uriFormat": "%s",
-        "action": "debugWithChrome"
+      "type": "node",
+      "request": "attach",
+      "name": "Next: server",
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/app",
+      "remoteRoot": "/app" // Docker内のアプリのディレクトリ
+    },
+    // For client side rendering debug
+    {
+      "type": "chrome", // 固定 (ブラウザを変えたい場合は1.のインストールとともに変更してください
+      "request": "launch", // 固定
+      "name": "Next: Chrome", // 好きな名前で
+      "url": "http://localhost:3000", // DockerComponseのポートと、サービスのディレクトリなど、お好みでカスタマイズしてください
+      "webRoot": "${workspaceFolder}/app", // 固定
+      "sourceMapPathOverrides": {
+        // 固定
+        "webpack:///./*": "${webRoot}/src/*"
       }
     }
   ]

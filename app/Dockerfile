@@ -4,14 +4,13 @@ FROM node:18.19.0-slim
 # 作業ディレクトリを設定
 WORKDIR /app
 
-# パッケージリストをコピー
-COPY ./app/package.json ./app/package-lock.json ./
+# アプリケーションファイルをすべてコピー
+COPY app .
 
 # 依存関係をインストール
+RUN npm install -g npm@latest
+
 RUN npm ci
 
-# アプリケーションファイルをすべてコピー
-COPY . .
-
-# コンテナ起動時に開発サーバーを立ち上げる
-CMD ["npm", "run", "dev"]
+# シェルを使用して複数コマンドを実行する
+CMD ["sh", "-c", "npm run inspect"]
