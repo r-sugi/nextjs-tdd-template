@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: app
+    working-directory: app/
 
 jobs:
   Setup:
@@ -34,7 +34,7 @@ jobs:
         with:
           path: node_modules
           key: |
-            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('app/package-lock.json') }}
+            ${{ runner.arch }}-${{ runner.os }}-node-${{ steps.node.outputs.node-version }}-npm-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
