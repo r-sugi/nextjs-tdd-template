@@ -53,7 +53,7 @@ services:
       context: .
       dockerfile: ./functions/Dockerfile
     working_dir: /opt/firebase
-    command: firebase emulators:start --only functions,auth,firestore --import=./functions/.data/export_my_data --export-on-exit=./functions/.data/export_my_data
+    command: sh -c "cd ./functions && npm run build:watch & firebase emulators:start --only functions,auth,firestore --import=./functions/.data/export_my_data --export-on-exit=./functions/.data/export_my_data"
     volumes:
       - ./functions:/opt/firebase/functions
       - ./functions/firebase.json:/opt/firebase/firebase.json
