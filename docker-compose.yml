@@ -72,5 +72,22 @@ services:
     # environment:
     #   FIREBASE_PROJECT_ID: next-hasura-tdd-stg
 
+  app_dev:
+    container_name: app_dev
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./app/node_modules:/app/node_modules
+    ports:
+      - 3000:3000
+      - 9229:9229 # for debugging
+      - 9230:9230 # for debugging
+    tty: true
+    stdin_open: true
+
 volumes:
   db_data:
+  node_modules: #TODO: この指定あってる？
