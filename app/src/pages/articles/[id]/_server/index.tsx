@@ -10,7 +10,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 }): Promise<{
 	props: PagePropsType;
 }> => {
-	debugger
 	try {
 		// 1. 例: パラメータのバリデーション
 		const result = validateParams(params);
