@@ -9,10 +9,10 @@ type Props = {
 };
 
 export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
-	const [isDropdownVisible, setDropdownVisible] = useState(false);
+	const [visible, setVisible] = useState(false);
 
 	const handleFocus = () => {
-		setDropdownVisible(true);
+		setVisible(true);
 	};
 
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -20,7 +20,7 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 		console.log("handleBlur", event.currentTarget);
 
 		// 非表示にする
-		setDropdownVisible(false);
+		setVisible(false);
 	};
 
 	return (
@@ -37,8 +37,8 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 
 				<div
 					id="user-menu-dropdown"
-					className={`absolute right-0 w-48 mt-2 origin-top-right rounded-lg shadow-lg transform ${
-						isDropdownVisible
+					className={`absolute z-50 bg-white right-0 w-48 mt-2 origin-top-right rounded-lg shadow-lg transform ${
+						visible
 							? "scale-100 opacity-100 ease-in duration-100"
 							: "scale-0 opacity-0 ease-out duration-75"
 					} top-13`}
