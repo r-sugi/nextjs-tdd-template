@@ -1,0 +1,15 @@
+{
+  "name": "nextjs-tdd-template-root",
+  "version": "1.0.0",
+  "description": "desc",
+  "private": true,
+  "scripts": {
+    "app:lint": "npm run lint --prefix ./app",
+    "app:format": "npm run format --prefix ./app",
+    "app:type-check": "npm run type-check --prefix ./app",
+    "app:knip": "npm run knip --prefix ./app"
+  },
+  "devDependencies": {
+    "lefthook": "^1.7.15"
+  }
+}
