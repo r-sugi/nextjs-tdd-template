@@ -7,7 +7,9 @@
     "app:lint": "npm run lint --prefix ./app",
     "app:format": "npm run format --prefix ./app",
     "app:type-check": "npm run type-check --prefix ./app",
-    "app:knip": "npm run knip --prefix ./app"
+    "app:knip": "npm run knip --prefix ./app",
+    "fn:lint": "npm run lint --prefix ./functions",
+    "fn:format": "npm run format --prefix ./functions"
   },
   "devDependencies": {
     "lefthook": "^1.7.15"

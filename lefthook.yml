@@ -8,6 +8,12 @@ pre-commit:
     app:type-check:
       run: npm run app:type-check
 
+    # functions
+    fn:lint:
+      run: npm run fn:lint
+    fn:format:
+      run: npm run fn:format
+
 pre-push:
   parallel: true
   commands:
@@ -19,3 +25,9 @@ pre-push:
       run: npm run app:type-check
     app:knip:
       run: npm run app:knip
+
+    # functions
+    fn:lint:
+      run: npm run fn:lint
+    fn:format:
+      run: npm run fn:format
