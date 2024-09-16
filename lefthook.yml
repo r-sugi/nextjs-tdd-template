@@ -1,21 +1,21 @@
 pre-commit:
   parallel: true
   commands:
-    lint:
+    app:lint:
       run: npm run app:lint
-    format:
+    app:format:
       run: npm run app:format
-    type-check:
+    app:type-check:
       run: npm run app:type-check
 
 pre-push:
   parallel: true
   commands:
-    lint:
+    app:lint:
       run: npm run app:lint
-    format:
+    app:format:
       run: npm run app:format
-    type-check:
+    app:type-check:
       run: npm run app:type-check
-    knip:
+    app:knip:
       run: npm run app:knip
