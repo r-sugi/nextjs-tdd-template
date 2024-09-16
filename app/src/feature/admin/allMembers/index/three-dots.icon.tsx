@@ -13,9 +13,9 @@ export const ThreeDotsIcon: FC = () => {
 		>
 			<title id="vertical-dots-title">Vertical three dots icon</title>
 			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
+				strokeWidth="2"
 				d="M12 6v.01M12 12v.01M12 18v.01"
 			/>
 		</svg>
