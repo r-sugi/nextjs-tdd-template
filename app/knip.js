@@ -24,6 +24,7 @@ module.exports = {
 		"jest-environment-jsdom",
 		"pino-pretty",
 		"lefthook",
+		"esbuild",
 		// Unlisted dependencies
 		"dotenv",
 		"ts-node",
