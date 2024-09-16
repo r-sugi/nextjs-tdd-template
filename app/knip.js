@@ -23,9 +23,10 @@ module.exports = {
 		"next-router-mock",
 		"jest-environment-jsdom",
 		"pino-pretty",
+		"lefthook",
 		// Unlisted dependencies
 		"dotenv",
 		"ts-node",
 	],
-	ignoreBinaries: ["docker-compose", "npm-run-all"],
+	ignoreBinaries: ["docker-compose", "npm-run-all", "sed"],
 };
