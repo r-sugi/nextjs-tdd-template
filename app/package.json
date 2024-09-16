@@ -7,8 +7,7 @@
     "node": "^v18.19.0"
   },
   "scripts": {
-    "debug": "NODE_OPTIONS='--inspect' next dev",
-    "dev": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
+    "dev": "NEXT_PUBLIC_API_MOCKING=enabled NODE_OPTIONS='--inspect=0.0.0.0' next dev",
     "dev:all": "npm-run-all -p dev db:start fn:dev fn:watch",
     "build": "next build",
     "start": "next start",
@@ -35,7 +34,8 @@
     "db:migration": "npm run db:migration --prefix ./db",
     "db:metadata": "npm run db:metadata --prefix ./db",
     "db:meta:export": "npm run db:meta:export --prefix ./db",
-    "db:dump": "npm run db:dump --prefix ./db"
+    "db:dump": "npm run db:dump --prefix ./db",
+    "postinstall": "sed -E -i '' 's/NODE_OPTIONS.*nodeDebugType.*/NODE_OPTIONS = `${NODE_OPTIONS} --${nodeDebugType}=0.0.0.0:9230`;/' node_modules/next/dist/cli/next-dev.js"
   },
   "dependencies": {
     "@apollo/client": "^3.9.11",
