@@ -51,24 +51,6 @@ export const 一覧: Story = {
 									"__typename": "memberStatusActivityLatest"
 								},
 								{
-									"status": "pendingActivation",
-									"createdAt": "2024-04-20T04:11:58.03316+00:00",
-									"id": "32833818-04fd-458e-a016-661bec557de6",
-									"memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
-									"memberActive": null,
-									"memberBanned": null,
-									"memberPendingActivation": {
-										"createdAt": "2024-04-21T10:31:43.791215+00:00",
-										"email": "hhhh@gmail.com",
-										"memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
-										"statusActivityId": "32833818-04fd-458e-a016-661bec557de6",
-										"__typename": "memberPendingActivation"
-									},
-									"memberResigned": null,
-									"memberRestored": null,
-									"__typename": "memberStatusActivityLatest"
-								},
-								{
 									"status": "active",
 									"createdAt": "2024-06-10T15:55:16.675707+00:00",
 									"id": "8a1432a1-bf3b-42a3-8eed-cf282216dba5",
@@ -85,6 +67,24 @@ export const 一覧: Story = {
 									},
 									"memberBanned": null,
 									"memberPendingActivation": null,
+									"memberResigned": null,
+									"memberRestored": null,
+									"__typename": "memberStatusActivityLatest"
+								},
+								{
+									"status": "pendingActivation",
+									"createdAt": "2024-04-20T04:11:58.03316+00:00",
+									"id": "32833818-04fd-458e-a016-661bec557de6",
+									"memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
+									"memberActive": null,
+									"memberBanned": null,
+									"memberPendingActivation": {
+										"createdAt": "2024-04-21T10:31:43.791215+00:00",
+										"email": "hhhh@gmail.com",
+										"memberId": "f0f04501-dd5d-4418-9e2f-c3b0b62941f2",
+										"statusActivityId": "32833818-04fd-458e-a016-661bec557de6",
+										"__typename": "memberPendingActivation"
+									},
 									"memberResigned": null,
 									"memberRestored": null,
 									"__typename": "memberStatusActivityLatest"
