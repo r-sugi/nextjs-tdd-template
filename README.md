@@ -7,12 +7,11 @@
 - デザイン
 
 ## frontend
+### vscode debugger
+docker起動後にpackageを一部書き換える（npm iの後に毎回）
 ```
-npm ci
+npm run patch:debug:port
 ```
-
-http://localhost:3000 にアクセスする
-
 
 ## Hasura server
 ### db setup
@@ -44,30 +43,8 @@ http://localhost:8080/
 で作るとマイグレーションファイル等には反映されません
 ```
 
-### db schema export
-install hasura CLI on local PC
-```
-npm run db:meta:export
-```
-
 ## firebase
 ### firebase認証する
 ```
 docker compose run --rm firebase firebase login --no-localhost
-```
-
-### setup local emulator
-install
-```
-npm i firebase-tools -g
-```
-
-start emulator
-```
-npm run fn:dev
-```
-
-watch code changes
-```
-npm run fn:watch
 ```
