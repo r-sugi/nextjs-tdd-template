@@ -8,10 +8,7 @@ import {
 } from "@/generated/graphql";
 
 import type { ActiveMember } from "@/core/domains/member/activeMember";
-import type {
-	AllMembers,
-	MembersByType,
-} from "@/core/domains/member/member";
+import type { AllMembers, MembersByType } from "@/core/domains/member/member";
 import type { AppErrorMessage } from "@/error/const";
 import { transformError } from "./transformError";
 import { transform } from "./transformer/activeMember.transformer";

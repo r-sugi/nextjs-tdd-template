@@ -1,10 +1,7 @@
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
 
 import type { MembersByType } from "@/core/domains/member/member";
-import {
-	type MemberStatus,
-	memberStatus,
-} from "@/core/domains/member/status";
+import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import { useFetchMembersByStatus } from "@/core/repositories/member/members.repository";
 import { outputErrorLog } from "@/error/outputErrorLog";
 import { useErrorNotificationContext } from "@/feature/error/banner/ErrorNotificationContext";

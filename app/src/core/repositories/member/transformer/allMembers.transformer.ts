@@ -4,10 +4,7 @@ import type { AllMembers } from "@/core/domains/member/member";
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 import type { ResignMember } from "@/core/domains/member/resignMember";
 import type { RestoredMember } from "@/core/domains/member/restoredMember";
-import {
-	type MemberStatus,
-	memberStatus,
-} from "@/core/domains/member/status";
+import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import type { GetAllMembersQueryResult } from "@/generated/graphql";
 
 export const transform = (res: GetAllMembersQueryResult): AllMembers | null => {
