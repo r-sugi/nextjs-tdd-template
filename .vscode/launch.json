@@ -14,15 +14,13 @@
     //   "url": "http://localhost:3000"
     // },
     {
-      "name": "Next.js: debug full stack",
-      "type": "node-terminal",
-      "request": "launch",
-      "command": "npm run dev",
-      "serverReadyAction": {
-        "pattern": "- Local:.+(https?://.+)",
-        "uriFormat": "%s",
-        "action": "debugWithChrome"
-      }
+      "type": "node",
+      "request": "attach",
+      "name": "Next: server",
+      "port": 9230,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/app",
+      "remoteRoot": "/app" // Docker内のアプリのディレクトリ
     }
   ]
 }
