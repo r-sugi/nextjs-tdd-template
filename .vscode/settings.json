@@ -2,7 +2,7 @@
   "editor.quickSuggestions": {
     "strings": true
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -21,12 +21,5 @@
     "quickfix.biome": "explicit",
     "source.organizeImports.biome": "explicit"
   },
-  "tailwindCSS.experimental.classRegex": [
-    "classNames = `([^`]*)",
-    "className: ",
-    "Style = ",
-    "= `([^`]*)",
-    ": `([^`]*)"
-  ],
   "git.ignoreLimitWarning": true
 }

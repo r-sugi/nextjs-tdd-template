@@ -2,10 +2,13 @@ pre-commit:
   parallel: true
   commands:
     lint:
+      root: "app/"
       run: npm run lint
     format:
+      root: "app/"
       run: npm run format
     type-check:
+      root: "app/"
       run: npm run type-check
     # commit時は作業中なのでknipを実行しない
 
@@ -13,10 +16,14 @@ pre-push:
   parallel: true
   commands:
     lint:
+      root: "app/"
       run: npm run lint
     format:
+      root: "app/"
       run: npm run format
     type-check:
+      root: "app/"
       run: npm run type-check
     knip:
+      root: "app/"
       run: npm run knip

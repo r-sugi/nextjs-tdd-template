@@ -28,5 +28,5 @@ module.exports = {
 		"dotenv",
 		"ts-node",
 	],
-	ignoreBinaries: ["docker-compose", "npm-run-all", "sed"],
+	ignoreBinaries: ["docker-compose", "sed"],
 };

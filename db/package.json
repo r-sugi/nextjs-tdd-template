@@ -12,8 +12,5 @@
     "db:dump": "curl -d '{\"opts\": [\"-a\", \"-O\", \"-x\", \"--inserts\", \"--exclude-schema=hdb_catalog\"], \"clean_output\": true, \"source\": \"default\"}' -H \"x-hasura-admin-secret:xxxxxx\" http://localhost:8080/v1alpha1/pg_dump > dump/dump.sql"
   },
   "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "npm-run-all": "^4.1.5"
-  }
+  "license": "ISC"
 }
