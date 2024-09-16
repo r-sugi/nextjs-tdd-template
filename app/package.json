@@ -22,15 +22,6 @@
     "codegen": "graphql-codegen --config codegen.js",
     "storybook": "RUNTIME_ENV=storybook storybook dev -p 6006",
     "storybook:build": "rm -rf ./storybook-static && RUNTIME_ENV=storybook storybook build",
-    "fn:deploy": "npm run deploy --prefix ./functions",
-    "fn:watch": "npm run build:watch --prefix ./functions",
-    "db:export": "npm run db:export --prefix ./db",
-    "db:apply": "npm run db:apply --prefix ./db",
-    "db:console": "npm run db:console --prefix ./db",
-    "db:migration": "npm run db:migration --prefix ./db",
-    "db:metadata": "npm run db:metadata --prefix ./db",
-    "db:meta:export": "npm run db:meta:export --prefix ./db",
-    "db:dump": "npm run db:dump --prefix ./db",
     "patch:debug:port": "sed -E -i '' 's/NODE_OPTIONS.*nodeDebugType.*/NODE_OPTIONS = `${NODE_OPTIONS} --${nodeDebugType}=0.0.0.0:9230`;/' node_modules/next/dist/cli/next-dev.js"
   },
   "dependencies": {
