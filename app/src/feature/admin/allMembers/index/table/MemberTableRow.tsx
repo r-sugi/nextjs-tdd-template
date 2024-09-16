@@ -83,6 +83,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 						onClickDisable={onClickDisable}
 					/>
 					<BanDialog
+						ref={ref}
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {
@@ -104,6 +105,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 				<>
 					<PendingActivationMemberRow member={member} onClickBan={onClickBan} />
 					<BanDialog
+						ref={ref}
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {

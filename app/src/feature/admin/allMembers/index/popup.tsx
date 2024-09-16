@@ -35,9 +35,8 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 					{opener}
 				</button>
 
-				<button
+				<div
 					id="user-menu-dropdown"
-					type="button"
 					className={`absolute right-0 w-48 mt-2 origin-top-right rounded-lg shadow-lg transform ${
 						isDropdownVisible
 							? "scale-100 opacity-100 ease-in duration-100"
@@ -48,7 +47,7 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 				>
 					{/* onclickした */}
 					{children}
-				</button>
+				</div>
 			</div>
 		</nav>
 	);
