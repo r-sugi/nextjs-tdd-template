@@ -8,12 +8,9 @@ import { Seo } from "../_seo/seo";
 const IndexTemplate = dynamic(() => import("@/feature/signIn/signin"), {
 	ssr: false,
 });
-const AuthGuard = dynamic(
-	() => import("@/feature/auth/component/AuthGuard"),
-	{
-		ssr: false,
-	},
-);
+const AuthGuard = dynamic(() => import("@/feature/auth/component/AuthGuard"), {
+	ssr: false,
+});
 
 export default function Index() {
 	return <IndexTemplate />;

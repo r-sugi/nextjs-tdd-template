@@ -3,10 +3,7 @@ import type { BannedMember } from "@/core/domains/member/bannedMember";
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 import type { ResignMember } from "@/core/domains/member/resignMember";
 import type { RestoredMember } from "@/core/domains/member/restoredMember";
-import {
-	type MemberStatus,
-	memberStatus,
-} from "@/core/domains/member/status";
+import { type MemberStatus, memberStatus } from "@/core/domains/member/status";
 import type {
 	GetMembersByStatusQueryResult,
 	MemberStatusActivityLatest,

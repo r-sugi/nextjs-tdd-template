@@ -1,7 +1,4 @@
-import {
-	type PropsWithChildren,
-	useState,
-} from "react";
+import { type PropsWithChildren, useState } from "react";
 
 type Props = {
 	opener: React.ReactNode;
@@ -15,7 +12,7 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 
 	const onClose = () => {
 		setVisible(false);
-  };
+	};
 
 	return (
 		<div className="relative">
@@ -28,9 +25,8 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 				{opener}
 			</button>
 
-			{
-				visible && (
-					<div
+			{visible && (
+				<div
 					id="overlay"
 					className="fixed inset-0 z-0 bg-transparent flex justify-center items-center"
 					onClick={onClose}
@@ -46,8 +42,7 @@ export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
 						{children}
 					</div>
 				</div>
-				)
-			}
+			)}
 		</div>
 	);
 };
