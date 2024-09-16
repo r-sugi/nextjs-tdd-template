@@ -91,8 +91,3 @@ services:
 volumes:
   db_data:
   node_modules: #TODO: この指定あってる？
-
-networks:
-  app_dev:
-    name: app_dev
-    driver: bridge
