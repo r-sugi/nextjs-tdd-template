@@ -74,6 +74,8 @@ services:
 
   app_dev:
     container_name: app_dev
+    user: "${UID}:${GID}"
+    platform: linux/arm64
     build:
       context: .
       dockerfile: ./app/Dockerfile

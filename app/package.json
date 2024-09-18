@@ -31,7 +31,7 @@
     "db:metadata": "npm run db:metadata --prefix ./db",
     "db:meta:export": "npm run db:meta:export --prefix ./db",
     "db:dump": "npm run db:dump --prefix ./db",
-    "patch:debug:port": "sed -E -i '' 's/NODE_OPTIONS.*nodeDebugType.*/NODE_OPTIONS = `${NODE_OPTIONS} --${nodeDebugType}=0.0.0.0:9230`;/' node_modules/next/dist/cli/next-dev.js"
+    "postinstall": "sed -E -i '' 's/NODE_OPTIONS.*nodeDebugType.*/NODE_OPTIONS = `${NODE_OPTIONS} --${nodeDebugType}=0.0.0.0:9230`;/' node_modules/next/dist/cli/next-dev.js"
   },
   "dependencies": {
     "@apollo/client": "^3.9.11",
