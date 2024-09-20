@@ -8,7 +8,13 @@
 
 ## frontend
 ### vscode debugger
-docker起動後にpackageを一部書き換える（npm iの後に毎回）
+docker compose build後にnode_modulesを一部書き換える（npm iの後に毎回）
+```
+下記のようなエラーが出る
+app_dev  | For help, see: https://nodejs.org/en/docs/inspector
+app_dev  |    the --inspect option was detected, the Next.js router server should be inspected at port 0.
+```
+
 ```
 npm run patch:debug:port
 ```
