@@ -1,29 +1,38 @@
+import type { ReactNode } from "react";
+import ClientOnlyPortal from "../modal/clientOnlyPortal";
+
+type IProps = {
+	open: boolean;
+	handleClose: () => void;
+	children: ReactNode;
+	isModal?: boolean;
+};
+
+export const Dialog = (props: IProps) => {
+	const handleClose = () => {
+		!props.isModal && props.handleClose();
+	};
+
+	return (
+		props.open && (
+			<ClientOnlyPortal selector="#modal">
+				{/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
+				<div
+					onClick={handleClose}
+					className="fixed inset-0 backdrop-brightness-50 grid place-content-center"
+				>
+					{props.children}
+				</div>
+			</ClientOnlyPortal>
+		)
+	);
+};
+
 /*
  * （出典）出典：デジタル庁デザインシステムウェブサイト https://design.digital.go.jp/
  *  https://github.com/digital-go-jp/design-system-example-components/tree/main/src/components
  */
-import { type ComponentProps, forwardRef } from "react";
-
-export type DialogProps = ComponentProps<"dialog">;
-
-export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(
-	function createDialog(props, ref) {
-		const { children, className, ...rest } = props;
-
-		return (
-			<dialog
-				className={`bg-transparent p-6 backdrop:bg-black/45 ${className ?? ""}`}
-				onClick={(e) => {
-					e.currentTarget.close();
-				}}
-				ref={ref}
-				{...rest}
-			>
-				{children}
-			</dialog>
-		);
-	},
-);
+import type { ComponentProps } from "react";
 
 export type DialogBodyProps = ComponentProps<"div">;
 

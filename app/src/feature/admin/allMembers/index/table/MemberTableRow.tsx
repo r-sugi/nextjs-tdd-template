@@ -1,17 +1,14 @@
-import { Button, Dialog } from "@/components";
 import type { AllMember } from "@/core/domains/member/member";
 
-import { DialogBody } from "@/components/dialog/Dialog";
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
-import { type BaseSyntheticEvent, type FC, useRef } from "react";
-import { isValid } from "zod";
+import { type FC, useCallback, useState } from "react";
 import { BanDialog } from "../dialog/BanDialog";
 import { DisableDialog } from "../dialog/DisableDialog";
-import type { BanMemberSchema } from "../form/useBanMemberForm";
 import { ActiveMemberRow } from "./ActiveMemberRow";
 import { PendingActivationMemberRow } from "./PendingActivationMemberRow";
 import {
+	type EventType,
 	type OnClickBan,
 	type OnClickDisable,
 	type OnSubmitBan,
@@ -25,29 +22,39 @@ type Prop = {
 	onSubmit: OnSubmitStatusChange;
 };
 
-export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
-	const ref = useRef<HTMLDialogElement>(null);
-	const disableDialogRef = useRef<HTMLDialogElement>(null);
+type DialogState = Record<EventType, boolean>;
 
-	const onClickBan: OnClickBan<ActiveMember | PendingActivationMember> = (
-		member,
-	) => {
-		console.log("onClickBan", member);
-		ref.current?.showModal();
+const initialDialogState = {
+	onClickBan: false,
+	onClickDisable: false,
+} as const satisfies DialogState;
+
+export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
+	const [dialogState, setToggleModal] =
+		useState<DialogState>(initialDialogState);
+
+	const openModal = useCallback((eventType: EventType) => {
+		setToggleModal((prev) => ({ ...prev, [eventType]: true }));
+	}, []);
+
+	const closeModal = useCallback((eventType: EventType) => {
+		setToggleModal((prev) => ({ ...prev, [eventType]: false }));
+	}, []);
+
+	const onClickBan: OnClickBan<ActiveMember | PendingActivationMember> = () => {
+		openModal("onClickBan");
 	};
 
-	const onClickDisable: OnClickDisable<ActiveMember> = (member) => {
-		console.log("onClickDisable", member);
-		disableDialogRef.current?.showModal();
+	const onClickDisable: OnClickDisable<ActiveMember> = () => {
+		openModal("onClickDisable");
 	};
 
 	const onSubmitBan: OnSubmitBan<ActiveMember | PendingActivationMember> = (
 		member,
 		data,
 	) => {
-		ref.current?.close();
+		closeModal("onClickBan");
 
-		// call mutation
 		onSubmit({
 			type: eventTypes.onClickBan,
 			detail: {
@@ -59,13 +66,8 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 
 	const onSubmitDisable: OnSubmitDisable<ActiveMember> = (member) => {
 		return () => {
-			console.log("onSubmitDisable");
+			closeModal("onClickDisable");
 
-			// close dialog
-			disableDialogRef.current?.close();
-			// reset form state
-
-			// call mutation
 			onSubmit({
 				type: eventTypes.onClickDisable,
 				detail: { member },
@@ -83,19 +85,19 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 						onClickDisable={onClickDisable}
 					/>
 					<BanDialog
-						ref={ref}
+						opened={dialogState.onClickBan}
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {
-							ref.current?.close();
+							closeModal("onClickBan");
 						}}
 					/>
 					<DisableDialog
-						ref={disableDialogRef}
+						opened={dialogState.onClickDisable}
 						member={member}
 						onSubmitDisable={onSubmitDisable}
 						onClose={() => {
-							disableDialogRef.current?.close();
+							closeModal("onClickDisable");
 						}}
 					/>
 				</>
@@ -105,11 +107,11 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 				<>
 					<PendingActivationMemberRow member={member} onClickBan={onClickBan} />
 					<BanDialog
-						ref={ref}
+						opened={dialogState.onClickBan}
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {
-							ref.current?.close();
+							closeModal("onClickBan");
 						}}
 					/>
 				</>
