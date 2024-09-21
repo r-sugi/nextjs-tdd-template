@@ -7,7 +7,7 @@ import type { BanMemberSchema } from "../form/useBanMemberForm";
 // Payload
 //
 
-type EventType = (typeof eventTypes)[keyof typeof eventTypes];
+export type EventType = (typeof eventTypes)[keyof typeof eventTypes];
 
 export const eventTypes = {
 	onClickBan: "onClickBan",

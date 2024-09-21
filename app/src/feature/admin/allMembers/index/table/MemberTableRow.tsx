@@ -8,6 +8,7 @@ import { DisableDialog } from "../dialog/DisableDialog";
 import { ActiveMemberRow } from "./ActiveMemberRow";
 import { PendingActivationMemberRow } from "./PendingActivationMemberRow";
 import {
+	type EventType,
 	type OnClickBan,
 	type OnClickDisable,
 	type OnSubmitBan,
@@ -21,29 +22,30 @@ type Prop = {
 	onSubmit: OnSubmitStatusChange;
 };
 
-export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
-	// TODO: 'none' | 'pendingActivation' | 'active';
-	const [modalOpened, setToggleModal] = useState<boolean>(false);
+type DialogState = Record<EventType, boolean>;
+const initialDialogState = {
+	onClickBan: false,
+	onClickDisable: false,
+} as const satisfies DialogState;
 
-	const onClickBan: OnClickBan<ActiveMember | PendingActivationMember> = (
-		member,
-	) => {
-		console.log("onClickBan", member);
-		setToggleModal(true);
+export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
+	const [dialogState, setToggleModal] =
+		useState<DialogState>(initialDialogState);
+
+	const onClickBan: OnClickBan<ActiveMember | PendingActivationMember> = () => {
+		setToggleModal((prev) => ({ ...prev, onClickBan: true }));
 	};
 
-	const onClickDisable: OnClickDisable<ActiveMember> = (member) => {
-		console.log("onClickDisable", member);
-		setToggleModal(true);
+	const onClickDisable: OnClickDisable<ActiveMember> = () => {
+		setToggleModal((prev) => ({ ...prev, onClickDisable: true }));
 	};
 
 	const onSubmitBan: OnSubmitBan<ActiveMember | PendingActivationMember> = (
 		member,
 		data,
 	) => {
-		setToggleModal(false);
+		setToggleModal((prev) => ({ ...prev, onClickBan: false }));
 
-		// call mutation
 		onSubmit({
 			type: eventTypes.onClickBan,
 			detail: {
@@ -55,13 +57,8 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 
 	const onSubmitDisable: OnSubmitDisable<ActiveMember> = (member) => {
 		return () => {
-			console.log("onSubmitDisable");
+			setToggleModal((prev) => ({ ...prev, onClickDisable: false }));
 
-			// close dialog
-			setToggleModal(false);
-			// reset form state
-
-			// call mutation
 			onSubmit({
 				type: eventTypes.onClickDisable,
 				detail: { member },
@@ -79,19 +76,19 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 						onClickDisable={onClickDisable}
 					/>
 					<BanDialog
-						opened={modalOpened}
+						opened={dialogState.onClickBan}
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {
-							setToggleModal(false);
+							setToggleModal((prev) => ({ ...prev, onClickBan: false }));
 						}}
 					/>
 					<DisableDialog
-						opened={modalOpened}
+						opened={dialogState.onClickDisable}
 						member={member}
 						onSubmitDisable={onSubmitDisable}
 						onClose={() => {
-							setToggleModal(false);
+							setToggleModal((prev) => ({ ...prev, onClickDisable: false }));
 						}}
 					/>
 				</>
@@ -101,11 +98,11 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 				<>
 					<PendingActivationMemberRow member={member} onClickBan={onClickBan} />
 					<BanDialog
-						opened={modalOpened}
+						opened={dialogState.onClickBan}
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {
-							setToggleModal(false);
+							setToggleModal((prev) => ({ ...prev, onClickBan: false }));
 						}}
 					/>
 				</>
