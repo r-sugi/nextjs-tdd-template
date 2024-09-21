@@ -9,9 +9,9 @@ export default class Document extends NextDocument {
 				</Head>
 				<body>
 					<Main />
-					<div id="portal" />
 					<NextScript />
 				</body>
+				<div id="modal" />
 			</Html>
 		);
 	}

@@ -1,24 +1,27 @@
 import { Button, Dialog } from "@/components";
-import { DialogBody } from "@/components/dialog/Dialog";
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
-import { type BaseSyntheticEvent, forwardRef } from "react";
+import type { BaseSyntheticEvent } from "react";
 import {
 	type BanMemberSchema,
 	useBanMemberForm,
 } from "../form/useBanMemberForm";
 import type { OnSubmitBan } from "../table/type";
+import { DialogBody } from "@/components/dialog/Dialog2";
 
 type props = {
+	opened: boolean;
 	member: ActiveMember | PendingActivationMember;
 	onSubmitBan: OnSubmitBan<ActiveMember | PendingActivationMember>;
 	onClose: () => void;
 };
 
-export const BanDialog = forwardRef<HTMLDialogElement, props>(function dialog(
-	{ member, onSubmitBan: onSubmit, onClose },
-	ref,
-) {
+export const BanDialog = ({
+	opened,
+	member,
+	onSubmitBan: onSubmit,
+	onClose,
+}: props) => {
 	const {
 		handleSubmit,
 		register,
@@ -34,7 +37,7 @@ export const BanDialog = forwardRef<HTMLDialogElement, props>(function dialog(
 	};
 
 	return (
-		<Dialog ref={ref}>
+		<Dialog open={opened} handleClose={onClose} isModal>
 			<DialogBody>
 				{/* bodytitle */}
 				<h2
@@ -70,4 +73,4 @@ export const BanDialog = forwardRef<HTMLDialogElement, props>(function dialog(
 			</DialogBody>
 		</Dialog>
 	);
-});
+};
