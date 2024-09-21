@@ -26,7 +26,7 @@ export const PendingActivationMemberRow: FC<{
 								onClick={() => {
 									onClickBan(member);
 								}}
-								label="Delete"
+								label="Ban"
 							/>
 						</PopupMenu>
 					</div>

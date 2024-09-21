@@ -23,7 +23,7 @@ export const ActiveMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem onClick={() => onClickBan(member)} label="Delete" />
+							<MenuItem onClick={() => onClickBan(member)} label="Ban" />
 							<MenuItem
 								onClick={() => onClickDisable(member)}
 								label="Disable"
