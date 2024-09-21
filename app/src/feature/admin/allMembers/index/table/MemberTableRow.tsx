@@ -2,7 +2,7 @@ import type { AllMember } from "@/core/domains/member/member";
 
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
-import { type FC, useState } from "react";
+import { type FC, useCallback, useState } from "react";
 import { BanDialog } from "../dialog/BanDialog";
 import { DisableDialog } from "../dialog/DisableDialog";
 import { ActiveMemberRow } from "./ActiveMemberRow";
@@ -23,6 +23,7 @@ type Prop = {
 };
 
 type DialogState = Record<EventType, boolean>;
+
 const initialDialogState = {
 	onClickBan: false,
 	onClickDisable: false,
@@ -32,19 +33,27 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 	const [dialogState, setToggleModal] =
 		useState<DialogState>(initialDialogState);
 
+	const openModal = useCallback((eventType: EventType) => {
+		setToggleModal((prev) => ({ ...prev, [eventType]: true }));
+	}, []);
+
+	const closeModal = useCallback((eventType: EventType) => {
+		setToggleModal((prev) => ({ ...prev, [eventType]: false }));
+	}, []);
+
 	const onClickBan: OnClickBan<ActiveMember | PendingActivationMember> = () => {
-		setToggleModal((prev) => ({ ...prev, onClickBan: true }));
+		openModal("onClickBan");
 	};
 
 	const onClickDisable: OnClickDisable<ActiveMember> = () => {
-		setToggleModal((prev) => ({ ...prev, onClickDisable: true }));
+		openModal("onClickDisable");
 	};
 
 	const onSubmitBan: OnSubmitBan<ActiveMember | PendingActivationMember> = (
 		member,
 		data,
 	) => {
-		setToggleModal((prev) => ({ ...prev, onClickBan: false }));
+		closeModal("onClickBan");
 
 		onSubmit({
 			type: eventTypes.onClickBan,
@@ -57,7 +66,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 
 	const onSubmitDisable: OnSubmitDisable<ActiveMember> = (member) => {
 		return () => {
-			setToggleModal((prev) => ({ ...prev, onClickDisable: false }));
+			closeModal("onClickDisable");
 
 			onSubmit({
 				type: eventTypes.onClickDisable,
@@ -80,7 +89,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {
-							setToggleModal((prev) => ({ ...prev, onClickBan: false }));
+							closeModal("onClickBan");
 						}}
 					/>
 					<DisableDialog
@@ -88,7 +97,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 						member={member}
 						onSubmitDisable={onSubmitDisable}
 						onClose={() => {
-							setToggleModal((prev) => ({ ...prev, onClickDisable: false }));
+							closeModal("onClickDisable");
 						}}
 					/>
 				</>
@@ -102,7 +111,7 @@ export const MemberTableRow: FC<Prop> = ({ member, onSubmit }) => {
 						member={member}
 						onSubmitBan={onSubmitBan}
 						onClose={() => {
-							setToggleModal((prev) => ({ ...prev, onClickBan: false }));
+							closeModal("onClickBan");
 						}}
 					/>
 				</>
