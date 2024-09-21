@@ -1,5 +1,5 @@
 # ベースイメージとしてNode.js 18.19.0-slimを使用
-FROM node:18.19.0-slim
+FROM node:20.17.0-slim
 
 # 作業ディレクトリを設定
 WORKDIR /app

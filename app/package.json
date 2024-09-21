@@ -4,7 +4,7 @@
   "private": true,
   "engineStrict": true,
   "engines": {
-    "node": "^v18.19.0"
+    "node": "^v20.17.0"
   },
   "scripts": {
     "dev": "NEXT_PUBLIC_API_MOCKING=enabled NODE_OPTIONS='--inspect=0.0.0.0' next dev",

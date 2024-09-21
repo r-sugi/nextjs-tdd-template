@@ -32,7 +32,7 @@ export default function IndexTemplate() {
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
 				<div>
-					<label id="reasonType">{resignMemberLabels.reasonType}</label>
+					<label htmlFor="reasonType">{resignMemberLabels.reasonType}</label>
 					<select aria-labelledby="reasonType" {...register("reasonType")}>
 						<option value="">選択してください</option>
 						<option value="NO_USE">利用しないため</option>

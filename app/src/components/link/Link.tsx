@@ -30,7 +30,7 @@ export const Link = (props: LinkProps) => {
 				<svg
 					aria-label={`${icon?.ariaLabel ?? "新規タブで開きます"}`}
 					role="img"
-					className={`mb-[3px] ml-1 inline ${icon ? icon.className ?? "" : ""}`}
+					className={`mb-[3px] ml-1 inline ${icon ? (icon.className ?? "") : ""}`}
 					fill="none"
 					height="20"
 					viewBox="0 0 21 20"

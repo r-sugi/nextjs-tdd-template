@@ -8,5 +8,5 @@ async function initMocks() {
 	}
 }
 initMocks();
-// biome-ignore lint/style/useExportType: <explanation>
+
 export {};

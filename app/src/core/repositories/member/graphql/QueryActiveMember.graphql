@@ -1,15 +1,15 @@
 query GetActiveMember($memberId: uuid!) {
-  memberStatusActivityLatest(where: { memberId: { _eq: $memberId } }) {
-    id
-    createdAt
-    memberActive {
-      address
-      birthday
-      createdAt
-      email
-      memberId
-      postalCode
-      statusActivityId
-    }
-  }
+	memberStatusActivityLatest(where: { memberId: { _eq: $memberId } }) {
+		id
+		createdAt
+		memberActive {
+			address
+			birthday
+			createdAt
+			email
+			memberId
+			postalCode
+			statusActivityId
+		}
+	}
 }

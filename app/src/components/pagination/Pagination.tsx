@@ -132,8 +132,8 @@ export const PaginationNext = (props: PaginationItemProps) => {
 export const PaginationEllipsis = (props: PaginationEllipsisProps) => {
 	const { className, ...rest } = props;
 	return (
+		// biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
 		<svg
-			aria-hidden={true}
 			className={className}
 			fill="none"
 			height="24"
