@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { GetAllMembersDocument } from "@/generated/graphql";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { HttpResponse, graphql } from "msw";
 
