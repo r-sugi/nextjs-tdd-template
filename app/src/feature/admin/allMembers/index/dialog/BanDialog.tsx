@@ -7,7 +7,7 @@ import {
 	useBanMemberForm,
 } from "../form/useBanMemberForm";
 import type { OnSubmitBan } from "../table/type";
-import { DialogBody } from "@/components/dialog/Dialog2";
+import { DialogBody } from "@/components/dialog/Dialog";
 
 type props = {
 	opened: boolean;

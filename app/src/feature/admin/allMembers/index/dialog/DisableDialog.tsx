@@ -1,7 +1,7 @@
 import { Button, Dialog } from "@/components";
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { OnSubmitDisable } from "../table/type";
-import { DialogBody } from "@/components/dialog/Dialog2";
+import { DialogBody } from "@/components/dialog/Dialog";
 
 type props = {
 	opened: boolean;

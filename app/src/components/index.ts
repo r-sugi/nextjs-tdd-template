@@ -16,7 +16,7 @@ export {
 	buttonSizeStyle,
 } from "./button/Button";
 export { Checkbox } from "./checkbox/Checkbox";
-export { Dialog } from "./dialog/Dialog2";
+export { Dialog } from "./dialog/Dialog";
 export { ErrorText } from "./errorText/ErrorText";
 export { HamburgerButton } from "./hamburgerButton/HamburgerButton";
 export { Input } from "./input/Input";
