@@ -33,7 +33,7 @@ export default function IndexTemplate() {
 			>
 				<div>
 					<label htmlFor="reasonType">{resignMemberLabels.reasonType}</label>
-					<select aria-labelledby="reasonType" {...register("reasonType")}>
+					<select id="reasonType" {...register("reasonType")}>
 						<option value="">選択してください</option>
 						<option value="NO_USE">利用しないため</option>
 						<option value="OTHER">その他</option>
