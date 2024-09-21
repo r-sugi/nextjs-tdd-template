@@ -6,12 +6,12 @@ exports[`IndexTemplate 正常系 初期描画が変化していない 1`] = `
     <form>
       <div>
         <label
-          id="reasonType"
+          for="reasonType"
         >
           退会理由
         </label>
         <select
-          aria-labelledby="reasonType"
+          id="reasonType"
           name="reasonType"
         >
           <option

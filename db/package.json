@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {"node": "20.17.0"},
   "scripts": {
     "db:console": "hasura console",
     "db:migration": "hasura migrate apply",

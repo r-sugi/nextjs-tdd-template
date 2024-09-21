@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react";
 import { GetMembersByStatusDocument } from "@/generated/graphql";
+import type { Meta, StoryObj } from "@storybook/react";
 
 import { fixtureGetMembersByStatus } from "@/mocks/fixtures/member";
 import { HttpResponse, graphql } from "msw";

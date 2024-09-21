@@ -1,5 +1,5 @@
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { useRef, useEffect, useState, type ReactNode } from "react";
 
 export type IProps = {
 	selector: string;

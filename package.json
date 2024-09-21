@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "desc",
   "private": true,
+  "engines": {"node": "v20.17.0"},
   "scripts": {
     "app:lint": "npm run lint --prefix ./app",
     "app:format": "npm run format --prefix ./app",

@@ -14,9 +14,7 @@ export const MenuItem = ({ onClick, label }: ListItemProps) => {
 			aria-labelledby="user-menu"
 			onClick={() => onClick()}
 		>
-			<div className="block px-6 py-2 mb-2 font-bold rounded" role="menuitem">
-				{label}
-			</div>
+			<div className="block px-6 py-2 mb-2 font-bold rounded">{label}</div>
 		</button>
 	);
 };

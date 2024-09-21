@@ -6,14 +6,10 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    font-family:
-      "Noto Sans JP",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      sans-serif;
+	body {
+		font-family: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
+			sans-serif;
 
-    @apply text-std-17N-7 text-solid-grey-900;
-  }
+		@apply text-std-17N-7 text-solid-grey-900;
+	}
 }

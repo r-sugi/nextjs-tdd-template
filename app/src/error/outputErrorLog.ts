@@ -1,6 +1,6 @@
-import * as Sentry from "@sentry/nextjs";
 import { isSentryEnabled } from "@/config/env";
 import { Logger } from "@/lib/logger";
+import * as Sentry from "@sentry/nextjs";
 import type { AppErrorMessage, AppServerErrorMessage } from "./const";
 
 const logging = (error: AppErrorMessage) => {

@@ -66,7 +66,7 @@ const Template: FC = () => {
 				onSubmit={handleSubmit((data, event) => submitHandler(data, event))}
 			>
 				<div>
-					<label>退会理由</label>
+					<label htmlFor="reasonType">退会理由</label>
 					<select {...register("reasonType")}>
 						<option value="">選択してください</option>
 						<option value="NO_USE">利用しないため</option>
@@ -76,7 +76,7 @@ const Template: FC = () => {
 				</div>
 
 				<div>
-					<label>詳細</label>
+					<label htmlFor="reasonDetail">詳細</label>
 					<textarea {...register("reasonDetail")} />
 					{errors.reasonDetail?.message && <p>{errors.reasonDetail.message}</p>}
 				</div>

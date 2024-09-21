@@ -34,12 +34,12 @@ export default function SignInTemplate() {
 			>
 				<div>サインインフォーム</div>
 				<div>
-					<label>メールアドレス</label>
+					<label htmlFor="email">メールアドレス</label>
 					<input {...register("email")} />
 					{errors.email?.message && <p>{errors.email.message}</p>}
 				</div>
 				<div>
-					<label>パスワード</label>
+					<label htmlFor="password">パスワード</label>
 					<input {...register("password")} />
 					{errors.password?.message && <p>{errors.password.message}</p>}
 				</div>

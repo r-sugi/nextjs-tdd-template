@@ -13,6 +13,7 @@ export const Label = (props: LabelProps) => {
 
 	return (
 		<label
+			htmlFor={props.id}
 			className={`
         flex w-fit items-center gap-2 text-dns-16B-2
         ${isDisabled ? "text-solid-grey-420" : "text-solid-grey-900"}

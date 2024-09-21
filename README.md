@@ -7,14 +7,22 @@
 - デザイン
 
 ## frontend
-### vscode debugger
-docker compose build後にnode_modulesを一部書き換える（npm iの後に毎回）
+### 開発サーバー
+初回起動時のみ、Download処理が走る
 ```
-下記のようなエラーが出る
+app_dev  |  ✓ Starting...
+app_dev  |    Downloading swc package @next/swc-linux-arm64-gnu...
+app_dev  |    Downloading swc package @next/swc-linux-arm64-musl...
+```
+
+### npm i時
+(npm i or docker compose build)後、node_modulesをスクリプトで一部書き換える
+```
+下記のようなエラーが出たら
 app_dev  | For help, see: https://nodejs.org/en/docs/inspector
 app_dev  |    the --inspect option was detected, the Next.js router server should be inspected at port 0.
 ```
-
+↓
 ```
 npm run patch:debug:port
 ```
