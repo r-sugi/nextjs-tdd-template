@@ -1,13 +1,12 @@
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
-import type { BaseSyntheticEvent } from "react";
 import type { BanMemberSchema } from "../form/useBanMemberForm";
 
 //
 // Payload
 //
 
-type EventType = (typeof eventTypes)[keyof typeof eventTypes];
+export type EventType = (typeof eventTypes)[keyof typeof eventTypes];
 
 export const eventTypes = {
 	onClickBan: "onClickBan",

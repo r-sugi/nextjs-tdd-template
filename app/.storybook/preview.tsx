@@ -32,6 +32,7 @@ export default {
 
 			return (
 				<AppProvider>
+					<div id="modal" />
 					<Story />
 				</AppProvider>
 			);
