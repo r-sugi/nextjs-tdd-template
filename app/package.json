@@ -32,7 +32,8 @@
     "db:metadata": "npm run db:metadata --prefix ./db",
     "db:meta:export": "npm run db:meta:export --prefix ./db",
     "db:dump": "npm run db:dump --prefix ./db",
-    "patch:debug:port": "sed -E -i '' 's/NODE_OPTIONS.*nodeDebugType.*/NODE_OPTIONS = `${NODE_OPTIONS} --${nodeDebugType}=0.0.0.0:9230`;/' node_modules/next/dist/cli/next-dev.js"
+    "patch:debug:port": "sed -E -i '' 's/NODE_OPTIONS.*nodeDebugType.*/NODE_OPTIONS = `${NODE_OPTIONS} --${nodeDebugType}=0.0.0.0:9230`;/' node_modules/next/dist/cli/next-dev.js",
+    "build:dep-graph": "npx depcruise src --include-only '^src' --config --output-type dot | dot -T png > ./tmp/dependency-graph.png"
   },
   "dependencies": {
     "@apollo/client": "^3.9.11",
@@ -72,6 +73,7 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.20",
+    "dependency-cruiser": "^16.4.1",
     "esbuild": "^0.23.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
