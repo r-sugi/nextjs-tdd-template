@@ -33,7 +33,7 @@
     "db:meta:export": "npm run db:meta:export --prefix ./db",
     "db:dump": "npm run db:dump --prefix ./db",
     "patch:debug:port": "sed -E -i '' 's/NODE_OPTIONS.*nodeDebugType.*/NODE_OPTIONS = `${NODE_OPTIONS} --${nodeDebugType}=0.0.0.0:9230`;/' node_modules/next/dist/cli/next-dev.js",
-    "build:dep-graph": "npx depcruise src --include-only '^src' --config --output-type dot | dot -T png > ./tmp/dependency-graph.png"
+    "build:dep-graph": "npx depcruise src --config --output-type dot | dot -T png > ./tmp/dependency-graph.png"
   },
   "dependencies": {
     "@apollo/client": "^3.9.11",
