@@ -5,7 +5,7 @@ type ListItemProps = {
 	label: string;
 };
 
-export const MenuItem = ({ onClick, label }: ListItemProps) => {
+export const ListItem = ({ onClick, label }: ListItemProps) => {
 	return (
 		<button
 			type="button"

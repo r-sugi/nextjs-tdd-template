@@ -1,8 +1,8 @@
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { FC } from "react";
-import { MenuItem } from "../list/MenuItem";
-import { PopupMenu } from "../popup";
-import { ThreeDotsIcon } from "../three-dots.icon";
+import { ListItem } from "../list/ListItem";
+import { PopupMenu } from "../popup/Popup";
+import { ThreeDotsIcon } from "../threeDotsIcon/ThreeDots.icon";
 import type { OnClickBan, OnClickDisable } from "./type";
 
 export const ActiveMemberRow: FC<{
@@ -23,8 +23,8 @@ export const ActiveMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem onClick={() => onClickBan(member)} label="Ban" />
-							<MenuItem
+							<ListItem onClick={() => onClickBan(member)} label="Ban" />
+							<ListItem
 								onClick={() => onClickDisable(member)}
 								label="Disable"
 							/>

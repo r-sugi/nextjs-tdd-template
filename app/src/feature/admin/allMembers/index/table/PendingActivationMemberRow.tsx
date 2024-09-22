@@ -1,8 +1,8 @@
 import type { PendingActivationMember } from "@/core/domains/member/pendingActivationMember";
 import type { FC } from "react";
-import { MenuItem } from "../list/MenuItem";
-import { PopupMenu } from "../popup";
-import { ThreeDotsIcon } from "../three-dots.icon";
+import { ListItem } from "../list/ListItem";
+import { PopupMenu } from "../popup/Popup";
+import { ThreeDotsIcon } from "../threeDotsIcon/ThreeDots.icon";
 import type { OnClickBan } from "./type";
 
 export const PendingActivationMemberRow: FC<{
@@ -22,7 +22,7 @@ export const PendingActivationMemberRow: FC<{
 				<div className="flex justify-between">
 					<div className="items-center">
 						<PopupMenu opener={<ThreeDotsIcon />}>
-							<MenuItem
+							<ListItem
 								onClick={() => {
 									onClickBan(member);
 								}}
