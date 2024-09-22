@@ -1,7 +1,7 @@
 import type { ActiveMember } from "@/core/domains/member/activeMember";
 import type { FC } from "react";
 import { ListItem } from "../list/ListItem";
-import { Popup } from "../popup/Popup2";
+import { Popup } from "../popup/Popup";
 import { ThreeDotsIcon } from "../threeDotsIcon/ThreeDotsIcon";
 import type { OnClickBan, OnClickDisable } from "./type";
 
