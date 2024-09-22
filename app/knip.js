@@ -3,19 +3,13 @@ module.exports = {
 		"**/*.d.ts",
 		// Unused files
 		"src/__mocks__/**/*.*",
-		"functions/src/index.ts",
-		"mocks/**/*.ts",
+		"src/mocks/**/*.*",
 		"public/mockServiceWorker.js",
-		"src/error/errors/unhandledRejectionError.ts",
 		"postcss.config.js",
+		"biome.js",
+		".dependency-cruiser.js",
 		// Unused exports, Unused exported types of component templates
 		"src/components/**/*.*",
-		"biome.js",
-		"functions/lib/**",
-		"functions/.bin/**",
-		"functions/src/index.ts",
-		"src/api/articles/[id]/index.ts",
-		"src/mocks/fixtures/member/allMembers.ts",
 	],
 	ignoreWorkspaces: ["src/generated/**"],
 	ignoreDependencies: [
@@ -29,5 +23,5 @@ module.exports = {
 		"dotenv",
 		"ts-node",
 	],
-	ignoreBinaries: ["docker-compose", "sed"],
+	ignoreBinaries: ["docker-compose", "sed", "dot"],
 };
