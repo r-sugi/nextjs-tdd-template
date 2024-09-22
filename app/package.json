@@ -7,7 +7,8 @@
     "node": "^v20.17.0"
   },
   "scripts": {
-    "dev": "NEXT_PUBLIC_API_MOCKING=enabled NODE_OPTIONS='--inspect=0.0.0.0' next dev",
+    "debug": "NEXT_PUBLIC_API_MOCKING=enabled NODE_OPTIONS='--inspect=0.0.0.0' next dev",
+    "dev": "NEXT_PUBLIC_API_MOCKING=enabled next dev",
     "build": "next build",
     "start": "next start",
     "format": "biome format --write src",
