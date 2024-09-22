@@ -4,7 +4,7 @@ type Props = {
 	opener: React.ReactNode;
 };
 
-export const PopupMenu = ({ opener, children }: PropsWithChildren<Props>) => {
+export const Popup = ({ opener, children }: PropsWithChildren<Props>) => {
 	const [visible, setVisible] = useState(false);
 	const onOpen = () => {
 		setVisible(true);

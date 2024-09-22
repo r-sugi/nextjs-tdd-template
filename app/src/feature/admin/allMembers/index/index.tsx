@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { useFetchAllMembers } from "@/core/usecases/member/useFetchAllMembers.query";
 
 import { MemberTableRow } from "./table/MemberTableRow";
-import { MemberTable } from "./table/table";
+import { MemberTable } from "./table/Table";
 import { type OnSubmitStatusChange, eventTypes } from "./table/type";
 
 export const IndexTemplate: FC = () => {

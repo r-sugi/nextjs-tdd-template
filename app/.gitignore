@@ -48,3 +48,5 @@ storybook-static/
 # storycap
 __screenshots__
 
+# tmp
+tmp
