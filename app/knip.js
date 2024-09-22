@@ -19,9 +19,10 @@ module.exports = {
 		"pino-pretty",
 		"lefthook",
 		"esbuild",
+		"dependency-cruiser",
 		// Unlisted dependencies
 		"dotenv",
 		"ts-node",
 	],
-	ignoreBinaries: ["docker-compose", "sed", "dot"],
+	ignoreBinaries: ["docker-compose", "sed", "dot", "depcruise"],
 };
