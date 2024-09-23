@@ -31,19 +31,15 @@ export const IndexTemplate: FC = () => {
 
 	return (
 		<div data-testid="admin-members-index">
-			{/* メンバー一覧 */}
-			<div className="container mx-auto">
-				<h1 className="text-2xl font-bold mb-4">Members</h1>
-				<MemberTable>
-					{data.members.map((member) => (
-						<MemberTableRow
-							member={member}
-							key={member.statusActivityId}
-							onSubmit={onSubmit}
-						/>
-					))}
-				</MemberTable>
-			</div>
+			<MemberTable>
+				{data.members.map((member) => (
+					<MemberTableRow
+						member={member}
+						key={member.statusActivityId}
+						onSubmit={onSubmit}
+					/>
+				))}
+			</MemberTable>
 		</div>
 	);
 };
