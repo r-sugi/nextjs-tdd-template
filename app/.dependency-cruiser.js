@@ -187,6 +187,9 @@ module.exports = {
 			path: [
 				"^src/feature/admin/allMembers",
 				"^src/pages/admin/allMembers/index.page.tsx",
+				"^src/core/usecases/member/useFetchAllMembers.query.ts",
+				"core/repositories/member/members.repository",
+				"transformer/allMembers.transformer",
 			],
 		},
 		exclude: {
